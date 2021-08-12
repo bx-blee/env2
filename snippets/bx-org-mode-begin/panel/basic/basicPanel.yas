@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Common Panel
+# key: begin/commonPanel
+# group: basic
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/basicPanels/commonPanel.org")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

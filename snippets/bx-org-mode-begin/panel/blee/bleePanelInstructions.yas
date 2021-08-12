@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Blee Instructions Panel
+# key: begin/bleePanelInstructions
+# group: blee
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/leafPanels/instructionsBegin.org")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert bsipStartBash.sh
+# key: bsipStart/insert-bsipStartBash
+# group: bsipStart
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+bsipStartBash.sh$0

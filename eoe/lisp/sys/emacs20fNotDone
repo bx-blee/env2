@@ -1,0 +1,319 @@
+;;; -*- Mode: Emacs-Lisp; -*-
+
+;;; .emacs19f
+
+;;; This .emacs19f defines the Emacs environment for an EOE user.
+;;; Most EOE users will simply use the system's default
+;;; <*eoe-sys-dir*>/.emacs19f, but sophisticated users may copy this
+;;; file to their $HOME directory and make their own edits to it.
+;;;
+;;; Note that for changing EOE parameters, most EOE users will only
+;;; need to copy <*eoe-sys-dir*/.eoe> and modify that.
+
+;;; -----------------------------------------------------------------
+;;; prepend user's ~/lisp to load path, if exists
+;;; -----------------------------------------------------------------
+(if (file-directory-p (expand-file-name "~/lisp"))
+    (setq load-path (cons (expand-file-name "~/lisp")
+			  load-path)))
+
+;;; -----------------------------------------------------------------
+;;; Environement setup
+;;; -----------------------------------------------------------------
+(cond ((eq system-type 'windows-nt)
+       ;; make USER = USERNAME, if not already set
+       (if (null (getenv "USER")) (setenv "USER" (getenv "USERNAME"))))
+      (t nil))
+
+;;; -----------------------------------------------------------------
+;;; EOE Menu
+;;; -----------------------------------------------------------------
+(require 'eoe-menu)
+
+
+;;; -----------------------------------------------------------------
+;;; Shell stuff
+;;; -----------------------------------------------------------------
+(require 'ksh-mode)
+;;(require 'fshell)
+
+; ;;; -----------------------------------------------------------------
+; ;;; Neda Domain Management Tool -- NDMT
+; ;;; -----------------------------------------------------------------
+; (require 'ndmt)
+
+;;; -----------------------------------------------------------------
+;;; Mail -- VM
+;;; -----------------------------------------------------------------
+(eoe-require 'vm)
+(require 'vm-ext)			
+
+(if (eq window-system 'win32)
+    (progn
+      (eoe-require 'smtpmail)
+      ;; this doesn't seem to get called soon enough so
+      ;; manually invoke it here...
+      (vm-menu-initialize-vm-mode-menu-map)
+      ))
+
+;;; -----------------------------------------------------------------
+;;; vm-ruleproc: Rules-Based Mailbox Processing
+;;; -----------------------------------------------------------------
+(eoe-require 'vm-ruleproc)		; basic ruleproc engine
+(eoe-require 'vm-ruleproc-bbdb)		; ruleset for use with BBDB `ruleproc' field
+(require 'vm-ruleproc-unsafe-elisp)	; ruleset for application/x-unsafe-elisp
+
+;;
+;; under testing
+;; 
+
+(if (string-equal (user-login-name) "pean")
+    (progn
+
+      ;;
+      ;; define ruleset to forward mail explicitly sent to user when (i)
+      ;; user has an eoe-priority-access address for LSM, (ii) the author of
+      ;; the message is in user's BBDB and (iii) user is named explicitly
+      ;;
+      (defvar vm-ruleproc-ruleset/forward-to-lsm
+	`((:R001
+	   (and eoe-priority-access-address-lsm
+		(vm-ruleproc-test/author-in-bbdb-p :curr-msg)
+		(vm-ruleproc-test/user-named-explicitly-p :curr-msg (user-login-name)))
+	   (vm-ruleproc-action/forward-current-message eoe-priority-access-address-lsm))))
+
+      ;;
+      ;; activate ruleset defined above
+      ;; 
+      (vm-ruleproc-activate-ruleset 'vm-ruleproc-ruleset/forward-to-lsm t) ; activate
+      ))
+
+;;; -----------------------------------------------------------------
+;;; Email Citations -- SuperCite
+;;; -----------------------------------------------------------------
+(eoe-require 'supercite)
+
+;;; -----------------------------------------------------------------
+;;; Network News Reader -- GNUS
+;;; -----------------------------------------------------------------
+(eoe-require 'gnus)
+(eoe-require 'gnus-ext)			; for NNTP AUTHINFO passwords
+
+;;; -----------------------------------------------------------------
+;;; Tools for MIME
+;;; -----------------------------------------------------------------
+
+;; default is to not split messages 
+(eval-after-load "tm-edit" (setq mime-editor/split-message nil))
+
+(require 'tm-gnus)			; for GNUS
+;(require 'tm-vm)			; for VM
+(require 'neda-mime-ue)			; application/x-unsafe-elisp
+(require 'neda-mime-ers)		; application/x-embedded-response-spec
+
+;;; -----------------------------------------------------------------
+;;; Rolodex -- BBDB
+;;; -----------------------------------------------------------------
+(eoe-require 'bbdb)
+
+;;; -----------------------------------------------------------------
+;;; Templates and Substitution
+;;; -----------------------------------------------------------------
+(require 'template)
+(eoe-require 'tmplt-ext)
+
+;;; -----------------------------------------------------------------
+;;; Software Development
+;;; -----------------------------------------------------------------
+(eoe-require 'cc-mode)			; covers C, C++ 
+
+(require 'compile-ext)
+
+; ;;
+; ;; CVS
+; ;;
+; (eoe-require 'pcl-cvs)
+
+;;
+;; RCS
+;; 
+(require 'rcs)
+
+;;; -----------------------------------------------------------------
+;;; WWW - World Wide Web
+;;; -----------------------------------------------------------------
+
+;;;
+;;; W3
+;;;
+(eoe-require 'w3)
+
+;;;
+;;; configure browse-url.el
+;;;
+(require 'browse-url)
+(setq browse-url-browser-function (cond ((eq eoe-www-browser 'netscape)
+					 'browse-url-netscape)
+					((eq eoe-www-browser 'w3)
+					 'browse-url-w3)
+					(t 
+					 'browse-url-w3)))
+
+;; 
+;; configure VM support for URL browsing
+;;
+;; Non-nil value means VM should enable URL passing. This means that
+;; VM will search for URLs (Uniform Resource Locators) in messages and
+;; make it possible for you to pass them to a World Wide Web browser.
+(setq vm-url-browser (cond ((eq eoe-www-browser 'netscape)
+			    'vm-mouse-send-url-to-netscape)
+			   ((or (eq eoe-www-browser 'w3)
+				t)	; default
+			    (eoe-require 'w3)
+			    'w3-fetch-other-frame)))
+
+
+
+;;; -----------------------------------------------------------------
+;;; DOS mode
+;;; -----------------------------------------------------------------
+(require 'dos-mode)			; hide ^M characters
+
+;;; -----------------------------------------------------------------
+;;; Keyboard Definitions -- load keyboard function key setup
+;;; -----------------------------------------------------------------
+; (let ((disp (getenv "DISPLAY"))
+;       (keybind-style eoe-keybinding-style)
+;       keyboard-type)
+
+;   ;; determine keyboard type
+;   (cond ((eq window-system 'win32)
+; 	 (setq keyboard-type "AT"))
+; 	((and disp
+; 	      (or (string-match "daedalus" disp)
+; 		  (string-match "icarus" disp)
+; 		  (string-match "portege" disp)
+; 		  (string-match "voyager" disp)
+; 		  (string-match "sudabeh" disp)
+; 		  (string-match "twintrees.com" disp)))
+; 	 (setq keyboard-type "AT"))
+; 	(t
+; 	 (setq keyboard-type "type5")))
+
+;   ;; load the key binding
+;   (eoe-load-keybindings eoe-keybinding-style keyboard-type))
+
+ (eoe-load-keybindings "neda" "AT")
+
+;;; -----------------------------------------------------------------
+;;; auto-mode-alist modifications
+;;; -----------------------------------------------------------------
+(eoe-auto-mode-alist-add "\\.[rR][cC]\\'" 'c++-mode) ; .rc windows resource files
+(eoe-auto-mode-alist-add "\\.[rR][uU][lL]\\'" 'c++-mode) ; .rul IShield files
+(eoe-auto-mode-alist-add "\\.[Mm][Aa][Kk]\\'" 'makefile-mode) ; .mak files
+(eoe-auto-mode-alist-add "[Mm]akefile\\." 'makefile-mode) ; makefile.* files
+(eoe-auto-mode-alist-add "\\.[Dd][Ss][Pp]\\'" 'makefile-mode) ; VC++ .dsp files
+(eoe-auto-mode-alist-add "\\.[CcKk][Ss][Hh]\\'" 'ksh-mode) ; .[ck]sh files
+(eoe-auto-mode-alist-add "\\.[Ss][Hh]\\'" 'ksh-mode) ; .sh files
+;(eoe-auto-mode-alist-add "\\.CPP\\'" 'c++-mode)
+;(eoe-auto-mode-alist-add "\\.C\\'" 'c-mode)
+;(eoe-auto-mode-alist-add "\\.H\\'" 'c-mode)
+
+
+;;; -----------------------------------------------------------------
+;;; Font Lock -- select modes for automatic font lock
+;;; -----------------------------------------------------------------
+(add-hook 'dired-mode-hook	   'turn-on-font-lock)
+(add-hook 'tex-mode-hook	   'turn-on-font-lock)
+(add-hook 'latex-mode-hook	   'turn-on-font-lock)
+(add-hook 'bbdb-mode-hook	   'turn-on-font-lock)
+(add-hook 'emacs-lisp-mode-hook    'turn-on-font-lock)
+(add-hook 'c-mode-hook 	           'turn-on-font-lock)
+(add-hook 'c++-mode-hook	   'turn-on-font-lock)
+(add-hook 'shell-mode-hook	   'turn-on-font-lock)
+(add-hook 'ksh-mode-hook	   'turn-on-font-lock)
+(add-hook 'makefile-mode-hook	   'turn-on-font-lock)
+
+
+;;; -----------------------------------------------------------------
+;;; Calc -- Arbitrary precision calculator
+;;; -----------------------------------------------------------------
+(autoload 'calc-dispatch          "calc" "Calculator Options" t)
+(autoload 'full-calc              "calc" "Full-screen Calculator" t)
+(autoload 'full-calc-keypad       "calc" "Full-screen X Calculator" t)
+(autoload 'calc-eval              "calc" "Use Calculator from Lisp")
+(autoload 'defmath                "calc" nil t t)
+(autoload 'calc                   "calc" "Calculator Mode" t)
+(autoload 'quick-calc             "calc" "Quick Calculator" t)
+(autoload 'calc-keypad            "calc" "X windows Calculator" t)
+(autoload 'calc-embedded          "calc" "Use Calc from any buffer" t)
+(autoload 'calc-embedded-activate "calc" "Activate =>'s in buffer" t)
+(autoload 'calc-grab-region       "calc" "Grab region of Calc data" t)
+(autoload 'calc-grab-rectangle    "calc" "Grab rectangle of data" t)
+
+;;; -----------------------------------------------------------------
+;;; Info -- more info directories
+;;; -----------------------------------------------------------------
+
+;; info setup if running emacs 19
+(if (= emacs-major-version 19)
+    (setq Info-directory-list 
+	  (append Info-directory-list
+		  (list ))))
+
+(if (= emacs-major-version 20)
+    (message "NOTYET, IGNORE")
+  (progn
+
+    (setq Info-directory-list
+      (append Info-directory-list
+	      ;; add latex info
+	      (list "/usr/curenv/info"
+		    "/opt/public/sde/info"
+		    "/opt/public/latex2e-95/info")
+	      ))
+    ))
+
+;;; -----------------------------------------------------------------
+;;; Disable Scary Commands
+;;; -----------------------------------------------------------------
+(put 'eval-expression 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled t)
+
+;;; -----------------------------------------------------------------
+;;; Sound
+;;; -----------------------------------------------------------------
+
+;;
+;; visible or audible bell...
+;;
+(cond (eoe-use-sound
+       (setq visible-bell nil))
+      (t
+       (setq visible-bell t)))
+
+;;; -----------------------------------------------------------------
+;;; dired
+;;; -----------------------------------------------------------------
+(eoe-require 'dired)
+
+;;; -----------------------------------------------------------------
+;;; Operations at Point
+;;; -----------------------------------------------------------------
+(require 'at-point)
+
+;;; -----------------------------------------------------------------
+;;; Miscellaneous
+;;; -----------------------------------------------------------------
+(require 'at-neda)
+
+(if (eq window-system 'win32)
+    (require 'win32-fixes))
+
+;;
+;; mode line 
+;; 
+(display-time)				; display time on mode line
+(line-number-mode 1)			; display line num

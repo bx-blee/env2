@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: cmndArgsSpec Method -- Each As Enumerated -- 
+# key: cmndElemArgs/specEachAsEnumerated
+# group: cmndElemArgs
+# --
+$0####+BEGIN: bx:icm:python:method :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+####+END:        
+        """
+***** Cmnd Args Specification  -- Each As Enumerated.
+"""
+        cmndArgsSpecDict = icm.CmndArgsSpecDict()
+        cmndArgsSpecDict.argsDictAdd(
+            argPosition="0&9999",
+            argName="cmndArgs",
+            argChoices=[argValue1, argValueN,],
+            argDescription="List Of CmndArgs To Be Processed. Each As Enumerated."
+        )
+
+        return cmndArgsSpecDict

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: MenuBar Generic Panel
+# key: begin/bleePanelGeneric
+# group: panelMenuBar
+# type: command
+# --
+(progn
+  ;; Footer Part	
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/footerEmacsParams.org")
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/footerOrgParams.org")  
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/footerPanelControls.org")
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/evolution.org")
+  ;; Header Part
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/overview.org")
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/relatedPanelsEditables.org")  
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/commonSisters.org")
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/title.org")
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/topPanelControls.org")
+  ;; Expand
+  (org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

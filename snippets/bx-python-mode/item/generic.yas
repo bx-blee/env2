@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: COMEEGA Python ICM Item Generic
+# key: icmItem/generic
+# group: icmItem
+# --
+$0####+BEGIN: bx:icm:python:icmItem :itemType "${1:type}" :itemTitle "${2:title}"
+####+END:

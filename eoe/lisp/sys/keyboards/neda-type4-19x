@@ -1,0 +1,182 @@
+;; -*- Mode: Emacs-Lisp -*-
+;;  Included below:
+;;    Sun type4 keyboard bindings
+;;
+;;  RCS: $Id: neda-type4-19x,v 1.1.1.1 2007-02-23 22:32:57 mohsen Exp $
+;;
+;; Dot.emacs for Michael Lamoureux
+;;     This file contains ideas stolen from a great many sources
+;;     latest hack added on 9/21/92
+
+;; [many lines deleted here -mjl]
+
+(require 'basic-ext)			; for sync-cd
+(require 'bbdb-mb)			; for bbdb-complete-name-only
+
+;; &&lucid ========== Lucid emacs 19 stuff ===========================
+(if (string-match "Lucid" emacs-version)
+    (progn
+
+      (require 'font-lock-ext)
+
+      ;; emacs-19 key bindings for Sun type4 keyboard
+      ;;
+      ;;  Can use "meta", "control", and "shift" modifiers
+      ;; Left keypad
+      (define-key global-map [(f11)] 'isearch-exit);; Stop
+      (define-key global-map [(f12)] 'isearch-repeat-forward);; Again
+      (define-key global-map [(control f12)] 'repeat-complex-command);; Again
+      (define-key global-map [(f13)] 'find-emacs-new-screen);; Props
+      (define-key global-map [(control f13)] 'find-Xdefs-new-screen);; Props
+      (define-key global-map [(f14)] 'undo);; Undo
+      (define-key global-map [(f16)] 'kill-ring-save);; Copy
+      (define-key global-map [(f18)] 'yank);; Paste
+      (define-key global-map [(control f18)] 'yank-pop);; Paste
+      (define-key global-map [(f19)] 'isearch-forward);; Find
+      (define-key global-map [(control f19)] 'query-replace);; Find
+      (define-key global-map [(f20)] 'kill-region);; Cut
+
+      ;; emacs-19 key bindings for Sun type5 keyboard
+
+      ;;  Can use "meta", "control", and "shift" modifiers
+
+      ;; =================
+      ;; Top Function keys
+      ;; =================
+      ;;
+      ;; F1
+      (define-key global-map [(f1)] 'compile) 
+      (define-key global-map [(shift f1)] 'noop) 
+      (define-key global-map [(control f1)] 'noop) 
+      (define-key global-map [(meta f1)] 'noop) 
+      ;; F2
+      (define-key global-map [(f2)] 'vm) 
+      (define-key global-map [(shift f2)] 'vm-visit-folder)
+      (define-key global-map [(control f2)] 'noop) 
+      (define-key global-map [(meta f2)] 'noop) 
+      ;; F3
+      (define-key global-map [(f3)] 'vm-mail)
+      (define-key global-map [(shift f3)] 'vm-visit-folder)
+      (define-key global-map [(control f3)] 'noop) 
+      (define-key global-map [(meta f3)] 'noop) 
+      ;; F4
+      (define-key global-map [(f4)] 'bbdb-complete-name-only)
+      (define-key global-map [(shift f4)] 'bbdb-complete-address)
+      (define-key global-map [(control f4)] 'noop) 
+      (define-key global-map [(meta f4)] 'noop) 
+      ;; F5
+      (define-key global-map [(f5)] 'comint-dynamic-complete)
+      (define-key global-map [(shift f5)] 'noop) 
+      (define-key global-map [(control f5)] 'noop) 
+      (define-key global-map [(meta f5)] 'noop) 
+      ;; F6
+      (define-key global-map [(f6)] 'netscape-fetch-url-at-point)
+      (define-key global-map [(shift f6)] 'ispell-buffer)
+      (define-key global-map [(control f6)] 'sync-cd) 
+      (define-key global-map [(meta f6)] 'noop) 
+      ;; F7
+      (define-key global-map [(f7)] 'shell)
+      (define-key global-map [(shift f7)] 'noop) 
+      (define-key global-map [(control f7)] 'noop) 
+      (define-key global-map [(meta f7)] 'noop) 
+      ;; F8
+      (define-key global-map [(f8)] 'find-file)
+      (define-key global-map [(shift f8)] 'find-file-other-window)
+      (define-key global-map [(control f8)] 'noop) 
+      (define-key global-map [(meta f8)] 'noop) 
+      ;; F9
+      (define-key global-map [(f9)] 'goto-shell) 
+      (define-key global-map [(shift f9)] 'noop) 
+      (define-key global-map [(control f9)] 'noop) 
+      (define-key global-map [(meta f9)] 'noop) 
+      ;; F10
+      (define-key global-map [(f10)] 'gdb-raise-buffers) 
+      (define-key global-map [(shift f10)] 'noop) 
+      (define-key global-map [(control f10)] 'noop) 
+      (define-key global-map [(meta f10)] 'noop) 
+      ;; F11 (SunF36 [sic])
+      (define-key global-map [(SunF36)] 'other-window-at-end) 
+      (define-key global-map [(shift SunF36)] 'noop)
+      (define-key global-map [(control SunF36)] 'noop) 
+      (define-key global-map [(meta SunF36)] 'noop) 
+      ;; F12 (SunF37 [sic]) 
+      (define-key global-map [(SunF37)] 'other-window) 
+      (define-key global-map [(shift SunF37)] 'noop)
+      (define-key global-map [(control SunF37)] 'noop) 
+      (define-key global-map [(meta SunF37)] 'noop) 
+
+      ;;
+      ;; Right keypad
+      ;;
+
+      ;; Print Screen
+      (define-key global-map [(f22)] 'print-buffer) 
+      (define-key global-map [(control f22)] 'font-lock-mode)
+      (define-key global-map [(meta f22)] 'font-lock-maximum-size-cycle)
+      (define-key global-map [(shift f22)] 'noop)
+      
+      ;; Pause
+      (define-key global-map [(f23)] 'keyboard-quit);; Break
+
+      ;; Home
+      (define-key global-map [(f27)] 'beginning-of-line);; Home
+      (define-key global-map [(control f27)] 'beginning-of-buffer);; Home
+
+      ;; Page Up
+      (define-key global-map [(f29)] 'scroll-down);; PgUp
+      (define-key global-map [(control f29)] 'scroll-other-window-down);; PgUp
+
+      ;; Page Down
+      (define-key global-map [(f35)] 'scroll-up);; PgDn
+      (define-key global-map [(control f35)] 'scroll-other-window);; PgDn
+
+      ;; Up Arrow
+      (define-key global-map [(up)] 'previous-line)
+
+      ;; Down Arrow
+      (define-key global-map [(down)] 'next-line)
+
+      ;; Left-Arrow
+      (define-key global-map [(left)] 'backward-char)
+      (define-key global-map [(control left)] 'backward-word)
+
+      ;; Right Arrow
+      (define-key global-map [(right)] 'forward-char)
+      (define-key global-map [(control right)] 'forward-word)
+
+      ;; End
+      (define-key global-map [(r13)] 'end-of-line)
+      (define-key global-map [(control r13)] 'end-of-buffer)
+
+      ;; Insert
+      (define-key global-map [(insert)] 'template-moded)
+      (define-key global-map [(meta insert)] 'template-moded-overwrite)
+
+      ;; Keypad Insert
+      (define-key global-map [(kp-insert)] 'template-moded)
+      (define-key global-map [(meta kp-insert)] 'template-moded-overwrite)
+
+      ;; []
+      (define-key global-map [(f31)] 'move-to-window-line)
+      
+      ))
+
+;; for function keys
+;;   haven't bothered to figure this one out yet...  I was hoping that
+;;   it was just a negative argument to scroll-other-window, but I
+;;   couldn't find anything in the documentation...
+;(defun scroll-other-window-down ()
+;  (interactive)
+;  (scroll-other-window (- 0 [number of lines in other-window])))
+
+(defun find-emacs-new-screen () ;; for props key
+  (interactive)
+  (find-file-new-screen "~/.emacs"))
+(defun find-Xdefs-new-screen () 
+  (interactive)
+  (find-file-new-screen "~/.Xdefaults"))
+
+(defun noop () 
+  (interactive)
+  (message "noop"))
+

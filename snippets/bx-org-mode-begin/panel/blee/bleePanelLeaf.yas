@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Blee Leaf Panel
+# key: begin/bleePanelLeaf
+# group: blee
+# type: command
+# --
+(progn
+  (insert-file "/bisos/apps/defaults/begin/bleePanel/leafPanels/leafBegin.org")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

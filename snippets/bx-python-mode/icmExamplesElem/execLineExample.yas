@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Cmnd Elems -- execLineExample
+# key: icmExampleElem/execLineExample
+# group: icmExampleElem
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+execLineEx("""${1:bashCommandLine}""")
+$0
+
+

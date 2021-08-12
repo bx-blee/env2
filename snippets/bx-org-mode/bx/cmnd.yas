@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Elisp Sh Cmnd
+# key: bx/elisp/cmnd
+# group: bx.elisp
+# --
+`(org-toggle-link-display)`[[elisp:(lsip-local-run-command "${1:ShellCommand}")][${2:VisibleString}]]$0

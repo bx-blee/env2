@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: All RFC Port Nu Fix
+# key: convert/all-rfc-portnu-fix
+# group: rfcs
+# type: command
+# --
+(progn
+  (bx:org:portNu-fixup)
+  ;;(org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

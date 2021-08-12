@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Map Directions
+# key: address/map-diretions
+# group: address
+# type: command
+# --
+(progn
+  (message "Place Holder: Using Address At Point use map and show directions")
+  )

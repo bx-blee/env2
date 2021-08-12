@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Frame Plus Full
+# key: frame/full
+# group: DB-Frames Plus
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:frame-full-begin :disabledP "false" :title "${1:Title}" :subtitle "${2:SubTitle}" :label "${3:auto}" :attrs "${4:fragile}" :audio "${5:conventional}" :transition "${6:Trans}" :onLeave "${7:OnLeave}"
+%%%#+END:
+
+  \begin{block}{Observation 1}
+  Some Block
+  \end{block}
+
+  \begin{exampleblock}{Example 1}
+  Some Example Block
+  \end{exampleblock}
+
+  \begin{itemize}
+  \item Item One
+  \end{itemize}
+
+  \pnote{
+    Frame Notes\\\\
+    \par
+  }
+
+\end{frame}

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Snippet Head Sans Group
+# key: snippetHeadSansGroup
+# type: command
+# --
+(progn
+  (insert "\
+# -*- mode: snippet -*-
+# name: tbdName
+# key: tbdKey
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+"))

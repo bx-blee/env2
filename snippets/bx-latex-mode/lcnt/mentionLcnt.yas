@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: mentionLcnt
+# key: lcnt/mentionLcnt
+# group: LCNT
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+%%%#+BEGIN: bx:dblock:lcnt:latex:mention-lcnt  :lcnt-nu "PLPC-$0"
+%%%#+END:

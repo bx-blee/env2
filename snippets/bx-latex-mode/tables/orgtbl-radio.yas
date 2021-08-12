@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: orgtbl-radio
+# key: tables/orgtbl-radio
+# group: tables
+# type: command
+# --
+(progn
+  (orgtbl-insert-radio-table)
+  (orgtbl-mode t)	
+  )

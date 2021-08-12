@@ -1,0 +1,51 @@
+# -*- mode: snippet -*-
+# name: Basic With Args Action Plus Rest
+# key: icmCmnds/basicArgsActionRest
+# group: icmCmnds
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "${1:commandName}" :comment "" :parsMand "" :parsOpt "" :argsMin "1" :argsMax "9999" :asFunc "" :interactiveP ""
+####+END:
+        action = self.cmndArgsGet("0", cmndArgsSpecDict, effectiveArgsList)
+        print(action)
+
+        actionPars = self.cmndArgsGet("1&9999", cmndArgsSpecDict, effectiveArgsList)        
+        print(actionPars)
+        
+        for each in actionPars:
+            print(each)
+
+        return cmndOutcome.set(
+            opError=icm.OpError.Success,
+            opResults=None,
+        )
+
+####+BEGIN: bx:icm:python:method :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+####+END:        
+        """
+***** Cmnd Args Specification
+      """
+        cmndArgsSpecDict = icm.CmndArgsSpecDict()
+        cmndArgsSpecDict.argsDictAdd(
+            argPosition="0",
+            argName="action",
+            argChoices=['list', 'print'],
+            argDescription="Action to be specified by rest"
+        )
+        cmndArgsSpecDict.argsDictAdd(
+            argPosition="1&9999",
+            argName="actionPars",
+            argChoices=[],
+            argDescription="Rest of args for use by action"
+        )
+
+        return cmndArgsSpecDict
+
+
+####+BEGIN: bx:icm:python:method :methodName "cmndDocStr" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+####+END:        
+        return """
+***** TODO [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Place holder for this commands doc string.
+"""
+

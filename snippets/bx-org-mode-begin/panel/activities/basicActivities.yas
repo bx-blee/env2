@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Activities Panel
+# key: begin/activitiesPanel
+# group: panelActivities
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/activitiesPanels/beginActPanel.org")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

@@ -1,0 +1,193 @@
+;;; -*- Mode: Emacs-Lisp; -*-
+
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+;; All subsequent package-initialize invokations should be eliminated or:
+;; (unless package--initialized (package-initialize t))  
+
+;;;
+;;; Blee bootstrap Start
+;;;
+
+(defun blee:bootstrap:file-name-obtain ()
+  "Also add an environment variable -- export blee-bootstrap=fileName"  
+    (let (
+	  (blee-3-bootstrap "/bisos/blee/env/main/emacs-blee.el")
+	  (blee-2-bootstrap "~/lisp/bystar-emacs.el")
+	  )
+      (cond
+       ((file-exists-p blee-3-bootstrap)
+	blee-3-bootstrap
+	)
+       ((file-exists-p blee-2-bootstrap)
+	blee-2-bootstrap
+	)
+       (t
+	(message "Missing Blee bootstrap file")
+	nil
+	)
+       )))
+
+(defvar blee:bootstrap:file-name (blee:bootstrap:file-name-obtain)  "Initial Blee Load File")
+
+(if blee:bootstrap:file-name
+    (load  blee:bootstrap:file-name)
+  )
+
+;;;
+;;; END OF .emacs
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(gnuserv-program (concat exec-directory "/gnuserv"))
+ '(load-home-init-file t t)
+ '(org-agenda-custom-commands
+   (quote
+    (("d" todo "DELEGATED" nil)
+     ("c" todo "DONE|DEFERRED|CANCELLED" nil)
+     ("w" todo "WAITING" nil)
+     ("W" agenda ""
+      ((org-agenda-ndays 21)))
+     ("A" agenda ""
+      ((org-agenda-skip-function
+	(lambda nil
+	  (org-agenda-skip-entry-if
+	   (quote notregexp)
+	   "\\=.*\\[#A\\]")))
+       (org-agenda-ndays 1)
+       (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+     ("u" alltodo ""
+      ((org-agenda-skip-function
+	(lambda nil
+	  (org-agenda-skip-entry-if
+	   (quote scheduled)
+	   (quote deadline)
+	   (quote regexp)
+	   "<[^>
+]+>")))
+       (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
+ '(org-agenda-files
+   (quote
+    ("~/org/captures.org" "~/org/events/main.org" "~/org/events/family.org")))
+ '(org-agenda-ndays 7)
+ '(org-agenda-show-all-dates t)
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-done t)
+ '(org-agenda-start-on-weekday nil)
+ '(org-deadline-warning-days 14)
+ '(org-default-notes-file "~/org/notes.org")
+ '(org-fast-tag-selection-single-key (quote expert))
+ '(org-reverse-note-order t)
+ '(package-selected-packages
+   (quote
+    (markdown-mode bbdb yasnippet w3m tabbar realgud python-mode offlineimap notmuch magit load-dir jedi highlight-indentation google-maps flymake-python-pyflakes f emms autopair auctex)))
+ '(safe-local-variable-values
+   (quote
+    ((folded-file . t)
+     (bx:iimBash:iimName . "mailInject.sh")
+     (bx:iimp:iimName . "hereHere")
+     (major-mode . shellscript-mode)
+     (major-mode . latex-mode)
+     (eval setq bx:curUnit "smbd")
+     (eval bx:iimBash:cmndLineSpecs :name "lcaSambaSysdAdmin.sh")
+     (eval setq bufloc:selectedSubject "")
+     (major-mode . shell-script-mode)
+     (major-mode . sh-mode)
+     (folded-file)
+     (major-mode . lisp-mode)
+     (eval defun org-dblock-write:bx:dblock:org:doc-title
+	   (params)
+	   (let
+	       ((bx:types
+		 (or
+		  (plist-get params :types)
+		  "")))
+	     (bx:lcnt:info:base-read)
+	     (insert
+	      (format "*  [[elisp:(beginning-of-buffer)][Top]] #####################  [[elisp:(delete-other-windows)][(1)]]                /*%s-%s -- LCNT Panel -- lcntProc.sh, presProc.sh and Mailings*/
+*  [[elisp:(beginning-of-buffer)][Top]] #####################  [[elisp:(delete-other-windows)][(1)]]                 *%s*
+*  [[elisp:(beginning-of-buffer)][Top]] #####################  [[elisp:(delete-other-windows)][(1)]]                 %s"
+		      (get
+		       (quote bx:lcnt:info:base)
+		       (quote type))
+		      (get
+		       (quote bx:lcnt:info:base)
+		       (quote lcntNu))
+		      (get
+		       (quote bx:lcnt:info:base)
+		       (quote shortTitle))
+		      (get
+		       (quote bx:lcnt:info:base)
+		       (quote url))))))
+     (eval setq bx:curUnit "lcntProc")
+     (eval bx:iimBash:cmndLineSpecs :name "lcntProc.sh")
+     (eval bx:iimp:cmndLineSpecs :name "bxpManage.py")
+     (eval setq bx:iimp:iimModeArgs "")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(bbdb-field-name ((t (:foreground "yellow" :size "16"))))
+ '(bold ((t (:foreground "yellow" :size "16" :bold nil))))
+ '(bold-italic ((t (:foreground "white" :size "16"))))
+ '(custom-button-face ((t nil)))
+ '(custom-variable-button-face ((t nil)))
+ '(dict-word-entry-face ((t nil)))
+ '(dired-face-directory ((t nil)))
+ '(font-lock-comment-face ((((class color) (background light)) (:foreground "yellow"))))
+ '(font-lock-warning-face ((((class color) (background dark)) (:foreground "Pink"))))
+ '(gnus-emphasis-bold ((t nil)) t)
+ '(gnus-emphasis-bold-italic ((t nil)) t)
+ '(gnus-emphasis-underline-bold ((t nil)) t)
+ '(gnus-emphasis-underline-bold-italic ((t nil)) t)
+ '(gnus-group-mail-1-face ((((class color) (background dark)) (:foreground "aquamarine1"))) t)
+ '(gnus-group-mail-2-face ((((class color) (background dark)) (:foreground "aquamarine2"))) t)
+ '(gnus-group-mail-3-face ((((class color) (background dark)) (:foreground "aquamarine3"))) t)
+ '(gnus-group-mail-low-face ((((class color) (background dark)) (:foreground "aquamarine4"))) t)
+ '(gnus-group-news-1-face ((((class color) (background dark)) (:foreground "PaleTurquoise"))) t)
+ '(gnus-group-news-2-face ((((class color) (background dark)) (:foreground "turquoise"))) t)
+ '(gnus-group-news-3-face ((((class color) (background dark)) nil)) t)
+ '(gnus-group-news-4-face ((((class color) (background dark)) nil)) t)
+ '(gnus-group-news-5-face ((((class color) (background dark)) nil)) t)
+ '(gnus-group-news-6-face ((((class color) (background dark)) nil)) t)
+ '(gnus-group-news-low-face ((((class color) (background dark)) (:foreground "DarkTurquoise"))) t)
+ '(gnus-summary-high-ancient-face ((((class color) (background dark)) (:foreground "SkyBlue"))) t)
+ '(gnus-summary-high-read-face ((((class color) (background dark)) (:foreground "PaleGreen"))) t)
+ '(gnus-summary-high-ticked-face ((((class color) (background dark)) (:foreground "pink"))) t)
+ '(gnus-summary-high-unread-face ((t nil)) t)
+ '(gui-element ((t nil)) t)
+ '(highlight-indentation-current-column-face ((t (:background "dark slate gray"))))
+ '(highlight-indentation-face ((t (:background "dark olive green"))))
+ '(hyper-apropos-heading ((t (:foreground "white"))))
+ '(hyper-apropos-major-heading ((t (:foreground "yellow"))))
+ '(hyper-apropos-section-heading ((t (:foreground "white"))))
+ '(hyper-apropos-warning ((t (:foreground "red"))))
+ '(info-node ((t (:foreground "white"))))
+ '(info-xref ((t (:foreground "yellow"))))
+ '(italic ((t (:foreground "orange" :size "16"))))
+ '(man-bold ((t (:foreground "yellow"))))
+ '(man-heading ((t (:foreground "white"))))
+ '(man-italic ((t (:foreground "red"))))
+ '(man-xref ((t (:foreground "orange"))))
+ '(message-header-cc ((((class color) (background dark)) (:foreground "green4"))))
+ '(message-header-newsgroups ((((class color) (background dark)) (:foreground "yellow"))))
+ '(message-header-subject ((((class color) (background light)) (:foreground "yellow"))))
+ '(message-header-to ((((class color) (background dark)) (:foreground "green2"))))
+ '(message-headers ((t nil)))
+ '(message-url ((t (:foreground "white"))))
+ '(shell-input ((t (:foreground "white" :size "16" :bold nil))))
+ '(shell-prompt ((t (:foreground "yellow" :size "16" :family "lucida" :bold nil :italic nil))))
+ '(tabbar-button-highlight ((t (:background "grey50" :foreground "white" :height 0.8 :family "Sans Serif"))))
+ '(tabbar-default ((t (:background "grey50" :foreground "yellow" :height 0.8 :family "Sans Serif"))))
+ '(tabbar-modified ((t (:background "grey50" :foreground "yellow" :box (:line-width 1 :color "white" :style released-button)))))
+ '(tabbar-selected ((t (:background "white" :foreground "black" :box (:line-width 1 :color "white" :style pressed-button) :height 0.8 :family "Sans Serif"))))
+ '(tabbar-unselected ((t (:background "grey50" :foreground "blue" :box (:line-width 2 :color "black" :style released-button) :height 0.8 :family "Sans Serif"))))
+ '(widget-button ((t nil))))

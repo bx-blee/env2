@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: devStartAndBegin
+# key: bxtStart/devStartAndBegin
+# group: bxtStart
+# type: command
+# --
+(progn
+  (blee:bnsm:panel-goto  "/libre/ByStar/InitialTemplates/activeDocs/bxPlatformFacilities/main")
+  )

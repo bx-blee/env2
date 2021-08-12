@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Link Elisp Form
+# key: link/elisp
+# group: Create Link
+# type: command
+# --
+
+(progn
+  (yas-redo-selected-text-bx)
+  (bx:org:link:elisp)  
+  )

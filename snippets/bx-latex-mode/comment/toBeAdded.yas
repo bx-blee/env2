@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Comment toBeAddedText
+# key: comment/toBeAddedText
+# group: Comment
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+\begin{comment}
+****** TODO [[elisp:(org-cycle)][| ]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(beginning-of-buffer)][|^]] [[elisp:(delete-other-windows)][|1]] || *Incomplete Text*  :: $0 [[elisp:(org-cycle)][| ]]
+\end{comment}

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: run repo config list
+# key: bxShell/gitRepo/configList
+# group: gitRepoInfo
+# type: command
+# --
+(progn
+  (lsip-local-run-command "git --no-pager config --list")
+  )

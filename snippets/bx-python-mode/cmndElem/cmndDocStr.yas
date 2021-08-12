@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: docString -- Method
+# key: cmndElems/cmndDocStr
+# group: cmndElems
+# --
+$0####+BEGIN: bx:icm:python:method :methodName "cmndDocStr" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+####+END:        
+        return """
+***** TODO [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Place holder for this commands doc string.
+"""

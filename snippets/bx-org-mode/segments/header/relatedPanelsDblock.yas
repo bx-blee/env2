@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Related Panels Dblock (+ panelSisters)
+# key: begin/relatedPanels
+# group: segments/header
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/relatedPanels.org")
+  (org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

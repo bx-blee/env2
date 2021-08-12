@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: dotIgnore Update -- Run
+# key: bxShell/gitRepo/dotIgnoreUpdate
+# group: gitRepoSetup
+# type: command
+# --
+(progn
+  (lsip-local-run-command "bx-gitRepos.sh -h -v -n showRun -i baseUpdateDotIgnore .")
+  )

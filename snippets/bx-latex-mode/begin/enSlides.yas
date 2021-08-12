@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: enSlides
+# key: begin/enSlides
+# group: begin
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/begin/templates/moded/latex-mode/enSlides.tex")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

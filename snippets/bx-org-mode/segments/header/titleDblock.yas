@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: BxPanel Title Dblock
+# key: bxPanel/title
+# group: segments/header
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:bxPanel:title :panelType "=${1:bxPanel}=" :title "~${2:echo command}~"
+####+END:

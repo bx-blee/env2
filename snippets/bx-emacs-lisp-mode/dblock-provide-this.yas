@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: dblock provide this
+# key: provideThis
+# type: command
+# --
+(save-excursion
+  (insert
+   (format "\
+;;;#+BEGIN: bx:dblock:lisp:provide :disabledP \"false\" :lib-name \"%s\"
+;;;#+END:
+"
+	   (file-name-sans-extension
+	    (file-name-nondirectory
+	     buffer-file-name))
+	   )))

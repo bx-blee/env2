@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Hevea latexOnlyAsComment
+# key: hevea/latexOnlyAsComment
+# group: hevea
+# --
+%BEGIN LATEX
+$0
+%END LATEX
+

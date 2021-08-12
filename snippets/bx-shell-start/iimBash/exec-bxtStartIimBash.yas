@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Exec bxtStartIimBash.sh
+# key: bxtStart/iimBash/bxtStartIimBash
+# group: bxtStart.iimBash
+# type: command
+# --
+(progn
+  (lsip-local-run-command "bxtStartIimBash.sh")
+  )

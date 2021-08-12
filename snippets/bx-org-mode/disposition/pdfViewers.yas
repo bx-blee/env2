@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: File Disposition PDF Viewers
+# key: fileDisposition/pdf
+# group: File Disposition Line
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:pdf|disposition :outLevel 1 :sep t :folding t :file "${1:File Name}" :title "${2:Title Desc Of PDF}"  :comment "${2:Extra Info}"
+####+END:

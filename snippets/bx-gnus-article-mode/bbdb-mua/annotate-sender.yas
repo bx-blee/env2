@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Annotate Sender
+# key: bbdb-mua/annotateSender
+# group: bbdb-mua
+# type: command
+# --
+(progn
+  (bbdb-mua-annotate-sender)
+  )

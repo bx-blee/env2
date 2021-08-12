@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Maintenance Text -- OLD Obsoleted
+# key: segments/maintenance
+# group: segments/body
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0*      ================
+*  [[elisp:(beginning-of-buffer)][Top]] #####################  [[elisp:(delete-other-windows)][(1)]]      *Notes -- Status -- Development -- Evolution*
+*  [[elisp:(org-cycle)][| ]]  Manifest           ::   /Files Description/    [[elisp:(lsip-local-run-command-here "ls -C -F -1 | emlStdinGen -i lsToManifestStdout")][ls -C -F -1 | emlStdinGen -i lsToManifestStdout]] [[elisp:(org-cycle)][| ]]
+*  [[elisp:(org-cycle)][| ]]  Notes              ::   /Notes, Ideas, Tasks, Agenda/   [[elisp:(org-cycle)][| ]]
+** DONE [[elisp:(org-cycle)][| ]]  bisos.bx-bases  ::  Dependency Problem -- Needs argparse  [[elisp:(org-cycle)][| ]]
+*  [[elisp:(org-cycle)][| ]]  Team               ::   /Development Team/ [[elisp:(org-cycle)][| ]]
+*      =====================  

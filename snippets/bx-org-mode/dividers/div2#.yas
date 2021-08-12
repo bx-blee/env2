@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Divider 2 #
+# key: divider/div2#
+# group: divider
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+**  [[elisp:(beginning-of-buffer)][|^]] #################### [[elisp:(delete-other-windows)][|1]]

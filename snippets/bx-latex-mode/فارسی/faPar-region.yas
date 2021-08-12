@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: faPar Region
+# key: faPar/region
+# group: فارسی در لاتین
+# type: command
+# --
+(progn
+  ;;;(yas-redo-selected-text-bx)	 
+  (insert (format "\\begin{faPar}\n%s\n\\end{faPar}" yas-selected-text))
+  )

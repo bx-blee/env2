@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: One func To orgSec
+# key: convert/one-func-to-orgSec
+# group: convert
+# type: command
+# --
+(progn
+  (iim-bash-one-func-to-orgSec)
+  ;;(org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

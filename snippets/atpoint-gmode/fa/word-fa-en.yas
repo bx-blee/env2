@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Persian-to-English Word
+# key: word/fa-en
+# group: fa
+# type: command
+# --
+(progn
+  (lookup-word-fa-en)
+  )

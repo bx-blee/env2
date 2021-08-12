@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Basic Class Method
+# key: class/method
+# group: class
+# --
+$0####+BEGIN: bx:icm:python:method :methodName "${1:methodName}" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList "${2:methodArgs}"
+####+END:        
+        pass

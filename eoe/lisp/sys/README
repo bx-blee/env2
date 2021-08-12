@@ -1,0 +1,47 @@
+
+19-compat.el           -- Considered Obsolete
+AlmostJunk
+basic-ext.el           -- A generalized Library
+default-eoe.el         -- Being Obsoleted mostly 19f related
+dressups.el            -- Screen Coloring
+dressups.el.2001
+dressups.el~
+emacs-vers.el          -- Outside package library
+dotEmacs20fNotDone
+eoe-emacs-vers.el      -- Link to emacs-vers.el
+eoe-ini-utils.el       -- .INI file parsing library
+eoe-menu.el            -- Lucid and FSF menu library
+eoe.el                 -- eoe-load eoe-require ...
+keyboards
+mohsen-menu.el
+mohsen-menu.el~
+site-defaults
+
+NOTE: all symlinks were replaced with duplicates
+when converted to remote CVS.
+
+zanjan-mohsen->ls -al
+total 192
+drwxrwxr-x  5 mohsen employee  4096 2007-02-23 19:56 .
+drwxrwxr-x  9 mohsen employee  4096 2007-02-23 19:56 ..
+-rwxrwxr-x  1 mohsen employee   618 2007-02-23 14:32 19-compat.el
+-rwxrwxr-x  1 mohsen employee 23025 2007-02-23 14:32 basic-ext.el
+drwxrwxr-x  2 mohsen employee  4096 2007-02-23 19:58 CVS
+-rwxrwxr-x  1 mohsen employee  5243 2007-02-23 14:32 default-eoe.el
+-rw-rw-r--  1 mohsen employee 12385 2007-02-23 14:32 dressups.el
+-rw-rw-r--  1 mohsen employee 11281 2007-02-23 14:32 dressups.el.2001
+lrwxrwxrwx  1 mohsen employee    27 2007-02-23 19:56 .emacs -> ./site-defaults/neda/.emacs
+-rw-rw-r--  1 mohsen employee 11233 2007-02-23 14:32 emacs20fNotDone
+lrwxrwxrwx  1 mohsen employee    40 2007-02-23 19:56 .emacs.no-user-init -> ./site-defaults/neda/.emacs.no-user-init
+-rwxrwxr-x  1 mohsen employee 51247 2007-02-23 14:32 emacs-vers.el
+lrwxrwxrwx  1 mohsen employee    25 2007-02-23 19:56 .eoe -> ./site-defaults/neda/.eoe
+-rwxrwxr-x  1 mohsen employee  5072 2007-02-23 14:32 eoe.el
+lrwxrwxrwx  1 mohsen employee    13 2007-02-23 19:56 eoe-emacs-vers.el -> emacs-vers.el
+-rwxrwxr-x  1 mohsen employee  2345 2007-02-23 14:32 eoe-ini-utils.el
+-rwxrwxr-x  1 mohsen employee  7107 2007-02-23 14:32 eoe-menu.el
+-rwxrwxr-x  1 mohsen employee  7002 2004-06-05 23:10 eoe-menu.el~
+drwxrwxr-x  3 mohsen employee  4096 2007-02-23 19:56 keyboards
+-rwxrwxr-x  1 mohsen employee  1421 2007-02-23 14:32 mohsen-menu.el
+-rw-rw-r--  1 mohsen employee   567 2007-02-23 14:32 README
+drwxrwxr-x  4 mohsen employee  4096 2007-02-23 15:00 site-defaults
+-rwxrwxr-x  1 mohsen employee   166 2007-02-23 14:32 symLinks.sh

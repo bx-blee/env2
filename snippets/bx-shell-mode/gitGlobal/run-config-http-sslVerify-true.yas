@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: run global config http.sslverify true
+# key: bxShell/gitGlobal/config/http.sslverify/true
+# group: gitGlobal
+# type: command
+# --
+(progn
+  (lsip-local-run-command "git config --global http.sslverify true")
+  )

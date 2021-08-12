@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Package Adopt
+# key: begin/iimBasic
+# group: begin
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/software/begin/iimBash/lpSimple.generic")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

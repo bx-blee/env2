@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Unix Command (ol=2)
+# key: unix/cmnd
+# group: Execute Line / Unix
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:panel:unix:cmnd :outLevel 2 :sep nil :folding? nil :label "${1:Label}" :command "${2:echo command}" :comment "${3:Allows you to edit}" :afterComment "${4:-- tailor the command line}"
+####+END:

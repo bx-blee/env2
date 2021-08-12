@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Dictionary Word
+# key: word/dictionary
+# type: command
+# --
+(progn
+  (dictem-dictionary-define-at-point-bx)
+  )

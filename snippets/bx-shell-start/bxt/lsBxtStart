@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: lsBxtStart
+# key: bxt/lsBxtStart
+# group: bxt
+# type: command
+# --
+(progn
+  (lsip-local-run-command "ls -ldt /opt/public/osmt/bin/bxtStart*")
+  )

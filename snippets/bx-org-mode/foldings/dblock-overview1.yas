@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Dblock Panel Overview
+# key: folding/db-sec-1
+# group: folding
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:bxPanel:foldingSection :outLevel 1 :title "OVERVIEW" :anchor "Panel" :extraInfo "Summary"
+####+END

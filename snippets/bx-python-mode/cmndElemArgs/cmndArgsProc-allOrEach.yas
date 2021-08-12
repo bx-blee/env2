@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: cmndArgsProc Block -- AllOrEach
+# key: cmndElemsArgs/proc-allOrEach
+# group: cmndElemArgs
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+${1:argName} = self.cmndArgsGet(${2:argPosStr}, cmndArgsSpecDict, effectiveArgsList)
+
+if $1[0] == "all":
+    cmndArgsSpec = cmndArgsSpecDict.argPositionFind($2)
+    argChoices = cmndArgsSpec.argChoicesGet()
+    argChoices.pop(0)
+    $1 = argChoices
+
+for each in $1:
+    icm.ANN_here("{each}".format(each=each))
+
+$0
+
+

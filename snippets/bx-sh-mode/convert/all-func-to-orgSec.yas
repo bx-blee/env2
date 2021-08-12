@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: All func To orgSec
+# key: convert/all-func-to-orgSec
+# group: convert
+# type: command
+# --
+(progn
+  (iim-bash-all-func-to-orgSec)
+  ;;(org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

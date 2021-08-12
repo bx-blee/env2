@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert icmPars --callTracking monitor+
+# key: icmPars/callTrackingMonitor
+# group: icmPars
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+ -v 1 --callTrackings monitor+ $0

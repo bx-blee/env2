@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Link Elisp Find File
+# key: link/elispFindFile
+# group: Create Link
+# type: command
+# --
+
+(progn
+  (yas-redo-selected-text-bx)
+  (bx:org:link:elispFindFile)  
+  )

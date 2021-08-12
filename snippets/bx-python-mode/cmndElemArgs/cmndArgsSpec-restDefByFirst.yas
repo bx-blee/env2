@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: cmndArgsSpec Method -- RestDefinedByFirst (action)
+# key: cmndElemArgs/spec-restDefinedByFirst
+# group: cmndElemArgs
+# --
+$0####+BEGIN: bx:icm:python:method :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+####+END:        
+        """
+***** Cmnd Args Specification -- Pattern: Rest Defined By First -- first=action rest=actionPars
+"""
+        cmndArgsSpecDict = icm.CmndArgsSpecDict()
+        cmndArgsSpecDict.argsDictAdd(
+            argPosition="0",
+            argName="action",
+            argDefault='list',	    	    
+            argChoices=['list', 'print'],
+            argDescription="Action to be specified by rest"
+        )
+        cmndArgsSpecDict.argsDictAdd(
+            argPosition="1&9999",
+            argName="actionPars",
+            argDefault='one',
+            argChoices=[],
+            argDescription="Rest of args for use by action"
+        )
+
+        return cmndArgsSpecDict

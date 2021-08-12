@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Top + Title
+# key: begin/top-title
+# group: panelHeaders
+# type: command
+# Description: Order of insert-file is the opposit of natural order.
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/title.org")
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/topPanelControls.org")
+  (org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

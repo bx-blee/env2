@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Comment orgCmnd
+# key: comment/orgCmnd
+# group: Comment
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+\begin{comment}
+*******  =CMND= ::   $0   e| 
+\end{comment}

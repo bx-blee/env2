@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: inputed
+# key: begin/inputed
+# group: begin
+# type: command
+# --
+(progn
+  ;;(insert-file "/libre/ByStar/InitialTemplates/software/begin/latex//inputed.tex")
+  (insert-file "/libre/ByStar/InitialTemplates/begin/templates/moded/latex-mode/inputed.tex")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

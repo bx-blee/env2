@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Cmnd Elems -- fullCmndMenu
+# key: icmExampleElem/fullCmndMenu
+# group: icmExampleElem
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+cmndName = ${1:"cmndName"} ; cmndArgs = "${2:cmndArgs}" ;
+cps=cpsInit() ; cps['${3:cmndParamName}'] = ${4:cmndParamValue}
+icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity='basic',
+                     comment='none', icmWrapper=None, icmName=None)
+$0
+
+

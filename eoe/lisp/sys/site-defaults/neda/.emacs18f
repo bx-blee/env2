@@ -1,0 +1,370 @@
+;;; -*- Mode: Emacs-Lisp; -*-
+
+(require 'misc-lim)
+
+;; for easy debugging of .emacs load; should be turned-off at the end
+;; of this file
+(setq debug-on-error t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Emacs Lisp environment
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; include my personal emacs lisp directory on loadpath
+(setq load-path (append (list (expand-file-name "~/emacs/lisp"))
+      load-path))
+
+(setq max-lisp-eval-depth (* 4 max-lisp-eval-depth)) ; quadruple it
+
+(setq gc-cons-threshold (* 8 gc-cons-threshold)) ; octuple it
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Mail stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; rings bell thrice when mail arrives
+(progn
+ (load "time")
+ (setq display-time-day-and-date t)
+ (eoe-load "popmail")
+ )
+
+(require 'rmail)
+(setq rmail-file-name "~/RMAIL")
+(setq mail-default-reply-to "pean@neda.com")
+(setq mail-archive-file-name "~/outgoing.mail")
+
+(require 'mail-ext)
+
+;;;; MH Stuff
+;;
+;; (eoe-require 'mh-e)
+;; (setq mh-reply-default-reply-to "from")
+;;
+;; (require 'mh-e-ext)			; my mh-e extensions
+;; (setq *mh-summary-height-percentage* 25)
+
+;; supercite (sc.el) stuff
+
+(progn
+  (eoe-require 'sc)
+  (setq mail-yank-hooks 'sc-cite-original)
+  ; (setq mh-yank-hooks 'sc-cite-original)
+  (setq sc-preferred-header-style 1)
+  (setq sc-citation-leader "    ")
+  )
+
+;;; directory services
+
+;; (load "ds-namec")			; name complete by fullname
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; shell file completion
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; shell stuff
+
+(load "shell-filec")
+(setq shell-mode-hook
+      (function (lambda ()
+		  (local-set-key "\t" 'complete-filename)
+		  )))
+
+;; specify shell-mode-hooks prior to this
+(require 'shell)
+
+
+;;; CMU SHELL Stuff
+
+(setq cmushell-load-hook
+  '((lambda ()
+      (define-key cmushell-mode-map "\t" 'complete-filename)
+  )))
+
+(require 'comint)
+(require 'cmushell)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Enable Info editing
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq Info-enable-edit t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; mini-buffer file completion
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(load "mini-filec")
+(define-key minibuffer-local-map "\t" 'minibuffer-complete-file)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; netnews
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; GNUS
+(progn
+  (eoe-require 'gnus)
+  (require 'gnus-ext)
+  (setq gnus-window-configuration
+	'((SelectNewsgroup (0 1 0))
+	  (ExitNewsgroup (1 0 0))
+	  (SelectArticle (0 7 10))
+	  (ExpandSubject (0 1 0))))
+  (setq gnus-signature-file nil)	; no automatic signatures
+  (require 'gnuspost))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; X stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; x screen colors
+(progn
+  (require 'screencolors)
+  ;;
+  ;; map configuration names to colors
+  ;;
+  (add-screen-colors 'black-on-gray '("black" "lightgray" "yellow" "yellow"))
+  (add-screen-colors 'black-on-white '("black" "white" "black" "black"))
+  (add-screen-colors 'blue-on-white '("SlateBlue" "white" "SlateBlue" "SlateBlue"))
+  (add-screen-colors 'green-on-black '("green" "black" "white" "white"))
+  (add-screen-colors 'white-on-green '("white" "ForestGreen" "white" "white"))
+  (add-screen-colors 'white-on-red '("white" "Firebrick" "white" "white"))
+  (add-screen-colors 'white-on-black '("white" "black" "white" "white"))
+  (add-screen-colors 'white-on-blue '("white" "SlateBlue" "yellow" "yellow"))
+  (add-screen-colors 'white-on-navy '("white" "NavyBlue" "white" "white"))
+  (add-screen-colors 'white-on-maroon '("white" "Maroon4" "white" "white"))
+  (add-screen-colors 'yellow-on-black '("yellow" "black" "white" "white"))
+  (add-screen-colors 'yellow-on-gray '("yellow" "Gray15" "white" "white"))
+  ;;
+  ;; map hostnames to configuration names
+  ;;
+  (add-screen-colors "oleum.zso.dec.com" 'white-on-maroon)
+  (add-screen-colors "slugbt.zso.dec.com" 'white-on-maroon)
+  (add-screen-colors "snohomish.zso.dec.com" 'white-on-blue)
+  (add-screen-colors "alfred.zso.dec.com" 'white-on-blue)
+  (add-screen-colors "zoomer.zso.dec.com" 'green-on-black)
+  (add-screen-colors "sunsail" 'yellow-on-black)
+  (add-screen-colors "sundae.zso.dec.com" 'yellow-on-black)
+  (add-screen-colors "decsun" 'yellow-on-black)
+  ;;
+  ;; map usernames to configuration names
+  ;;
+  (add-screen-colors "root" 'white-on-navy)
+  (maybe-set-screen-colors)
+  )
+;; x font cycling
+(require 'xfontcycle)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Printing
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (require 'enscript)
+(eoe-require 'ascii-print)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Auto Insert Stuff -- provides templates for various file types
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Auto insert stuff
+; (load "autoinsert")
+; (setq auto-insert-directory "/usr/staff3/lim/templates/insert/"
+;     auto-insert-alist '(
+;       		  ("\\.bib$" 		. "tex-insert.tex")
+;       		  ("\\.c$" 		. "c-insert.c")
+;       		  ("\\.C$" 		. "C++-insert.C")
+;       		  ("\\.c++$" 		. "C++-insert.C")
+;       		  ("\\.cc$" 		. "C++-insert.C")
+;       		  ("\\.cxx$" 		. "C++-insert.C")
+;       		  ("\\.ec$" 		. "c-insert.c")
+;       		  ("\\.h$" 		. "h-insert.c")
+;                         ("\\.H$"		. "H-insert.C")
+;       		  ("Makelocal.mk" 	. "Makelocal.mk")
+;       		  ("[Mm]akefile" 	. "makefile.inc")
+;       		  ("\\.mk$" 		. "makefile.inc")
+;       		  ("\\.mak$" 		. "makefile.inc")
+;       		  ("\\.sh$" 		. "sh-insert.sh")
+;       		  ("\\.tex$" 		. "tex-insert.tex")
+;       		  ("\\.x$" 		. "c-insert.c")
+;       		  ("\\.idl$" 		. "c-insert.c")
+;       		  ))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Source Code Control (SCCS & RCS & CVS)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; CVS
+; (require 'pcl-cvs)
+
+;;; SCCS
+(eoe-baroque-require 'sccs)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; C programming
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'gdb-ext)
+(require 'compile-ext)
+(require 'c-mode-ext)
+
+;;  Settings for GNU (default), K&R and BSD indentation styles are:
+;;
+;;                                   GNU  K&R  BSD
+;;                                   -------------
+;;    c-indent-level                  2    5    8
+;;    c-continued-statement-offset    2    5    8
+;;    c-brace-offset                  0   -5   -8
+;;    c-argdecl-indent                5    0    8
+;;    c-label-offset                 -2   -5   -8
+
+
+
+(setq c-tab-always-indent nil)          ; allow better manual-formatting
+(setq c-auto-newline nil)
+
+; (load-library "dw-code-std")            ; DECwest coding standards
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; C++ programming
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Saber C++ interface
+;; (require 'saber)
+;; (require 'saber-ext)
+
+; (eoe-load "c++-mode")
+; (setq c++-tab-always-indent nil)	; only if point at left margin
+;; (setq c++-empty-arglist-indent        4
+;;      c++-friend-offset                0
+;;      )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Informix programming
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; treat esql/c files as c files
+;(if (null (assoc "\\.ec$" auto-mode-alist))
+;    (setq auto-mode-alist (cons '("\\.ec$" . c-mode) auto-mode-alist)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Calendar & Time Management
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (require 'calendar)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; add to manual-formatted-dirlist
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq manual-formatted-dirlist
+      (append '("~/man/cat1" "~/man/cat2" "~/man/cat3" "~/man/cat4"
+		"~/man/cat5" "~/man/cat6" "~/man/cat7" "~/man/cat8")
+	      manual-formatted-dirlist))
+
+;;; a handy function to remember is 'nuke-nroff-bs'
+(eoe-load "man")			; modified to nuke DEC highlighting
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; version control
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq version-control nil)		; makes numbered backups for files
+					; that have numbered backups already.
+					; Otherwise, make single backups.
+(setq trim-versions-without-asking t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Writing
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (eoe-require 'ispell)
+(eoe-load "webster")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Calculator
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; (eoe-require 'calc)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Games
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;(progn
+;  (require 'getris)
+;
+;  (setq getris-initial-delay 1200)
+;  (setq getris-acceleration 2000)
+;
+;  (defun boss-has-come ()
+;    (interactive)
+;    (getris-exit)
+;    (kill-buffer "*Getris*")
+;    (top-level)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Disable (Dangerous) Commands
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(put 'upcase-region 'disabled t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; load keyboard function key setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; load the 'pean' keybinding-style on a 'type5' keyboard
+(eoe-load-keybindings 'pean 'type5)	
+
+;; declare cmushell to be my preferred shell
+(setq *preferred-shell-function* 'cmushell)
+
+;; don't really want to use the following but squirrelling it here
+;; for future reference
+;;
+;; (global-set-key	"`" 'ESC-prefix)b
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; settings of miscellaneous parameters
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq dired-listing-switches (cond ((memq system-type
+					  '(aix-v3
+					    hpux
+					    usg-unix-v)) "-al")
+				   (t "-alg")))
+
+(progn
+  (require 'dired-ext)
+  (setq dired-compress-program "gzip")
+  (setq dired-uncompress-program "gunzip"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; FTP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (eoe-require 'ange-ftp)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; always load any miscellaneous .emacs.* files in my home directory
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; (require 'basic-ext)			; for 'mention'
+;
+;    (mapcar (function (lambda (filename)
+;			(if (and (string-has-prefix-p filename ".emacs.")
+;				 (not (string-has-suffix-p filename "~"))
+;				 (not (string-has-suffix-p filename ",v"))
+;				 )
+;			    (condition-case error
+;				(load-file (concat "./" filename))
+;			      (error (ding)
+;				     (mention nil 1 "Error %s loading %s"
+;					      error filename)
+;				     nil)))))
+;	    (directory-files "~/"))
+
+(eoe-set-bell 'visible)
+(ding)					; emacs initialized; notify user
+
+(setq debug-on-error nil)		; turn off debugging
+

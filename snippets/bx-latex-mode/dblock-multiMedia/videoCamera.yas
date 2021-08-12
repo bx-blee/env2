@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Video Camera
+# key: mm/video/camera
+# group: MultiMedia dblock
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:body:odg-artpres  :fig-file "/pub/"
+%%%#+END:

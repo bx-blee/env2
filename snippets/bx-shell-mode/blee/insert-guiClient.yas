@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert blee guiClient
+# key: blee/insert-guiClient
+# group: blee
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+emacsclient -c$0

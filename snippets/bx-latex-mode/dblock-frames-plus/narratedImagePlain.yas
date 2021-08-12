@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Frame Narrated Itemize
+# key: frame/narrated/itemize
+# group: DB-Frames Plus
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:frame-narrated-begin :mode "auto" :title "${1:Title}" :subtitle "${2:SubTitle}" :label "${3:auto}" 
+%%%#+END:
+
+  \begin{itemize}
+  \item Item One
+  \end{itemize}
+
+  \pnote{
+    Frame Notes\\\\
+    \par
+  }
+
+\end{frame}

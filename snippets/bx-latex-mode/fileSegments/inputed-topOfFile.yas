@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: inputed-topOfFile
+# key: fileSeg/inputed-topOfFile
+# group: File Segments
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0%%% -*- Mode: LaTeX; -*-
+
+%%%#+BEGIN: bx:dblock:global:this-file :disabledP "false" :mode "auto"
+%%%#+END:
+
+%%%#+BEGIN: bx:dblock:lcnt:latex:inputed-title :disabledP "false" :mode "auto"
+%%%#+END:
+
+%%%#+BEGIN: bx:dblock:global:org-controls :disabledP "false" :mode "auto"
+%%%#+END:
+
+%%%#+BEGIN: bx:dblock:lcnt:latex:commands :disabledP "false" :class "art+pres" :langs "en+fa"
+%%%#+END:
+
+%%%#+BEGIN: bx:dblock:global:org-contents-list :disabledP "false" :mode "auto"
+%%%#+END:
+
+\begin{comment}
+** TODO [[elisp:(org-cycle)][| ]]  Idea      ::  Description   [[elisp:(org-cycle)][| ]]
+\end{comment}

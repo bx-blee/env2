@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Snippet Sans Group: Snippet Head
+# key: snippetSansGroup
+# type: command
+# --
+(progn
+  (insert "\
+# -*- mode: snippet -*-
+# name: tbdName
+# key: tbdKey
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+SomeInsertion ${1:funcName}
+$0
+"))

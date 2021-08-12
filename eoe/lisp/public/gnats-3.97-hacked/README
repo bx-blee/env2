@@ -1,0 +1,3 @@
+Hacked send-pr.el to not have any emacsclient support from server.el
+otherwise this package precludes use of gnuserv.el.
+

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Preview Raw Message
+# key: mml-preview%1
+# group: preview
+# type: command
+# --
+(mml-preview 1)
+

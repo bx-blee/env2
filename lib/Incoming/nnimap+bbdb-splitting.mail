@@ -1,0 +1,43 @@
+map splitting success
+Eric Abrahamsen <eric <at> ericabrahamsen.net>
+2013-07-16 06:54:50 GMT
+
+Okay, I've finally got everything working right, and wanted to lay out
+my imap splitting setup here for posterity. It was a pain in the butt to
+wrap my head around, and I assume other people may have similar
+difficulties. It ends up looking pretty simple, though, so maybe I
+really am the only one.
+
+The main headache was BBDB integration. In the normal nnmail setup, BBDB
+intercepts all splitting, and calls nnmail-split-fancy if it can't find
+its own match. That works because nnmail-split-fancy is both a variable
+and a function.
+
+For nnimap, nnimap-split-fancy is only a variable. Thus the BBDB
+integration process is reversed: splitting goes straight to
+nnimap-split-fancy, and bbdb/gnus-nnimap-folder-list-from-bbdb dumps
+splits directly into it. That took a while to figure out.
+
+So the basic arrangement: "imap" fields are added to BBDB records you
+want to create splits from. to-list/to-address/split-regexp parameters
+are added to groups you want to automatically split to. Then:
+
+(setq gnus-secondary-select-methods
+      '((nnimap "acc" 
+		(nnimap-inbox "INBOX")
+		(nnimap-split-methods nnimap-split-fancy))
+
+(setq nnimap-split-fancy `(|
+			   , <at> (bbdb/gnus-nnimap-folder-list-from-bbdb)
+                           ;; other splits here
+			   (: gnus-group-split-fancy nil t "INBOX")))
+
+Not so hard after all!
+
+Eric
+
+With a little help off-list, I think I've figured it out. I've been
+using bbdb/gnus-split-method, both with nnmail and nnimap. It appears
+that, with nnimap, the value of bbdb/gnus-split-default-group comes into
+play. That defaults to "mail.misc", and switching it to "INBOX" solved
+the problem.

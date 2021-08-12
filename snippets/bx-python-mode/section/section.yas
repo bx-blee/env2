@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: COMEEGA Python Section
+# key: section/section
+# group: section
+# --
+$0####+BEGIN: bx:icm:python:section :title "${1:title}"
+####+END:

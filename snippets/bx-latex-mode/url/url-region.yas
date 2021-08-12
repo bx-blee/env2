@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Url Region
+# key: url/region
+# group: url
+# type: command
+# --
+(progn
+  ;;;(yas-redo-selected-text-bx)	 
+  (insert (format "\\url{%s}" yas-selected-text))
+  )

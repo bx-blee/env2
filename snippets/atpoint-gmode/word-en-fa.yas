@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: English-to-Persian Word
+# key: word/en-fa
+# type: command
+# --
+(progn
+  (lookup-word-en-fa)
+  )

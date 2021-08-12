@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert Config User.Name SPECIFY
+# key: bxBash/gitRepo/config/user.name/SPECIFY
+# group: gitRepoSetup
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+git config user.name 'FIRST LAST'

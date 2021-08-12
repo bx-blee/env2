@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Frame Basic Blank
+# key: frame/basic/blank
+# group: DB-Frames
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:frame-basic-begin :mode "auto" :title "${1:Title}" :subtitle "${2:SubTitle}" :label "${3:auto}" :transition "${4:default}"
+%%%#+END:
+
+  \pnote{
+    Frame Notes\\\\
+    \par
+  }
+
+\end{frame}

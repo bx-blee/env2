@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: I: deactivate
+# key: pyVirt/insert-deactivate
+# group: pyVirt
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+deactivate$0

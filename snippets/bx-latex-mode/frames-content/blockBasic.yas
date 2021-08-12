@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Frame Block Basic
+# key: frame/block
+# group: Frames Content
+# --
+  \begin{block}{${1:Observation}}
+  $0
+  \end{block}

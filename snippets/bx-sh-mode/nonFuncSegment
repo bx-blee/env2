@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: ICM Segement (Non Function)
+# key: icm/segement
+# group: icm
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+_CommentBegin_
+*  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(beginning-of-buffer)][|^]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]] || TBD       ::  ${1:funcName}    [[elisp:(org-cycle)][| ]]
+_CommentEnd_
+

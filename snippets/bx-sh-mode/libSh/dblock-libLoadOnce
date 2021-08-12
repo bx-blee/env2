@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: dblock-libLoadOnce
+# key: libSh/dblock-libLoadOnce
+# group: libSh
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: bx:bsip:bash/libLoadOnce :libName "auto"
+####+END:

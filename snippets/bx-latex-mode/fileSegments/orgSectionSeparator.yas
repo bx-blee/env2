@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Org Section Separator
+# key: fileSeg/orgSectionSeparator
+# group: File Segments
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0%%%#+BEGIN: bx:lcnt:latex-orgSeparator  :disabledP "false" :seg-title "${1:*SectionTitle*}"
+%%%#+END:

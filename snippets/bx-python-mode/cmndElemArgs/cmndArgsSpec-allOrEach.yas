@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: cmndArgsSpec Method -- AllOrEach -- 
+# key: cmndElemArgs/specAllOrEach
+# group: cmndElemArgs
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: bx:icm:python:method :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "cmndArgsSpecDict" :deco "default" :argsList ""
+####+END:        
+        """
+***** Cmnd Args Specification
+"""
+        cmndArgsSpecDict = icm.CmndArgsSpecDict()
+        cmndArgsSpecDict.argsDictAdd(
+            argPosition="0&2",
+            argName="actions",
+            argDefault='all',
+            argChoices=['all', 'zero', 'one', 'two'],
+            argDescription="Output relevant information",
+        )
+
+        return cmndArgsSpecDict

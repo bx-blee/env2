@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Latin Environment
+# key: latinEnv
+# group: ltrInفارسی
+# --
+\begin{rawhtml}
+<DIV dir="ltr">
+\end{rawhtml}
+\begin{latin}
+${0:latinComesHere}
+\end{latin}
+\begin{rawhtml}
+<DIV dir="rtl">
+\end{rawhtml}

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Terse TreeNavigator Dblock
+# key: begin/terseTreeNavigator
+# group: segments/header
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/terseTreeNavigator.org")
+  (org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

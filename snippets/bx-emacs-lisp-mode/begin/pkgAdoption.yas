@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Package Adopt
+# key: begin/pkgAdopt
+# group: begin
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/begin/templates/moded/emacs-lisp/pkgAdopt.el")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

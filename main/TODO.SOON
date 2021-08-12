@@ -1,0 +1,61 @@
+
+* Blee ReadMail Menu
+** Help To Standardized Model -- Single Line, Consistent Tabs
+** Get Rid of Frame and Faces items -- Now in "My"
+** Sort by level on Mail Read Menus
+
+* WebMarks
+** Load Multiple Files (Read News)
+
+http://www.emacswiki.org/emacs/TempoMode  -- Read Tempo Mode - Tempo-Snipet, skeleton, autoinsert, abbrev
+
+http://wiki.github.com/bard/mozrepl
+
+http://emacspeak.googlecode.com/svn/trunk/lisp/emacspeak-moz.el
+
+install ./bard-mozrepl-a009edf
+
+window.alert("Hello From Inside");
+
+gBrowser.addTab("http://www.neda.com/");
+
+gBrowser.selectedTab = gBrowser.addTab("http://www.neda.com/");
+
+http://www.emacswiki.org/emacs/FlySpell
+
+xfardic
+
+1. Install the packages dictd, dict-gcide, and dict-wn.
+-- dictd is the dictionary database "server" of sorts
+-- dict-gcide is a comprehensive free English dictionary
+-- dict-wn is another dictionary with more up-to-date definitions, but it is not comprehensive
+
+2. Install other dictionary packages you might want
+-- Look in Synaptic at the many packages under dict- and read their descriptions. If you want to download all the dictionaries, you can just get the metapackage dict-freedict. I avoided this option because I did not want to clutter my definition screen or to wait while the program searched all these extra dictionaries I'd rarely (if ever) use.
+-- dict-moby-thesaurus is available if you want a thesaurus, too.
+
+3. Change the preferences in gnome-dictionary.
+-- Applications > Dictionary opens gnome-dictionary
+-- Edit > Preferences
+-- change server to localhost
+-- change the Database to "search all databases"
+
+; {{{
+;; Gnus.
+
+(setq gnus-home-directory "~/gnus/")
+(setq gnus-startup-file (concat gnus-home-directory ".newsrc"))
+(setq gnus-cache-directory (concat gnus-home-directory "cache/"))
+(setq message-directory (concat gnus-home-directory "Mail/"))
+(setq gnus-directory (concat gnus-home-directory "News/"))
+(setq gnus-agent-directory (concat gnus-directory "agent/"))
+(setq message-auto-save-directory (concat message-directory "drafts/"))
+(setq gnus-dribble-directory gnus-home-directory)
+(setq nnml-directory (concat gnus-home-directory "nnml/"))
+(setq nnmail-crash-box (concat nnml-directory "mit-gnus-crash-box/"))
+(setq nnml-newsgroups-file (concat nnml-directory "newsgroup/"))
+(setq nntp-authinfo-file "~/.authinfo")
+
+;; }}}
+
+

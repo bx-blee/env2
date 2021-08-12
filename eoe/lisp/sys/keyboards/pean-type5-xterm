@@ -1,0 +1,69 @@
+;;; -*- Mode: Emacs-Lisp -*-
+
+;;; specify emacs commands to be invoked by function keys on a Sun type5 keyboard
+
+(require 'keypad)
+
+;;; ensure that the functions that we want to invoke with fkeys are defined
+(require 'eoe)
+(require 'basic-ext)
+(require 'misc-lim)
+(eoe-require 'ascii-print)
+(eoe-require 'gnus-ext)
+(require 'xfontcycle)
+(require 'compile-ext)
+
+(defvar decstation-fkey-map nil
+  "The decstation-fkey-map maps the type 4 keyboard function keys.")
+
+(setq decstation-fkey-map (make-keymap))
+
+(global-set-key "\e[" decstation-fkey-map)
+
+(setup-terminal-keymap
+ decstation-fkey-map
+ '(
+   ;; top row function keys
+   ("11~" . compile-no-ask)		; [F1] compile-ext.el
+   ("12~" . compile-not-sticky)	        ; [F2] compile-ext.el
+   ("13~" . windows-for-hacking)	; [F3] misc-lim.el
+   ("14~" . windows-for-gnus)		; [F4] gnus-ext.el
+   ("15~" . delete-other-windows)	; [F5] <std cmd>
+
+   ("17~" . keep-two-windows)		; [F6] misc-lim.el
+   ("18~" . next-error-with-frills)	; [F7] compile-ext.el
+   ("19~" . toggle-truncate-lines)      ; [F8] misc-lim.el
+   ("20~" . shell-command)		; [F9] <std cmd>
+   ("21~" . goto-shell)	                ; [F10] misc-lim.el
+
+   ;; [F11] == ESC  
+   ("24~" . gdb-raise-buffers)	        ; [F12] gdb-ext.el
+   ("25~" . other-window-at-end)	; [F13] misc-lim.el 
+   ("26~" . other-window)	        ; [F14] <std cmd>
+
+   ;; cluster to the right of [F14]
+   ("28~" . read-mail)	                ; [Help] misc-lim.el
+   ("29~" . undo)	                ; [Do] <std cmd>
+
+   ;; [F17]-[F20]
+   ("31~" . ascii-print-buffer)         ; [F17] ascii-print.el
+   ("32~" . picture-mode-toggle)        ; [F18] misc-lim.el
+   ("33~" . picture-movement-toggle)    ; [F19] misc-lim.el
+   ("34~" . x-switch-font)              ; [F20] xfontcycle.el
+   
+
+   ;; cluster above inverted T
+   ("1~" . beginning-of-buffer)         ; [Find] <std cmd>
+   ("2~" . compare-windows)	        ; [Insert Here] <std cmd> 
+   ("3~" . scroll-down)                 ; [Remove] <std cmd>
+   ("4~" . end-of-buffer)	        ; [Select] <std cmd>
+   ("5~" . scroll-down)	                ; [Prev Screen] <std cmd>
+   ("6~" . scroll-up)	                ; [Next Screen] <std cmd>
+
+   ;; inverted T
+   ("A" . previous-line)                ; [Up Arrow] 
+   ("B" . next-line)                    ; [Down Arrow]
+   ("C" . forward-char)                 ; [Right Arrow]
+   ("D" . backward-char)                ; [Left Arrow]
+   ))
+

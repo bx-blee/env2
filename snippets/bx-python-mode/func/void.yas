@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Function void
+# key: func/void
+# group: func
+# --
+$0####+BEGIN: bx:icm:python:func :funcName "${1:funcName}" :funcType "void" :retType "bool" :deco "" :argsList "${2:funcArg}"
+####+END:
+    pass

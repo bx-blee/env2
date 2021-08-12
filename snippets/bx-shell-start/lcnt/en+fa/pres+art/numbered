@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: baseFullStart
+# key: lcnt/en+fa/pres+art/numbered
+# group: lcnt.en+fa.pres+art
+# type: command
+# --
+(progn
+  (lsip-local-run-command "lcnLcntGens.sh -n showRun -p cntntRawHome=. -p srcForms=\"pres+art\" -p srcLangs=\"en+fa\" -i baseFullStart")
+  )

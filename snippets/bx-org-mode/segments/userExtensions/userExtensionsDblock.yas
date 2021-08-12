@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: User Extensions Dblock
+# key: bxPanel/userExtensions
+# group: segments/userExtensions
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: bx:dblock:bnsm:user-extenstions-insert
+####+END:

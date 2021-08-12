@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Run: Git Repo Show All Branches
+# key: bxShell/gitRepo/showAllBranches
+# group: gitRepoInfo
+# type: command
+# --
+(progn
+  (lsip-local-run-command "git --no-pager branch -a")
+  )

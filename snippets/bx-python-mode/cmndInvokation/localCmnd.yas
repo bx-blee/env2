@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Cmnd Invokation -- localCmnd
+# key: cmndInvokation/localCmnd
+# group: cmndInvokation
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0outcome = cmndName().cmnd(
+     interactive=False,
+     paramName=paramValue,
+     argsList=cmndArgs,
+)
+
+results = outcome.results

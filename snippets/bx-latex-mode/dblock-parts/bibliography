@@ -1,0 +1,7 @@
+# -*- Mode: snippet -*-
+# name: bibliography
+# key: dblock/bibliography
+# group: Parts dblock
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:latex-bibliography :disabledP "false" :class "${1:art}" :langs "${2:en+fa}"
+%%%#+END:

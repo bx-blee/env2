@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Link With Lined Tree Navigator L1
+# key: navigation/linkWithLinedTreeNavigatorL1
+# group: file tree navigation
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:bxPanel:linkWithLinedTreeNavigator :model "auto" :outLevel 2 :foldDesc "auto" :destDesc "auto" :dest "/libre/ByStar/InitialTemplates/activeDocs/bxPlatform/baseDirs/_nodeBase_"
+####+END

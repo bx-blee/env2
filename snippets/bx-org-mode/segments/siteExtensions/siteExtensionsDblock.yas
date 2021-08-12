@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Site Extensions Dblock
+# key: bxPanel/siteExtensions
+# group: segments/siteExtensions
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: bx:dblock:bnsm:site-extenstions-insert
+####+END:

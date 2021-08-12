@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Cmnd Elems -- topDefs
+# key: icmExampleElem/topDefs
+# group: icmExampleElem
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+def cpsInit(): return collections.OrderedDict()
+def menuItem(verbosity): icm.ex_gCmndMenuItem(cmndName, cps, cmndArgs, verbosity=verbosity,
+                         comment='none', icmWrapper=None, icmName=None) # verbosity: 'little' 'basic' 'none'
+def execLineEx(cmndStr): icm.ex_gExecMenuItem(execLine=cmndStr)
+
+$0
+
+

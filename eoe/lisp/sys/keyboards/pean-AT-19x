@@ -1,0 +1,164 @@
+;;; -*- Mode: Emacs-Lisp -*-
+
+;;; ensure that the functions we want to invoke with the function keys are
+;;; defined
+
+(require 'eoe)
+(require 'basic-ext)
+(require 'misc-lim)
+(require 'compile-ext)
+;(require 'gud-ext)
+(eoe-require 'ascii-print)
+(require 'font-lock-ext)
+
+(progn
+  ;; XEmacs key bindings for an IBM AT-style keyboard
+
+  ;; =================
+  ;; Top Function keys
+  ;; =================
+  ;;
+  ;; F1
+  (define-key global-map [(f1)] 'help-for-help)
+  (define-key global-map [(shift f1)] 'noop)
+  (define-key global-map [(control f1)] 'noop)
+  (define-key global-map [(meta f1)] 'noop)
+  ;; F2
+  (define-key global-map [(f2)] 'compile)
+  (define-key global-map [(shift f2)] 'noop)
+  (define-key global-map [(control f2)] 'compile-not-sticky)
+  (define-key global-map [(meta f2)] 'compile-no-ask)
+  ;; F3
+  (define-key global-map [(f3)] 'windows-for-hacking)
+  (define-key global-map [(shift f3)] 'noop)
+  (define-key global-map [(control f3)] 'noop)
+  (define-key global-map [(meta f3)] 'noop)
+  ;; F4
+  (define-key global-map [(f4)] 'toggle-truncate-lines)
+  (define-key global-map [(shift f4)] 'dos-mode)
+  (define-key global-map [(control f4)] 'font-lock-mode)
+  (define-key global-map [(meta f4)] 'font-lock-maximum-size-cycle)
+  (define-key global-map [(control meta f4)] 'x-switch-font)
+  ;; F5
+  (define-key global-map [(f5)] 'delete-other-windows)
+  (define-key global-map [(shift f5)] 'noop)
+  (define-key global-map [(control f5)] 'noop)
+  (define-key global-map [(meta f5)] 'noop)
+  ;; F6
+  (define-key global-map [(f6)] 'keep-two-windows)
+  (define-key global-map [(shift f6)] 'noop)
+  (define-key global-map [(control f6)] 'sync-cd)
+  (define-key global-map [(meta f6)] 'noop)
+  ;; F7
+  (define-key global-map [(f7)] 'next-error)
+  (define-key global-map [(shift f7)] 'noop)
+  (define-key global-map [(control f7)] 'noop)
+  (define-key global-map [(meta f7)] 'noop)
+  ;; F8
+  (define-key global-map [(f8)] 'shell-command)
+  (define-key global-map [(shift f8)] 'noop)
+  (define-key global-map [(control f8)] 'noop)
+  (define-key global-map [(meta f8)] 'noop)
+  ;; F9
+  (define-key global-map [(f9)] 'goto-shell)
+  (define-key global-map [(shift f9)] 'noop)
+  (define-key global-map [(control f9)] 'noop)
+  (define-key global-map [(meta f9)] 'noop)
+  ;; F10
+  (define-key global-map [(f10)] 'gud-raise-buffers)
+  (define-key global-map [(shift f10)] 'noop)
+  (define-key global-map [(control f10)] 'noop)
+  (define-key global-map [(meta f10)] 'noop)
+  ;; F11
+  (define-key global-map [(f11)] 'gnus)
+  (define-key global-map [(shift f11)] 'noop)
+  (define-key global-map [(control f11)] 'switch-to-windowless-buffer)
+  (define-key global-map [(meta f11)] 'other-window-at-end)
+  ;; F12
+  (define-key global-map [(f12)] 'vm)
+  (define-key global-map [(shift f12)] 'noop)
+  (define-key global-map [(control f12)] 'noop)
+  (define-key global-map [(meta f12)] 'vm-mail)
+  ;; Print Screen
+  (define-key global-map [(print)] 'ascii-print-buffer)
+  (define-key global-map [(shift print)] 'noop)
+  (define-key global-map [(control print)] 'noop)
+  (define-key global-map [(meta print)] 'noop)
+  ;; Scroll Lock (scroll_lock)
+  (define-key global-map [(scroll-lock)] 'noop)
+  (define-key global-map [(shift scroll-lock)] 'noop)
+  (define-key global-map [(control scroll-lock)] 'noop)
+  (define-key global-map [(break)] 'noop) ; C-scrolllock is break on 19x/PC-XWare 5.0
+  (define-key global-map [(meta scroll-lock)] 'noop)
+  ;; Pause
+  (define-key global-map [(pause)] 'compare-windows-from-eol)
+  (define-key global-map [(shift pause)] 'noop)
+  (define-key global-map [(control pause)] 'noop)
+  (define-key global-map [(meta pause)] 'noop)
+
+  ;; ============
+  ;; Right keypad
+  ;; ============
+  (define-key global-map [(insert)] 'repeat-complex-command)
+  (define-key global-map [(meta insert)] 'undo)
+  ;; DEL
+  (define-key global-map [(home)] 'beginning-of-buffer)
+  (define-key global-map [(end)] 'end-of-buffer)
+  (define-key global-map [(prior)] 'scroll-down)
+  (define-key global-map [(next)] 'scroll-up)
+
+  ;; =============
+  ;; Arrow Cluster
+  ;; =============
+  (define-key global-map [(up)] 'previous-line)
+  (define-key global-map [(control up)] 'scroll-down-1)
+  (define-key global-map [(down)] 'next-line)
+  (define-key global-map [(control down)] 'scroll-up-1)
+  (define-key global-map [(left)] 'backward-char)
+  (define-key global-map [(right)] 'forward-char)
+
+  ;; ====================================
+  ;; Non-Function Key global-map Settings
+  ;; ====================================
+  (define-key global-map [(control x) m] 'vm-mail)
+  (define-key global-map "\M-." 'find-tag-other-window)
+
+  )
+
+(defun noop ()
+  (interactive)
+  (message "noop"))
+
+
+(defun compare-windows-from-eol ()
+  (interactive)
+  (end-of-line)
+  (other-window 1)
+  (end-of-line)
+  (other-window -1)
+  (compare-windows nil)
+  (other-window 1)
+  (message "here...")
+  (sit-for 2)
+  (other-window -1)
+  (message "here...and here.")
+  )
+
+(defun switch-to-windowless-buffer (&optional buffer-list)
+  (interactive)
+  (if (null buffer-list)
+      (setq buffer-list (buffer-list)))
+
+  (let ((first-buf (car buffer-list))
+	(rest-list (cdr buffer-list)))
+    (cond ((or (get-buffer-window first-buf)
+	       (string-match "Minibuf" (buffer-name first-buf))
+	       (string-match "*Buffer List*" (buffer-name first-buf))
+	       (string-match "trace of POP session" (buffer-name first-buf))
+	       (null (y-or-n-p (format "Switch to %s? " first-buf)))
+	       )
+	   (if rest-list
+	       (switch-to-windowless-buffer rest-list)
+	     (message "No more candidates.")))
+	  (t
+	   (switch-to-buffer first-buf)))))

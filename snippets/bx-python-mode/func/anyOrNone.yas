@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Function Any Or None
+# key: func/anyOrNone
+# group: func
+# --
+$0####+BEGIN: bx:icm:python:func :funcName "${1:funcName}" :funcType "anyOrNone" :retType "bool" :deco "" :argsList "${2:funcArg}"
+####+END:
+    pass

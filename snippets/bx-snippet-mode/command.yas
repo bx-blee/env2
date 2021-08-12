@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Command: Snippet Head
+# key: command
+# type: command
+# --
+(progn
+  (insert "\
+# -*- mode: snippet -*-
+# name: tbdName
+# key: tbdGroup/tbdKey
+# group: tbdGroup
+# type: command
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+(progn
+  (message \"Here\")
+  )
+"))

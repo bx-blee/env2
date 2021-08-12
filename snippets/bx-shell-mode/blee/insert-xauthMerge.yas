@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert blee xauth merge
+# key: blee/insert-xauthMerge
+# group: blee
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+xauth merge ~/.Xauthority$0

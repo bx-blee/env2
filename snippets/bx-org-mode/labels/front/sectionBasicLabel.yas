@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Basic Label Section 
+# key: node/basicLabelSection
+# group: Front Labels
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+* [[elisp:(show-all)][|N]] [[elisp:(blee:menu-sel:outline:popupMenu)][+-]] [[elisp:(blee:menu-sel:navigation:popupMenu)][==]]   *${1:Description}*   :: $0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Dblock loading-message
+# key: loading-message
+# --
+;;;#+BEGIN: bx:dblock:lisp:loading-message :disabledP "false" :message "${1:loadingMessage}"
+;;;#+END:
+$0

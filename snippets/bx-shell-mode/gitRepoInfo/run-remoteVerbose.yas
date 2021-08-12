@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Run: Git Repo Show Remote Verbose
+# key: bxShell/gitRepo/showRemoteVerbose
+# group: gitRepoInfo
+# type: command
+# --
+(progn
+  (lsip-local-run-command "git remote -v")
+  )

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Cmnd Elems -- oneLineCmndMenu
+# key: icmExampleElem/oneLineCmndMenu
+# group: icmExampleElem
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+cmndName = ${1:"cmndName"} ; cmndArgs = "" ; cps=cpsInit(); menuItem(verbosity='none')
+$0
+
+

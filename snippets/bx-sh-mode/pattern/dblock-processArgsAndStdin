@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: dblock-processArgsAndStdin
+# key: icmPattern/dblock-processArgsAndStdin
+# group: ICM Pattern
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: bx:bsip:bash/processArgsAndStdin 
+####+END:

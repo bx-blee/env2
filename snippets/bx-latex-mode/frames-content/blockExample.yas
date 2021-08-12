@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Frame Block Example
+# key: frame/blockexample
+# group: Frames Content
+# --
+  \begin{exampleblock}{${1:Observation}}
+  $0
+  \end{exampleblock}

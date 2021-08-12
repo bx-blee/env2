@@ -1,0 +1,156 @@
+
+
+* Key Board Design
+
+F1  -- Process AtPoint = file, url, tag, send-url-elsewhere, expand dblock
+F12 -- Complete AtPoint = tag, insert, abbrev, symbol, name, word, bbdb, word
+
+F7  -- This Window = shell, dblock, fold, outline, bookmark-jump, moded-insert, lang-insert
+F8  -- Other Window = other (default), tag, scroll, go, close, shell
+
+F11 -- org and Calendar
+
+
+* dblock Design
+
+** bx-dblock-lib.sh  -- auto detect mode -- set dblock regexp, for dblock expand buffer switch to org and back
+** Create a dblock directory   -- files named as dblock-latex-bystar.el
+** Create a dblock directory   -- files named as dblock-latex-eng-far.el
+
+
+* File Naming Conventions
+=========================
+
+** Blee Policy 
+
+*** blee-af-pkg.el     -- Adopted Feature (Minor Mode, Feature) Based on Standard Emacs Package.
+*** blee-aa-pkg.el     -- Adopted Activity (Major Mode) Based on standard emacs package.
+
+** (bystar)  ByStar-Service Marriage
+
+***  bystar-pkg.el  (eg bystar-web.el )
+***  bystar-pkg-lib.el  (eg bystar-web-lib.el )
+***  bystar-pkg-menu.el  (eg bystar-web-menu.el ) Keyboard comes here too
+***  bystar:pkg:
+
+(new: bac, parallel lca) Blee Adopted Component -- Package/Feature Incorporation + ByStar-Service Marriage
+
+***  bac-pkg.el  (eg bac-bbdb.el )
+***  bac-pkg-lib.el  (eg bac-bbdb-lib.el )
+***  bac-pkg-menu.el  (eg bac-bbdb-menu.el ) Keyboard comes here too
+***  bac:pkg:
+
+** (blee) Top Level Integrators
+*** blee-emacs.el      to replace bystar-emacs.el
+*** blee-emacs24.el    to replace bystar-emacs24f.el 
+*** blee-menu-blee.el
+*** blee-menu-my.el
+*** blee-kbd-global.el   
+
+** (bue) ByStar User Env Facilities -- Libraries related to ByStar
+*** bue-acct-lib.el
+*** bue-platform-lib.el
+
+** (bx) Blee eXtension Facilities/Libraries
+*** bx-shell-lib.el     -- A library of extensions
+*** bx-atpoint-menu.el  -- Native Blee/ByStar Component
+
+** (bux) Blee User eXtension Facilities/Libraries
+*** ~/BUE/elisp/bux-3610-menu.el 
+
+
+* Elisp and Info Bases
+======================
+
+** A) Distribution Base  [Rev Specific]
+---------------------------------------
+   /usr/share/emacs-snapshot/site-lisp/
+   /usr/share/emacs22/site-lisp/
+
+** B) ByStar External Pkgs Base [Rev Specific]
+
+   /libre/common/emacs/22/
+   /libre/common/emacs/23/
+   /libre/common/emacs/22plus/
+
+** C) ByStar Common Native Base
+
+  /libre/common/beue/22plus
+  /libre/common/beue/22plus/startup/dorEmacs
+  /libre/common/beue/22plus/bystar/bystar-mod-site.el
+  /libre/common/beue/22plus/bystar/bystar-mod-lib.el
+  /libre/common/beue/22minus
+
+** D) BUE Account Customized Base
+
+  ~lsipusr/LUE/elisp
+
+
+
+* General Order
+===============
+
+ 1) ~/.emacs      -- detects emacs flavor and emacs rev and dispatches ~/.emacs23f
+
+ 2) ~/.emacs23f   -- Module-by-Module loads  bystra-module.el
+
+ 2.1) ~/lisp/bystar-ue-lib.el   -- Sets/Determines parameters
+
+ 2.2) ~/lisp/control/bep:form-factor    -- Read by string to over write 
+                                        -- determinable parameters.
+
+ 3) ~/lisp/bystar-mail.el       -- Sets user preferences and 
+
+ 4) ~/lisp/bytsra-mail-lib.el   -- Things get set feature-by-feature based on known 
+                                   params.
+
+* Structure and Conventions:
+============================
+
+Config Blocks are organized/structured  and placed in functions
+so that features can be included/excluded easily.
+
+ 
+* Elisp Naming Conventions
+==========================
+
+Hierarchical Modules by name. 
+Module names include  ':' and end with ':'
+var and func names use words separted by '-' lower case
+Some Compound names may be mixed case
+
+* Paramter Classes:
+==================
+
+:bcp:  (Base Constant Paramter)
+:bep:  (Base Editable Paramter)
+:sp:  (Selectable Parameter)
+:pp:  (Preferance Paramter)
+:ap:  (Application Parameter)
+
+These come last in modules list in vars
+
+* Main Configration Parameters:
+===============================
+
+bystar:ue:bcp:platform-name   -- N810
+bystar:ue:bcp:os-type
+bystar:ue:bcp:os-ver
+
+bystar:ue:bep:form-factor  (handset, netbook, notebook, desktop)
+
+bystar:ue:bep:display-size
+bystar:ue:bep:kbd-type
+
+bystar:ue:sp:lang-primary
+bystar:ue:sp:
+
+
+Menu Conventions
+================
+
+RevDoc: 
+
+Help: 
+
+KeyMap: 

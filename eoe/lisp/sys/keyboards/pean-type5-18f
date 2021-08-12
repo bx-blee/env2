@@ -1,0 +1,68 @@
+;;; -*- Mode: Emacs-Lisp -*-
+
+;;; specify emacs commands to be invoked by function keys on Sun Type
+;;; 5 keyboards
+
+(require 'keypad)
+
+;;; ensure that the functions that we want to invoke with fkeys are defined
+(eoe-load "webster")
+(eoe-require 'ispell)
+(require 'basic-ext)                    
+(require 'misc-lim)                         
+(require 'ascii-print)                     
+(require 'xfontcycle)
+(require 'compile-ext)
+(require 'gdb-ext)
+(require 'ds-namec)
+
+(defvar sun-type5-fkey-map (make-sparse-keymap)
+  "The sun-type5-fkey-map maps the type 4 keyboard function keys.")
+
+(global-set-key "\e[" sun-type5-fkey-map)
+
+;;; SPARC type 5 keyboard fn key bindings under X11R4.
+;;; don't seem to apply when running under Suntools nor Open Windows
+;;;
+(setup-terminal-keymap 
+ sun-type5-fkey-map
+ '(
+   ;; top row function keys
+   ("224z" . compile-no-ask)		; [F1] compile-ext.el
+   ("225z" . compile-not-sticky)	; [F2] compile-ext.el
+   ("226z" . windows-for-hacking)	; [F3] misc-lim.el
+   ("227z" . delete-other-windows)	; [F4] <std cmd>
+   ("228z" . keep-two-windows)		; [F5] misc-lim.el
+   ("229z" . sync-cd)			; [F6] basic-ext.el
+   ("230z" . next-error-with-frills)	; [F7] compile-ext.el
+   ("231z" . shell-command)		; [F8] <std cmd>
+   ("232z" . goto-shell)		; [F9] misc-lim.el 
+   ("-1z"  . toggle-truncate-lines)	; [F10] [Help] misc-lim.el
+   ;; C-p                               ; [F11] 
+   ;; C-q                               ; [F12] 
+
+   ;; keypad cluster
+   ("208z" . other-window-at-end)	; [Pause] misc-lim.el
+   ("209z" . ascii-print-buffer)	; [PrSc] ascii-print.el
+   ("210z" . x-switch-font)		; [Scroll Lock Break] xfontcycle.el
+   ("211z" . webster)			; [-] webster.el
+   ("213z" . ispell-word)		; [R6] ispell.el
+   ("214z" . line-to-window-top)	; [R7] [Home] misc-lim.el
+   ("216z" . scroll-down)		; [R9] [PgUp] <std cmd>
+   ("218z" . fancy-goto-line)		; [R11] [_]  in misc-lim.el
+   ("220z" . end-of-buffer)		; [R13] [End] <std cmd>
+   ("222z" . scroll-up)			; [R15] [PgDn] <std cmd>
+
+   ;; left-side function-key cluster
+   ;; same as [F11]                    ; [L1] [Stop] 
+   ;; same as [F12]                    ; [L2] [Again]
+   ("194z" . trim-buffer-list)         ; [L3] [Props] misc-lim.el
+   ("195z" . undo)                     ; [L4] [Undo] <std cmd>
+   ("196z" . gdb)                      ; [L5] [Front] <std cmd>
+   ("197z" . indent-relative)          ; [L6] [Copy] <std cmd>
+   ("198z" . other-window-at-end)      ; [L7] [Open] misc-lim.el
+   ("199z" . read-mail)		       ; [L8] [Paste] misc-lim.el
+   ("200z" . gdb-raise-buffers)        ; [L9] [Find] gdb-ext.el
+   ("201z" . toggle-truncate-lines)    ; [L10] [Cut] misc-lim.el
+   ;; same as [F10]                    ; [Help]
+   ))

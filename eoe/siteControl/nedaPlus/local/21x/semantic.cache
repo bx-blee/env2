@@ -1,0 +1,15 @@
+;; Object 21x/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "21x/"
+  :tables (list 
+   (semanticdb-table "at-neda.el"
+    :major-mode 'emacs-lisp-mode
+    :tags '(("at-neda-fsf-emacs-p" variable (:constant-flag t :default-value (null (string-match "XEmacs" emacs-version))) nil [25 138]) ("if" code nil nil [185 230]) ("at-neda-menu" variable (:constant-flag t :default-value (quote ("@Neda" ["Quick Info" (Info-find-node "/usr/curenv/doc/nedaInternal/operations/nedaQuickInfo/nedaQuickInfo.info" "Top") t] "----- Personnel ----" ["Info Visit Personnel Policies" (Info-find-node "/usr/curenv/doc/nedaInternal/personnel/personnelPolicies/personnelPolicies.info" "Top") t] "----- Operations ----" ["Info Visit Doc Of Docs" (Info-find-node "/usr/curenv/doc/nedaInternal/operations/docOfDocs/docofdocs.info" "Top") t] ["Info Visit Software Asset Tracking" (Info-find-node "/usr/curenv/doc/nedaInternal/operations/nedaAssetTrackingSoftware/assetTrackingSoftware.info" "Top") t] ["Info Visit Hardware Asset Tracking" (Info-find-node "/usr/curenv/doc/nedaInternal/operations/nedaAssetTrackingHardware/assetTrackingHardware.info" "Top") t] ["Info Visit Misc Asset Tracking" (Info-find-node "/usr/curenv/doc/nedaInternal/operations/nedaAssetTrackingMisc/assetTrackingMisc.info" "Top") t] ["Info Visit Library And Mail Sorting" (Info-find-node "/usr/curenv/doc/nedaInternal/operations/libraryAndMailSorting/libraryAndMailSorting.info" "Top") t] "----- Engineering ----" ["Neda Computing Env. Sol2" (Info-find-node "/usr/curenv/doc/nedaInternal/engineering/nedaComputingEnvSol2/nedaComputingEnvSol2.info" "Top") t] "-----" ["Phone Message" (at-neda-notyet) t] ["Purchase Order Request" (at-neda-notyet) t] ["Print Time Sheet Form 1-15" (at-neda-notyet) t]))) nil [387 1841]) ("at-neda-update-menu" function (:user-visible-flag t) nil [1844 2210]) ("at-neda-notyet" function nil nil [2371 2440]) ("cond" code nil nil [2611 2894]) ("at-neda" package nil nil [2966 2984]))
+    :file "at-neda.el"
+    :pointmax 2985
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0beta3"
+  :semanticdb-version "2.0beta3"
+  )

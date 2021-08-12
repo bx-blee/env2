@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Notes Directory
+# key: begin/directoryPanel
+# group: panelNotes
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/notesPanels/beginActDirectory.org")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

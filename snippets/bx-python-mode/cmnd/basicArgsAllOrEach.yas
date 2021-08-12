@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# name: Basic With Args -- All or Each
+# key: icmCmnds/basicWithArgs
+# group: icmCmnds
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: bx:icm:python:cmnd:classHead :cmndName "${1:commandName}" :comment "" :parsMand "" :parsOpt "" :argsMin "0" :argsMax "4" :asFunc "" :interactiveP ""
+####+END:
+        actions = self.cmndArgsGet("0&4", cmndArgsSpecDict, effectiveArgsList)
+        if actions[0] == "all":
+            cmndArgsSpec = cmndArgsSpecDict.argPositionFind("0&4")
+            argChoices = cmndArgsSpec.argChoicesGet()
+            argChoices.pop(0)
+            actions = argChoices
+        for each in actions:
+            if interactive:
+                exec("""retVal = {}()""".format(each))                                
+                print("""{each}={retVal}""".format(each=each, retVal=retVal))
+                
+        return cmndOutcome.set(
+            opError=icm.OpError.Success,
+            opResults=None,
+        )
+
+####+BEGIN: bx:icm:python:method :methodName "cmndArgsSpec" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+####+END:        
+        """
+***** Cmnd Args Specification
+"""
+        cmndArgsSpecDict = icm.CmndArgsSpecDict()
+        cmndArgsSpecDict.argsDictAdd(
+            argPosition="0&4",
+            argName="actions",
+            argDefault='all',
+            argChoices=['all', 'pkgBase_modulesDir', 'pkgBase_configDir', 'pkgBase_vagrantsDir', 'pkgBase_genReposSpecDir',],
+            argDescription="Exec all or those specified as functions.",
+        )
+
+        return cmndArgsSpecDict
+
+
+####+BEGIN: bx:icm:python:method :methodName "cmndDocStr" :methodType "anyOrNone" :retType "bool" :deco "default" :argsList ""
+####+END:        
+        return """
+***** TODO [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Place holder for this commands doc string.
+"""
+

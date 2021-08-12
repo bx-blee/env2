@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Audio Narration
+# key: mm/audio/narration
+# group: MultiMedia dblock
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:body:odg-artpres  :fig-file "/pub/"
+%%%#+END:

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: ICM Topic Separator
+# key: icm/topicSeparator
+# group: icm
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+_CommentBegin_
+*  [[elisp:(org-cycle)][| ]] Additional Info                        :: /* ${1:topicSeparator} */ |
+_CommentEnd_

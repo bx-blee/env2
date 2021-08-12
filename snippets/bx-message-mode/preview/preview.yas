@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Preview Message
+# key: mmlp-preview
+# group: preview
+# type: command
+# --
+(mml-preview)
+

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Hevea latexOnly
+# key: hevea/latexOnly
+# group: hevea
+# --
+\begin{latexonly}
+$0
+\end{latexonly}

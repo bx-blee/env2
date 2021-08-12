@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: ltr-bidi Example
+# key: ltr-bidi
+# group: فارسی در لاتین
+# --
+Some English \RLE{\persian{درست وصت انگليسى}} comes here.
+Some \begin{fa}درست وصت انگليسى\end{fa} English comes here.
+Some  English comes \persian{درست وصت انگليسى} here.

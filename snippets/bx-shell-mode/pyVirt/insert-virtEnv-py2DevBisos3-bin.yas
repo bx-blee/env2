@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: I: /bisos/venv/py2/dev/bisos3/bin/
+# key: pyVirt/insert-dev-py2-bisos-3 bin
+# group: pyVirt
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+/bisos/venv/py2/dev/bisos3/bin/$0

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Region Link Shell Command
+# key: region/link/shCommand
+# group: Create Link
+# type: command
+# --
+
+(progn
+  (yas-redo-selected-text-bx)
+  (bx:yas:shCommand)  
+  )

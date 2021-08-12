@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Divider Blank 1
+# key: divider/blank1
+# group: divider
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0* 

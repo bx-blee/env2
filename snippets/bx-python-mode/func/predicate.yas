@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Function Predicate
+# key: func/predicate
+# group: func
+# --
+$0####+BEGIN: bx:icm:python:func :funcName "${1:funcName}" :funcType "predicate" :retType "bool" :deco "" :argsList "${2:funcArg}"
+####+END:
+    pass

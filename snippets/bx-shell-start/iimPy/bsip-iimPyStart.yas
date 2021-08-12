@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: BSIP bxtStartIimPy.sh
+# key: iimPy/bsip-iimBashStart
+# group: iimPy
+# type: command
+# --
+(progn
+  (lsip-local-run-command "bxtStartIimPy.sh")
+  )

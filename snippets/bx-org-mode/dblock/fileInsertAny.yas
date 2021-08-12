@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Dblock File Insert Any
+# key: dblock/fileInsertAny
+# group: dblock
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+####+BEGIN: bx:dblock:global:file-insert :file "./fileName"
+####+END

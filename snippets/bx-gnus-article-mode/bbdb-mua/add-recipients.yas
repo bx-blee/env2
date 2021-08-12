@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Create All Recipients
+# key: bbdb-mua/addAllRecipients
+# group: bbdb-mua
+# type: command
+# --
+(progn
+  (bbdb-mua-display-all-recipients 'create)
+  )

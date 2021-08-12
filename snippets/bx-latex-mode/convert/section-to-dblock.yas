@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: section-to-dblock
+# key: convert/section-to-dblock
+# group: convert
+# type: command
+# --
+(progn
+  (latex-section-to-dblock)
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

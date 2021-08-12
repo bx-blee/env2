@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: UCF+ICM+G+Bleep Dblock
+# key: import/ucfIcmBleepG-dblock
+# group: import
+# --
+$0####+BEGIN: bx:dblock:global:file-insert :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/importUcfIcmBleepG.py"
+####+END:

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Wikipedia Word
+# key: word/wikipedia
+# type: command
+# --
+(progn
+  (lookup-word-wikipedia)
+  )
+
+
+

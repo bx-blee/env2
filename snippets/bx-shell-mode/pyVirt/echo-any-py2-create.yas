@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: echo: virtualenv -p python2 /tmp/py2v1
+# key: pyVirt/echo-py2-any-virtCreate
+# group: pyVirt
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+echo virtualenv -p python2 /tmp/py2v1$0

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Command Redo Region: Snippet Head
+# key: commandRedoRegion
+# type: command
+# --
+(progn
+  (insert "\
+# -*- mode: snippet -*-
+# name: tbdName
+# key: tbdGroup/tbdKey
+# group: tbdGroup
+# type: command
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+(progn
+  (yas-redo-selected-text-bx)	 
+  ;;(lookup-region-google)
+  )
+"))

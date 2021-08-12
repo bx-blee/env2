@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Run= blee xauth merge
+# key: blee/run=-xauthMerge
+# group: blee
+# type: command
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+(progn
+  (lsip-local-run-command "xauth merge ~/.Xauthority")
+  )
+

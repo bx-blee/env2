@@ -1,0 +1,165 @@
+;;; babel.el --- Emacs interface to the Babelfish translation service
+;;;
+;;; Author: Eric Marsden <emarsden@mail.dotcom.fr>
+;;; Keywords: translation
+;;; Version: 0.2
+;;
+;;     Copyright (C) 1999  Eric Marsden
+;;   
+;;     This program is free software; you can redistribute it and/or
+;;     modify it under the terms of the GNU General Public License as
+;;     published by the Free Software Foundation; either version 2 of
+;;     the License, or (at your option) any later version.
+;;     
+;;     This program is distributed in the hope that it will be useful,
+;;     but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+;;     GNU General Public License for more details.
+;;     
+;;     You should have received a copy of the GNU General Public
+;;     License along with this program; if not, write to the Free
+;;     Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+;;     MA 02111-1307, USA.
+;;
+;; Please send suggestions and bug reports to
+;; <emarsden@mail.dotcom.fr>. The latest version of this package
+;; should be available from
+;;
+;;     <URL:http://www.chez.com/emarsden/downloads/>
+
+
+;;; Overview ==========================================================
+;;
+;; This module provides an Emacs interface to the Babelfish
+;; translation services at babelfish.altavista.com. You give it a word
+;; or paragraph to translate and select the source and destination
+;; languages, and it connects to the translation server, retrieves the
+;; data, and presents it in a special *babel* buffer.
+;;
+;; Entry points: either `M-x babel', which prompts for a phrase and a
+;; language pair, or `M-x babel-region', which prompts for a language
+;; pair, and translates the currently selected region.
+;;
+;; babel.el requires Emacs/w3 to be installed.
+
+;;; Code:
+
+(require 'cl)
+
+
+(defconst babel-translations
+  '(("English -> French"     . "en_fr")
+    ("English -> German"     . "en_de")
+    ("English -> Italian"    . "en_it")
+    ("English -> Portuguese" . "en_pt")
+    ("English -> Spanish"    . "en_es")
+    ("French -> English"     . "fr_en")
+    ("German -> English"     . "de_en")
+    ("Italiano -> English"   . "it_en")
+    ("Spanish -> English"    . "es_en")
+    ("Portuguese -> English" . "pt_en"))
+    "Alist of translations that the Babelfish service is capable of.")
+
+(defvar babel-history nil)
+
+(defvar babel-mode-hook nil)
+
+(defvar babel-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map ?q #'bury-buffer)
+    (define-key map ?\ #'scroll-down)
+    map)
+  "Keymap used in Babel mode.")
+
+
+;;;###autoload
+(defun babel (msg)
+  "Use the Babelfish service to translate MSG."
+  (interactive "sBabelfish translate phrase: ")
+  (let* ((buf (get-buffer-create " *babelwork*"))
+         (translation
+          (completing-read "Translate from: "
+                           babel-translations nil t
+                           (cons (caar babel-translations) 0)
+                           babel-history)))
+    (switch-to-buffer-other-window buf)
+    (erase-buffer)
+    (babel-fetch msg (cdr (assoc translation babel-translations)))
+    (babel-wash)
+    (babel-display)
+    (babel-mode)))
+
+;;;###autoload
+(defun babel-region (start end)
+  "Use the Babelfish service to translate the current region."
+  (interactive "r")
+  (babel (buffer-substring start end)))
+
+(defun babel-fetch (msg translation)
+  "Connect to the Babelfish server and request the translation."
+  (require 'url)
+  (let* ((pairs `(("urltext" . ,msg)
+                  ("lp" . ,translation)
+                  ("doit" . "done")))
+         (url-request-data (babel-form-encode pairs))
+         (url-request-method "POST")
+         (url-request-extra-headers
+          '(("Content-type" . "application/x-www-form-urlencoded"))))
+    (url-insert-file-contents "http://babelfish.altavista.com/cgi-bin/translate?")))
+
+(defun babel-wash ()
+  "Extract the useful information from the HTML returned by Babelfish."
+  (goto-char (point-min))
+  (let ((case-fold-search t))
+    (when (search-forward "BGCOLOR=WHITE>" nil t)
+      (delete-region (point-min) (match-end 0)))
+    (goto-char (point-max))
+    (when (re-search-backward "<form action" nil t)
+      (delete-region (point-max) (match-beginning 0)))
+    (goto-char (point-max))
+    (if (re-search-backward "<a href=" nil t)
+        (delete-region (point-max) (match-beginning 0)))
+    (goto-char (point-min))
+    (while (re-search-forward "<[^>]+>" nil t)
+      (replace-match "" t))))
+
+(defun babel-display ()
+  (require 'w3)
+  (let* ((source (buffer-string))
+         (source-buf (current-buffer))
+         (parse (w3-parse-buffer source-buf)))
+  (goto-char (point-min))
+  (insert "<html><head><title>Babelfish translation</title></head><body>")
+  (goto-char (point-max))
+  (insert "</body></html>")
+  (set-buffer-modified-p nil)
+  (w3-draw-tree parse)
+  (setq w3-current-source source
+        w3-current-parse parse)
+  (w3-finish-drawing)
+  (set-buffer-modified-p nil)
+  (if (get-buffer "*babel*")
+      (kill-buffer "*babel*"))
+  (rename-buffer "*babel*")))
+
+(defun babel-mode ()
+  (interactive)
+  (use-local-map babel-mode-map)
+  (setq major-mode 'babel-mode
+        mode-name "Babel")
+  (run-hooks 'babel-mode-hook))
+
+;; from nnweb.el
+(defun babel-form-encode (pairs)
+  "Return PAIRS encoded for forms."
+  (require 'w3-forms)
+  (mapconcat
+   (function
+    (lambda (data)
+      (concat (w3-form-encode-xwfu (car data)) "="
+	      (w3-form-encode-xwfu (cdr data)))))
+   pairs "&"))
+
+(provide 'babel)
+
+;; babel.el ends here

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Thesarus Word
+# key: word/thesarus
+# type: command
+# --
+(progn
+  (dictem-thesarus-define-at-point-bx)
+  )

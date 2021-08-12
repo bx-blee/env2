@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Module End
+# key: module-end
+# --
+
+(lambda () "
+*  [[elisp:(org-cycle)][| ]]  Common        :: /[dblock] -- End-Of-File Controls/ [[elisp:(org-cycle)][| ]]
+#+STARTUP: showall
+")
+
+;;; local variables:
+;;; no-byte-compile: t
+;;; bx:iimp:iimName: "hereHere"
+;;; end:
+$0

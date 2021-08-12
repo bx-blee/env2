@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Top Panel Controls Dblock
+# key: segments/topPanelControls
+# group: segments/header
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/topPanelControls.org")
+  (org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

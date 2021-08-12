@@ -1,2 +1,5 @@
-# env2
-environment repo for blee2
+# env
+Main Blee Environment
+
+aPkgs -- adopted packages 
+main  -- .emacs loaded modules.

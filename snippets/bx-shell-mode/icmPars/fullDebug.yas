@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert icmPars fullDebug
+# key: icmPars/fullDebug
+# group: icmPars
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+ -v 1 --callTrackings monitor+ --callTrackings invoke+ $0

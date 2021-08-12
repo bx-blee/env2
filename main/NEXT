@@ -1,0 +1,80 @@
+
+* NEXT GENERAL
+==============
+
+** Absorb n810 emacs setup on mohsen's n810 -- Dany's setup has been cvsed
+
+** HELP MENU CONVENTIONS
+- Always Make Help Be A SubMenu1
+- List Of Tags:
+    - Kbd: 
+    - Pointers:
+    - Help:
+    - RevDoc: 
+
+- RevDoc:Stanardize on RevDoc: For Revisable Document
+- Pointers: urls as well as info
+
+
+* NEXT M17N
+===========
+
+f6 
+
+/usr/share/X11/xkb/symbols/ir
+// Information Technology – Layout of Persian Letters and Symbols on Computer Keyboards
+// ISIRI 9147 – 1st Edition
+// Institute of Standards and Industrial Research of Iran
+// http://www.isiri.org/UserStd/DownloadStd.aspx?id=9147
+// http://behnam.esfahbod.info/standards/isiri-keyboard-9147.pdf
+//
+// Author: Behnam Esfahbod <behnam@esfahbod.info>
+
+
+* NEXT MAIL SEND
+================
+
+- emacs cleanups
+  
+  - bystar-mail-lib.el
+
+    - From and Envelope Address Settings And Test
+
+    - Convert to defmacro
+
+    - Get Rid of all constant email addresses
+
+    - Cleanup functions
+
+  - ~/lisp/bystar-bbdb-lib.el
+    
+    - ReOrg and Cleanup
+
+  - ~/.emacs23f
+
+    - (Mostly Done) Get rid of junk in the file
+
+  - ~/lisp/eoeKbd.el
+    
+    - Revisit and Cleanup
+
+
+  - Create New Modules
+
+    - bystar-calendar-lib.el
+
+    - bystar-org-lib.el
+
+    - bystar-w3m-lib.el
+
+    - bystar-emms-lib.el
+
+    - bystar-acct-lib.el
+
+    - bystar-bbdb-lib.el
+
+    - bystar-printing-mode-lib.el
+
+- Add /usr/devenv/bbdbNames And Test
+
+

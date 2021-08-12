@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Dehkhoda Word
+# key: word/dehkhoda
+# group: fa
+# type: command
+# --
+(progn
+  (lookup-word-dehkhoda)
+  )

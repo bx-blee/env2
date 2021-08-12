@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Org Blank
+# key: org/blank
+# --
+(lambda () "
+$0
+")

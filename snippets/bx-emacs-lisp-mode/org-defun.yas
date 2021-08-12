@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Org defun Section
+# key: org/defun
+# --
+(lambda () "
+*  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || defun        :: (${1:funcName}) [[elisp:(org-cycle)][| ]]
+")
+$0

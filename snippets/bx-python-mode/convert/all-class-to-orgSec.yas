@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: All class To orgSec
+# key: convert/all-class-to-orgSec
+# group: convert
+# type: command
+# --
+(progn
+  (iim-python-all-class-to-orgSec)
+  )

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Category Folding Section 
+# key: node/categoryFoldingSection
+# group: Front Labels
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+* [[elisp:(show-all)][|N]] [[elisp:(blee:menu-sel:outline:popupMenu)][+-]] [[elisp:(blee:menu-sel:navigation:popupMenu)][==]]   ${1:Catgeory}  :: [[elisp:(org-cycle)][| *${2:Description}* |]]   $0

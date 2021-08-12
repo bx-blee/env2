@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: persian Region
+# key: persian/region
+# group: فارسی در لاتین
+# type: command
+# --
+(progn
+  ;;;(yas-redo-selected-text-bx)	 
+  (insert (format "\\persian{%s}" yas-selected-text))
+  )

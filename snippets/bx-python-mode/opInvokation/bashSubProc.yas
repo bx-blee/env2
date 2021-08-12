@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name:  SubProc Bash
+# key: opInvokation/subProcBash
+# group: opInvokation
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+outcome = icm.subProc_bash("""\
+$0echo  {cmndArgs}"""
+                             .format(cmndArgs=" ".join(cmndArgs))
+).log()
+if outcome.isProblematic(): return(icm.EH_badOutcome(outcome))
+stdOut = outcome.stdout; stdErr = outcome.stderr; stdExit = outcome.error

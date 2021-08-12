@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: In-line ToDo
+# key: inlineTodo
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+\begin{comment}
+****** TODO [[elisp:(blee:ppmm:org-mode-toggle)][|N]] $0
+\end{comment}

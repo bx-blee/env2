@@ -1,0 +1,18 @@
+#!/bin/csh
+#
+# if netscape is running use it to display URL $1,
+# otherwise start a new netscape
+#
+
+if ( $1 == "" ) then
+    echo Usage: `basename $0` "<url>"
+    exit 1
+endif
+
+netscape -remote "openURL($1)" > /dev/null
+
+if ( $status ) then
+    echo Starting netscape...
+    netscape $1
+endif
+

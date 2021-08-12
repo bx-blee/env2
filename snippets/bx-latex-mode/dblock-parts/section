@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Section
+# key: dblock/section
+# group: Parts dblock
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:latex-section :mode "" :seg-title "${1:SectionTitle}" :label ""
+%%%#+END:

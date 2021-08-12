@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Link With Tree Element (enable agenda) L1
+# key: navigation/linkWithTreeElemL1
+# group: file tree navigation
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:bxPanel:linkWithTreeElem :agenda t :sep t :outLevel 2 :model "auto" :foldDesc "auto" :destDesc "auto" :dest "/bisos/panels/bisos/core/_nodeBase_"
+####+END

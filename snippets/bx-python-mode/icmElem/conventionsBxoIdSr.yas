@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: ICM Element Convention BxoIdSr
+# key: icmElem/conventionBxoIdSr
+# group: icmElem
+# --
+$0####+BEGIN: bx:icm:python:section :title "Common Module Support Facilities (BxoIdSr)"
+####+END:
+
+####+BEGIN: bx:dblock:global:file-insert :file "/libre/ByStar/InitialTemplates/update/sw/icm/py/curGetBxOSr.py"
+####+END:

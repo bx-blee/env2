@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ICM Sub-Section
+# key: section/subsection
+# group: section
+# --
+$0####+BEGIN: bx:icm:python:subSection :title "${1:title}"
+####+END:

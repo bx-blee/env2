@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: All defun To orgSec
+# key: bx/convert/all-defun-to-orgSec
+# group: convert
+# type: command
+# --
+(progn
+  (elisp-all-defun-to-orgSec)
+  ;;(org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

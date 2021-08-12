@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: inputed-endOfFile
+# key: fileSeg/inputed-endOfFile
+# group: File Segments
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:latex:end-of-file :class "art" :langs "en+fa" :masters "articleEnFa.ttytex"
+%%%#+END:

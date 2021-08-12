@@ -1,0 +1,75 @@
+;;; -*- Mode: Emacs-Lisp; -*-
+
+(defun $blee:emacs|early-init ()
+  "Package initialization happens after this but before init.el
+The variables determined here are local in scope, 
+they will be determined globally later."
+
+  (message (format "blee:ann $blee:emacs|early-init from %s" (or load-file-name buffer-file-name)))
+  (let (
+	($blee:emacs:type "fsf")
+	($blee:emacs:id (intern (format "%df" emacs-major-version)))
+	)
+    (setq package-user-dir
+	  (file-name-as-directory 
+	   (expand-file-name
+	    (format "/bisos/blee/%s/elpa" $blee:emacs:id))))
+    )
+  )
+
+(when (>= emacs-major-version 26)
+  ($blee:emacs|early-init)
+  )
+
+(when (<= emacs-major-version 26.2)
+  ;;; NOTYET, Temporary hack
+  (setq package-check-signature nil))
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+;; All subsequent package-initialize invokations should be eliminated or:
+;; (unless package--initialized (package-initialize t))  
+
+;;;
+;;; Blee bootstrap Start
+;;;
+
+;;; (blee:bootstrap:file-name-obtain)
+(defun blee:bootstrap:file-name-obtain ()
+  "Also add an environment variable -- export blee-bootstrap=fileName"
+    (let (
+	  (blee-3-bootstrap "/bisos/blee/env/main/emacs-blee.el")
+	  (blee-2-bootstrap "~/lisp/bystar-emacs.el")
+	  )
+
+      (when (>= emacs-major-version 26)
+	(setq blee-3-bootstrap "/bisos/blee/env/boot/boot-blee.el"))
+
+      (when (>= emacs-major-version 27)
+	(setq blee-3-bootstrap "/bisos/blee/env/boot/boot-blee.el"))
+      
+      (cond
+       ((file-exists-p blee-3-bootstrap)
+	blee-3-bootstrap
+	)
+       ((file-exists-p blee-2-bootstrap)
+	blee-2-bootstrap
+	)
+       (t
+	(message "Missing Blee bootstrap file")
+	nil
+	)
+       )))
+
+(defvar blee:bootstrap:file-name (blee:bootstrap:file-name-obtain)  "Initial Blee Load File")
+
+(if blee:bootstrap:file-name
+    (load  blee:bootstrap:file-name)
+  )
+
+;;;
+;;; END OF .emacs

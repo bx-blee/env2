@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Blee Sister Panels
+# key: begin/bleeSisterPanels
+# group: blee
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/sisterPanels/sisterPanelsBegin.org")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

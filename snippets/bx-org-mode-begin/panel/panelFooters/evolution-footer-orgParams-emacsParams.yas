@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Evolution + Footer + Org Params + Emacs Params
+# key: begin/evolution-footer-org-emacs
+# group: panelFooters
+# type: command
+# Description: Order of insert-file is the opposit of natural order.
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/footerEmacsParams.org")
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/footerOrgParams.org")  
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/footerPanelControls.org")
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/evolution.org")
+  (org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: All func To orgSec
+# key: convert/all-func-to-orgSec
+# group: convert
+# type: command
+# --
+(progn
+  (iim-python-all-func-to-orgSec)
+  )

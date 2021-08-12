@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: fa Region
+# key: fa/region
+# group: فارسی در لاتین
+# type: command
+# --
+(progn
+  ;;;(yas-redo-selected-text-bx)	 
+  (insert (format "\\begin{fa}%s\\end{fa}" yas-selected-text))
+  )

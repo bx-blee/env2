@@ -1,0 +1,242 @@
+;;; bbdb-site.el
+
+(require 'bbdb-com)
+(require 'bbdb-gnus)
+
+;;; ----------
+;;; setup BBDB's GNUS interface
+;;; ----------
+;;; There is also GNUS's BBDB interface setup in gnus-site.el
+
+;;; NEWS (GNUS) READING INTERFACE
+(autoload 'bbdb/gnus-lines-and-from "bbdb-gnus")
+;(setq gnus-optional-headers 'bbdb/gnus-lines-and-from) ; doesn't exist in 19.15's GNUS
+(or (member 'bbdb-insinuate-gnus gnus-startup-hook)
+    (setq gnus-startup-hook 'bbdb-insinuate-gnus))
+(setq bbdb/gnus-header-prefer-real-names t)
+
+
+;;; --------
+;;; VM setup
+;;; --------
+(require 'bbdb-vm)
+(setq bbdb-send-mail-style 'vm)
+(bbdb-insinuate-vm)
+
+;; M-TAB is used by some windows managers (e.g., Motif), so provide
+;; an alternative binding for bbdb-complete-name
+(define-key vm-mail-mode-map [(control meta tab)] 'bbdb-complete-name)
+
+;; ---------------------------------------------------------------------
+
+;; My own Messages
+(setq bbdb-user-mail-names (format "%s@*neda.com" (user-login-name)))
+;;;(setq bbdb-user-mail-names "mohsen")
+
+;;; MAIL ALIASES INTERFACE
+(cond ((eq *eoe-emacs-type* '19f)
+       (require 'mailabbrev))
+      ((eq *eoe-emacs-type* '19f)
+       (require 'mail-abbrevs)))
+(setq mail-alias-separator-string ",\n    ")
+
+;;; Customization Parameters
+(setq bbdb-file "~/.bbdb")
+(setq bbdb-default-area-code 425)
+(setq bbdb-north-american-phone-numbers-p nil)
+
+;; Automatic Displaying
+;;(setq bbdb-use-pop-up nil)
+(setq bbdb-use-pop-up t)
+;;(setq bbdb-use-pop-up 'horiz)
+
+(setq bbdb-electric-p nil)             ;; So you can keep bbdb buffers
+
+;; Automatic Entry into BBDB
+(setq bbdb-offer-save t)
+(setq bbdb-always-add-addresses nil)  ;; results in asking
+;;(setq bbdb-always-add-addresses 'never)
+;;(setq bbdb-quiet-about-name-mismatches t)
+(setq bbdb-quiet-about-name-mismatches nil)
+(setq bbdb-new-nets-always-primary 'never) ;; The messages address goes end of list
+(setq bbdb/mail-auto-create-p nil)
+;;(setq bbdb/mail-auto-create-p t)
+
+;;; Customization Hooks (1.5.2)
+
+;;; Predefined Hooks (1.5.3)
+(setq bbdb-change-hook 'bbdb-timestamp-hook)
+(setq bbdb-create-hook 'bbdb-creation-date-hook)
+
+;; BBDB Printing Interface
+(require 'bbdb-print)
+
+(setq bbdb-print-file-name "~/bbdb-print/bbdb.tex")
+(setq bbdb-print-format-file-name "bbdb-print.tex")
+(setq bbdb-print-elide '(aka mail-alias nic nic-updated)) ;;  List of fields NOT to print
+(setq bbdb-print-require '(and name (or address phone)))
+
+(setq bbdb-print-no-bare-names t)       ;;If nonnil, `bare names' will not be printed.
+
+;;; Describe Variable to see what means what
+(setq bbdb-print-alist '((columns . 2)
+			 (separator . 2)
+			 (phone-on-first-line . "^[ \t]*$")
+			 (ps-fonts . nil)
+			 (font-size . 10)
+			 (quad-hsize . "3.15in")
+			 (quad-vsize . "4.5in")))
+
+;;;(setq bbdb-print-elide '(net aka mail-alias nic nic-updated)) ;;  List of fields NOT to print
+;;;(setq bbdb-print-alist '((columns . quad)
+;;;			   (separator . 2)
+;;;			   (phone-on-first-line . "^[ \t]*$")
+;;;			   (ps-fonts . nil)
+;;;			   (font-size . 6)
+;;;			   (quad-hsize . "3.15in")
+;;;			   (quad-vsize . "4.5in")))
+
+
+;; BBDB Filters
+(load "bbdb-eudora")
+
+(setq bbdb-eudora-nndbase-filename
+      (concat "/dos/m/eudora.mai/" (user-login-name) "/nndbase.txt"))
+;;; And then
+;; (bbdb-eudora-nndbase-output)
+
+(setq bbdb-eudora-rcpdbase-filename
+      (concat "/dos/m/eudora.mai/" (user-login-name) "/rcpdbase.txt"))
+;;; And then
+;; (bbdb-eudora-rcpdbase-output)
+
+(load "bbdb-ccmail")
+
+(setq bbdb-ccmail-filename "~/privdir.ini")
+;;; And then
+;;; (bbdb-ccmail-output)
+
+(load "bbdb-hp200lx")
+
+(setq bbdb-hp200lx-filename
+      (concat "/dos/u/" (user-login-name) "/hp200lx/bbdb/default.cdf"))
+
+;;;XXX;;;
+;;;XXX;;;     bbdb-hp200lx-output-requires
+;;;XXX;;;     bbdb-hp200lx-output-no-bare-names
+(setq bbdb-hp200lx-output-elide
+      '(net mail-alias nic nic-updated creation-date timestamp)) ;;  List of fields NOT to output
+
+(setq bbdb-hp200lx-output-requires
+      '(and name))   ;; must have (and name (or address phone)
+
+(setq bbdb-hp200lx-output-no-bare-names t)  ;;If nonnil, `bare names' will not be printed.
+
+;;; And then
+;; (bbdb-hp200lx-output)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; BBDB -> PINE Output Filter
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(load "bbdb-pine")
+
+(setq bbdb-pine-filename "~/.addressbook")
+;;; And then
+;;; (bbdb-pine-output)
+
+
+;;; BBDB PASSWD INPUT FILTER
+
+(load "bbdb-passwd")
+
+(setq bpf-omit-uid-limit 100)
+(setq bpf-omit-user-name-regexp "\\(sl-\\\|guest\\)")
+(setq bpf-omit-user-name-list '("nobody" "noaccess"))
+(setq bpf-omit-pretty-name-regexp "\\(Slip \\\|Listserv\\\|PPP\\)")
+(setq bpf-omit-pretty-name-list '())
+
+
+;;; And then
+;; (bbdb-passwd-input)
+
+;;; BDBD Export
+(require 'bbdb-export)
+
+
+;;; BDBD Letter
+(load "bbdb-letter")
+(load "bbdb-letter-mohsen")
+
+;;; BDBD Supercite (Attribution)
+(load "bbdb-supercite")
+
+;;; BDBD WWW (w3)
+;;;(load "bbdb-www")
+
+;; BBDB SCHDPLUS Filter
+(load "bbdb-schdplus")
+
+(setq bos-filename
+      (concat "/dos/u/" (user-login-name) "/bbdb-schdplus.csv"))
+;;; - to output the *BBDB* buffer in SCHDPLUS comma-delimited-file (.CSV)
+;;; format, invoke M-x bbdb-output-schdplus
+
+;; BBDB PALMPILOT Filter
+(load "bbdb-palmpilot")
+
+(setq bopp-filename
+      (concat "/dos/u/" (user-login-name) "/bbdb-palmpilot.csv"))
+;;; - to output the *BBDB* buffer in PALMPILOT comma-delimited-file (.CSV)
+;;; format, invoke M-x bbdb-output-palmpilot
+
+
+;; BBDB OUTLOOK97 Filter
+(load "bbdb-outlook97")
+
+(setq bopp-filename
+      (concat "/dos/u/" (user-login-name) "/bbdb-outlook97.csv"))
+;;; - to output the *BBDB* buffer in OUTLOOK97 comma-delimited-file (.CSV)
+;;; format, invoke M-x bbdb-output-outlook97
+
+;; BBDB NETSCAPE4 Unix Filter
+(load "bbdb-nsmail")
+
+(setq  bno-file-name "~/.netscape/address-book.bbdb.html")
+;;; format, invoke M-x bbdb-output-nsmail
+
+
+;; BBDB NETSCAPE6 Filter
+(load "bbdb-netscape6")
+
+(setq boo-filename
+      (concat "/dos/u/" (user-login-name) "/bbdb-netscape6.csv"))
+;;; - to output the *BBDB* buffer in NETSCAPE6 comma-delimited-file (.CSV)
+;;; format, invoke M-x bbdb-output-netscape6
+
+
+
+;;; BDBD Append
+(load "bbdb-append")
+
+;;; BBDB Misc
+(load "insert-fpath")
+
+;;; BBDB Action
+(load "bbdb-action-extension")
+(load "bbdb-action-lib")
+
+
+;;; BBDB Action-Tex
+(load "bbdb-tex-lib")
+(load "bbdb-a-tex-example")
+
+;;; BBDB Group
+(load "bbdb-group")
+
+
+
+;;; Local Neda Specific Content
+
+(load-file "/usr/devenv/doc/nedaComRecs/Content/msend-contents-load.el")
+
+

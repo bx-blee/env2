@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ICM Element Python Work Bench
+# key: icmElem/pyWorkBench
+# group: icmElem
+# --
+$0####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/libre/ByStar/InitialTemplates/software/plusOrg/dblock/inserts/pyWorkBench.org"
+####+END:

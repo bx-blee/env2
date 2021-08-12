@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Create Sender
+# key: bbdb-mua/addSender
+# group: bbdb-mua
+# type: command
+# --
+(progn
+  (bbdb-mua-display-sender 'create)
+  )

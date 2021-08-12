@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Query Add Sender
+# key: bbdb-mua/queryAddSender
+# group: bbdb-mua
+# type: command
+# --
+(progn
+  (bbdb-mua-display-sender 'query)
+  )

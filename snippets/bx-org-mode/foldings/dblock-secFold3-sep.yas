@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Dblock Folding Sec 3 + sep
+# key: folding/db-sec-3-sep
+# group: folding
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:bxPanel:foldingSection :outLevel 3 :sep t :title "${1:Title}" :anchor "${2:anchor}" :extraInfo "${3:extraInfo}"
+####+END

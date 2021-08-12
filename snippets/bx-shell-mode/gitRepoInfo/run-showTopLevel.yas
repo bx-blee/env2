@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Run: Git Repo Show Top Level
+# key: bxShell/gitRepo/showTopLevel
+# group: gitRepoInfo
+# type: command
+# --
+(progn
+  (lsip-local-run-command "git rev-parse --show-toplevel")
+  )

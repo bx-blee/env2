@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Disposition: Text-File Viewing
+# key: fileDisposition/text
+# group: File Disposition Line
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:panel:file:text/intro :outLevel 1 :sep t :folding t :fileName "${1:File Name}" :comment "${2:Title Comment}"  :afterComment "${2:Extra Info}"
+####+END:

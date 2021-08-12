@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Footer Org Params Dblock
+# key: begin/footerOrgParams
+# group: segments/footer
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/footerOrgParams.org")
+  (org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

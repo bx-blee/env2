@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Google Word
+# key: word/google
+# type: command
+# --
+(progn
+  (lookup-word-google)
+  )

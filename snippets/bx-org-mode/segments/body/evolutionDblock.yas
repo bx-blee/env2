@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Evolution Dblock
+# key: begin/evolutionDblock
+# group: segments/body
+# type: command
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/evolution.org")
+  (org-dblock-update-buffer-bx)
+  ;;;(blee:ppmm:org-mode-content-list)  
+  )

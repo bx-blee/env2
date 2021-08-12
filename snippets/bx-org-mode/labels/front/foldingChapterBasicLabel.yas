@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Basic Label Folding Chapter 
+# key: node/basicLabelFoldingChapter
+# group: Front Labels
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+* [[elisp:(show-all)][|N]] [[elisp:(blee:menu-sel:outline:popupMenu)][+-]] [[elisp:(blee:menu-sel:navigation:popupMenu)][==]]   [[elisp:(org-cycle)][| _${1:Description}_ |]]  :: $0

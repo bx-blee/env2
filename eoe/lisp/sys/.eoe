@@ -1,0 +1,122 @@
+;;; -*- Mode: Emacs-Lisp -*-
+;;;
+;;; filename: .eoe 
+;;;
+;;; per-user EOE parameters
+
+;;; -------------------------
+;;; Emacs Display Preferences
+;;; -------------------------
+
+;;; 
+;;; User's Emacs Screen Width 
+;;;
+(defvar eoe-uses-wide-screen nil
+  "Used to determine alternate display styles, where 
+`wide' refers to character cells-per-line, not pixels-per-line.
+If you can fit more than 132 characters per line, you should
+probably set this to t.")
+  
+;;;
+;;; Font Selection
+;;;
+
+(defvar eoe-font (cond ((eq window-system 'x)
+			"10x20")
+		       ((eq window-system 'win32)
+			"-*-Fixedsys-normal-r-*-*-13-97-*-*-c-*-*-ansi-"))
+
+  "EOE does syntax highlighting with colors instead of fonts.  
+
+Some nice fonts to use as eoe-font for X are:
+
+  8x13bold  (aka -misc-fixed-bold-r-normal--13-120-75-75-c-80-iso8859-1)
+  10x20     (aka -misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-1)
+
+Some nice fonts to use as eoe-font for Windows are:
+
+ -*-Lucida Console-normal-r-*-*-19-142-*-*-c-*-*-ansi-
+ -*-Fixedsys-normal-r-*-*-13-97-*-*-c-*-*-ansi-
+")
+
+;;;
+;;; Keyboard Mapping Selection
+;;;
+
+(defvar eoe-keybinding-style "neda"
+  "String naming style for function key bindings.  
+Some values are: \"neda\" \"pean\".")
+
+;;;
+;;; Use Toolbars
+;;;
+
+(defvar eoe-use-toolbars t
+  "Control the display of toolbars.
+Should be either `t' or `nil'.")
+
+;;;
+;;; Use Sound (if available)
+;;;
+
+(defvar eoe-use-sound t
+  "Use sounds if the instance of emacs you are running
+will allow it.")
+
+;;; ---------------------
+;;; Mail Server Selection
+;;; ---------------------
+
+(defvar eoe-pop-server "arash.neda.com"
+  "Name of POP server, as a string e.g., \"mail.domain.com\".")
+
+(defvar eoe-smtp-server "rostam.neda.com"
+  "Name of SMTP server, as a string e.g., \"mail.domain.com\".")
+
+;;; -----------------------------
+;;; Network News Server Selection
+;;; -----------------------------
+
+(defvar eoe-nntp-server "afrasiab.neda.com"
+  "Name of NNTP server for network news. 
+e.g., 
+ 
+ \"news.domain.com\".
+ \"msnews.microsoft.com\".
+")
+
+;;; -------------------------
+;;; Priority Access Addresses
+;;; -------------------------
+
+(defvar eoe-priority-access-address-pager nil
+  "Pager number for receiving priority messages.
+e.g.; \"Pager Mohsen <18007596366/1882263@pager.neda.com>")
+
+(defvar eoe-priority-access-address-fax nil
+  "Fax number for receiving priority messages.
+e.g.; \"Fax Pean Lim <pean/5629591@fax.neda.com>\"")
+
+(defvar eoe-priority-access-address-lsm "Pean LSM Lim <166.056@lsm.neda.com>"
+  "LSM address for receiving priority messages.
+e.g.; \"LSM Pean Lim <166.056@lsm.neda.com>\"")
+
+(defvar eoe-priority-access-address-emergency nil
+  "Emergency address for receiving priority messages.
+e.g.; \"Pager Mohsen <18007596366/1882263@pager.neda.com>")
+
+(defvar eoe-priority-access-address-default nil
+  "Emergency address for receiving priority messages.
+e.g.; \"Pager Mohsen <18007596366/1882263@pager.neda.com>")
+
+;;; -----------------------
+;;; World-Wide Web Defaults
+;;; -----------------------
+
+(defvar eoe-www-browser 'netscape
+  "The web browser to be used with EOE.  
+Some values are: 'netscape 'w3.")
+
+(defvar eoe-www-homepage "http://www.neda.com"
+  "Name of homepage for the Emacs W3 browser.")
+

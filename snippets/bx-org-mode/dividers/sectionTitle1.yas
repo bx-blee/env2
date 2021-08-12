@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Divider Section 1
+# key: divider/section1
+# group: divider
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+* [[elisp:(blee:ppmm:org-mode-toggle)][|N]] ======      *$0*

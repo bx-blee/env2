@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Basic Class
+# key: class/basic
+# group: class
+# --
+$0####+BEGIN: bx:dblock:python:class :className "${1:className}" :superClass "" :comment "" :classType "basic"
+####+END:

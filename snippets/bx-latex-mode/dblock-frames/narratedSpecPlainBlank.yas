@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Frame Narrated Specified Blank
+# key: frame/narratedSpec/blank
+# group: DB-Frames
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:frame-narratedSpecified-plain-begin :mode "auto" :title "${1:Title}" :subtitle "${2:SubTitle}" :label "${3:auto}" :audio "${4:pub/bx/cne/bystar/share1/mmc/audio/narration/aboutThisMmDoc/en.wav}" :transition "${5:default}"
+%%%#+END:
+
+  \pnote{
+    Frame Notes\\\\
+    \par
+  }
+
+\end{frame}

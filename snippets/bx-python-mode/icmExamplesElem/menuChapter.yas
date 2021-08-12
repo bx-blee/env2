@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Cmnd Elems -- MenuChapter
+# key: icmExampleElem/MenuChapter
+# group: icmExampleElem
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+icm.cmndExampleMenuChapter('*${1:ChapterTitle}*')
+$0
+
+

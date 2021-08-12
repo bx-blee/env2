@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Divider 1 |^ (P-Controls)
+# key: divider/div1|^
+# group: divider
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+* *[[elisp:(beginning-of-buffer)][|^]] [[elisp:(blee:menu-sel:navigation:popupMenu)][==]] [[elisp:(delete-other-windows)][|1]]*

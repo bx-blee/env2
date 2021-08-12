@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert bxtStartIimBash.sh
+# key: bxtStart/iimBash/insert-bxtStartIimBash
+# group: bxtStart.iimBash
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+bxtStartIimBash.sh$0

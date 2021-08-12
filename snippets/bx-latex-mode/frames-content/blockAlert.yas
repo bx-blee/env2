@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Frame Block Alert
+# key: frame/blockalert
+# group: Frames Content
+# --
+  \begin{alertblock}{${1:Observation}}
+  $0
+  \end{alertblock}

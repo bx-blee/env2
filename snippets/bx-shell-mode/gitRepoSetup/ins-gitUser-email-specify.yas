@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Insert Config  user.email SPECIFY
+# key: bxBash/gitRepor/config/user.email/SPECIFY
+# group: gitRepoSetup
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+git config user.email someName@example.com

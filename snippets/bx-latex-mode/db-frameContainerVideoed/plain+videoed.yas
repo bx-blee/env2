@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: DB-Frame Container Plain Then Videoed
+# key: frame/videoed/videoed
+# group: DB-Frame Container Videoed
+# --
+$0%%%#+BEGIN: bx:lcnt:frame-plain+videoed-begin :mode "auto" :title "${1:Title}" :subtitle "${2:SubTitle}" :label "auto" :transition "default"
+%%%#+END:

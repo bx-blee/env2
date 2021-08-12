@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Region Link Blee Panel
+# key: region/link/bleePanel
+# group: Create Link
+# type: command
+# --
+
+(progn
+  (yas-redo-selected-text-bx)
+  (bx:org:insert:bleePanel)  
+  )

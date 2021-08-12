@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Segment Panel Bottom -- OLD and Obsoleted
+# key: segments/panelBottom
+# group: segments/footer
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0*  [[elisp:(beginning-of-buffer)][Top]] #####################  [[elisp:(delete-other-windows)][(1)]]      *Common Footer Controls*
+####+BEGIN: bx:dblock:org:parameters :types "agenda"
+#+STARTUP: lognotestate
+#+SEQ_TODO: TODO WAITING DELEGATED | DONE DEFERRED CANCELLED
+#+TAGS: @desk(d) @home(h) @work(w) @withInternet(i) @road(r) call(c) errand(e)
+####+END:
+
+
+####+BEGIN: bx:dblock:bnsm:end-of-menu "basic"
+*  #Controls:  [[elisp:(blee:bnsm:menu-back)][Back]]  [[elisp:(toggle-read-only)][toggle-read-only]]  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Cycle Glob Vis]]  [[elisp:(delete-other-windows)][1 Win]]  [[elisp:(save-buffer)][Save]]   [[elisp:(kill-buffer)][Quit]]
+####+END:
+*  [[elisp:(org-cycle)][| ]]  Local Vars  ::                  *Org-Mode And Emacs Specific Configurations*   [[elisp:(org-cycle)][| ]]
+#+CATEGORY: bxPanel
+#+STARTUP: overview
+
+;; Local Variables:
+;; eval: (setq bx:iimp:iimModeArgs "")
+;; eval: (bx:iimp:cmndLineSpecs :name "bxpManage.py")
+;; eval: (bx:iimBash:cmndLineSpecs :name "lcaSambaSysdAdmin.sh")
+;; eval: (setq bufloc:selectedSubject "")
+;; End:

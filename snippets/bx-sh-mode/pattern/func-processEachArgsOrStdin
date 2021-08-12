@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: func-processEachArgsOrStdin
+# key: icmPattern/func-processEachArgsOrStdin
+# group: Obsoleted
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+function vis_func$0 {
+    G_funcEntry
+    function describeF {  G_funcEntryShow; cat  << _EOF_
+Function description.
+Design Pattern: processEach based on args or stdin.
+Examples:
+      \${G_myName} -i userAcctsReport bisos
+      echo bisos bystar | \${G_myName} -i userAcctsReport
+_EOF_
+    }
+    local inputsList="\$@"
+    local thisFunc=\${G_thisFunc}
+
+    function processEach {
+	EH_assert [[ \$# -eq 1 ]]
+	echo "\${thisFunc}" "\$1"
+    }
+
+####+BEGIN: bx:bsip:bash/processEachArgsOrStdin 
+####+END:
+    
+    lpReturn
+}

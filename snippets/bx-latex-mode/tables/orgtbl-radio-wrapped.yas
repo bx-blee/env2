@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: orgtbl-radio-wrapped
+# key: tables/orgtbl-radio-wrapped
+# group: tables
+# type: command
+# --
+(progn
+  (insert (format "
+\\begin{table}[h]	
+\\begin{tabular}{|l|r|}
+\\hline
+ColOne & ColTwo\\\\
+\\hline
+%% BEGIN RECEIVE ORGTBL newTable
+%% END RECEIVE ORGTBL newTable
+\\hline  
+\\end{tabular}
+\\caption{Step 2 -- Activities}
+\\label{tab:stepTwo}
+\\end{table}
+\\begin{comment}
+#+ORGTBL: SEND newTable orgtbl-to-latex :splice t :skip 0
+|   |   |
+\\end{comment}
+"))
+  (orgtbl-mode t)
+  )

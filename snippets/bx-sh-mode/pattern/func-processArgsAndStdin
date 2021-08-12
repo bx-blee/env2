@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: func-processArgsAndStdin
+# key: icmPattern/func-processArgsAndStdin
+# group: ICM Pattern
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+function vis_func$0 {
+    G_funcEntry
+    function describeF {  G_funcEntryShow; cat  << _EOF_
+Function description.
+Design Pattern: processEach based on args or stdin.
+Examples:
+      \${G_myName} -i \${G_thisFunc} arg1 arg2
+      printf "stdinArg1\nstdin2\n" | \${G_myName} -i \${G_thisFunc} arg1 arg2
+_EOF_
+    }
+    local thisFunc=\${G_thisFunc}
+
+    function processEach {
+	EH_assert [[ \$# -eq 1 ]]
+	local each=\"\$1\"
+	
+	echo \"Processing \${thisFunc}::  \${each}\"
+    }
+
+####+BEGIN: bx:bsip:bash/processArgsAndStdin  
+####+END:
+    
+    lpReturn
+}

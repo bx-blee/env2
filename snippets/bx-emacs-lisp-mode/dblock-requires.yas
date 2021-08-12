@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Dblock requires
+# key: requires
+# --
+;;;#+BEGIN: bx:dblock:lisp:requires :disabledP "false"
+;;;#+END:
+$0

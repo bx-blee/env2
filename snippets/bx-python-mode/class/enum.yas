@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Basic Class Enum
+# key: class/enum
+# group: class
+# --
+$0####+BEGIN: bx:dblock:python:enum :enumName "${1:enumName}" :comment ""
+####+END:
+

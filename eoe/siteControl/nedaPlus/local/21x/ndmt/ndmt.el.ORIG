@@ -1,0 +1,235 @@
+;;; 
+;;; RCS: $Id: ndmt.el.ORIG,v 1.1.1.1 2007-02-23 22:32:57 mohsen Exp $
+;;;
+
+(defvar *ndmt-version* "$Revision: 1.1.1.1 $")
+
+(defvar *ndmt-buffer-name-prefix* "*NDMT*")
+
+(require 'ndmt-basic-lucid)
+(require 'ndmt-lsm-mts-lucid)		; MTS
+(require 'ndmt-lsm-ua-lucid)		; UA
+(require 'ndmt-fax-lucid)		; fax gateway
+(require 'ndmt-pager-lucid)		; pager gateway
+(require 'ndmt-ivr-lucid)		; ivrmsg mgmt
+(require 'ndmt-dns-lucid)		; 
+(require 'ndmt-printer-lucid)		; 
+(require 'ndmt-gnats-lucid)		; GNATS problem tracking 
+(require 'ndmt-usenet-lucid)		; usenet
+(require 'ndmt-nts-lucid)		; network terminal server
+(require 'ndmt-www-lucid)		; world-wide web
+(require 'ndmt-network-lucid)		; network mgmt
+(require 'ndmt-backup-lucid)		; tape backups
+
+
+;;; Put the menu in the menubar
+(defun ndmt-install-menubar ()
+  "Install"
+  (interactive)
+  (if current-menubar
+      (let ((assn (assoc "NDMT" current-menubar)))
+	(cond (assn
+	       ;; pulldown already exists
+	       (setcdr assn (cdr ndmt-main-menu)))
+	      (t
+	       ;; new 
+	       (set-buffer-menubar (copy-sequence current-menubar))
+	       (add-menu nil "NDMT" (cdr ndmt-main-menu) "Options"))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; commands associated with the menu items
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; maybe this should be a hook 
+
+(defun ndmt-show-config ()
+  (interactive)
+  (ndmt)
+  (ndmt-log-message (format "current CURENVBASE: `%s'." (ndmt-curenvbase)) t)
+  (ndmt-log-message (format "current LSM-MTS node is: `%s'." *ndmt-lsm-mts-hostname*) nil)
+  (ndmt-log-message (format "current LSM-UA node is: `%s'." *ndmt-lsm-ua-hostname*) nil)
+  (ndmt-log-message (format "current LSM-UA user is: `%s'." *ndmt-lsm-ua-username*) nil)
+  (ndmt-log-message (format "current IVR node is: `%s'." *ndmt-ivr-hostname*) nil)
+  (ndmt-log-message (format "current Pager node is: `%s'." *ndmt-pager-hostname*) nil)
+  (ndmt-log-message (format "current USENET node is: `%s'." *ndmt-usenet-hostname*) nil)
+  (ndmt-log-message (format "current WWW node is: `%s'." *ndmt-www-hostname*) nil)
+  (ndmt-log-message (format "current Network Management Station is: `%s'." *ndmt-network-hostname*) nil)
+  (ndmt-backup-show-config)
+  )
+
+
+(defun ndmt-basic-specify-curenvbase (new-curenvbase)
+  (interactive (list (read-directory-name (format "Specify new CURENVBASE (default should be %s): "
+						  *ndmt-default-curenvbase*)
+					  (or *ndmt-curenvbase* (getenv "CURENVBASE") (ndmt-curenvbase))
+					  (or *ndmt-curenvbase* (getenv "CURENVBASE") (ndmt-curenvbase)))))
+  (setq *ndmt-curenvbase* (ndmt-trim-trailing-slash (expand-file-name new-curenvbase)))
+  
+  (ndmt-basic-update-curenvbase-in-subprocesses)
+  (message (format "CURENVBASE is now: `%s'." (ndmt-curenvbase)))
+  (ndmt-log-message (format "CURENVBASE is now: `%s'." (ndmt-curenvbase)) t))
+
+
+(defvar ndmt-curenvbase-alist '(("production (old) [sw.0117]" "/neda/sw.0117/curenv.sol2")
+				("production       [sw.0205]" "/neda/sw.0205/curenv.sol2")
+				("pre-production   [sw.a3]" "/neda/sw.a3/curenv.sol2"))
+  "A-list of standard CURENVBASEs in the form '((<prettynamestring> <dirstring>) (<prettynamestring> <dirstring>) ...)") 
+
+(defun ndmt-curenvbase-menu ()
+  (cons "Specify CURENVBASE"
+	(append (mapcar (lambda (assn)
+			  (let ((prettyname (nth 0 assn))
+				(dirname (nth 1 assn)))
+			    (vector prettyname `(ndmt-basic-specify-curenvbase ,dirname) t)))
+			ndmt-curenvbase-alist)
+		'(["Other..." ndmt-basic-specify-curenvbase t]))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; NDMT main menu
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defconst ndmt-main-menu
+  `("NDMT"
+    ["Show NDMT Configuration" ndmt-show-config t]
+    "-----"
+    ,(ndmt-curenvbase-menu)
+    "-----"
+    ["Clear Viewport" (progn (goto-char (point-max))(recenter 0)) t]
+    ["Toggle Line Truncation" (setq truncate-lines (not truncate-lines))
+     :style toggle :selected truncate-lines]
+    ["Always Use ange-ftp for Remote Hosts" (setq *ndmt-use-ange-ftp* (not *ndmt-use-ange-ftp*))
+     :style toggle :selected *ndmt-use-ange-ftp*]
+    ("Method for `tail -f'"
+     ["Use New `xterm'" (setq *ndmt-tail-f-method* 'xterm)
+      :style radio :selected (equal *ndmt-tail-f-method* 'xterm)]
+     ["Use New Buffer & Frame" (setq *ndmt-tail-f-method* 'frame)
+      :style radio :selected (equal *ndmt-tail-f-method* 'frame)]
+     ["Use \"*NDMT* <host>\" Buffer" (setq *ndmt-tail-f-method* 'nil)
+      :style radio :selected (equal *ndmt-tail-f-method* nil)]
+     )
+    "-----"
+    ,ndmt-network-menu
+    "-----"
+    ,ndmt-www-menu
+    "-----"
+    ,ndmt-backup-menu
+    "-----"
+    ("White Pages"
+     ["Lookup..." ndmt-not-yet nil]
+     ["View Database" ndmt-not-yet nil]
+     )
+    "-----"
+    ["NDMT Help" ndmt-not-yet nil]
+    ))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; NDMT "main"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun ndmt ()
+  (interactive)
+
+  ;; goto NDMT buffer
+  (switch-to-buffer (ndmt-main-buffer))
+
+  ;; setup NDMT buffer's menubar
+  (set-buffer-menubar default-menubar)
+  (ndmt-install-menus)
+
+  ;; set curenvbase
+  (message (format "CURENVBASE is: %s" (ndmt-curenvbase)))
+  )
+
+
+(defun ndmt-version ()
+  (interactive)
+  (message "NDMT Version %s" *ndmt-version*))
+
+
+;;; NOTYET -- this wants to be a hook (say, ndmt-startup-hook)
+
+(defun ndmt-install-menus ()
+  (interactive)
+  (ndmt-install-menubar)
+  (ndmt-lsm-mts-install-menubar)
+  (ndmt-lsm-ua-install-menubar)
+  (ndmt-ivr-install-menubar)
+  (ndmt-fax-install-menubar)
+  (ndmt-dns-install-menubar)
+  (ndmt-printer-install-menubar)
+  (ndmt-pager-install-menubar)
+  (ndmt-usenet-install-menubar)
+  (ndmt-nts-install-menubar)
+  (ndmt-gnats-install-menubar)
+  (ndmt-maybe-add-remove-menus-button)
+  (delete-menu-item '("Add NDMT Menus"))
+  (run-hooks 'activate-menubar-hook)
+  )
+
+
+(defun ndmt-uninstall-menus ()
+  (interactive)
+  (delete-menu-item '("NDMT"))
+  (delete-menu-item '("LSM-MTS"))
+  (delete-menu-item '("LSM-UA"))
+  (delete-menu-item '("IVR"))
+  (delete-menu-item '("FAX"))
+  (delete-menu-item '("DNS"))
+  (delete-menu-item '("PRINTER"))
+  (delete-menu-item '("PAGER"))
+  (delete-menu-item '("USENET"))
+  (delete-menu-item '("NTS"))
+  (delete-menu-item '("GNATS"))
+  (ndmt-maybe-add-add-menus-button)
+  (delete-menu-item '("Remove NDMT Menus"))
+  (run-hooks 'activate-menubar-hook)
+  )
+
+
+(defun ndmt-maybe-add-add-menus-button ()
+  (if (null (assoc "NDMT" current-menubar))
+      (progn
+	(add-menu-button nil
+			 ["Add NDMT Menus"
+			  (progn (delete-menu-item '("Add NDMT Menus"))
+				 (ndmt-install-menus))
+			  t]
+			 (cond ((assoc "Help" current-menubar)
+				"Help")
+			       ((assoc "Help!" current-menubar)
+				"Help!"))))))
+
+(add-hook 'activate-menubar-hook 'ndmt-maybe-add-add-menus-button)
+
+(defun ndmt-maybe-add-remove-menus-button ()
+  (if (assoc "NDMT" current-menubar)
+      (add-menu-button nil
+		       ["Remove NDMT Menus"
+			(progn
+			  (delete-menu-item '("Remove NDMT Menus"))
+			  (ndmt-uninstall-menus))
+			t]
+		       (cond ((assoc "Help" current-menubar)
+			      "Help")
+			     ((assoc "Help!" current-menubar)
+			      "Help!")))))
+
+
+;; install NDMT button in default menubar
+(add-menu-button '("Apps") ["-----" nil nil]
+		 (aref (car (cdr (assoc "Apps" default-menubar))) 0))
+(add-menu-button '("Apps") ["Remove NDMT Menus" (ndmt-uninstall-menus) 
+			    (car (find-menu-item current-menubar '("NDMT")))]
+		 (aref (car (cdr (assoc "Apps" default-menubar))) 0))
+(add-menu-button '("Apps") ["Add NDMT Menus" (ndmt-install-menus) 
+			     (null (car (find-menu-item current-menubar '("NDMT"))))]
+		 (aref (car (cdr (assoc "Apps" default-menubar))) 0))
+(add-menu-button '("Apps") ["Neda Domain Mgmt. Tool (NDMT)" ndmt t]
+		 (aref (car (cdr (assoc "Apps" default-menubar))) 0)) 
+(ndmt-maybe-add-add-menus-button)
+
+
+(provide 'ndmt)

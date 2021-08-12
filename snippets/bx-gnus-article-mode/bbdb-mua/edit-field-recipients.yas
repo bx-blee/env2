@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Edit Field All Recipients
+# key: bbdb-mua/editFieldAllRecipients
+# group: bbdb-mua
+# type: command
+# --
+(progn
+    (call-interactively 'bbdb-mua-edit-field-recipients)
+  )

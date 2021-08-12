@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Text-To-Speach Word
+# key: word/tts
+# type: command
+# --
+(progn
+  (tts-word)
+  )

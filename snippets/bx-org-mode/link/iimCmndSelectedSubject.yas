@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Region IIM Command SelectedSubject
+# key: link/iimCmndSelectedSubject
+# group: Create Link
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+[[elisp:(iim:bash:cmnd:lineExec :name "$1" :iif "$2" :iifArgs (format "%s" bufloc:selectedSubject))][$1 CNTRL -i $2 @selectedSubject@]$0

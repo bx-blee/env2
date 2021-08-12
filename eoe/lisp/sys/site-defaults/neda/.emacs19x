@@ -1,0 +1,329 @@
+;;; -*- Mode: Emacs-Lisp; -*-
+
+;;; .emacs19x
+
+;;; This .emacs19x defines the Emacs environment for an EOE user.
+;;; Most EOE users will simply use the system's default
+;;; <*eoe-sys-dir*>/.emacs19x, but sophisticated users may copy this
+;;; file to their $HOME directory and make their own edits to it.
+;;;
+;;; Note that for changing EOE parameters, most EOE users will only
+;;; need to copy <*eoe-sys-dir*/.eoe> and modify that.
+
+;;; -----------------------------------------------------------------
+;;; prepend user's ~/lisp to load path, if exists
+;;; -----------------------------------------------------------------
+(if (file-directory-p (expand-file-name "~/lisp"))
+    (setq load-path (cons (expand-file-name "~/lisp")
+			  load-path)))
+
+;;; -----------------------------------------------------------------
+;;; EOE Menu
+;;; -----------------------------------------------------------------
+(require 'eoe-menu)
+(require 'bool-menu)			; 19x only
+
+;;; -----------------------------------------------------------------
+;;; Shell stuff
+;;; -----------------------------------------------------------------
+(require 'ksh-mode)
+
+
+;;; -----------------------------------------------------------------
+;;; Neda Domain Management Tool -- NDMT
+;;; -----------------------------------------------------------------
+(require 'ndmt)
+
+;;; -----------------------------------------------------------------
+;;; Mail -- VM
+;;; -----------------------------------------------------------------
+(eoe-require 'vm)
+(require 'vm-ext)			
+
+;;; -----------------------------------------------------------------
+;;; vm-ruleproc: Rules-Based Mailbox Processing
+;;; -----------------------------------------------------------------
+(eoe-require 'vm-ruleproc)		; basic ruleproc engine
+(eoe-require 'vm-ruleproc-bbdb)		; ruleset for use with BBDB `ruleproc' field
+(require 'vm-ruleproc-unsafe-elisp)	; ruleset for application/x-unsafe-elisp
+
+
+;;; -----------------------------------------------------------------
+;;; Email Citations -- SuperCite
+;;; -----------------------------------------------------------------
+(eoe-require 'supercite)
+
+;;; -----------------------------------------------------------------
+;;; Network News Reader -- GNUS
+;;; -----------------------------------------------------------------
+(eoe-require 'gnus)
+(eoe-require 'gnus-ext)			; for NNTP AUTHINFO passwords
+
+;;; -----------------------------------------------------------------
+;;; Tools for MIME
+;;; -----------------------------------------------------------------
+
+;; default is to not split messages 
+(eval-after-load "tm-edit" (setq mime-editor/split-message nil))
+
+(require 'tm-gnus)			; for GNUS
+;(require 'tm-vm)			; for VM
+(require 'neda-mime-ue)			; application/x-unsafe-elisp
+(require 'neda-mime-ers)		; application/x-embedded-response-spec
+
+;;; -----------------------------------------------------------------
+;;; Rolodex -- BBDB
+;;; -----------------------------------------------------------------
+(eoe-require 'bbdb)
+
+;;; -----------------------------------------------------------------
+;;; Templates and Substitution
+;;; -----------------------------------------------------------------
+(require 'template)
+(eoe-require 'tmplt-ext)
+
+;;; -----------------------------------------------------------------
+;;; Software Development
+;;; -----------------------------------------------------------------
+(eoe-require 'cc-mode)			; covers C, C++ 
+
+(require 'compile-ext)
+
+;;
+;; CVS
+;;
+(eoe-require 'pcl-cvs)
+
+;;
+;; RCS
+;; 
+(require 'rcs)
+
+;;; -----------------------------------------------------------------
+;;; WWW - World Wide Web
+;;; -----------------------------------------------------------------
+
+;;;
+;;; W3
+;;;
+(eoe-require 'w3)
+
+;;;
+;;; configure browse-url.el
+;;;
+(require 'browse-url)
+(setq browse-url-browser-function (cond ((eq eoe-www-browser 'netscape)
+					 'browse-url-netscape)
+					((eq eoe-www-browser 'w3)
+					 'browse-url-w3)
+					(t 
+					 'browse-url-w3)))
+
+;; 
+;; configure Highlight Headers
+;;
+(require 'highlight-headers)
+(setq highlight-headers-follow-url-function (cond ((eq eoe-www-browser 'netscape)
+						   'highlight-headers-follow-url-netscape)
+						  ((or (eq eoe-www-browser 'w3)
+						       t) ; default
+						   (eoe-require 'w3)
+						   'w3-fetch-other-frame)))
+;; 
+;; configure VM support for URL browsing
+;;
+;; Non-nil value means VM should enable URL passing. This means that
+;; VM will search for URLs (Uniform Resource Locators) in messages and
+;; make it possible for you to pass them to a World Wide Web browser.
+(setq vm-url-browser (cond ((eq eoe-www-browser 'netscape)
+			    'vm-mouse-send-url-to-netscape)
+			   ((or (eq eoe-www-browser 'w3)
+				t)	; default
+			    (eoe-require 'w3)
+			    'w3-fetch-other-frame)))
+
+
+
+;;; -----------------------------------------------------------------
+;;; DOS mode
+;;; -----------------------------------------------------------------
+(require 'dos-mode)			; hide ^M characters
+
+;;; -----------------------------------------------------------------
+;;; Keyboard Definitions -- load keyboard function key setup
+;;; -----------------------------------------------------------------
+(let ((disp (getenv "DISPLAY"))
+      (keybind-style eoe-keybinding-style)
+      keyboard-type)
+
+  ;; determine keyboard type
+  (cond ((and disp
+	      (or (string-match "daedalus" disp)
+		  (string-match "icarus" disp)
+		  (string-match "portege" disp)
+		  (string-match "voyager" disp)
+		  (string-match "sudabeh" disp)
+		  (string-match "twintrees.com" disp)))
+	 (setq keyboard-type "AT"))
+	(t
+	 (setq keyboard-type "type5")))
+
+  ;; load the key binding
+  (eoe-load-keybindings eoe-keybinding-style keyboard-type))
+
+;;; -----------------------------------------------------------------
+;;; auto-mode-alist modifications
+;;; -----------------------------------------------------------------
+(eoe-auto-mode-alist-add "\\.[rR][cC]\\'" 'c++-mode) ; .rc windows resource files
+(eoe-auto-mode-alist-add "\\.[rR][uU][lL]\\'" 'c++-mode) ; .rul IShield files
+(eoe-auto-mode-alist-add "\\.[Mm][Aa][Kk]\\'" 'makefile-mode) ; .mak files
+(eoe-auto-mode-alist-add "[Mm]akefile\\." 'makefile-mode) ; makefile.* files
+(eoe-auto-mode-alist-add "\\.[Dd][Ss][Pp]\\'" 'makefile-mode) ; VC++ .dsp files
+(eoe-auto-mode-alist-add "\\.[CcKk][Ss][Hh]\\'" 'ksh-mode) ; .[ck]sh files
+(eoe-auto-mode-alist-add "\\.[Ss][Hh]\\'" 'ksh-mode) ; .sh files
+;(eoe-auto-mode-alist-add "\\.CPP\\'" 'c++-mode)
+;(eoe-auto-mode-alist-add "\\.C\\'" 'c-mode)
+;(eoe-auto-mode-alist-add "\\.H\\'" 'c-mode)
+
+
+;;; -----------------------------------------------------------------
+;;; Font Lock -- select modes for automatic font lock
+;;; -----------------------------------------------------------------
+(add-hook 'dired-mode-hook	   'turn-on-font-lock)
+(add-hook 'tex-mode-hook	   'turn-on-font-lock)
+(add-hook 'latex-mode-hook	   'turn-on-font-lock)
+(add-hook 'bbdb-mode-hook	   'turn-on-font-lock)
+(add-hook 'emacs-lisp-mode-hook    'turn-on-font-lock)
+(add-hook 'c-mode-hook 	           'turn-on-font-lock)
+(add-hook 'c++-mode-hook	   'turn-on-font-lock)
+;(add-hook 'shell-mode-hook	   'turn-on-font-lock)
+(add-hook 'ksh-mode-hook	   'turn-on-font-lock)
+(add-hook 'makefile-mode-hook	   'turn-on-font-lock)
+
+
+;;; -----------------------------------------------------------------
+;;; Calc -- Arbitrary precision calculator
+;;; -----------------------------------------------------------------
+(autoload 'calc-dispatch          "calc" "Calculator Options" t)
+(autoload 'full-calc              "calc" "Full-screen Calculator" t)
+(autoload 'full-calc-keypad       "calc" "Full-screen X Calculator" t)
+(autoload 'calc-eval              "calc" "Use Calculator from Lisp")
+(autoload 'defmath                "calc" nil t t)
+(autoload 'calc                   "calc" "Calculator Mode" t)
+(autoload 'quick-calc             "calc" "Quick Calculator" t)
+(autoload 'calc-keypad            "calc" "X windows Calculator" t)
+(autoload 'calc-embedded          "calc" "Use Calc from any buffer" t)
+(autoload 'calc-embedded-activate "calc" "Activate =>'s in buffer" t)
+(autoload 'calc-grab-region       "calc" "Grab region of Calc data" t)
+(autoload 'calc-grab-rectangle    "calc" "Grab rectangle of data" t)
+
+;;; -----------------------------------------------------------------
+;;; Info -- more info directories
+;;; -----------------------------------------------------------------
+
+;; info setup if running emacs 19
+(if (= emacs-major-version 19)
+    (setq Info-directory-list 
+	  (append Info-directory-list
+		  (list ))))
+
+(setq Info-directory-list
+      (append Info-directory-list
+	      ;; add latex info
+	      (list "/usr/curenv/info"
+		    "/opt/public/sde/info"
+		    "/opt/public/latex2e-95/info")
+	      ))
+
+;;; -----------------------------------------------------------------
+;;; Disable Scary Commands
+;;; -----------------------------------------------------------------
+(put 'eval-expression 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled t)
+
+;;; -----------------------------------------------------------------
+;;; Sound
+;;; -----------------------------------------------------------------
+
+;;
+;; visible or audible bell...
+;;
+(cond (eoe-use-sound
+       (load-default-sounds)		; triggers autoload
+       ;; the following progn is the guts of `load-default-sounds'
+       ;; it is included here for easy user-extensibilty
+       (progn
+	 (let ((default-directory data-directory))
+	   (load-sound-file "sounds/drum-beep.au"	'drum)
+	   (load-sound-file "sounds/quiet-beep.au"	'quiet)
+	   (load-sound-file "sounds/bass-snap.au"	'bass 80)
+	   (load-sound-file "sounds/whip.au"		'whip 70)
+	   (load-sound-file "sounds/cuckoo.au"		'cuckoo)
+	   (load-sound-file "sounds/yeep.au"		'yeep)
+	   (load-sound-file "sounds/hype.au"		'hype 100)
+	   )
+	 (setq sound-alist
+	       (append
+		'((default		:sound bass)
+		  (undefined-key	:sound drum)
+		  (undefined-click	:sound drum)
+		  ;; beginning-of-buffer or end-of-buffer errors.
+		  (buffer-bound	:sound drum)
+		  ;; buffer-read-only error
+		  (read-only	        :sound drum)
+		  ;; non-interactive function or lambda called
+		  (command-error	:sound bass)
+		  (y-or-n-p		:sound quiet)
+		  (yes-or-no-p		:sound quiet)
+		  (auto-save-error	:sound whip :volume 100)
+		  (no-completion	:sound whip)
+		  (isearch-failed	:sound quiet)
+		  (isearch-quit	        :sound bass)
+		  ;; QUIT: sound generated by ^G and it's variants.
+		  (quit		        :sound quiet :volume 75)
+		  ;; READY: time-consuming task has completed...  compile,
+		  ;; cvs-update, etc.
+		  (ready		:sound cuckoo)
+		  ;; WARP: XEmacs has changed the selected-window or frame
+		  ;; asynchronously...  Especially when it's done by an
+		  ;; asynchronous process filter.  Perhaps by a debugger breakpoint
+		  ;; has been hit?
+		  (warp		        :sound yeep :volume 75)
+		  ;; ALARM: used for reminders...
+		  (alarm		:sound cuckoo :volume 100)
+		  )
+		sound-alist)))
+       (setq visible-bell nil))
+      (t
+       (setq visible-bell t)))
+
+;;; -----------------------------------------------------------------
+;;; dired
+;;; -----------------------------------------------------------------
+(eoe-require 'dired)
+
+;;; -----------------------------------------------------------------
+;;; Recent Files
+;;; -----------------------------------------------------------------
+(require 'recent-files)
+(setq recent-files-menu-title "Recent_Files")
+(recent-files-initialize)
+
+;;; -----------------------------------------------------------------
+;;; Operations at Point
+;;; -----------------------------------------------------------------
+(require 'at-point)
+
+
+;;; -----------------------------------------------------------------
+;;; Miscellaneous
+;;; -----------------------------------------------------------------
+(require 'at-neda)
+
+;;
+;; mode line 
+;; 
+(display-time)				; display time on mode line
+(line-number-mode 1)			; display line num

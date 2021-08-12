@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Folding Section 4
+# key: folding/sec-4
+# group: folding
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0**** [[elisp:(show-all)][|N]] [[elisp:(blee:menu-sel:outline:popupMenu)][+-]] [[elisp:(blee:menu-sel:navigation:popupMenu)][==]]     [[elisp:(org-cycle)][| *${1:Title}:* |]] ${2:<<anchor>>} ${3:extraInfo} |

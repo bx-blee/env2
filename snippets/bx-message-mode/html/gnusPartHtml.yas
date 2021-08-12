@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Gnus Html Part
+# key: html/gnusPartHtml
+# group: insertHtmlPart
+# type: snippet
+# --
+<#part type="text/html" disposition=inline>
+$0
+<#/part>

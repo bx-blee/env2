@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: faPar Environment
+# key: faPar
+# group: فارسی در لاتین
+# --
+\begin{faPar}
+$0
+\end{faPar}

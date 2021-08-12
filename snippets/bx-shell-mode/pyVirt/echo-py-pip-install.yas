@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: I:  pip2 --no-cache-dir install --upgrade bisos.module
+# key: pyVirt/echo  py2 pip install no-cache upgrade
+# group: pyVirt
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+pip2 --no-cache-dir install --upgrade bisos.module$0

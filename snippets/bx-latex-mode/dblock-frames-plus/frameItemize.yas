@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Frame Plus itemize
+# key: frame/itemize
+# group: DB-Frames Plus
+# --
+$0%%%#+BEGIN: bx:dblock:lcnt:frame-full-begin :mode "auto" :title "${1:Title}" :subtitle "${2:SubTitle}" :label "${3:auto}" :options "${4:fragile}" :audio "${5:labeled}" :transition "${6:Trans}" :onLeave "${7:OnLeave}"
+%%%#+END:
+
+  \begin{itemize}
+    \item Item One
+  \end{itemize}
+ 
+
+  \pnote{
+    Frame Notes\\\\
+    \par
+  }
+
+\end{frame}

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Function SuccessFail
+# key: func/succFail
+# group: func
+# --
+$0####+BEGIN: bx:icm:python:func :funcName "${1:funcName}" :funcType "succFail" :retType "bool" :deco "" :argsList "${2:funcArg}"
+####+END:
+    pass

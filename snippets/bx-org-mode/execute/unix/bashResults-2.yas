@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Bash Run And Capture (ol=2)
+# key: bash/runCaptureAll
+# group: Execute Line / Unix
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:bxPanel:runResult :outLevel 2  :command "${1:echo command}"  :results t :comment "${2:Allows you to edit}" :afterComment "${3:-- tailor the command line}"
+####+END:

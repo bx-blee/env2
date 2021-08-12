@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Invoke IIM Command IifArgs
+# key: link/iimCmndIifArgs
+# group: Create Link
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+[[elisp:(iim:bash:cmnd:lineExec :iimName "${1:iimName}" :iif "${2:iif}" :iifArgs "${3:iifArgs}")][$1 -i $2 $3]$0

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Blank L1 DB
+# key: divider/BlankL1-DB
+# group: divider
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:bxPanel:separator :outLevel 1
+####+END

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: outcome -- return Failure
+# key: cmndElems/outcome-retFailure
+# group: cmndElems
+# --
+        $0return cmndOutcome.set(
+            opError=icm.OpError.Failure,
+            opResults=None,
+        )

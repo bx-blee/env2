@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: ICM run-result dblock
+# key: icm/run-result
+# group: icm
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+####+BEGIN: bx:dblock:global:run-result :command "icmName.sh  -i iic"
+
+####+END:

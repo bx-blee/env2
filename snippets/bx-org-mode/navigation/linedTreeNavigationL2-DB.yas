@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Lined Tree Navigation L2
+# key: navigation/linedTreeNavigationL2
+# group: file tree navigation
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0####+BEGIN: blee:bxPanel:foldingSection :outLevel 1 :sep t :title "Panel Tree Navigation" :anchor "panelTreeNav" :extraInfo ""
+####+END
+####+BEGIN: blee:bxPanel:linedTreeNavigator :model "auto" :outLevel 2
+####+END

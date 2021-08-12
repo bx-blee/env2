@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Dblock Chapter Level 1 + sep
+# key: folding/db-chapter-1-sep
+# group: folding
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# _ (underscore) and rawTitle are used as a convention to create Chapters
+# --
+$0####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :sep t :title "${1:Title}" :anchor "${2:anchor}" :extraInfo "${3:extraInfo}"
+####+END

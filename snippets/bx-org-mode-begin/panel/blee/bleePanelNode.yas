@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Blee Branch Panel
+# key: begin/bleePanelBranch
+# group: blee
+# type: command
+# --
+(progn
+  (insert-file "/bisos/apps/defaults/begin/bleePanel/branchPanels/branchBegin.org")
+  (org-dblock-update-buffer-bx)
+  (blee:ppmm:org-mode-content-list)  
+  )

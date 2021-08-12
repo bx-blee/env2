@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Footer Controls
+# key: begin/footerControls
+# group: panelFooters
+# type: command
+# Description: Order of insert-file is the opposit of natural order.
+# --
+(progn
+  (insert-file "/libre/ByStar/InitialTemplates/activeDocs/common/buePanels/segmentsOfPanels/footerPanelControls.org")
+  (org-dblock-update-buffer-bx)
+  ;;(blee:ppmm:org-mode-content-list)  
+  )

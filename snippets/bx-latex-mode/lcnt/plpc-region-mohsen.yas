@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: PLPC Region Mohsen
+# key: lcnt/region-mohsen
+# group: LCNT
+# type: command
+# --
+(progn
+  ;;;(yas-redo-selected-text-bx)	 
+  (insert (format "\\href{http://mohsen.1.banan.byname.net/PLPC/%s}{PLPC-%s}" yas-selected-text yas-selected-text))
+  )
