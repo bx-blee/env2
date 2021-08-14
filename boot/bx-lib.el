@@ -570,9 +570,14 @@
   )
 
 (defun bx:orgm:indirectBufOther ()
-  "Usually in |>"
+  "Usually in |>. Behavior of org-tree-to-indirect-buffer changed in 2021."
   (interactive)
-  (org-tree-to-indirect-buffer)
+  (let ($kept)
+    (setq $kept org-indirect-buffer-display)
+    (setq org-indirect-buffer-display 'other-window)
+    (org-tree-to-indirect-buffer)
+    (setq org-indirect-buffer-display $kept)
+    )
   )
 
 
