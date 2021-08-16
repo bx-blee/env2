@@ -558,7 +558,7 @@
 **  [[elisp:(org-cycle)][| ]]  Minor-Mode            ::      *Tabbar* [[elisp:(org-cycle)][| ]]
 	Tabbar setup needs to come late in the setup, perhaps after color-theme
 "
-	       (require 'setup-tabbar)
+	       ;;(require 'setup-tabbar)
 	       ))
 
 
