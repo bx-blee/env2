@@ -276,8 +276,8 @@
   ;; -----------------------------------------------------------------
   ;;(require 'blee-python)  ;; Notyet flymake
 
-  (require 'bide-python)
-  (bide:py:full/update)
+  ;; (require 'bide-python)
+  ;; (bide:py:full/update)
 
   ;; -----------------------------------------------------------------
   ;; Common Lisp Programming Language -- Software Development 
