@@ -34,6 +34,11 @@
 
 (defalias 'org-dblock-write:bx:icm:python:name 'org-dblock-write:bx:global:icm:name-py)
 
+(defun org-dblock-write:bx:icm:py:name (params)
+  ""
+  (insert (format "icmInfo['moduleName'] = \"%s\"" (file-name-sans-extension (bx:buf-fname))))
+  )
+
 (defun org-dblock-write:bx:global:icm:name-py (params)
   ""
   (insert (format "__icmName__ = \"%s\"" (file-name-sans-extension (bx:buf-fname))))
@@ -46,10 +51,23 @@
   (insert (format "__libName__ = \"%s\"" (file-name-sans-extension (bx:buf-fname))))
   )
 
+(defun org-dblock-write:bx:icm:py:version-timestamp (params)
+  ""
+  (insert (format "icmInfo['version'] = \"%s\"" (format-time-string "%Y%m%d%M%S")))
+  )
+
 (defun org-dblock-write:bx:global:timestamp:version-py (params)
   ""
   (insert (format "__version__ = \"%s\"" (format-time-string "%Y%m%d%M%S")))
   )
+
+(defun org-dblock-write:bx:icm:py:status (@params)
+  ""
+  (let (($status (or (plist-get @params :status) ""))
+	)
+    (insert (format "icmInfo['status']  = \"%s\"" $status))
+    ))
+
 
 (defun org-dblock-write:bx:global:icm:status-py (@params)
   ""
