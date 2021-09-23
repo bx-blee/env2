@@ -25,11 +25,14 @@ If Other than org-mode, push, switch-to-org
       (progn
 	(blee:ppmm:mode-pop)
 	(move-beginning-of-line 1)
+        (recenter)
+        (org-indent-mode 0)
+        (toggle-truncate-lines)
 	)
     (progn
       (blee:ppmm:mode-push major-mode)
       (bap:org/switch-to-org-mode)
-      (move-beginning-of-line 1)      
+      (move-beginning-of-line 1)
       )
     )
   )
@@ -87,6 +90,7 @@ If Other than org-mode, push, switch-to-org
 	      )
 	  (progn
 	    (goto-char (point-min))
+            (org-shifttab)
 	    )
 	  )
 	)

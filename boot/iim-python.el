@@ -69,13 +69,22 @@
 )))
 
 
-(defun sectionTitleOpenInsert(@sectionType)
+(defun sectionTitleOpenInsert%%(@sectionType)
   (insert
    (format "\
 \"\"\"\n* \
  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  %-14s ::"
 @sectionType
 )))
+
+(defun sectionTitleOpenInsert(@sectionType)
+  (insert
+   (format "\
+\"\"\"\n* \
+ _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  %-10s ::"
+@sectionType
+)))
+
 
 (defun sectionTitleCloseInsert(@sectionType)
   (insert

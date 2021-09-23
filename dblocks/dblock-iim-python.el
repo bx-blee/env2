@@ -597,7 +597,7 @@ Insert Org-heading
       (if (not (string= @argsMax "0"))
 	  (insert
 	   (format "\
-            effectiveArgsList = G.%sRunArgsGet().%sArgs
+            effectiveArgsList = G.%sRunArgsGet().%sArgs  # type: ignore
         else:
             effectiveArgsList = argsList
 
