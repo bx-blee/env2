@@ -386,6 +386,44 @@
     )))
 
 
+(defun org-dblock-write:bx:icm:py3:method (@params)
+  "Insert Header
+"
+  (let (
+	($methodName (or (plist-get @params :methodName) ""))
+	($methodType (or (plist-get @params :methodType) ""))
+	($decorate (or (plist-get @params :deco) ""))
+	($comment (or (plist-get @params :comment) ""))	
+	($argsListStr (or (plist-get @params :argsList) ""))
+	($argsList)
+	)
+    (setq $argsList (split-string $argsListStr))
+    (subSectionTitleOpenInsertMethod (format
+			     "Method-%s" $methodType))
+
+    (insert (format " /%s/" $methodName))
+
+    (if (not (string= $comment ""))
+	(insert (format " =%s=" $comment)))
+
+    (if (not (string= $decorate ""))
+	(insert (format " deco=%s" $decorate)))
+    
+    (sectionTitleCloseInsert "")
+
+    (if (string= $decorate "default")
+	(setq $decorate "icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)"))
+
+    (if (not (string= $decorate ""))
+	(insert (format "    @%s\n" $decorate)))
+
+    (insert
+     (format "    def %s(" $methodName))
+      
+    ))
+
+
+
 (defalias  'org-dblock-write:bx:icm:python:cmnd:classHead 'org-dblock-write:bx:dblock:python:iim:cmnd:classHead)
 
 (defun org-dblock-write:bx:dblock:python:iim:cmnd:classHead (@params)
