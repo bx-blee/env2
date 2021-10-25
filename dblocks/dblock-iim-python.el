@@ -185,6 +185,43 @@
              $title
 	     ))))
 
+(defun org-dblock-write:bx:icm:py3:func (@params)
+  "Insert Header
+"
+  (let (
+	($funcName (or (plist-get @params :funcName) ""))
+	($funcType (or (plist-get @params :funcType) ""))
+	($decorate (or (plist-get @params :deco) ""))
+	($comment (or (plist-get @params :comment) ""))	
+	($argsListStr (or (plist-get @params :argsList) ""))
+	($argsList)
+	)
+    (setq $argsList (split-string $argsListStr))
+    (sectionTitleOpenInsert (format
+			     "Func-%s" $funcType))
+
+    
+
+    (insert (format " /%s/" $funcName))
+
+    (if (not (string= $comment ""))
+	(insert (format " =%s=" $comment)))
+
+    (if (not (string= $decorate ""))
+	(insert (format " deco=%s" $decorate)))
+    
+    (sectionTitleCloseInsert "")
+
+    (if (string= $decorate "default")
+	(setq $decorate "icm.subjectToTracking(fnLoc=True, fnEntry=True, fnExit=True)"))
+
+    (if (not (string= $decorate ""))
+	(insert (format "@%s\n" $decorate)))
+    
+    (insert
+     (format "def %s(" $funcName))
+    ))
+
 
 
 (defalias  'org-dblock-write:bx:icm:python:func 'org-dblock-write:bx:dblock:python:func)
