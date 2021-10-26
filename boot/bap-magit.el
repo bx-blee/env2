@@ -135,7 +135,7 @@ typeset RcsId="$Id: setup-global-magit.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp 
 	)
     (setq $shellCommand
 	  (format
-	   "bxoReposManage.sh -i basedOnPath_reposPathList %s" buffer-file-name))
+	   "bpoReposManage.sh -i basedOnPath_reposPathList %s" buffer-file-name))
     (setq $reposListAsString (shell-command-to-string $shellCommand))
     (setq $reposList (s-split "\n" $reposListAsString))
     )
@@ -164,7 +164,7 @@ typeset RcsId="$Id: setup-global-magit.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp 
 	)
     (setq $shellCommand
 	  (format
-	   "bxoAcctManage.sh -i bxoIdsList | bxoReposManage.sh -v -i bxoReposPathList"))
+	   "bpoAcctManage.sh -i bpoIdsList | bpoReposManage.sh -v -i bxoReposPathList"))
     (setq $reposListAsString (shell-command-to-string $shellCommand))
     (setq $reposList (s-split "\n" $reposListAsString))
     )
@@ -196,7 +196,7 @@ typeset RcsId="$Id: setup-global-magit.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp 
 	)
     (setq $shellCommand
 	  (format
-	   "bxoReposManage.sh -i basedOnPath_reposPathList %s" buffer-file-name))
+	   "bpoReposManage.sh -i basedOnPath_reposPathList %s" buffer-file-name))
     (setq $reposListAsString (shell-command-to-string $shellCommand))
     (setq $reposList (s-split "\n" $reposListAsString))
     )
