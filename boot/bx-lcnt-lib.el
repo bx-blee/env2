@@ -36,6 +36,9 @@
 
 ;;;   (bx:lcnt:info:base-read-dir "/lcnt/lgpc/mohsen/permanent/polyExistential/mb_polyExistentials")
 ;;;   (bx:lcnt:info:base-read-dir "/bxo/iso/pip_lcnt_polyexistentals/lcnt/lgpc/permanent/mb_polyExistentials")
+;;;   (bx:lcnt:info:base-read-dir "/bxo/iso/pip_lcnt_bystarOverview/lcnt/lgpc/bystar/permanent/general/bleePersoArabic")
+;;;   (bx:lcnt:info:base-read-dir "/bxo/iso/pip_lcnt_bystarCommon/lcnt/lgpc/bystar/permanent/usage/bleeEnFa")
+;;;   (get 'bx:lcnt:info:base 'authorUrl1)
 (defun bx:lcnt:info:base-read-dir (dir)
   ""
   (interactive "DEnter Directory:")

@@ -3223,7 +3223,7 @@ This is a Libre-Halaal poly-existential.
 
 ;; \\title[%s]
       ;; {%s}\n" lcnt-shortTitle lcnt-mainTitle)
-      )
+      ;; )
 
 ;;       (if (not (string-equal lcnt-subTitle ""))
 ;; 	  (insert (format "
@@ -3335,7 +3335,7 @@ This is a Libre-Halaal poly-existential.
     ;;;(insert "%}}} DBLOCK-front-begin")
       )
     )
-  
+  )
 
 
 
