@@ -1,4 +1,4 @@
-;;; -*- Mode: Emacs-Lisp; -*-
+;;; -*- mode: Emacs-Lisp; lexical-binding: t ; -*-
 ;; (setq debug-on-error t)
 
 ;;;#+BEGIN: bx:dblock:global:org-controls :disabledP "false" :mode "auto"
@@ -122,8 +122,13 @@
   )
 
 (defun org-dblock-write:bx:dblock:global:file-insert (params)
+  "If type is specified, additional text (eg closing comment) is inserted.
+If mode is specified, the insert goes in as a comment.
+outLevel applies to org-mode indentation.
+surround is for panel decoration."
   (let (
 	(bx:file (or (plist-get params :file) ""))
+	($type (or (plist-get params :type) "none"))	        
 	(bx:mode (or (plist-get params :mode) "auto"))	
 	(bx:outLevel (or (plist-get params :outLevel) 1))
 	(bx:surround (or (plist-get params :surround) ""))	
@@ -132,6 +137,8 @@
 	(orgFileLink)
 	)
 
+    (bx:dblock:global:typed:insert-begin $type)   
+    
     (if (string-equal "auto" bx:mode)
 	(progn
 	  (setq bx:mode major-mode)
@@ -708,6 +715,24 @@
 	   )
 	  (t
 	   (message (format "major-mode: %s - dblock re unchanged" mode))
+	   )
+	  )
+    )
+  )
+
+;;;(bx:dblock:global:typed:insert-begin "html")
+(cl-defun bx:dblock:global:typed:insert-begin (type)
+  ""
+  (if (string-equal "none" type)
+      (cl-return-from bx:dblock:global:typed:insert-begin)
+    )
+  
+  (progn
+    (cond ((string-equal "html" type)
+	   (insert "-->\n")	   
+	   )
+	  (t
+	   (message (format "typed-insert-begin unexpected type: %s" type))
 	   )
 	  )
     )
