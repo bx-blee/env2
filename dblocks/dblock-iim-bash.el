@@ -432,8 +432,8 @@ fi")
 
 (defun org-dblock-write:bx:bsip:bash/processArgsAndStdin (params)
   "
-**
-***
+** stdin and args as one list are processed with processEach with each as an argument.
+*** No dblock params are used, but dblock demands params so you need a :param nil or an extra space.
 "       
   (insert 
    "\
