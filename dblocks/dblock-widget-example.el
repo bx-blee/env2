@@ -2,10 +2,10 @@
 
 (defun org-dblock-write:bx:dblock:menuChoice (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	)
+        )
     
     (widget-insert "New New! Here is a menu choice. The label is set by :tag, and the default item is\n"
-		   "the child item that :value match the :value of the menu choice.\n")    
+                   "the child item that :value match the :value of the menu choice.\n")    
 
     (widget-create 'menu-choice
                   :tag "_Menu choices_"
@@ -30,14 +30,14 @@
 
 (defun org-dblock-write:bx:dblock:menuChoiceOld (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	)
+        )
     (insert " ZZZZ \n")
 
     (bxCheckbox-mode)
     
     
     (widget-insert "Here is a menu choice. The label is set by :tag, and the default item is\n"
-		   "the child item that :value match the :value of the menu choice.\n")    
+                   "the child item that :value match the :value of the menu choice.\n")    
 
 ;    (bxCheckbox-form-create
 ;     'menu-choice

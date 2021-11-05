@@ -52,18 +52,18 @@
 NOTYET, Support for fVar  needs to be added, support for more funcs, args should become named args.
 "
   (let (
-	(@paramsDescFunc (or (plist-get @args :paramsDescFunc) nil))
-	;;
-	($control nil)
-	)
+        (@paramsDescFunc (or (plist-get @args :paramsDescFunc) nil))
+        ;;
+        ($control nil)
+        )
     
     (when (and
-	   (not (equal @control "hide"))
-	   (not (equal @control "release"))
-	   )
+           (not (equal @control "hide"))
+           (not (equal @control "release"))
+           )
       (when @paramsDescFunc
-	(funcall @paramsDescFunc)
-	)
+        (funcall @paramsDescFunc)
+        )
       )
 
     (setq $control @control)    

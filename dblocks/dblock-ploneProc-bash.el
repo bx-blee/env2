@@ -3,8 +3,8 @@
 
 (defun org-dblock-write:bx:dblock:ploneProc:bash:siteFolders (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	(files-list)
-	)
+        (files-list)
+        )
     ;;; bx:types Ignored all together -- (equal bx:types "xxx")
     (insert "# {{{ DBLOCK-siteFolders\n")
     (insert "siteFolders=\"\n")
@@ -21,8 +21,8 @@
 
 (defun org-dblock-write:bx:dblock:ploneProc:bash:sitePages (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	(files-list)
-	)
+        (files-list)
+        )
     ;;; bx:types Ignored all together -- (equal bx:types "xxx")
     (insert "# {{{ DBLOCK-sitePages\n")
     (insert "sitePages=\"\n")
@@ -38,8 +38,8 @@
 
 (defun org-dblock-write:bx:dblock:ploneProc:bash:nodesList (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	(files-list)
-	)
+        (files-list)
+        )
     ;;; bx:types Ignored all together -- (equal bx:types "xxx")
     (insert "# {{{ DBLOCK-nodesList\n")
     (insert "nodesList=\"\n")
@@ -56,8 +56,8 @@
 
 (defun org-dblock-write:bx:dblock:ploneProc:bash:leavesList (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	(files-list)
-	)
+        (files-list)
+        )
     ;;; bx:types Ignored all together -- (equal bx:types "xxx")
     (insert "# {{{ DBLOCK-leavesList\n")
     (insert "leavesList=\"\n")

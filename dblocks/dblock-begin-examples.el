@@ -64,20 +64,20 @@ contentPlus
 See [[file:/libre/ByStar/InitialTemplates/activeDocs/blee/development/fullUsagePanel-en.org::BleeComeega]]
 "
   (let (
-	(@toggle (or (plist-get @params :toggle) nil))       ;; For backwards compatibility -- replaced by governor
-	(@governor (or (plist-get @params :governor) "enabled")) ;; Controls general behaviour
-	(@ext-gov (or (plist-get @params :ext-gov) "na")) ;; Controls general behaviour
-	(@sur-style (or (plist-get @params :sur-style) "default")) ;; Controls general souroundings style	
-	;;
-	(@exampleOfExtraParams (or (plist-get
-			   @params
-			   :bibSrcPaths)
-			  "/lcnt/BIB/plpcUrl,/lcnt/BIB/rfcs,/lcnt/BIB/bxsup"
-			  ))
-	
-	;;
-	($localVarPlaceHolder)
-	)
+        (@toggle (or (plist-get @params :toggle) nil))       ;; For backwards compatibility -- replaced by governor
+        (@governor (or (plist-get @params :governor) "enabled")) ;; Controls general behaviour
+        (@ext-gov (or (plist-get @params :ext-gov) "na")) ;; Controls general behaviour
+        (@sur-style (or (plist-get @params :sur-style) "default")) ;; Controls general souroundings style       
+        ;;
+        (@exampleOfExtraParams (or (plist-get
+                           @params
+                           :bibSrcPaths)
+                          "/lcnt/BIB/plpcUrl,/lcnt/BIB/rfcs,/lcnt/BIB/bxsup"
+                          ))
+        
+        ;;
+        ($localVarPlaceHolder)
+        )
 
     (when @toggle (setq @governor @toggle))   ;; for backwards compatibility
     (setq @governor (bx:dblock:governor:effective @governor @ext-gov))    ;; Now available to local defuns
@@ -95,11 +95,11 @@ See [[file:/libre/ByStar/InitialTemplates/activeDocs/blee/development/fullUsageP
       )
     
     (bx:dblock:governor:process @governor @ext-gov @sur-style
-				(compile-time-function-name)
-				'helpLine
-				'bodyContentPlus
-				'bodyContent
-				)
+                                (compile-time-function-name)
+                                'helpLine
+                                'bodyContentPlus
+                                'bodyContent
+                                )
 
     ))
 
@@ -109,20 +109,20 @@ See [[file:/libre/ByStar/InitialTemplates/activeDocs/blee/development/fullUsageP
 
 "
   (let (
-	(@toggle (or (plist-get @params :toggle) nil))       ;; For backwards compatibility -- replaced by governor
-	(@governor (or (plist-get @params :governor) "enabled")) ;; Controls general behaviour
-	(@ext-gov (or (plist-get @params :gov-ext) "na")) ;; Controls general behaviour
-	(@gen-style (or (plist-get @params :gen-style) "default")) ;; Controls general souroundings style	
-	;;
-	(@exampleOfExtraParams (or (plist-get
-			   @params
-			   :bibSrcPaths)
-			  "/lcnt/BIB/plpcUrl,/lcnt/BIB/rfcs,/lcnt/BIB/bxsup"
-			  ))
-	
-	;;
-	($atLeastOnceWhen nil)
-	)
+        (@toggle (or (plist-get @params :toggle) nil))       ;; For backwards compatibility -- replaced by governor
+        (@governor (or (plist-get @params :governor) "enabled")) ;; Controls general behaviour
+        (@ext-gov (or (plist-get @params :gov-ext) "na")) ;; Controls general behaviour
+        (@gen-style (or (plist-get @params :gen-style) "default")) ;; Controls general souroundings style       
+        ;;
+        (@exampleOfExtraParams (or (plist-get
+                           @params
+                           :bibSrcPaths)
+                          "/lcnt/BIB/plpcUrl,/lcnt/BIB/rfcs,/lcnt/BIB/bxsup"
+                          ))
+        
+        ;;
+        ($atLeastOnceWhen nil)
+        )
 
     (when @toggle (setq @governor @toggle))
     ;;;(setq @toggle @governor)
@@ -136,10 +136,10 @@ See [[file:/libre/ByStar/InitialTemplates/activeDocs/blee/development/fullUsageP
       (org-latex-node-insert-note
        :label (format "DBLOCK:")
        :name (format
-	      "print-bibliography --- governor=%s  bibSrcPaths=%s"
-	      @governor
-	      @exampleOfExtraParams
-	      )
+              "print-bibliography --- governor=%s  bibSrcPaths=%s"
+              @governor
+              @exampleOfExtraParams
+              )
        :level 1
        :comment (format "")
        )
@@ -161,12 +161,12 @@ See [[file:/libre/ByStar/InitialTemplates/activeDocs/blee/development/fullUsageP
        (compile-time-function-name)
        :style "terse"
        )
-	  
+          
       (bx:dblock:global:moded:insert-end major-mode)
       )
     )
   )
-	      
+              
 
 ;;;#+BEGIN: bx:dblock:lisp:provide :disabledP "false" :lib-name "dblock-begin-examples"
 (lambda () "

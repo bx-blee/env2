@@ -52,64 +52,64 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:doc-class (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	)
+        (bx:langs (or (plist-get params :langs) ""))
+        )
     (bx:lcnt:info:base-read)
 
     (when (equal bx:class "memo")
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert "\
+                (equal bx:langs "en+fa"))
+        (insert "\
 \\documentclass{article}
 \\usepackage{comment}")
-	)
+        )
       (when (equal bx:langs "fa+en")
-	(insert "\
+        (insert "\
 \\documentclass{article}
 \\usepackage{comment}")
-	)
+        )
       )
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
 
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert "\
+                (equal bx:langs "en+fa"))
+        (insert "\
 \\documentclass{article}
 \\usepackage{comment}")
-	)
+        )
       (when (equal bx:langs "fa+en")
-	(insert "\
+        (insert "\
 \\documentclass{article}
 \\usepackage{comment}")
-	)
+        )
       )
 
     ;;;
     ;;; PRESENTATION BEGIN
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       ;;; ENGLISH
       (when 
-	  (or
-	   (equal bx:langs "en")
-	   (equal bx:langs "en+fa")
-	   )
-	(insert "\
+          (or
+           (equal bx:langs "en")
+           (equal bx:langs "en+fa")
+           )
+        (insert "\
 %\\nonstopmode
 
 \\documentclass[ignorenonframetext]{beamer}
-\\usepackage{comment}")	
-	)
+\\usepackage{comment}") 
+        )
       
       ;;; FARSI
       (when (equal bx:langs "fa+en")
-	(insert "\
+        (insert "\
 \\documentclass[ignorenonframetext]{bidibeamer}
-\\usepackage{comment}")	
+\\usepackage{comment}") 
 
-	)
+        )
       )
     ))
 
@@ -125,48 +125,48 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:inputed-title (params)  
   (let (
-	(bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
-	(bx:mode (or (plist-get params :mode) "auto"))       
-	)
+        (bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
+        (bx:mode (or (plist-get params :mode) "auto"))       
+        )
     
     (if (not
-	 (or (equal "TRUE" bx:disabledP)
-	     (equal "true" bx:disabledP)))
-	(progn
-	  (if (string-equal "auto" bx:mode)
-	      (progn
-		(setq bx:mode major-mode)
-		))
-	  
-	  ;;; Processing Body
-	  (bx:lcnt:info:base-read)
-	  (bx:dblock:global:moded:insert-begin bx:mode)
-	  (insert (format "\
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          (if (string-equal "auto" bx:mode)
+              (progn
+                (setq bx:mode major-mode)
+                ))
+          
+          ;;; Processing Body
+          (bx:lcnt:info:base-read)
+          (bx:dblock:global:moded:insert-begin bx:mode)
+          (insert (format "\
 *      ================
 *  [[elisp:(beginning-of-buffer)][Top]] ################  [[elisp:(delete-other-windows)][(1)]]   /*%s-%s -- LCNT Panel -- lcntProc.sh, presProc.sh and Mailings*/
 *  [[elisp:(beginning-of-buffer)][Top]] ################  [[elisp:(delete-other-windows)][(1)]]   *%s*
 *  [[elisp:(beginning-of-buffer)][Top]] ################  [[elisp:(delete-other-windows)][(1)]]   %s
 *  [[elisp:(beginning-of-buffer)][Top]] ################  [[elisp:(delete-other-windows)][(1)]]   \
 " 
-			  (get 'bx:lcnt:info:base  'type)
-			  (get 'bx:lcnt:info:base  'lcntNu)
-			  (get 'bx:lcnt:info:base  'shortTitle)
-			  (get 'bx:lcnt:info:base  'url)
-			  ))
-	  
-	  (mapcar '(lambda (arg)
-		     (progn
-		       (insert
-			(format "\
-[[elisp:(find-file \"%s.ttytex\")][Visit ./%s.ttytex]] || "		  
-			  arg arg))))
-	       (split-string (get 'bx:lcnt:info:base  'docSrcList))
-	       )
-	  ;;;(insert (format "\n*      ================\n" ))
+                          (get 'bx:lcnt:info:base  'type)
+                          (get 'bx:lcnt:info:base  'lcntNu)
+                          (get 'bx:lcnt:info:base  'shortTitle)
+                          (get 'bx:lcnt:info:base  'url)
+                          ))
+          
+          (mapcar '(lambda (arg)
+                     (progn
+                       (insert
+                        (format "\
+[[elisp:(find-file \"%s.ttytex\")][Visit ./%s.ttytex]] || "               
+                          arg arg))))
+               (split-string (get 'bx:lcnt:info:base  'docSrcList))
+               )
+          ;;;(insert (format "\n*      ================\n" ))
           (insert (format "\n"))
-	  
-	  (bx:dblock:global:moded:insert-end bx:mode)					  
-	  )
+          
+          (bx:dblock:global:moded:insert-end bx:mode)                                     
+          )
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )))
 
@@ -180,10 +180,10 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:commands (params)  
   (let (
-	(bx:types (or (plist-get params :types) ""))
-	(docsList)
-	(bufferFileName (file-name-nondirectory buffer-file-name))
-	)
+        (bx:types (or (plist-get params :types) ""))
+        (docsList)
+        (bufferFileName (file-name-nondirectory buffer-file-name))
+        )
     (bx:lcnt:info:base-read)
 
     (insert (format "\
@@ -204,8 +204,8 @@
  || [[elisp:(bx:iimBash:cmndLineExec :wrapper \"\" :name \"lcntProc.sh\" :iif \"buildHtmlPreview\" :iifArgs \"%s\")][lcntProc.sh -i buildHtmlPreview %s]]
 \\end{comment}\
 "
-		    bufferFileName bufferFileName bufferFileName bufferFileName
-		    ))
+                    bufferFileName bufferFileName bufferFileName bufferFileName
+                    ))
          ))
 
 (lambda () "
@@ -225,13 +225,13 @@
 ;;;
 (defun org-dblock-write:bx:lcnt:latex:heveaUse (params)
   (let (
-	($class (or (plist-get params :class) ""))
-	($langs (or (plist-get params :langs) ""))
-	($htmlHead (or (plist-get params :htmlHead) ""))
-	($htmlFoot (or (plist-get params :htmlFoot) ""))
-	($htmlHeadStr "")
-	($htmlFootStr "")
-	)
+        ($class (or (plist-get params :class) ""))
+        ($langs (or (plist-get params :langs) ""))
+        ($htmlHead (or (plist-get params :htmlHead) ""))
+        ($htmlFoot (or (plist-get params :htmlFoot) ""))
+        ($htmlHeadStr "")
+        ($htmlFootStr "")
+        )
     (bx:lcnt:info:base-read)
 
     (insert (format "\
@@ -256,7 +256,7 @@
     ;;; Left To Right
     ;;; 
     (when (or (equal $langs "en")
-	      (equal $langs "en+fa"))
+              (equal $langs "en+fa"))
       (insert (format "
 \\htmlhead{
 %s
@@ -266,16 +266,16 @@
 %s
 }
 "
-		      $htmlHeadStr
-		      $htmlFootStr
-		      ))
+                      $htmlHeadStr
+                      $htmlFootStr
+                      ))
       )
-		      
+                      
     ;;;
     ;;; Right To Left
     ;;; 
     (when (or (equal $langs "fa")
-	      (equal $langs "fa+en"))
+              (equal $langs "fa+en"))
       (insert (format "
 \\htmlhead{
 \\begin{rawhtml}
@@ -291,9 +291,9 @@
 \\end{rawhtml}
 }
 "    
-    		      $htmlHeadStr
-		      $htmlFootStr
-		      ))
+                      $htmlHeadStr
+                      $htmlFootStr
+                      ))
       )
     ))
 
@@ -304,11 +304,11 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:early-common-packages (params)
   (let (
-	(bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	($modern (or (plist-get params :modern) ""))
-	($modernStr "")	
-	)
+        (bx:class (or (plist-get params :class) ""))
+        (bx:langs (or (plist-get params :langs) ""))
+        ($modern (or (plist-get params :modern) ""))
+        ($modernStr "") 
+        )
     (bx:lcnt:info:base-read)
     ;;;(insert "%{{{ DBLOCK-header-begin\n")
 
@@ -320,8 +320,8 @@
 \\begin{comment}\n*\
   [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || /DBLOCK: early-common-packages%s/  ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}\n"
-		    $modernStr 
-		    ))
+                    $modernStr 
+                    ))
     
     (lambda () "
 **  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || memo  [[elisp:(org-cycle)][| ]]
@@ -330,10 +330,10 @@
     
     (when (equal bx:class "memo")
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	
-	(when (not (equal $modern "true"))
-	  (insert "
+                (equal bx:langs "en+fa"))
+        
+        (when (not (equal $modern "true"))
+          (insert "
 \\usepackage{hevea} 
 %HEVEA\\usepackage[utf8]{inputenc}
 
@@ -346,11 +346,11 @@
 }
 
 ")
-	  )
-	)
+          )
+        )
       (when (equal bx:langs "fa+en")
-	(when (not (equal $modern "true"))
-	  (insert "
+        (when (not (equal $modern "true"))
+          (insert "
 \\usepackage{hevea} 
 %HEVEA\\usepackage[utf8]{inputenc}
 
@@ -368,8 +368,8 @@
 \\end{rawhtml}
 }
 "))
-	
-	(insert "
+        
+        (insert "
 
 \\usepackage{rcs}
 \\usepackage{color}
@@ -393,7 +393,7 @@
 \\setdigitfont[Scale=1]{XB Zar}
 
 ")
-	)
+        )
 
      (when (equal bx:langs "en+fa")
        (insert "
@@ -425,7 +425,7 @@
 ")
 
        (if (not (equal bx:class "art+pres"))
-	 (insert "\\usepackage{bidi}\n"))
+         (insert "\\usepackage{bidi}\n"))
 
        (insert "
 \\makeatletter
@@ -455,12 +455,12 @@
     
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
 
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(when (not (equal $modern "true"))
-	  (insert "
+                (equal bx:langs "en+fa"))
+        (when (not (equal $modern "true"))
+          (insert "
 \\usepackage{hevea} 
 %HEVEA\\usepackage[utf8]{inputenc}
 
@@ -472,11 +472,11 @@
 \\bigskip
 }
 ")
-	  )
-	)
+          )
+        )
       (when (equal bx:langs "fa+en")
-	(when (not (equal $modern "true"))	
-	  (insert "
+        (when (not (equal $modern "true"))      
+          (insert "
 \\usepackage{hevea} 
 %HEVEA\\usepackage[utf8]{inputenc}
 
@@ -494,12 +494,12 @@
 \\end{rawhtml}
 }
 ")
-	  )
-	)
+          )
+        )
 
       (when  (or (equal bx:langs "en")
-		 (equal bx:langs "en+fa"))
-	(insert "
+                 (equal bx:langs "en+fa"))
+        (insert "
 \\usepackage{amssymb}
 \\usepackage{fontspec}
 \\setmainfont[Mapping=tex-text]{Linux Libertine O}
@@ -529,7 +529,7 @@
 \\usepackage{xunicode}
 ")
        (if (not (equal bx:class "art+pres"))
-	   (insert "\\usepackage{bidi}\n"))
+           (insert "\\usepackage{bidi}\n"))
 
        (insert "
 \\usepackage{beamerarticle}
@@ -565,11 +565,11 @@
 
     ;;; This RCS Stuff needs to be cleaned up or eliminated
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
 
       ;;; ENGLISH
       (when (equal bx:langs "en")
-	(insert "
+        (insert "
 \\begin{latexonly}
 \\def\\RcsEmptyValue{$\\rm \\langle Unknown \\rangle$}
 \\RCSdef $Revision: 1.1 $
@@ -578,11 +578,11 @@
 \\RCSdef $Name:  $
 \\RCSdef $Author: lsipusr $
 \\end{latexonly}\n")
-	)
+        )
 
       ;;; FARSI
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\usepackage{rcs}
 \\usepackage{color}
 
@@ -607,7 +607,7 @@
 % for in-line Arabic we need R-L control
 \\newenvironment{fa}{\\beginR\\persian}{\\endR}
 ")
-	)
+        )
       )
 
 
@@ -619,14 +619,14 @@
     ;;;
     ;;; PRESENTATION BEGIN
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       ;;; ENGLISH
       (when 
-	  (or
-	   (equal bx:langs "en")
-	   (equal bx:langs "en+fa")
-	   )
-	(insert "
+          (or
+           (equal bx:langs "en")
+           (equal bx:langs "en+fa")
+           )
+        (insert "
 %%%\\nonstopmode
 
 %%%\\documentclass[ignorenonframetext]{beamer}
@@ -651,13 +651,13 @@
 \\usepackage{beamerthemesplit}
 \\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter}
 "
-		)
+                )
 
-	)
+        )
       
       ;;; FARSI
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 %%%\\documentclass[ignorenonframetext]{bidibeamer}
 
 % \\usepackage{fontspec}
@@ -686,7 +686,7 @@
 \\def\\bidiexamplesname{مثال‌ها}
 \\def\\bidiproofname{اثبات}
 ")
-	)
+        )
       )
 
     ;;;(insert "%}}} DBLOCK-header-begin")
@@ -703,7 +703,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:optional-packages-and-styles (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     ;;;(insert "%{{{ DBLOCK-header-begin\n")
     (insert (format "\
@@ -722,7 +722,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:custom-specialized-packages (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     ;;;(insert "%{{{ DBLOCK-header-begin\n")
     (insert (format "\
@@ -743,7 +743,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:late-common-packages (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     ;;;(insert "%{{{ DBLOCK-header-end\n")
 
@@ -758,34 +758,34 @@
 
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       ;;; ENGLISH
       (when (equal bx:langs "en")
-	(insert "
+        (insert "
 %%%\\begin{document}\\ifpdf\\DeclareGraphicsExtensions{.pdf,.jpg,.png}\\else\\DeclareGraphicsExtensions{.eps,.epsi,.ps,.pdf}\\fi\n")
-	)
+        )
 
       (when (equal bx:langs "en+fa")
-	(insert "
+        (insert "
 %%%\\begin{document}
 ")
-	)
+        )
 
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 %%%\\begin{document}
 ")
-	)
+        )
 
 
       )      
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
 
       ;;; JUST ENGLISH
       (when (equal bx:langs "en")
-	(insert "
+        (insert "
 \\usepackage{morefloats}
 \\usepackage[english]{babel}
 
@@ -794,10 +794,10 @@
 \\usepackage{times}
 \\usepackage[T1]{fontenc}
 ")
-	)
+        )
 
       (when (equal bx:langs "en+fa")
-	(insert "
+        (insert "
 \\usepackage{color}
 
 \\usepackage{hyperref}
@@ -805,15 +805,15 @@
 
 \\usepackage{fontspec}")
 
-	;;;
-	;;; NOTYET test on 1604 perhaps xltxtra is not needed all together
-	;;; 
-	(when (not (ubuntu-1804-P))
-	  (insert "
+        ;;;
+        ;;; NOTYET test on 1604 perhaps xltxtra is not needed all together
+        ;;; 
+        (when (not (ubuntu-1804-P))
+          (insert "
 % \\usepackage{xltxtra}  % OBSOLETED In Ubuntu 16.04 and 18.04"))
 
-	
-	(insert "
+        
+        (insert "
 \\usepackage{xunicode}
 
 \\newenvironment{bidiSepBeforeHevea}{}{}
@@ -823,7 +823,7 @@
 \\usepackage{bystarpersian}   % Defines: \\newfontfamily{\persian}, \\newcommand{\farsi}, \\newenvironment{faPar},{fa}
 \\usepackage{bystarpresentation}   % Defines: \\excludecomment{presentationMode} \\newcommand{\\pnote}
 ")
-	)
+        )
       ;;;(insert "\\begin{document}\n")
       )
     ;;;(insert "%}}} DBLOCK-header-end")
@@ -841,7 +841,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:common-packages-style-settings (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     
     (org-latex-section-insert-dblock-name "common-packages-style-settings")
@@ -854,10 +854,10 @@
     
 
     (when (or 
-	   (equal bx:class "art+pres")
-	   (equal bx:class "art")
-	   (equal bx:class "memo")
-	   )
+           (equal bx:class "art+pres")
+           (equal bx:class "art")
+           (equal bx:class "memo")
+           )
       (insert "
 % ===== STYLE PARAMETERS =====
 
@@ -925,10 +925,10 @@
     
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert "
+                (equal bx:langs "en+fa"))
+        (insert "
 \\mode<presentation>
 {
   \\usetheme{Warsaw}
@@ -948,10 +948,10 @@
 }
 
 ")
-	)
+        )
 
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\mode<presentation>
 {
   \\usetheme{Warsaw}
@@ -986,7 +986,7 @@
 }
 
 ")
-	)
+        )
       )
     ;;;(insert "%}}} DBLOCK-style-params")
     ))
@@ -1002,20 +1002,20 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:begin-document (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	(lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
-	(lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
-	(lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
-	(lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
-	(lcnt-date (get 'bx:lcnt:info:base 'date))
-	(lcnt-type (get 'bx:lcnt:info:base 'type))
-	(lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
-	(lcnt-version (get 'bx:lcnt:info:base 'version))
-	(lcnt-url (get 'bx:lcnt:info:base 'url))
-	(lcnt-author1 (get 'bx:lcnt:info:base 'author1))
-	(lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
-	(lcnt-authorUrl1 (get 'bx:lcnt:info:base 'authorUrl1))
-	)
+        (bx:langs (or (plist-get params :langs) ""))
+        (lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
+        (lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
+        (lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
+        (lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
+        (lcnt-date (get 'bx:lcnt:info:base 'date))
+        (lcnt-type (get 'bx:lcnt:info:base 'type))
+        (lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
+        (lcnt-version (get 'bx:lcnt:info:base 'version))
+        (lcnt-url (get 'bx:lcnt:info:base 'url))
+        (lcnt-author1 (get 'bx:lcnt:info:base 'author1))
+        (lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
+        (lcnt-authorUrl1 (get 'bx:lcnt:info:base 'authorUrl1))
+        )
     
     (bx:lcnt:info:base-read)
     ;;;(insert "%{{{ DBLOCK-main-begin\n")
@@ -1027,12 +1027,12 @@
 \\begin{document}\n")
 
       (when (equal bx:langs "en+fa")
-	(insert (format "
+        (insert (format "
 \\title{%s}\n" lcnt-shortTitle))
       )
  
      (when (equal bx:langs "en")
-	(insert "
+        (insert "
 \\thispagestyle{empty}
 
 \\vspace*{-0.5in}
@@ -1068,7 +1068,7 @@ Subject:   & This Matter\\\\
       )
  
      (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\thispagestyle{empty}
 
 \\vspace*{-0.5in}
@@ -1114,7 +1114,7 @@ Subject:   & This Matter\\\\
      )
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (insert "
 \\begin{document}
 
@@ -1125,7 +1125,7 @@ Subject:   & This Matter\\\\
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (insert "
 \\begin{document}\n")      
       %%%(insert "% dblock for pres is empty\n"))
@@ -1136,14 +1136,14 @@ Subject:   & This Matter\\\\
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:title-insert (@params)
   (let (
-	(bx:class (or (plist-get @params :class) ""))
-	(bx:langs (or (plist-get @params :langs) ""))
-	($title (or (plist-get @params :title) ""))	
-	(lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
-	(lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
-	(lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
-	(lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
-	)
+        (bx:class (or (plist-get @params :class) ""))
+        (bx:langs (or (plist-get @params :langs) ""))
+        ($title (or (plist-get @params :title) ""))     
+        (lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
+        (lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
+        (lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
+        (lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
+        )
     
     (bx:lcnt:info:base-read)
 
@@ -1170,15 +1170,15 @@ Subject:   & This Matter\\\\
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:copyright (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	(bx:form (or (plist-get params :form) ""))    ;; none, std, or std-en-fa NOTYET
-	(lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
-	)
+        (bx:langs (or (plist-get params :langs) ""))
+        (bx:form (or (plist-get params :form) ""))    ;; none, std, or std-en-fa NOTYET
+        (lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
+        )
 
     (if (equal bx:form "none")
-	(progn
-	  (insert "% dblock copyright notice says none")
-	  )
+        (progn
+          (insert "% dblock copyright notice says none")
+          )
       (progn 
     
     (bx:lcnt:info:base-read)
@@ -1187,37 +1187,37 @@ Subject:   & This Matter\\\\
     (org-latex-section-insert-dblock-name "Copyright Settings")
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert (format "
+                (equal bx:langs "en+fa"))
+        (insert (format "
 \\vspace{0.4in}
 
 {\\bf Copyright} \\copyright \\space  {\\bf  2014 %s}
 " lcnt-authorName1))
 
-	(insert "\\vspace{0.1in}
+        (insert "\\vspace{0.1in}
 
 Permission is granted to make and distribute complete (not partial)\\\\
 verbatim copies of this document provided that the copyright notice\\\\
 and this permission notice are preserved on all copies.
 ")
-	)
+        )
       (when (equal bx:langs "fa+en")
-	(insert (format "
+        (insert (format "
 \\vspace{0.4in}
 \\begin{latin}
 {\\bf Copyright} \\copyright \\space  {\\bf  2011 %s}
 \\end{latin}
 " lcnt-authorName1))
 
-	(insert "\\vspace{0.1in}
+        (insert "\\vspace{0.1in}
 
 اجازِه چاپ مجدد وجود  دارد تا   هنگامى  که اين  اعلام اجازه روى همه 
 کپيها مجود باشد.
 ")
 
-	(insert "\\vspace{0.1in}
+        (insert "\\vspace{0.1in}
 \\begin{latin}
 Permission is granted to make and distribute complete (not partial)\\\\
 verbatim copies of this document provided that the copyright notice\\\\
@@ -1225,11 +1225,11 @@ and this permission notice are preserved on all copies.
 \\end{latin}
 ")
 
-	)
+        )
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (insert "% dblock copyright notice just says verbatim copying permitted\n"))
 
 ))
@@ -1251,25 +1251,25 @@ and this permission notice are preserved on all copies.
 %%%#+END:
 "
   (let (
-	(in:lcntNu (or (plist-get params :lcnt-nu) ""))
-	(lcntBase)
-	)
+        (in:lcntNu (or (plist-get params :lcnt-nu) ""))
+        (lcntBase)
+        )
     (set 'lcntBase
-	 (shell-command-to-string 
-	  (format "echo -n $( lcnLcntSelect.sh  %s 2> /dev/null | head -1 )" in:lcntNu))
-	 )
+         (shell-command-to-string 
+          (format "echo -n $( lcnLcntSelect.sh  %s 2> /dev/null | head -1 )" in:lcntNu))
+         )
     
     (bx:lcnt:info:base-read-dir lcntBase)
     
     (let (
-	  (lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
-	  (lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
-	  (lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
-	  (lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
-	  (lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
-	  (lcnt-version (get 'bx:lcnt:info:base 'version))
-	  (lcnt-url (get 'bx:lcnt:info:base 'url))
-	  )
+          (lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
+          (lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
+          (lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
+          (lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
+          (lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
+          (lcnt-version (get 'bx:lcnt:info:base 'version))
+          (lcnt-url (get 'bx:lcnt:info:base 'url))
+          )
 
 
       (insert (format "
@@ -1279,30 +1279,30 @@ and this permission notice are preserved on all copies.
 
 \\begin{quote}
   \\textbf{%s}\\\\"
-		      in:lcntNu
-		      lcnt-mainTitle
-		      ))
+                      in:lcntNu
+                      lcnt-mainTitle
+                      ))
 
       (when (not (string-equal (format "%s" lcnt-subTitle) ""))
-	(insert (format "
+        (insert (format "
   \\textbf{%s}\\\\"
-			lcnt-subTitle
-			)))
+                        lcnt-subTitle
+                        )))
 
       (when (not (string-equal (format "%s" lcnt-subSubTitle) ""))
-	(insert (format "
+        (insert (format "
   \\textbf{%s}\\\\"
-			lcnt-subSubTitle
-			)))
+                        lcnt-subSubTitle
+                        )))
 
       (insert (format "
   \\href{%s}{%s}
   --- \\cite{%s}\\\\
 \\end{quote}
 "
-		      lcnt-url lcnt-url
-		      in:lcntNu
-		      ))
+                      lcnt-url lcnt-url
+                      in:lcntNu
+                      ))
 
       
       )))
@@ -1319,11 +1319,11 @@ and this permission notice are preserved on all copies.
 
 (defun org-dblock-write:bx:lcnt:latex:titleSet (params)
   (let (
-	(bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	($processors (or (plist-get params :processors) ""))	
-	(lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
-	)
+        (bx:class (or (plist-get params :class) ""))
+        (bx:langs (or (plist-get params :langs) ""))
+        ($processors (or (plist-get params :processors) ""))    
+        (lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
+        )
     (bx:lcnt:info:base-read)
 
     (org-latex-section-insert-dblock-name "LaTeX titleSet")
@@ -1335,7 +1335,7 @@ and this permission notice are preserved on all copies.
   \\title{%s}
 \\end{htmlonly}
 "
-		      lcnt-shortTitle))
+                      lcnt-shortTitle))
       )
     
     (when (not (equal $processors "html"))
@@ -1343,7 +1343,7 @@ and this permission notice are preserved on all copies.
 
 \\title{%s}
 "
-		      lcnt-shortTitle))
+                      lcnt-shortTitle))
       )
     ))
 
@@ -1353,30 +1353,30 @@ and this permission notice are preserved on all copies.
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:title-page (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	(coverPage (or (plist-get params :coverPage) "UnSpecified"))	
-	(lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
-	(lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
-	(lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
-	(lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
-	(lcnt-date (get 'bx:lcnt:info:base 'date))
-	(lcnt-type (get 'bx:lcnt:info:base 'type))
-	(lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
-	(lcnt-version (get 'bx:lcnt:info:base 'version))
-	(lcnt-url (get 'bx:lcnt:info:base 'url))
-	(lcnt-author1 (get 'bx:lcnt:info:base 'author1))
-	(lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
-	(lcnt-authorUrl1 (get 'bx:lcnt:info:base 'authorUrl1))
-	(lcnt-presArtSrcFile (get 'bx:lcnt:info:base 'presArtSrcFile))	
-	(bufferFileName (file-name-nondirectory buffer-file-name))	
-	)
+        (bx:langs (or (plist-get params :langs) ""))
+        (coverPage (or (plist-get params :coverPage) "UnSpecified"))    
+        (lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
+        (lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
+        (lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
+        (lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
+        (lcnt-date (get 'bx:lcnt:info:base 'date))
+        (lcnt-type (get 'bx:lcnt:info:base 'type))
+        (lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
+        (lcnt-version (get 'bx:lcnt:info:base 'version))
+        (lcnt-url (get 'bx:lcnt:info:base 'url))
+        (lcnt-author1 (get 'bx:lcnt:info:base 'author1))
+        (lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
+        (lcnt-authorUrl1 (get 'bx:lcnt:info:base 'authorUrl1))
+        (lcnt-presArtSrcFile (get 'bx:lcnt:info:base 'presArtSrcFile))  
+        (bufferFileName (file-name-nondirectory buffer-file-name))      
+        )
     (bx:lcnt:info:base-read)
     ;;;(insert "%{{{ DBLOCK-front-begin\n")
 
     (org-latex-section-insert-dblock-name "title-page")
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (insert (format "
 \\thispagestyle{empty}
 
@@ -1390,10 +1390,10 @@ and this permission notice are preserved on all copies.
 "  lcnt-mainTitle))
 
       (if (not (string-equal lcnt-subTitle ""))
-	  (insert (format "%s\\\\\n" lcnt-subTitle)))
+          (insert (format "%s\\\\\n" lcnt-subTitle)))
 
       (if (not (string-equal lcnt-subSubTitle ""))
-	  (insert (format "%s\\\\\n" lcnt-subSubTitle)))
+          (insert (format "%s\\\\\n" lcnt-subSubTitle)))
 
       (insert "\\vspace{0.2in}
 }}
@@ -1403,10 +1403,10 @@ and this permission notice are preserved on all copies.
 ")
 
       (if (string-equal
-	   bufferFileName
-	   lcnt-presArtSrcFile)
+           bufferFileName
+           lcnt-presArtSrcFile)
     
-	  (insert "
+          (insert "
 \\begin{center}
   {\\Large {\\bf Article Format Of Presentation\\\\
 \\vspace{0.2in}
@@ -1420,7 +1420,7 @@ and this permission notice are preserved on all copies.
       
 
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
+                (equal bx:langs "en+fa"))
     (insert "\\begin{center}\n")
     (insert "{\\large Document \\#")
     (insert (format "%s-%s\\\\\n" lcnt-type lcnt-lcntNu))
@@ -1456,24 +1456,24 @@ and this permission notice are preserved on all copies.
 ")
    )
       (when (equal bx:langs "fa+en")
-	(insert "\\begin{center}\n")
-	(insert "{\\large مقاله شماره: ")
-	(insert (format "%s-%s\\\\\n" lcnt-type lcnt-lcntNu))
-	(insert (format "تاريخ: %s}\n" lcnt-date))
-	(insert "\\end{center}")
+        (insert "\\begin{center}\n")
+        (insert "{\\large مقاله شماره: ")
+        (insert (format "%s-%s\\\\\n" lcnt-type lcnt-lcntNu))
+        (insert (format "تاريخ: %s}\n" lcnt-date))
+        (insert "\\end{center}")
 
-	(insert "
+        (insert "
 \\vspace{0.05in}
 
 \\begin{center}
 {\\large مقاله و اسلايد روى وب در :}
 ")
 
-	(insert "\\begin{latin}\n")
-	(insert (format "\\href{%s}{%s}\n" lcnt-url lcnt-url))
-	(insert "\\end{latin}\n")
+        (insert "\\begin{latin}\n")
+        (insert (format "\\href{%s}{%s}\n" lcnt-url lcnt-url))
+        (insert "\\end{latin}\n")
 
-	(insert "\\end{center}
+        (insert "\\end{center}
 
 \\vspace{0.3in}
 
@@ -1491,11 +1491,11 @@ and this permission notice are preserved on all copies.
 \\bibliographystyle{plain}
 ")
 
-	)
+        )
       )  
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (insert "
 
 \\mode<all>  % Important -- Must Be Here\n")
@@ -1506,12 +1506,12 @@ and this permission notice are preserved on all copies.
 {%s}\n" lcnt-mainTitle lcnt-mainTitle))
 
       (if (not (string-equal lcnt-subTitle ""))
-	  (insert (format "
+          (insert (format "
 \\subtitle[%s]
 {%s}\n" lcnt-subTitle lcnt-subTitle)))
 
       ;;;(if (not (string-equal lcnt-subSubTitle ""))
-	;;;  (insert (format "%s\\\\\n" lcnt-subSubTitle)))
+        ;;;  (insert (format "%s\\\\\n" lcnt-subSubTitle)))
 
       (insert (format "
 \\author[%s] 
@@ -1535,7 +1535,7 @@ Email: \\href{%s/contact}{%s/contact}\\\\
 " lcnt-shortTitle))
 
       (when (string-equal coverPage "blank")
-	(insert "
+        (insert "
 % Blank Cover Page
 \\bgroup
 \\setbeamercolor{background canvas}{bg=black}
@@ -1545,7 +1545,7 @@ Email: \\href{%s/contact}{%s/contact}\\\\
 "))
 
       (when (not (string-equal coverPage "blank"))
-	(insert "
+        (insert "
 % No Blank Cover Page -- Select dblock :coverPage blank if desired
 "))
       
@@ -1569,14 +1569,14 @@ Email: \\href{%s/contact}{%s/contact}\\\\
 "  lcnt-mainTitle))
 
       (if (not (string-equal lcnt-subTitle ""))
-	  (insert (format "%s\\\\\n" lcnt-subTitle)))
+          (insert (format "%s\\\\\n" lcnt-subTitle)))
 
       (if (not (string-equal lcnt-subSubTitle ""))
-	  (insert (format "%s\\\\\n" lcnt-subSubTitle)))
+          (insert (format "%s\\\\\n" lcnt-subSubTitle)))
 
 
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
+                (equal bx:langs "en+fa"))
     (insert "\\begin{center}\n")
     (insert "{\\large Document \\#")
     (insert (format "%s-%s\\\\\n" lcnt-type lcnt-lcntNu))
@@ -1623,18 +1623,18 @@ Email: \\href{%s/contact}{%s/contact}\\\\
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:toc-insert (@params)
   (let (
-	($class (or (plist-get @params :class) ""))
-	($langs (or (plist-get @params :langs) ""))
-	($pageBreak (or (plist-get @params :pageBreak) ""))	
-	($toc (or (plist-get @params :toc) ""))
-	($tables (or (plist-get @params :tables) ""))	
-	($figures (or (plist-get @params :figures) ""))		
-	)
+        ($class (or (plist-get @params :class) ""))
+        ($langs (or (plist-get @params :langs) ""))
+        ($pageBreak (or (plist-get @params :pageBreak) ""))     
+        ($toc (or (plist-get @params :toc) ""))
+        ($tables (or (plist-get @params :tables) ""))   
+        ($figures (or (plist-get @params :figures) ""))         
+        )
 
     
     
     (if (not (equal $toc ""))
-	(org-latex-section-insert-dblock-name "Table Of Contents")
+        (org-latex-section-insert-dblock-name "Table Of Contents")
       (org-latex-section-insert-dblock-name "*NO* Table Of Contents")
       )
 
@@ -1668,13 +1668,13 @@ Email: \\href{%s/contact}{%s/contact}\\\\
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:toc (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
 
     (org-latex-section-insert-dblock-name "Table Of Contents")
     
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (insert "
 
 \\clearpage
@@ -1693,24 +1693,24 @@ Email: \\href{%s/contact}{%s/contact}\\\\
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert "
+                (equal bx:langs "en+fa"))
+        (insert "
 \\bibliographystyle{plain}
 
 ")
-	)
+        )
 
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\bibliographystyle{plain}
 
 \\begin{frame}
   \\titlepage
 \\end{frame}
 ")
-	)
+        )
       )
 
     ;;;(insert "%}}} DBLOCK-front-end")
@@ -1746,26 +1746,26 @@ Email: \\href{%s/contact}{%s/contact}\\\\
 
 (defun org-dblock-write:bx:dblock:lcnt:latex-input (params)
   (let ((bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
-	(bx:input-file (or (plist-get params :input-file) "missing")))
+        (bx:input-file (or (plist-get params :input-file) "missing")))
     (message (format "disabledP = %s" bx:disabledP))
     (if (not
-	 (or (equal "TRUE" bx:disabledP)
-	     (equal "true" bx:disabledP)))
-	(progn
-	  ;;; Processing Body
-	  (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
-	  (if (file-exists-p bx:input-file)
-	      (progn
-		(insert (format "\
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          ;;; Processing Body
+          (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
+          (if (file-exists-p bx:input-file)
+              (progn
+                (insert (format "\
 \\begin{comment}
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || /Input/  [[elisp:(blee:file-goto-contents \"%s\")][Goto %s]] ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}
 
 \\input{%s}"
-				bx:input-file
-				bx:input-file
-				bx:input-file
-				)))))
+                                bx:input-file
+                                bx:input-file
+                                bx:input-file
+                                )))))
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )))
 
@@ -1778,26 +1778,26 @@ Email: \\href{%s/contact}{%s/contact}\\\\
 
 (defun org-dblock-write:bx:dblock:lcnt:frame:latex-input (params)
   (let ((bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
-	(bx:input-file (or (plist-get params :input-file) "missing")))
+        (bx:input-file (or (plist-get params :input-file) "missing")))
     (message (format "disabledP = %s" bx:disabledP))
     (if (not
-	 (or (equal "TRUE" bx:disabledP)
-	     (equal "true" bx:disabledP)))
-	(progn
-	  ;;; Processing Body
-	  (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
-	  (if (file-exists-p bx:input-file)
-	      (progn
-		(insert (format "\
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          ;;; Processing Body
+          (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
+          (if (file-exists-p bx:input-file)
+              (progn
+                (insert (format "\
 \\begin{comment}
 *****  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || /In Frame Input/  [[elisp:(blee:file-goto-contents \"%s\")][Goto %s]] ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}
 
 \\input{%s}"
-				bx:input-file
-				bx:input-file
-				bx:input-file
-				)))))
+                                bx:input-file
+                                bx:input-file
+                                bx:input-file
+                                )))))
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )))
 
@@ -1821,25 +1821,25 @@ otherwise labelInfo is inserted as label"
     "Returns something like 'sec:' for use in a lable"
     (let ((tagForLabel "unknown:"))
       (when (member segType (list
-			     "section"
-			     "subsection"
-			     "subsubsection"
-			     ))
-	(setq tagForLabel "sec:"))
+                             "section"
+                             "subsection"
+                             "subsubsection"
+                             ))
+        (setq tagForLabel "sec:"))
       (when (member segType (list
-			     "chapter"
-			     ))
-	(setq tagForLabel "chap:"))
+                             "chapter"
+                             ))
+        (setq tagForLabel "chap:"))
       (when (member segType (list
-			     "part"
-			     ))
-	(setq tagForLabel "part:"))
+                             "part"
+                             ))
+        (setq tagForLabel "part:"))
       tagForLabel))
 
   (let (
-	(delimiterLinePerhaps "")
-	(newPagePerhaps "")
-	)
+        (delimiterLinePerhaps "")
+        (newPagePerhaps "")
+        )
 
     (when (member segType (list "part" "chapter"))
       (setq delimiterLinePerhaps "\n*      ================"))
@@ -1851,10 +1851,10 @@ otherwise labelInfo is inserted as label"
 \\begin{comment}%s
 %s  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  *%s*   /%s/ ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}"
-	       delimiterLinePerhaps
-	       (make-string orgDepth ?*)
-	       (str:capitalize-first-char segType) segTitle
-	       )))
+               delimiterLinePerhaps
+               (make-string orgDepth ?*)
+               (str:capitalize-first-char segType) segTitle
+               )))
     
     (when (not (string-equal segType "part"))
       (insert
@@ -1862,18 +1862,18 @@ otherwise labelInfo is inserted as label"
 \\begin{comment}%s
 %s  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  /%s/   %s ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}"
-	       delimiterLinePerhaps
-	       (make-string orgDepth ?*)
-	       (str:capitalize-first-char segType) segTitle
-	       )))
+               delimiterLinePerhaps
+               (make-string orgDepth ?*)
+               (str:capitalize-first-char segType) segTitle
+               )))
     
     (insert
      (format "
 %s
 \\%s{%s}"
-	     newPagePerhaps
-	     segType segTitle
-	     ))
+             newPagePerhaps
+             segType segTitle
+             ))
     
     (when (string-equal labelInfo "auto")
       (setq labelInfo (str:spacesElim segTitle)))
@@ -1882,8 +1882,8 @@ otherwise labelInfo is inserted as label"
       (insert
        (format "
 \\label{%s}"
-	       (concat (getTagForLabelFromSegType segType) labelInfo)
-	       )))
+               (concat (getTagForLabelFromSegType segType) labelInfo)
+               )))
     )
   )
 
@@ -1914,29 +1914,29 @@ otherwise labelInfo is inserted as label"
 (defmacro bx:lcnt:org-dblock-defun (funcName segType orgDepth)
   "The macro defines a function to be invoked from a dblock"
   (let (
-	(fullFuncName)
-	(baseFuncName "org-dblock-write")
-	)
+        (fullFuncName)
+        (baseFuncName "org-dblock-write")
+        )
     (setq fullFuncName (concat baseFuncName funcName))
     ;;;
     ;;; Equivalent of (defun ,fullFuncName (params)
     ;;;
     `(fset (intern ,fullFuncName)
-	   (lambda (params)
-	     (let (
-		   (dblockMode (or (plist-get params :disabledP) "UnSpecified"))
-		   (dblockMode (or (plist-get params :mode) "UnSpecified"))	
-		   (segTitle (or (plist-get params :seg-title) "UnSpecified"))
-		   (labelInfo (or (plist-get params :label) "UnSpecified"))
-		   )
-	       (when (blee:dblock:mode:disabledP dblockMode)
-		 (blee:dblock:mode:disabledIndicate))
-		 
-	       (when (not (blee:dblock:mode:disabledP dblockMode))
-		 (lcnt:latex:insertSegment ,orgDepth ,segType segTitle labelInfo)
-		 )
-	       ))
-	   )
+           (lambda (params)
+             (let (
+                   (dblockMode (or (plist-get params :disabledP) "UnSpecified"))
+                   (dblockMode (or (plist-get params :mode) "UnSpecified"))     
+                   (segTitle (or (plist-get params :seg-title) "UnSpecified"))
+                   (labelInfo (or (plist-get params :label) "UnSpecified"))
+                   )
+               (when (blee:dblock:mode:disabledP dblockMode)
+                 (blee:dblock:mode:disabledIndicate))
+                 
+               (when (not (blee:dblock:mode:disabledP dblockMode))
+                 (lcnt:latex:insertSegment ,orgDepth ,segType segTitle labelInfo)
+                 )
+               ))
+           )
     ))
 
 
@@ -1949,13 +1949,13 @@ otherwise labelInfo is inserted as label"
 
 (defun org-dblock-write:bx:dblock:lcnt:latex-part (params)
   (let ((bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
-	(bx:seg-title (or (plist-get params :seg-title) "missing")))
+        (bx:seg-title (or (plist-get params :seg-title) "missing")))
     (message (format "disabledP = %s" bx:disabledP))
     (if (not
-	 (or (equal "TRUE" bx:disabledP)
-	     (equal "true" bx:disabledP)))
-	(progn
-	  ;;; Processing Body
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          ;;; Processing Body
 
       (setq newPagePerhaps "\n\\newpage")
       (insert
@@ -1963,14 +1963,14 @@ otherwise labelInfo is inserted as label"
 \\begin{comment}%s
 %s  [[elisp:(org-cycle)][| ]] [[elisp:(org-show-subtree)][|=]] [[elisp:(show-children 10)][|V]] [[elisp:(bx:orgm:indirectBufOther)][|>]] [[elisp:(bx:orgm:indirectBufMain)][|I]] [[elisp:(blee:ppmm:org-mode-toggle)][|N]] [[elisp:(org-top-overview)][|O]] [[elisp:(progn (org-shifttab) (org-content))][|C]] [[elisp:(delete-other-windows)][|1]]  *%s*   /%s/ ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}"
-	       delimiterLinePerhaps
-	       (make-string orgDepth ?*)
-	       (str:capitalize-first-char segType) segTitle
-	       )))
-	  
-	  
-	  (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
-	  (insert (format "\
+               delimiterLinePerhaps
+               (make-string orgDepth ?*)
+               (str:capitalize-first-char segType) segTitle
+               )))
+          
+          
+          (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
+          (insert (format "\
 \\begin{comment}
 *      ================
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || *Appendix*   %s ::  [[elisp:(org-cycle)][| ]]
@@ -1979,10 +1979,10 @@ otherwise labelInfo is inserted as label"
 \\newpage
 \\appendix{%s}
 \\label{%s}"
-			  bx:seg-title
-			  bx:seg-title
-			  (concat "app:" (str:spacesElim bx:seg-title))			  
-			  )))
+                          bx:seg-title
+                          bx:seg-title
+                          (concat "app:" (str:spacesElim bx:seg-title))                   
+                          )))
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )))
 
@@ -2004,21 +2004,21 @@ otherwise labelInfo is inserted as label"
 
 (defun org-dblock-write:bx:lcnt:latex-orgSeparator (params)
   (let ((bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
-	(bx:seg-title (or (plist-get params :seg-title) "missing")))
+        (bx:seg-title (or (plist-get params :seg-title) "missing")))
     (message (format "disabledP = %s" bx:disabledP))
     (if (not
-	 (or (equal "TRUE" bx:disabledP)
-	     (equal "true" bx:disabledP)))
-	(progn
-	  ;;; Processing Body
-	  (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
-	  (insert (format "\
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          ;;; Processing Body
+          (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
+          (insert (format "\
 \\begin{comment}
 *      ================
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || *Segment*   %s ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}"
-			  bx:seg-title
-			  )))
+                          bx:seg-title
+                          )))
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )))
 
@@ -2030,15 +2030,15 @@ otherwise labelInfo is inserted as label"
 
 (defun org-dblock-write:bx:dblock:lcnt:latex-appendix (params)
   (let ((bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
-	(bx:seg-title (or (plist-get params :seg-title) "missing")))
+        (bx:seg-title (or (plist-get params :seg-title) "missing")))
     (message (format "disabledP = %s" bx:disabledP))
     (if (not
-	 (or (equal "TRUE" bx:disabledP)
-	     (equal "true" bx:disabledP)))
-	(progn
-	  ;;; Processing Body
-	  (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
-	  (insert (format "\
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          ;;; Processing Body
+          (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
+          (insert (format "\
 \\begin{comment}
 *      ================
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || *Appendix*   %s ::  [[elisp:(org-cycle)][| ]]
@@ -2047,10 +2047,10 @@ otherwise labelInfo is inserted as label"
 \\newpage
 \\appendix{%s}
 \\label{%s}"
-			  bx:seg-title
-			  bx:seg-title
-			  (concat "app:" (str:spacesElim bx:seg-title))			  
-			  )))
+                          bx:seg-title
+                          bx:seg-title
+                          (concat "app:" (str:spacesElim bx:seg-title))                   
+                          )))
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )))
 
@@ -2126,40 +2126,40 @@ otherwise labelInfo is inserted as label"
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:bibliography (params)
   (let (
-	(bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
-	(bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	)
+        (bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
+        (bx:class (or (plist-get params :class) ""))
+        (bx:langs (or (plist-get params :langs) ""))
+        )
     (if (not
-	 (or (equal "TRUE" bx:disabledP)
-	     (equal "true" bx:disabledP)))
-	(progn
-	  ;;; Processing Body
-	  (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          ;;; Processing Body
+          (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
 
           (org-latex-section-insert-dblock-name "Bibliography")
 
-	  (when (equal bx:class "memo")
-	    (insert "\
+          (when (equal bx:class "memo")
+            (insert "\
 % No Bib For Memo"
-		    )
-	    )
+                    )
+            )
 
-	  (when (or (equal bx:class "art+pres")
-		    (equal bx:class "art"))
-	    (insert "
+          (when (or (equal bx:class "art+pres")
+                    (equal bx:class "art"))
+            (insert "
 %\\bibliography{/usr/local/lib/bib/gnu,/usr/local/lib/bib/networking,/usr/local/lib/bib/nedadoc,/usr/local/lib/bib/rfcs,/lcnt/outputs/all/plpc}
 \\bibliography{/lcnt/outputs/all/plpcUrl,/usr/local/lib/bib/rfcs}"
-		    )
-	    )
+                    )
+            )
 
-	  (when (or (equal bx:class "pres+art")
-		    (equal bx:class "pres"))
-	    (insert "
+          (when (or (equal bx:class "pres+art")
+                    (equal bx:class "pres"))
+            (insert "
 \\bibliography{/lcnt/outputs/all/plpcUrl,/usr/local/lib/bib/rfcs}"
-		    )
-	    )
-	  )
+                    )
+            )
+          )
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )))
 
@@ -2175,47 +2175,47 @@ otherwise labelInfo is inserted as label"
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:document-end (params)
   (let (
-	(bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
-	(bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	)
+        (bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
+        (bx:class (or (plist-get params :class) ""))
+        (bx:langs (or (plist-get params :langs) ""))
+        )
     (if (not
-	 (or (equal "TRUE" bx:disabledP)
-	     (equal "true" bx:disabledP)))
-	(progn
-	  ;;; Processing Body
-	  (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          ;;; Processing Body
+          (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
 
-          (org-latex-section-insert-dblock-name "End-Of-Document")	  
-	  
-	  (when (equal bx:class "memo")
-	    (insert "
-
-\\end{document}"
-		    )
-	    )
-
-	  (when (or (equal bx:class "art+pres")
-		    (equal bx:class "art"))
-	    (insert "
+          (org-latex-section-insert-dblock-name "End-Of-Document")        
+          
+          (when (equal bx:class "memo")
+            (insert "
 
 \\end{document}"
-		    )
-	    )
+                    )
+            )
 
-	  (when (or (equal bx:class "pres+art")
-		    (equal bx:class "pres"))
-	    (insert "
+          (when (or (equal bx:class "art+pres")
+                    (equal bx:class "art"))
+            (insert "
 
-\\end{document}"	    
-		    )
-	    )
-	  (insert (format "
+\\end{document}"
+                    )
+            )
+
+          (when (or (equal bx:class "pres+art")
+                    (equal bx:class "pres"))
+            (insert "
+
+\\end{document}"            
+                    )
+            )
+          (insert (format "
 
 \\begin{comment}
 *      ================
 \\end{comment}"
-			  )))
+                          )))
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )))
 
@@ -2234,24 +2234,24 @@ otherwise labelInfo is inserted as label"
   (interactive)
   (if (save-excursion (re-search-forward "^\\\\.*section" nil t))
       (when (re-search-forward "^\\\\.*section" nil t)
-	(let* (
-	       (sectionCmnd (thing-at-point 'word))
-	       )
-	  (save-excursion
-	    (skip-chars-forward " 	{")
-	    (let ((sectionTitle
-		   (buffer-substring 
-		    (point)
-		    (progn
-		      (skip-chars-forward "^}")
-		      (point)))))
-	      
-	      (message (format "Section ==  %s-- %s" sectionCmnd sectionTitle))
-	      (beginning-of-line 1)
-	      (delete-region (point) (progn (forward-line 1) (point)))
-	      (message "Inserting dblock ...") ;;(sit-for 1)
-	      (latex-dblock-section-insert sectionCmnd sectionTitle)
-	      ))))))
+        (let* (
+               (sectionCmnd (thing-at-point 'word))
+               )
+          (save-excursion
+            (skip-chars-forward "       {")
+            (let ((sectionTitle
+                   (buffer-substring 
+                    (point)
+                    (progn
+                      (skip-chars-forward "^}")
+                      (point)))))
+              
+              (message (format "Section ==  %s-- %s" sectionCmnd sectionTitle))
+              (beginning-of-line 1)
+              (delete-region (point) (progn (forward-line 1) (point)))
+              (message "Inserting dblock ...") ;;(sit-for 1)
+              (latex-dblock-section-insert sectionCmnd sectionTitle)
+              ))))))
 
 
 (lambda () "
@@ -2263,24 +2263,24 @@ otherwise labelInfo is inserted as label"
   (interactive)
   (if (save-excursion (re-search-forward "^\\\\.*section" nil t))
       (while (re-search-forward "^\\\\.*section" nil t)
-	(let* (
-	       (sectionCmnd (thing-at-point 'word))
-	       )
-	  (save-excursion
-	    (skip-chars-forward " 	{")
-	    (let ((sectionTitle
-		   (buffer-substring 
-		    (point)
-		    (progn
-		      (skip-chars-forward "^}")
-		      (point)))))
-	      
-	      (message (format "Section ==  %s-- %s" sectionCmnd sectionTitle))
-	      (beginning-of-line 1)
-	      (delete-region (point) (progn (forward-line 1) (point)))
-	      (message "Inserting dblock ...") ;;(sit-for 1)
-	      (latex-dblock-section-insert sectionCmnd sectionTitle)
-	      ))))))
+        (let* (
+               (sectionCmnd (thing-at-point 'word))
+               )
+          (save-excursion
+            (skip-chars-forward "       {")
+            (let ((sectionTitle
+                   (buffer-substring 
+                    (point)
+                    (progn
+                      (skip-chars-forward "^}")
+                      (point)))))
+              
+              (message (format "Section ==  %s-- %s" sectionCmnd sectionTitle))
+              (beginning-of-line 1)
+              (delete-region (point) (progn (forward-line 1) (point)))
+              (message "Inserting dblock ...") ;;(sit-for 1)
+              (latex-dblock-section-insert sectionCmnd sectionTitle)
+              ))))))
 
 
 (lambda () "
@@ -2291,17 +2291,17 @@ otherwise labelInfo is inserted as label"
   ""
   (insert "\
 %%%#+BEGIN:")
-	  
+          
   (insert
    (format "\
  bx:dblock:lcnt:latex-%s :disabledP \"false\" :seg-title \"%s\""
-	   segCmnd
-	   segTitle))
+           segCmnd
+           segTitle))
   
   (insert "
 %%%#+END:
 "
-	  )
+          )
   )
 
 
@@ -2324,8 +2324,8 @@ Star at the begining of line is avoided not to show up in org-mode view.
   [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || /DBLOCK: %s/  ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}
 "
-	   name
-	   )))
+           name
+           )))
 
 
 ;;;#+BEGIN: bx:dblock:lisp:provide :disabledP "false" :lib-name "dblock-lcnt-latex"

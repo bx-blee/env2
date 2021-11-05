@@ -47,83 +47,83 @@
 
 (defun org-dblock-write:bx:bash:top-of-file (@params)
   (let (
-	(@control (or (plist-get @params :control) "enabled"))
-	(@vc (or (plist-get @params :vc) "git"))
-	(@partof (or (plist-get @params :partof) "bystar"))
-	(@copyleft (or (plist-get @params :copyleft) "halaal+brief"))
-	;;
-	($control nil)
-	)
+        (@control (or (plist-get @params :control) "enabled"))
+        (@vc (or (plist-get @params :vc) "git"))
+        (@partof (or (plist-get @params :partof) "bystar"))
+        (@copyleft (or (plist-get @params :copyleft) "halaal+brief"))
+        ;;
+        ($control nil)
+        )
 
     (defun paramsDescInsert ()
       (blee:dblock:params:desc
        'shell-script-mode
        (format "%s  :vc \"cvs|git|nil\" :partof \"bystar|nil\" :copyleft \"halaal+minimal|halaal+brief|nil\""
-	       (bx:dblock:controller:options)
-	       )
+               (bx:dblock:controller:options)
+               )
        )
       )
 
     (setq $control
-	  (bx:dblock:controller:enforce @control :paramsDescFunc 'paramsDescInsert))
+          (bx:dblock:controller:enforce @control :paramsDescFunc 'paramsDescInsert))
     
     (when (equal $control "enabled")
       (when (equal @vc "cvs")    
-	(insert "\
+        (insert "\
 typeset RcsId=\"$Id: dblock-iim-bash.el,v 1.4 2017-02-08 06:42:32 lsipusr Exp $\"
 # *CopyLeft*
 ")
-	)
+        )
 
       (when (equal @partof "bystar")
-	(insert (format "\
+        (insert (format "\
 __copying__=\"
 %s Libre-Halaal Software\"
 " "*"))
-	(insert "#  This is part of ByStar Libre Services. http://www.by-star.net
+        (insert "#  This is part of ByStar Libre Services. http://www.by-star.net
 ")
-	)
+        )
 
       (when (equal @copyleft "halaal+minimal")
-	(insert "#  This is a Halaal Poly-Existential. See http://www.freeprotocols.org\n")
-	)
+        (insert "#  This is a Halaal Poly-Existential. See http://www.freeprotocols.org\n")
+        )
       (when (equal @copyleft "halaal+brief")
-	(insert "# Copyright (c) 2011 Neda Communications, Inc. -- http://www.neda.com
+        (insert "# Copyright (c) 2011 Neda Communications, Inc. -- http://www.neda.com
 # See PLPC-120001 for restrictions.
 # This is a Halaal Poly-Existential intended to remain perpetually Halaal.\
 ")
-	)
+        )
       )
     ))
 
 
 (defun org-dblock-write:bx:bash:origin-statement (@params)
   (let (
-	(@control (or (plist-get @params :control) "enabled"))
-	(@origin (or (plist-get @params :origin) "bystar"))
-	;;
-	($control nil)
-	)
+        (@control (or (plist-get @params :control) "enabled"))
+        (@origin (or (plist-get @params :origin) "bystar"))
+        ;;
+        ($control nil)
+        )
 
     (defun paramsDescInsert ()
       (blee:dblock:params:desc
        'shell-script-mode
        (format "%s  :origin \"bystar|nil\""
-	       (bx:dblock:controller:options)
-	       )
+               (bx:dblock:controller:options)
+               )
        )
       )
 
     (setq $control
-	  (bx:dblock:controller:enforce @control :paramsDescFunc 'paramsDescInsert)
-	  )    
+          (bx:dblock:controller:enforce @control :paramsDescFunc 'paramsDescInsert)
+          )    
     (when (equal $control "enabled")
       (when (equal @origin "bystar")    
-	(insert (format "\
+        (insert (format "\
 ORIGIN=\"
 %s Part Of ByStar -- Best Used With Emacs, Blee and COMEEGA.\"\
 " "*"))
-	)
+        )
       )
     ))
 
@@ -133,16 +133,16 @@ ORIGIN=\"
 (defun org-dblock-write:bx:bsip:bash/libLoadOnce  (<params)
   "Load lib just once."
   (let* (
-	(<governor (or (plist-get <params :governor) "enabled")) ;; Controls general behaviour
-	(<extGov (or (plist-get <params :extGov) "na")) ;; External Governor
-	;;
-	(<libName (or (plist-get <params :libName) "."))
-	;;
-	($libBufferName (file-name-sans-extension
-			 (file-name-nondirectory
-			  (buffer-file-name))))
-	($libBufferPath (buffer-file-name))
-	)
+        (<governor (or (plist-get <params :governor) "enabled")) ;; Controls general behaviour
+        (<extGov (or (plist-get <params :extGov) "na")) ;; External Governor
+        ;;
+        (<libName (or (plist-get <params :libName) "."))
+        ;;
+        ($libBufferName (file-name-sans-extension
+                         (file-name-nondirectory
+                          (buffer-file-name))))
+        ($libBufferPath (buffer-file-name))
+        )
 
     (setq <governor (bx:dblock:governor:effective <governor <extGov))    ;; Now available to local defuns
 
@@ -153,8 +153,8 @@ ORIGIN=\"
     (defun bodyContent ()
       ""
       (when (string= <libName "auto")
-	(setq <libName $libBufferName)
-	)
+        (setq <libName $libBufferName)
+        )
       (insert
        (format
        "\
@@ -172,32 +172,32 @@ fi"
 
 (defun org-dblock-write:bx:bash:author (@params)
   (let (
-	(@control (or (plist-get @params :control) "enabled"))
-	(@author (or (plist-get @params :author) "mohsenBanan"))
-	;;
-	($control nil)
-	)
+        (@control (or (plist-get @params :control) "enabled"))
+        (@author (or (plist-get @params :author) "mohsenBanan"))
+        ;;
+        ($control nil)
+        )
     
     (defun paramsDescInsert ()
       (blee:dblock:params:desc
        'shell-script-mode
        (format
-	"%s  :author \"mohsenBanan|nil\""
-	(bx:dblock:controller:options)
-	)))
+        "%s  :author \"mohsenBanan|nil\""
+        (bx:dblock:controller:options)
+        )))
 
     (setq $control
-	  (bx:dblock:controller:enforce @control :paramsDescFunc 'paramsDescInsert)
-	  )
+          (bx:dblock:controller:enforce @control :paramsDescFunc 'paramsDescInsert)
+          )
     
     (when (equal $control "enabled")
       (when (equal @author "mohsenBanan")    
-	(insert
-	 (format "\
+        (insert
+         (format "\
 __author__=\"
 %s Authors: Mohsen BANAN, http://mohsen.banan.1.byname.net/contact\""
-		 "*"
-		 ))))))
+                 "*"
+                 ))))))
 
 
 (lambda () "
@@ -206,7 +206,7 @@ __author__=\"
 
 (defun org-dblock-write:bx:dblock:bash:end-of-file (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	)
+        )
   (insert "_CommentBegin_
 *  [[elisp:(org-cycle)][| ]]  Common        ::  /[dblock] -- End-Of-File Controls/ [[elisp:(org-cycle)][| ]]
 _CommentEnd_
@@ -224,8 +224,8 @@ _CommentEnd_
 
 (defun org-dblock-write:bx:dblock:lsip:bash:seed-spec (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	(files-list)
-	)
+        (files-list)
+        )
     ;;(insert "# {{{ DBLOCK-seed-spec\n")
     (insert 
      (format "SEED=\"\n*  /[dblock]/ /Seed/ :: [[file:/opt/public/osmt/bin/%s]] | \n\"\n" bx:types))
@@ -242,8 +242,8 @@ fi")
 
 (defun org-dblock-write:bx:bsip:bash:seed-spec (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	(files-list)
-	)
+        (files-list)
+        )
     ;;(insert "# {{{ DBLOCK-seed-spec\n")
     (insert 
      (format "SEED=\"\n*  /[dblock]/ /Seed/ :: [[file:/bisos/core/bsip/bin/%s]] | \n\"\n" bx:types))
@@ -260,8 +260,8 @@ fi")
 
 (defun org-dblock-write:bx:bisos:bash:seed-spec (params)
   (let ((bx:types (or (plist-get params :types) ""))
-	(files-list)
-	)
+        (files-list)
+        )
     ;;(insert "# {{{ DBLOCK-seed-spec\n")
     (insert 
      (format "SEED=\"\n*  /[dblock]/ /Seed/ :: [[file:%s]] | \n\"\n" bx:types))
@@ -279,28 +279,29 @@ fi")
 ;;; OBSOLETED
 (defun org-dblock-write:bx:bsip:bash/processEachArgsOrStdin (params)
   (let (
-	(files-list)
-	)
+        (files-list)
+        )
+    (insert "OBSOLETED: Use bx:bsip:bash/processArgsAndStdinEach instead\n")
     (insert 
      "\
     if [ $# -gt 0 ] ; then
-	local each=\"\"
-	for each in ${inputsList} ; do
-	    lpDo processEach ${each}
-	done
+        local each=\"\"
+        for each in ${inputsList} ; do
+            lpDo processEach ${each}
+        done
     else
-	local eachLine=\"\"
-	while read -r -t 1 eachLine ; do
-	    if [ ! -z \"${eachLine}\" ] ; then
-		local each=\"\"
-		for each in ${eachLine} ; do
-		    lpDo processEach ${each}
-		done
-	    fi
-	done
+        local eachLine=\"\"
+        while read -r -t 1 eachLine ; do
+            if [ ! -z \"${eachLine}\" ] ; then
+                local each=\"\"
+                for each in ${eachLine} ; do
+                    lpDo processEach ${each}
+                done
+            fi
+        done
     fi
 "
-		)
+                )
     ))
 
 (advice-add 'org-dblock-write:bx:bsip:bash/onTargetRun :around #'bx:dblock:control|wrapper)
@@ -309,16 +310,16 @@ fi")
 ** When :runLocally? is nil don't run. :sshAcct is either intra or bystar.
 "
   (let* (
-	 (<governor (letGet$governor)) (<extGov (letGet$extGov))
-	 (<outLevel (letGet$outLevel -1)) (<model (letGet$model))
-	 (<style (letGet$style "openBlank" "closeBlank"))
-	 ;;
-	 (<managerOrTarget (or (plist-get <params :managerOrTarget) "both"))
-	 (<sshAcct (or (plist-get <params :sshAcct) "bystar"))
-	 (<cmndOption (or (plist-get <params :cmndOption) nil))	 	 
-	 )
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel -1)) (<model (letGet$model))
+         (<style (letGet$style "openBlank" "closeBlank"))
+         ;;
+         (<managerOrTarget (or (plist-get <params :managerOrTarget) "both"))
+         (<sshAcct (or (plist-get <params :sshAcct) "bystar"))
+         (<cmndOption (or (plist-get <params :cmndOption) nil))          
+         )
 
-    (bxPanel:params$effective)	 
+    (bxPanel:params$effective)   
 
     (defun helpLine ()
       "NOTYET"
@@ -330,45 +331,45 @@ fi")
     (defun bodyContent ()
       "If there is user data, insert it."
       (let* (
-	     ($cmndOptionStr "")
-	     )
-	(when (string= <managerOrTarget "manager")
-	  (insert "\
+             ($cmndOptionStr "")
+             )
+        (when (string= <managerOrTarget "manager")
+          (insert "\
     if [ -z \"${targetName}\" ] ; then
        EH_problem \"Can Not Be Run On Target. Run It On Manager And Specify targetName.\"
        lpReturn
     fi\n"
-		  )
-	  )
+                  )
+          )
 
-	(when (string= <managerOrTarget "target")
-	  (insert "\
+        (when (string= <managerOrTarget "target")
+          (insert "\
     if [ ! -z \"${targetName}\" ] ; then
        EH_problem \"Can Only Run On Target. Can Not Be Run On Manager.\"
        lpReturn
     fi\n"
-		  )
-	  )
+                  )
+          )
 
-	(when <cmndOption
-	  (setq $cmndOptionStr "$(sansTargetName \"${G_paramCmndOption}\")"))
-	
-	(insert (format "\
+        (when <cmndOption
+          (setq $cmndOptionStr "$(sansTargetName \"${G_paramCmndOption}\")"))
+        
+        (insert (format "\
     if [ \"${targetName}\" == \"onTargetRun\" ] ; then
-	lpDo onTargetRun
+        lpDo onTargetRun
     elif [ -z \"${targetName}\" ] ; then
-	lpDo onTargetRun
+        lpDo onTargetRun
     else
-	local commandName=${FUNCNAME##vis_}		
-	lpDo sshpass -p intra ${sshCmnd} %s@\"${targetName}\" \\
-	     $(which ${G_myName}) ${G_commandPrefs} \\
-	     -p targetName=onTargetRun %s \\
+        local commandName=${FUNCNAME##vis_}             
+        lpDo sshpass -p intra ${sshCmnd} %s@\"${targetName}\" \\
+             $(which ${G_myName}) ${G_commandPrefs} \\
+             -p targetName=onTargetRun %s \\
              -i ${commandName}
     fi"
-			<sshAcct $cmndOptionStr
-			)
-		)
-	)
+                        <sshAcct $cmndOptionStr
+                        )
+                )
+        )
       )
     
     (bx:invoke:withStdArgs$bx:dblock:governor:process)    
@@ -376,30 +377,31 @@ fi")
 
 
 (defun org-dblock-write:bx:bsip:bash/processArgsAndStdinEach (params)
+  "No params are used, but dblock demands params so you need a :param nil or an extra space."
   (insert 
    "\
    function processArgsAndStdin {
-	if [ $# -gt 0 ] ; then
-	    local each=\"\"
-	    for each in \"$@\" ; do
-		lpDo processEach \"${each}\"
-	    done
-	fi
-	if [ -t 0 ] ; then # stdin is empty -- FD 0 is opened on a terminal (not piped)
-	    if [ $# -eq 0 ] ; then
-		ANT_raw \"No Args And Stdin Is Empty\"
-	    fi
-	    lpReturn
-	fi
-	local eachLine=\"\"
-	while read  eachLine ; do
-	    if [ ! -z \"${eachLine}\" ] ; then
-		local each=\"\"
-		for each in \"${eachLine}\" ; do
-		    lpDo processEach \"${each}\"
-		done
-	    fi
-	done
+        if [ $# -gt 0 ] ; then
+            local each=\"\"
+            for each in \"$@\" ; do
+                lpDo processEach \"${each}\"
+            done
+        fi
+        if [ -t 0 ] ; then # stdin is empty -- FD 0 is opened on a terminal (not piped)
+            if [ $# -eq 0 ] ; then
+                ANT_raw \"No Args And Stdin Is Empty\"
+            fi
+            lpReturn
+        fi
+        local eachLine=\"\"
+        while read  eachLine ; do
+            if [ ! -z \"${eachLine}\" ] ; then
+                local each=\"\"
+                for each in \"${eachLine}\" ; do
+                    lpDo processEach \"${each}\"
+                done
+            fi
+        done
     }
     lpDo processArgsAndStdin \"$@\"\
 "
@@ -410,18 +412,18 @@ fi")
   (insert 
    "\
     function processStdinWithArgs {
-	local stdinArgs=()
-	local each
-	if [ ! -t 0 ]; then # FD 0 is not opened on a terminal, there is a pipe
-	    readarray stdinArgs < /dev/stdin
-	fi
-	if [ ${#stdinArgs[@]} -eq 0 ] ; then
-	    ANT_raw \"No StdinArgs -- Processing Skipped\"
-	    lpReturn
-	fi
-	for each in \"${stdinArgs[@]}\"; do
-	    lpDo processEach \"${each%$'\\n'}\" \"$@\"
-	done
+        local stdinArgs=()
+        local each
+        if [ ! -t 0 ]; then # FD 0 is not opened on a terminal, there is a pipe
+            readarray stdinArgs < /dev/stdin
+        fi
+        if [ ${#stdinArgs[@]} -eq 0 ] ; then
+            ANT_raw \"No StdinArgs -- Processing Skipped\"
+            lpReturn
+        fi
+        for each in \"${stdinArgs[@]}\"; do
+            lpDo processEach \"${each%$'\\n'}\" \"$@\"
+        done
     }
     lpDo processStdinWithArgs \"$@\"\
 "
@@ -429,23 +431,27 @@ fi")
   )
 
 (defun org-dblock-write:bx:bsip:bash/processArgsAndStdin (params)
+  "
+**
+***
+"       
   (insert 
    "\
      function processArgsAndStdin {
-	local effectiveArgs=( \"$@\" )
-	local stdinArgs=()
-	local each
-	if [ ! -t 0 ]; then # FD 0 is not opened on a terminal, there is a pipe
-	    readarray stdinArgs < /dev/stdin
-	    effectiveArgs=( \"$@\" \"${stdinArgs[@]}\" )
-	fi
-	if [ ${#effectiveArgs[@]} -eq 0 ] ; then
-	    ANT_raw \"No Args And Stdin Is Empty\"
-	    lpReturn
-	fi
-	for each in \"${effectiveArgs[@]}\"; do
-	    lpDo processEach \"${each%$'\\n'}\"
-	done
+        local effectiveArgs=( \"$@\" )
+        local stdinArgs=()
+        local each
+        if [ ! -t 0 ]; then # FD 0 is not opened on a terminal, there is a pipe
+            readarray stdinArgs < /dev/stdin
+            effectiveArgs=( \"$@\" \"${stdinArgs[@]}\" )
+        fi
+        if [ ${#effectiveArgs[@]} -eq 0 ] ; then
+            ANT_raw \"No Args And Stdin Is Empty\"
+            lpReturn
+        fi
+        for each in \"${effectiveArgs[@]}\"; do
+            lpDo processEach \"${each%$'\\n'}\"
+        done
     }
     lpDo processArgsAndStdin \"$@\"\
 "
@@ -459,8 +465,8 @@ fi")
 
 (defun org-dblock-write:bx:dblock:lsip:bash:function (params)
   (let ((bx:func (or (plist-get params :func) ""))
-	(bx:type (or (plist-get params :type) ""))
-	)
+        (bx:type (or (plist-get params :type) ""))
+        )
     (insert (format "# {{{ %s\n" bx:func))
     (when (equal bx:type "idempotent")
       (insert (format "typeset %s_hasRun=\"\"\n" bx:func))
@@ -480,8 +486,8 @@ fi")
 
 (defun org-dblock-write:bx:dblock:lsip:binsprep:apt (params)
   (let ((bx:module (or (plist-get params :module) ""))
-	(bx:bash-module)
-	)
+        (bx:bash-module)
+        )
     (setq bx:bash-module (replace-regexp-in-string "-" "_" bx:module))    
     ;;;(insert (format "# {{{ %s\n" bx:module))
     (insert (format "_CommentBegin_\n"))
@@ -509,18 +515,18 @@ fi")
   (interactive)
   (if (save-excursion (re-search-forward "^function " nil t))
       (when (re-search-forward "^function " nil t)
-	(let* (
-	       (defunName (thing-at-point 'symbol))
-	       )
-	  ;;;(message (format "Section ==  %s" defunName))
-	  (save-excursion
-	    (message (format "Section ==  %s" defunName))
-	    (beginning-of-line 1)
-	    (open-line 1)
-	      ;;;(delete-region (point) (progn (forward-line 1) (point)))
-	    (message "Inserting dblock ...") ;;(sit-for 1)
-	    (iim-bash-func-orgSec-insert defunName)
-	    )))))
+        (let* (
+               (defunName (thing-at-point 'symbol))
+               )
+          ;;;(message (format "Section ==  %s" defunName))
+          (save-excursion
+            (message (format "Section ==  %s" defunName))
+            (beginning-of-line 1)
+            (open-line 1)
+              ;;;(delete-region (point) (progn (forward-line 1) (point)))
+            (message "Inserting dblock ...") ;;(sit-for 1)
+            (iim-bash-func-orgSec-insert defunName)
+            )))))
 
 
 (lambda () "
@@ -532,18 +538,18 @@ fi")
   (interactive)
   (if (save-excursion (re-search-forward "^function " nil t))
       (while (re-search-forward "^function " nil t)
-	(let* (
-	       (defunName (thing-at-point 'symbol))
-	       )
-	  ;;;(message (format "Section ==  %s" defunName))
-	  (save-excursion
-	    (message (format "Section ==  %s" defunName))
-	    (beginning-of-line 1)
-	    (open-line 1)
-	      ;;;(delete-region (point) (progn (forward-line 1) (point)))
-	    (message "Inserting dblock ...") ;;(sit-for 1)
-	    (iim-bash-func-orgSec-insert defunName)
-	    )))))
+        (let* (
+               (defunName (thing-at-point 'symbol))
+               )
+          ;;;(message (format "Section ==  %s" defunName))
+          (save-excursion
+            (message (format "Section ==  %s" defunName))
+            (beginning-of-line 1)
+            (open-line 1)
+              ;;;(delete-region (point) (progn (forward-line 1) (point)))
+            (message "Inserting dblock ...") ;;(sit-for 1)
+            (iim-bash-func-orgSec-insert defunName)
+            )))))
 
 
 (lambda () "
@@ -559,7 +565,7 @@ _CommentBegin_\n*\
  || Cmnd      ::  %s    [[elisp:(org-cycle)][| ]]
 _CommentEnd_
 "
-	   funcName)))
+           funcName)))
 
 
 

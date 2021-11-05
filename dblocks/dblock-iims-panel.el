@@ -47,9 +47,9 @@
 
 (defun org-dblock-write:iim:panel:iimsListPanels (params)  
   (let (
-	(mode (or (plist-get params :mode) ""))
-	(let:iimsList (or (plist-get params :iimsList) "UnSpecified"))			
-	)
+        (mode (or (plist-get params :mode) ""))
+        (let:iimsList (or (plist-get params :iimsList) "UnSpecified"))                  
+        )
     ;;;(iim:bash:panel:insert:module-title let:iim)
     (iim:panel:iimsListPanels let:iimsList)    
     ))
@@ -58,9 +58,9 @@
 
 (defun org-dblock-write:iicm:py:panel:set:iicmName (params)  
   (let (
-	(dblockMode (or (plist-get params :mode) "UnSpecified"))
-	(iicmName (or (plist-get params :iicm) "UnSpecified"))			
-	)
+        (dblockMode (or (plist-get params :mode) "UnSpecified"))
+        (iicmName (or (plist-get params :iicm) "UnSpecified"))                  
+        )
     (when (blee:dblock:mode:disabledP dblockMode)
       (blee:dblock:mode:disabledIndicate))
     
@@ -76,9 +76,9 @@
 
 (defun org-dblock-write:iim:bash:panel:module-title (params)  
   (let (
-	(mode (or (plist-get params :mode) ""))
-	(let:iim (or (plist-get params :iim) "UnSpecified"))			
-	)
+        (mode (or (plist-get params :mode) ""))
+        (let:iim (or (plist-get params :iim) "UnSpecified"))                    
+        )
     (iim:bash:panel:insert:module-title let:iim)
     ))
 
@@ -89,9 +89,9 @@
 
 (defun org-dblock-write:iicm:py:panel:module-title (params)  
   (let (
-	(dblockMode (or (plist-get params :mode) "UnSpecified"))
-	(iicm (or (plist-get params :iicm) "UnSpecified"))			
-	)
+        (dblockMode (or (plist-get params :mode) "UnSpecified"))
+        (iicm (or (plist-get params :iicm) "UnSpecified"))                      
+        )
     (when (blee:dblock:mode:disabledP dblockMode)
       (blee:dblock:mode:disabledIndicate))
     
@@ -107,9 +107,9 @@
 
 (defun org-dblock-write:iim:bash:panel:iimPkgInfo (params)  
   (let (
-	(mode (or (plist-get params :mode) ""))
-	(loc:iim (or (plist-get params :iim) ""))		
-	)
+        (mode (or (plist-get params :mode) ""))
+        (loc:iim (or (plist-get params :iim) ""))               
+        )
     (iim:bash:panel:insert:iimPkgInfo loc:iim)
     ))
 
@@ -120,9 +120,9 @@
 
 (defun org-dblock-write:iicm:py:panel:iimPkgInfo (params)  
   (let (
-	(mode (or (plist-get params :mode) ""))
-	(loc:iim (or (plist-get params :iim) ""))	
-	)
+        (mode (or (plist-get params :mode) ""))
+        (loc:iim (or (plist-get params :iim) ""))       
+        )
     (iicm:py:panel:insert:iimPkgInfo loc:iim)
     ))
 
@@ -133,8 +133,8 @@
 
 (defun org-dblock-write:iim:bash:panel:frameworkFeatures (params)  
   (let (
-	(mode (or (plist-get params :mode) ""))
-	)
+        (mode (or (plist-get params :mode) ""))
+        )
     (iim:bash:panel:insert:frameworkFeatures)
     ))
 
@@ -145,15 +145,15 @@
 
 (defun org-dblock-write:iicm:py:panel:frameworkFeatures (params)  
   (let (
-	(mode (or (plist-get params :mode) ""))
-	)
+        (mode (or (plist-get params :mode) ""))
+        )
     (iicm:py:panel:insert:frameworkFeatures)
     ))
 
 (defun org-dblock-write:iicm:py:panel:devWorkbench (params)  
   (let (
-	(dblockMode (or (plist-get params :mode) "UnSpecified"))
-	)
+        (dblockMode (or (plist-get params :mode) "UnSpecified"))
+        )
     (when (blee:dblock:mode:disabledP dblockMode)
       (blee:dblock:mode:disabledIndicate))
     
@@ -168,9 +168,9 @@
 
 (defun org-dblock-write:iim:bash:panel:execControlShow  (params)
   (let (
-	(dblockMode (or (plist-get params :mode) "UnSpecified"))
-	(orgLevel (or (plist-get params :orgLevel) "UnSpecified"))	
-	)
+        (dblockMode (or (plist-get params :mode) "UnSpecified"))
+        (orgLevel (or (plist-get params :orgLevel) "UnSpecified"))      
+        )
 
     (when (blee:dblock:mode:disabledP dblockMode)
       (blee:dblock:mode:disabledIndicate))
@@ -187,9 +187,9 @@
 
 (defun org-dblock-write:iicm:py:panel:execControlShow  (params)
   (let (
-	(dblockMode (or (plist-get params :mode) "UnSpecified"))
-	(orgLevel (or (plist-get params :orgLevel) "UnSpecified"))	
-	)
+        (dblockMode (or (plist-get params :mode) "UnSpecified"))
+        (orgLevel (or (plist-get params :orgLevel) "UnSpecified"))      
+        )
 
     (when (blee:dblock:mode:disabledP dblockMode)
       (blee:dblock:mode:disabledIndicate))
@@ -206,20 +206,20 @@
 
 (defun org-dblock-write:iim:bash:menuBox:commonControls:selectValues  (params)
   (let (
-	(loc:mode (or (plist-get params :mode) "UnSpecified"))
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	(fpNodeBase (or (plist-get params :baseDir) "UnSpecified"))	
-	)
+        (loc:mode (or (plist-get params :mode) "UnSpecified"))
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        (fpNodeBase (or (plist-get params :baseDir) "UnSpecified"))     
+        )
     (message (format "mode = %s" loc:mode))
     (if
-	(or (equal "DISABLED" loc:mode)
-	    (equal "disabled" loc:mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" loc:mode)
+            (equal "disabled" loc:mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (progn
-	(iim:bash:menuBox:commonControls:insert:paramsEditor  fpNodeBase)
-	)
+        (iim:bash:menuBox:commonControls:insert:paramsEditor  fpNodeBase)
+        )
       )
     )
   )
@@ -231,20 +231,20 @@
 
 (defun org-dblock-write:iicm:py:menuBox:commonControls:selectValues  (params)
   (let (
-	(loc:mode (or (plist-get params :mode) "UnSpecified"))
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	(fpNodeBase (or (plist-get params :baseDir) "UnSpecified"))	
-	)
+        (loc:mode (or (plist-get params :mode) "UnSpecified"))
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        (fpNodeBase (or (plist-get params :baseDir) "UnSpecified"))     
+        )
     (message (format "mode = %s" loc:mode))
     (if
-	(or (equal "DISABLED" loc:mode)
-	    (equal "disabled" loc:mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" loc:mode)
+            (equal "disabled" loc:mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (progn
-	(iicm:py:menuBox:commonControls:insert:paramsEditor  fpNodeBase)
-	)
+        (iicm:py:menuBox:commonControls:insert:paramsEditor  fpNodeBase)
+        )
       )
     )
   )
@@ -257,20 +257,20 @@
 
 (defun org-dblock-write:iicm:py:iifBox:common:selector (params)
   (let (
-	(loc:mode (or (plist-get params :mode) "UnSpecified"))
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	(fpNodeBase (or (plist-get params :baseDir) "UnSpecified"))	
-	)
+        (loc:mode (or (plist-get params :mode) "UnSpecified"))
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        (fpNodeBase (or (plist-get params :baseDir) "UnSpecified"))     
+        )
     (message (format "mode = %s" loc:mode))
     (if
-	(or (equal "DISABLED" loc:mode)
-	    (equal "disabled" loc:mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" loc:mode)
+            (equal "disabled" loc:mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (progn
-	(iicm:py:iifBox:common:selector fpNodeBase)
-	)
+        (iicm:py:iifBox:common:selector fpNodeBase)
+        )
       )
     )
   )
@@ -282,23 +282,23 @@
 
 (defun org-dblock-write:iim:bash:menuBox:selectBxSrf (params)
   (let (
-	(loc:mode (or (plist-get params :mode) "UnSpecified"))
-	(let:iim (or (plist-get params :iim) "UnSpecified"))		
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	)
+        (loc:mode (or (plist-get params :mode) "UnSpecified"))
+        (let:iim (or (plist-get params :iim) "UnSpecified"))            
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        )
     (message (format "mode = %s" loc:mode))
     (if
-	(or (equal "DISABLED" loc:mode)
-	    (equal "disabled" loc:mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" loc:mode)
+            (equal "disabled" loc:mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (if (eq (call-process let:iim  nil t nil "-i" "iimCmndPartIncludes" loc:scope) 0)
-	  (progn
-	    (menuBox:insert:selectBxSrf)
-	    )
-	(message "skipped")
-	)
+          (progn
+            (menuBox:insert:selectBxSrf)
+            )
+        (message "skipped")
+        )
       )
     )
   )
@@ -310,20 +310,20 @@
   ")
 (defun org-dblock-write:iicm:py:menuBox:selectBxSrf (params)
   (let (
-	(dblockMode (or (plist-get params :mode) "UnSpecified"))		
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	(iicmName (iicm:py:cmnd:get:bufLocVar :iicmName t))	
-	)
+        (dblockMode (or (plist-get params :mode) "UnSpecified"))                
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        (iicmName (iicm:py:cmnd:get:bufLocVar :iicmName t))     
+        )
     (when (blee:dblock:mode:disabledP dblockMode)
       (blee:dblock:mode:disabledIndicate))
     
     (when (not (blee:dblock:mode:disabledP dblockMode))
       (if (eq (call-process iicmName  nil t nil "-i" "iimCmndPartIncludes" loc:scope) 0)
-	  (progn
-	    (menuBox:insert:selectBxSrf)
-	    )
-	(blee:msg "skipped")
-	)
+          (progn
+            (menuBox:insert:selectBxSrf)
+            )
+        (blee:msg "skipped")
+        )
       )
     )
   )
@@ -335,23 +335,23 @@
 
 (defun org-dblock-write:iim:bash:menuBox:selectTargets (params)
   (let (
-	(loc:mode (or (plist-get params :mode) "UnSpecified"))
-	(let:iim (or (plist-get params :iim) "UnSpecified"))			
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	)
+        (loc:mode (or (plist-get params :mode) "UnSpecified"))
+        (let:iim (or (plist-get params :iim) "UnSpecified"))                    
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        )
     (message (format "mode = %s" loc:mode))
     (if
-	(or (equal "DISABLED" loc:mode)
-	    (equal "disabled" loc:mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" loc:mode)
+            (equal "disabled" loc:mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (if (eq (call-process let:iim  nil t nil "-i" "iimCmndPartIncludes" loc:scope) 0)
-	  (progn
-	    (iim:bash:menuBox:insert:selectTargets)	    
-	    )
-	(message "skipped")
-	)
+          (progn
+            (iim:bash:menuBox:insert:selectTargets)         
+            )
+        (message "skipped")
+        )
       )
     )
   )
@@ -363,23 +363,23 @@
 
 (defun org-dblock-write:iicm:py:menuBox:selectTargets (params)
   (let (
-	(loc:mode (or (plist-get params :mode) "UnSpecified"))
-	(let:iim (or (plist-get params :iim) "UnSpecified"))			
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	)
+        (loc:mode (or (plist-get params :mode) "UnSpecified"))
+        (let:iim (or (plist-get params :iim) "UnSpecified"))                    
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        )
     (message (format "mode = %s" loc:mode))
     (if
-	(or (equal "DISABLED" loc:mode)
-	    (equal "disabled" loc:mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" loc:mode)
+            (equal "disabled" loc:mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (if (eq (call-process let:iim  nil t nil "-i" "iimCmndPartIncludes" loc:scope) 0)
-	  (progn
-	    (iicm:py:menuBox:insert:selectTargets)	    
-	    )
-	(message "skipped")
-	)
+          (progn
+            (iicm:py:menuBox:insert:selectTargets)          
+            )
+        (message "skipped")
+        )
       )
     )
   )
@@ -391,25 +391,25 @@
 
 (defun org-dblock-write:iim:bash:menuBox:params:selectValues (params)
   (let (
-	(bx:mode (or (plist-get params :mode) "UnSpecified"))
-	(let:iim (or (plist-get params :iim) "UnSpecified"))			
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	(menuBoxTitle (or (plist-get params :title) "UnSpecified"))
-	(paramsBaseDir (or (plist-get params :baseDir) "UnSpecified"))	
-	)
+        (bx:mode (or (plist-get params :mode) "UnSpecified"))
+        (let:iim (or (plist-get params :iim) "UnSpecified"))                    
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        (menuBoxTitle (or (plist-get params :title) "UnSpecified"))
+        (paramsBaseDir (or (plist-get params :baseDir) "UnSpecified"))  
+        )
     (message (format "mode = %s" bx:mode))
     (if
-	(or (equal "DISABLED" bx:mode)
-	    (equal "disabled" bx:mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" bx:mode)
+            (equal "disabled" bx:mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (if (eq (call-process let:iim  nil t nil "-i" "iimCmndPartIncludes" loc:scope) 0)
-	  (progn
-	    (iim:bash:menuBox:params:insert:selectValues paramsBaseDir)	    
-	    )
-	(message "skipped")
-	)
+          (progn
+            (iim:bash:menuBox:params:insert:selectValues paramsBaseDir)     
+            )
+        (message "skipped")
+        )
       )
     )
   )
@@ -421,23 +421,23 @@
 
 (defun org-dblock-write:iicm:py:menuBox:params:selectValues (params)
   (let (
-	(dblockMode (or (plist-get params :mode) "UnSpecified"))	
-	(loc:scope (or (plist-get params :scope) "UnSpecified"))
-	(menuBoxTitle (or (plist-get params :title) "UnSpecified"))
-	(paramsBaseDir (or (plist-get params :baseDir) "UnSpecified"))
-	;;(iicmName (iicm:py:cmnd:get:bufLocVar :iicmName t))
-	(iicmName (or (plist-get params :iicmName) "UnSpecified"))	
-	)
+        (dblockMode (or (plist-get params :mode) "UnSpecified"))        
+        (loc:scope (or (plist-get params :scope) "UnSpecified"))
+        (menuBoxTitle (or (plist-get params :title) "UnSpecified"))
+        (paramsBaseDir (or (plist-get params :baseDir) "UnSpecified"))
+        ;;(iicmName (iicm:py:cmnd:get:bufLocVar :iicmName t))
+        (iicmName (or (plist-get params :iicmName) "UnSpecified"))      
+        )
     (when (blee:dblock:mode:disabledP dblockMode)
       (blee:dblock:mode:disabledIndicate))
     
     (when (not (blee:dblock:mode:disabledP dblockMode))
       (if (eq (call-process iicmName  nil t nil "-i" "iimCmndPartIncludes" loc:scope) 0)
-	  (progn
-	    (iicm:py:menuBox:params:insert:selectValues paramsBaseDir)	    
-	    )
-	(message "skipped")
-	)
+          (progn
+            (iicm:py:menuBox:params:insert:selectValues paramsBaseDir)      
+            )
+        (message "skipped")
+        )
       )
     )
   )
@@ -449,20 +449,20 @@
 
 (defun org-dblock-write:iim:bash:menuBox:iimExamples (params)
   (let (
-	(mode (or (plist-get params :mode) "UnSpecified"))
-	(paramsBaseDir (or (plist-get params :baseDir) "UnSpecified"))
-	(loc:iim (or (plist-get params :iim) "UnSpecified"))	
-	)
+        (mode (or (plist-get params :mode) "UnSpecified"))
+        (paramsBaseDir (or (plist-get params :baseDir) "UnSpecified"))
+        (loc:iim (or (plist-get params :iim) "UnSpecified"))    
+        )
     (message (format "mode = %s" mode))
     (if
-	(or (equal "DISABLED" mode)
-	    (equal "disabled" mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" mode)
+            (equal "disabled" mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (progn
-	(iim:bash:menuBox:examples:insert:iimExamples loc:iim)
-	)
+        (iim:bash:menuBox:examples:insert:iimExamples loc:iim)
+        )
       )
     )
   )
@@ -474,20 +474,20 @@
 
 (defun org-dblock-write:iicm:py:menuBox:iimExamples (params)
   (let (
-	(mode (or (plist-get params :mode) "UnSpecified"))
-	(paramsBaseDir (or (plist-get params :baseDir) "UnSpecified"))
-	(loc:iim (or (plist-get params :iim) "UnSpecified"))		
-	)
+        (mode (or (plist-get params :mode) "UnSpecified"))
+        (paramsBaseDir (or (plist-get params :baseDir) "UnSpecified"))
+        (loc:iim (or (plist-get params :iim) "UnSpecified"))            
+        )
     (message (format "mode = %s" mode))
     (if
-	(or (equal "DISABLED" mode)
-	    (equal "disabled" mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
-	  )
+        (or (equal "DISABLED" mode)
+            (equal "disabled" mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+          )
       (progn
-	(iicm:py:menuBox:examples:insert:iimExamples loc:iim)
-	)
+        (iicm:py:menuBox:examples:insert:iimExamples loc:iim)
+        )
       )
     )
   )
@@ -502,31 +502,31 @@
 
 (defun org-dblock-write:bx:dblock:org:fp:iimBash:menuBox:selectParams-Delete (params)
   (let (
-	(loc:mode (or (plist-get params :mode) "UnSpecified"))
-	(loc:menuBoxTitle (or (plist-get params :title) "UnSpecified"))
-	(loc:fpNodeBase (or (plist-get params :baseDir) "UnSpecified"))	
-	)
+        (loc:mode (or (plist-get params :mode) "UnSpecified"))
+        (loc:menuBoxTitle (or (plist-get params :title) "UnSpecified"))
+        (loc:fpNodeBase (or (plist-get params :baseDir) "UnSpecified")) 
+        )
     (message (format "mode = %s" loc:mode))
     (if
-	(or (equal "DISABLED" loc:mode)
-	    (equal "disabled" loc:mode))
-	(progn
-	  (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" loc:disabledP))
-	  )
+        (or (equal "DISABLED" loc:mode)
+            (equal "disabled" loc:mode))
+        (progn
+          (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" loc:disabledP))
+          )
       (progn
-	(insert "*\
+        (insert "*\
   [[elisp:(org-show-subtree)][=|=]]  [[elisp:(org-shifttab)][(O)]] /===/      [[elisp:(org-cycle)][| =Select This IIM's FP Parameters= | ]]                 /====/ [[elisp:(beginning-of-buffer)][Top]] | [[elisp:(delete-other-windows)][(1)]] | [[elisp:(progn (org-shifttab) (org-content))][(C)]] /====/"
-		)
-	;;(setq iimsInParams loc:fpNodeBase)
+                )
+        ;;(setq iimsInParams loc:fpNodeBase)
 
-	;;blee:menu-box:paramFromDirUpdate:popupMenu
+        ;;blee:menu-box:paramFromDirUpdate:popupMenu
 
-	;; bx:iimBash:paramsPropList
-	
-	(fp:node:menuBox:insert:iimBash:paramsEditor loc:fpNodeBase 'bx:iimBash:paramsPropList 'fp:node:menuBox:popupMenu:iimBash:trigger)
-	
-	;;;(fp:node:menuBox:insert:iimBash:paramsEditor loc:fpNodeBase 'iimsInParams 'blee:menu-box:paramFromDirUpdate:popupMenu)
-	)
+        ;; bx:iimBash:paramsPropList
+        
+        (fp:node:menuBox:insert:iimBash:paramsEditor loc:fpNodeBase 'bx:iimBash:paramsPropList 'fp:node:menuBox:popupMenu:iimBash:trigger)
+        
+        ;;;(fp:node:menuBox:insert:iimBash:paramsEditor loc:fpNodeBase 'iimsInParams 'blee:menu-box:paramFromDirUpdate:popupMenu)
+        )
       )
     )
   )

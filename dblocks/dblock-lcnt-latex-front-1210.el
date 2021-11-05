@@ -3,7 +3,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:warning-intro (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
 
     (bx:lcnt:info:base-read)
     ;;;(bxi:dblock-warning)
@@ -40,14 +40,14 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:header-begin (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     (insert "%{{{ DBLOCK-header-begin\n")
 
     (when (equal bx:class "memo")
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert "
+                (equal bx:langs "en+fa"))
+        (insert "
 \\documentclass{article}
 
 \\usepackage{hevea} 
@@ -62,9 +62,9 @@
 }
 
 ")
-	)
+        )
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\documentclass{article}
 
 \\usepackage{hevea} 
@@ -99,7 +99,7 @@
 \\setdigitfont[Scale=1]{XB Zar}
 
 ")
-	)
+        )
 
      (when (equal bx:langs "en+fa")
        (insert "
@@ -146,11 +146,11 @@
      )
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
 
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert "
+                (equal bx:langs "en+fa"))
+        (insert "
 \\documentclass{article}
 
 \\usepackage{hevea} 
@@ -164,9 +164,9 @@
 \\bigskip
 }
 ")
-	)
+        )
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\documentclass{article}
 \\usepackage{hevea} 
 %HEVEA\\usepackage[utf8]{inputenc}
@@ -185,7 +185,7 @@
 \\end{rawhtml}
 }
 ")
-	)
+        )
 
      (when (equal bx:langs "en+fa")
        (insert "
@@ -239,11 +239,11 @@
 
     ;;; This RCS Stuff needs to be cleaned up or eliminated
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
 
       ;;; ENGLISH
       (when (equal bx:langs "en")
-	(insert "
+        (insert "
 \\begin{latexonly}
 \\def\\RcsEmptyValue{$\\rm \\langle Unknown \\rangle$}
 \\RCSdef $Revision: 1.1 $
@@ -252,11 +252,11 @@
 \\RCSdef $Name:  $
 \\RCSdef $Author: lsipusr $
 \\end{latexonly}\n")
-	)
+        )
 
       ;;; FARSI
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\usepackage{rcs}
 \\usepackage{color}
 
@@ -277,28 +277,28 @@
 % for in-line Arabic we need R-L control
 \\newenvironment{fa}{\\beginR\\persian}{\\endR}
 ")
-	)
+        )
       )
 
     ;;;
     ;;; PRESENTATION BEGIN
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       ;;; ENGLISH
       (when 
-	  (or
-	   (equal bx:langs "en")
-	   (equal bx:langs "en+fa")
-	   )
-	(insert "
+          (or
+           (equal bx:langs "en")
+           (equal bx:langs "en+fa")
+           )
+        (insert "
 \\nonstopmode
 
 \\documentclass[ignorenonframetext]{beamer}\n")
-	)
+        )
       
       ;;; FARSI
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\documentclass[ignorenonframetext]{bidibeamer}
 
 % \\usepackage{fontspec}
@@ -327,7 +327,7 @@
 \\def\\bidiexamplesname{مثال‌ها}
 \\def\\bidiproofname{اثبات}
 ")
-	)
+        )
       )
 
     (insert "%}}} DBLOCK-header-begin")
@@ -335,16 +335,16 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:style-params (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     (insert "%{{{ DBLOCK-style-params\n")
 
 
     (when (or 
-	   (equal bx:class "art+pres")
-	   (equal bx:class "art")
-	   (equal bx:class "memo")
-	   )
+           (equal bx:class "art+pres")
+           (equal bx:class "art")
+           (equal bx:class "memo")
+           )
       (insert "% ===== STYLE PARAMETERS =====
 
 \\definecolor{darkred}{rgb}{0.5,0,0}
@@ -394,10 +394,10 @@
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert "
+                (equal bx:langs "en+fa"))
+        (insert "
 \\mode<presentation>
 {
   \\usetheme{Warsaw}
@@ -406,16 +406,16 @@
   % or whatever (possibly just delete it)
 }
 ")
-	)
+        )
 
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\mode<presentation>
 {
   \\usetheme{Warsaw}
 }
 ")
-	)
+        )
       )
     (insert "%}}} DBLOCK-style-params")
     ))
@@ -423,7 +423,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:header-end (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     (insert "%{{{ DBLOCK-header-end\n")
 
@@ -435,35 +435,35 @@
 
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       ;;; ENGLISH
       (when (equal bx:langs "en")
-	(insert "
+        (insert "
 \\begin{document}\\ifpdf\\DeclareGraphicsExtensions{.pdf,.jpg,.png}\\else\\DeclareGraphicsExtensions{.eps,.epsi,.ps,.pdf}\\fi
 ")
-	)
+        )
 
       (when (equal bx:langs "en+fa")
-	(insert "
+        (insert "
 \\begin{document}
 ")
-	)
+        )
 
       (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\begin{document}
 ")
-	)
+        )
 
 
       )      
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
 
       ;;; JUST ENGLISH
       (when (equal bx:langs "en")
-	(insert "
+        (insert "
 \\usepackage{morefloats}
 \\usepackage[english]{babel}
 
@@ -472,10 +472,10 @@
 \\usepackage{times}
 \\usepackage[T1]{fontenc}
 ")
-	)
+        )
 
       (when (equal bx:langs "en+fa")
-	(insert "
+        (insert "
 \\usepackage{bidi}
 \\usepackage{fontspec}
 \\usepackage{xltxtra}
@@ -490,7 +490,7 @@
 {\\everypar={\\setbox0\\lastbox \\beginR
 \\box0 \\persian}}{}
 ")
-	)
+        )
       (insert "\\begin{document}\n")
       )
     (insert "%}}} DBLOCK-header-end")
@@ -498,25 +498,25 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:front-begin (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	(lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
-	(lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
-	(lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
-	(lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
-	(lcnt-date (get 'bx:lcnt:info:base 'date))
-	(lcnt-type (get 'bx:lcnt:info:base 'type))
-	(lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
-	(lcnt-version (get 'bx:lcnt:info:base 'version))
-	(lcnt-url (get 'bx:lcnt:info:base 'url))
-	(lcnt-author1 (get 'bx:lcnt:info:base 'author1))
-	(lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
-	(lcnt-authorUrl1 (get 'bx:lcnt:info:base 'authorUrl1))
-	)
+        (bx:langs (or (plist-get params :langs) ""))
+        (lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
+        (lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
+        (lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
+        (lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
+        (lcnt-date (get 'bx:lcnt:info:base 'date))
+        (lcnt-type (get 'bx:lcnt:info:base 'type))
+        (lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
+        (lcnt-version (get 'bx:lcnt:info:base 'version))
+        (lcnt-url (get 'bx:lcnt:info:base 'url))
+        (lcnt-author1 (get 'bx:lcnt:info:base 'author1))
+        (lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
+        (lcnt-authorUrl1 (get 'bx:lcnt:info:base 'authorUrl1))
+        )
     (bx:lcnt:info:base-read)
     (insert "%{{{ DBLOCK-front-begin\n")
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (insert (format "
 \\thispagestyle{empty}
 
@@ -530,10 +530,10 @@
 "  lcnt-mainTitle))
 
       (if (not (string-equal lcnt-subTitle ""))
-	  (insert (format "%s\\\\\n" lcnt-subTitle)))
+          (insert (format "%s\\\\\n" lcnt-subTitle)))
 
       (if (not (string-equal lcnt-subSubTitle ""))
-	  (insert (format "%s\\\\\n" lcnt-subSubTitle)))
+          (insert (format "%s\\\\\n" lcnt-subSubTitle)))
 
       (insert "\\vspace{0.2in}
 }}
@@ -545,7 +545,7 @@
 ")
 
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
+                (equal bx:langs "en+fa"))
     (insert "\\begin{center}\n")
     (insert "{\\large Document \\#")
     (insert (format "%s-%s\\\\\n" lcnt-type lcnt-lcntNu))
@@ -581,24 +581,24 @@
 ")
    )
       (when (equal bx:langs "fa+en")
-	(insert "\\begin{center}\n")
-	(insert "{\\large مقاله شماره: ")
-	(insert (format "%s-%s\\\\\n" lcnt-type lcnt-lcntNu))
-	(insert (format "تاريخ: %s}\n" lcnt-date))
-	(insert "\\end{center}")
+        (insert "\\begin{center}\n")
+        (insert "{\\large مقاله شماره: ")
+        (insert (format "%s-%s\\\\\n" lcnt-type lcnt-lcntNu))
+        (insert (format "تاريخ: %s}\n" lcnt-date))
+        (insert "\\end{center}")
 
-	(insert "
+        (insert "
 \\vspace{0.05in}
 
 \\begin{center}
 {\\large مقاله و اسلايد روى وب در :}
 ")
 
-	(insert "\\begin{latin}\n")
-	(insert (format "\\href{%s}{%s}\n" lcnt-url lcnt-url))
-	(insert "\\end{latin}\n")
+        (insert "\\begin{latin}\n")
+        (insert (format "\\href{%s}{%s}\n" lcnt-url lcnt-url))
+        (insert "\\end{latin}\n")
 
-	(insert "\\end{center}
+        (insert "\\end{center}
 
 \\vspace{0.3in}
 
@@ -616,23 +616,23 @@
 \\bibliographystyle{plain}
 ")
 
-	)
+        )
       )  
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (insert "\\mode<all>\n")
       (insert (format "
 \\title[%s]
 {%s}\n" lcnt-mainTitle lcnt-mainTitle))
 
       (if (not (string-equal lcnt-subTitle ""))
-	  (insert (format "
+          (insert (format "
 \\subtitle[%s]
 {%s}\n" lcnt-subTitle lcnt-subTitle)))
 
       ;;;(if (not (string-equal lcnt-subSubTitle ""))
-	;;;  (insert (format "%s\\\\\n" lcnt-subSubTitle)))
+        ;;;  (insert (format "%s\\\\\n" lcnt-subSubTitle)))
 
       (insert (format "
 \\author[%s] 
@@ -662,43 +662,43 @@ Email: \\href{%s/contact}{%s/contact}\\\\
 
 (defun org-dblock-write:bx:dblock:lcnt:copyright (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	(bx:form (or (plist-get params :form) ""))    ;; std, or std-en-fa NOTYET
-	(lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
-	)
+        (bx:langs (or (plist-get params :langs) ""))
+        (bx:form (or (plist-get params :form) ""))    ;; std, or std-en-fa NOTYET
+        (lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
+        )
     (bx:lcnt:info:base-read)
     (insert "%{{{ DBLOCK-copyright\n")
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert (format "\\vspace{0.4in}
+                (equal bx:langs "en+fa"))
+        (insert (format "\\vspace{0.4in}
 
 {\\bf Copyright} \\copyright \\space  {\\bf  2012 %s}
 " lcnt-authorName1))
 
-	(insert "\\vspace{0.1in}
+        (insert "\\vspace{0.1in}
 
 Permission is granted to make and distribute complete (not partial)\\\\
 verbatim copies of this document provided that the copyright notice\\\\
 and this permission notice are preserved on all copies.
 ")
-	)
+        )
       (when (equal bx:langs "fa+en")
-	(insert (format "\\vspace{0.4in}
+        (insert (format "\\vspace{0.4in}
 \\begin{latin}
 {\\bf Copyright} \\copyright \\space  {\\bf  2011 %s}
 \\end{latin}
 " lcnt-authorName1))
 
-	(insert "\\vspace{0.1in}
+        (insert "\\vspace{0.1in}
 
 اجازِه چاپ مجدد وجود  دارد تا   هنگامى  که اين  اعلام اجازه روى همه 
 کپيها مجود باشد.
 ")
 
-	(insert "\\vspace{0.1in}
+        (insert "\\vspace{0.1in}
 \\begin{latin}
 Permission is granted to make and distribute complete (not partial)\\\\
 verbatim copies of this document provided that the copyright notice\\\\
@@ -706,12 +706,12 @@ and this permission notice are preserved on all copies.
 \\end{latin}
 ")
 
-	)
+        )
       )
       
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (insert "% dblock copyright notice just says verbatim copying permitted\n"))
 
     (insert "%}}} DBLOCK-copyright")
@@ -720,12 +720,12 @@ and this permission notice are preserved on all copies.
 
 (defun org-dblock-write:bx:dblock:lcnt:front-end (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     (insert "%{{{ DBLOCK-frontend\n")
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (insert "\\clearpage
 
 \\pagenumbering{roman}
@@ -740,25 +740,25 @@ and this permission notice are preserved on all copies.
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (when (or (equal bx:langs "en")
-		(equal bx:langs "en+fa"))
-	(insert "\\bibliographystyle{plain}
+                (equal bx:langs "en+fa"))
+        (insert "\\bibliographystyle{plain}
 
 \\begin{frame}
   \\titlepage
 \\end{frame}
 ")
-	)
+        )
 
       (when (equal bx:langs "fa+en")
-	(insert "\\bibliographystyle{plain}
+        (insert "\\bibliographystyle{plain}
 
 \\begin{frame}
   \\titlepage
 \\end{frame}
 ")
-	)
+        )
       )
       
 
@@ -768,32 +768,32 @@ and this permission notice are preserved on all copies.
 
 (defun org-dblock-write:bx:dblock:lcnt:main-begin (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	(lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
-	(lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
-	(lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
-	(lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
-	(lcnt-date (get 'bx:lcnt:info:base 'date))
-	(lcnt-type (get 'bx:lcnt:info:base 'type))
-	(lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
-	(lcnt-version (get 'bx:lcnt:info:base 'version))
-	(lcnt-url (get 'bx:lcnt:info:base 'url))
-	(lcnt-author1 (get 'bx:lcnt:info:base 'author1))
-	(lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
-	(lcnt-authorUrl1 (get 'bx:lcnt:info:base 'authorUrl1))
-	)
+        (bx:langs (or (plist-get params :langs) ""))
+        (lcnt-shortTitle (get 'bx:lcnt:info:base 'shortTitle))
+        (lcnt-mainTitle (get 'bx:lcnt:info:base 'mainTitle))
+        (lcnt-subTitle (get 'bx:lcnt:info:base 'subTitle))
+        (lcnt-subSubTitle (get 'bx:lcnt:info:base 'subSubTitle))
+        (lcnt-date (get 'bx:lcnt:info:base 'date))
+        (lcnt-type (get 'bx:lcnt:info:base 'type))
+        (lcnt-lcntNu (get 'bx:lcnt:info:base 'lcntNu))
+        (lcnt-version (get 'bx:lcnt:info:base 'version))
+        (lcnt-url (get 'bx:lcnt:info:base 'url))
+        (lcnt-author1 (get 'bx:lcnt:info:base 'author1))
+        (lcnt-authorName1 (get 'bx:lcnt:info:base 'authorName1))
+        (lcnt-authorUrl1 (get 'bx:lcnt:info:base 'authorUrl1))
+        )
     
     (bx:lcnt:info:base-read)
     (insert "%{{{ DBLOCK-main-begin\n")
 
     (when (equal bx:class "memo")
       (when (equal bx:langs "en+fa")
-	(insert (format "
+        (insert (format "
 \\title{%s}\n" lcnt-shortTitle))
       )
  
      (when (equal bx:langs "en")
-	(insert "
+        (insert "
 \\thispagestyle{empty}
 
 \\vspace*{-0.5in}
@@ -829,7 +829,7 @@ Subject:   & This Matter\\\\
       )
  
      (when (equal bx:langs "fa+en")
-	(insert "
+        (insert "
 \\thispagestyle{empty}
 
 \\vspace*{-0.5in}
@@ -875,7 +875,7 @@ Subject:   & This Matter\\\\
      )
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (insert "
 
 \\clearpage
@@ -885,7 +885,7 @@ Subject:   & This Matter\\\\
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (insert "% dblock for pres is empty\n"))
 
     (insert "%}}} DBLOCK-main-begin")
@@ -894,7 +894,7 @@ Subject:   & This Matter\\\\
 
 (defun org-dblock-write:bx:dblock:lcnt:main-end (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     (insert "%{{{ DBLOCK-main-end\n")
 
@@ -905,7 +905,7 @@ Subject:   & This Matter\\\\
       )
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "art"))
+              (equal bx:class "art"))
       (insert "
 %\\bibliography{/usr/local/lib/bib/gnu,/usr/local/lib/bib/networking,/usr/local/lib/bib/nedadoc,/usr/local/lib/bib/rfcs,/lcnt/outputs/all/plpc}
 \\bibliography{/lcnt/outputs/all/plpcUrl,/usr/local/lib/bib/rfcs} 
@@ -915,7 +915,7 @@ Subject:   & This Matter\\\\
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "pres"))
+              (equal bx:class "pres"))
       (insert "
 \\bibliography{/lcnt/outputs/all/plpcUrl,/usr/local/lib/bib/rfcs} 
 

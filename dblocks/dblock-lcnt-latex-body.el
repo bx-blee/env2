@@ -44,7 +44,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:body:warning-intro (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
 
     ;;;(bx:lcnt:info:base-read)
     ;;;(bxi:dblock-warning)
@@ -62,8 +62,8 @@
 
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "pres+art")
-	      )
+              (equal bx:class "pres+art")
+              )
       (insert "\\mode*\n")
       )
     )
@@ -75,7 +75,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:body:insert-artPresAllFigs (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
 
     (bx:lcnt:info:base-read)
     
@@ -92,15 +92,15 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:body:part-artpres (params)
   (let ((bx:part-title (or (plist-get params :part-title) ""))
-	(bx:part-nu (or (plist-get params :part-nu) "")))
+        (bx:part-nu (or (plist-get params :part-nu) "")))
 
     (bx:lcnt:info:base-read)
 
     (insert (format "\\part{%s}\n"
-		    bx:part-title))
+                    bx:part-title))
 
     (insert (format "%%{{{ DBLOCK part-%s\n"
-		    bx:part-title))
+                    bx:part-title))
 
     (insert "
 \\mode<presentation>{
@@ -112,17 +112,17 @@
 ")
 
     (insert (format "\\frametitle{Part %s: %s}\n" 
-		    bx:part-nu
-		    bx:part-title))
+                    bx:part-nu
+                    bx:part-title))
 
     (insert (format "\\tableofcontents[part=%s]\n" 
-		    bx:part-nu))
+                    bx:part-nu))
 
     (insert "\\end{frame}
 }\n")
 
     (insert (format "%%}}} DBLOCK part-%s"
-		    bx:part-title))
+                    bx:part-title))
     )
   )
 
@@ -144,16 +144,16 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:body:odg-artpres (params)
   (let (
-	(bx:fig-file (or (plist-get params :fig-file) ""))
-	)
+        (bx:fig-file (or (plist-get params :fig-file) ""))
+        )
 
     (let ((fig-title (shell-command-to-string 
-		     (format "echo -n $( cat %s )"
-			     (concat (file-name-sans-extension bx:fig-file) ".title"))))
-	  (fig-caption (shell-command-to-string 
-		     (format "echo -n $( cat %s )"
-			     (concat (file-name-sans-extension bx:fig-file) ".caption"))))
-	  )
+                     (format "echo -n $( cat %s )"
+                             (concat (file-name-sans-extension bx:fig-file) ".title"))))
+          (fig-caption (shell-command-to-string 
+                     (format "echo -n $( cat %s )"
+                             (concat (file-name-sans-extension bx:fig-file) ".caption"))))
+          )
 
       (bx:lcnt:info:base-read)
 
@@ -161,8 +161,8 @@
 \\begin{comment}
 ******  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || /Figure/ =ODG-ArtPres=  *%s* -- %s ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}\n"
-		      (fig-base-name bx:fig-file)
-		      fig-title))
+                      (fig-base-name bx:fig-file)
+                      fig-title))
 
 
       (insert "
@@ -174,7 +174,7 @@
 
       (insert (format "
        \\includegraphics[width=108mm,height=76mm,keepaspectratio]{%s}" 
-		      (file-name-sans-extension bx:fig-file)))
+                      (file-name-sans-extension bx:fig-file)))
 
       (insert "
     \\end{center}
@@ -188,7 +188,7 @@
 <div class=\"center\">
 <img src=\"%s\" height=\"450\">
 </div>"
-		     (concat (file-name-sans-extension bx:fig-file) ".png")))
+                     (concat (file-name-sans-extension bx:fig-file) ".png")))
 
       (insert "
   \\end{rawhtml}
@@ -205,17 +205,17 @@
   
       (insert (format "
       \\includegraphics[width=\\textwidth]{%s}"
-		      (file-name-sans-extension bx:fig-file)))
+                      (file-name-sans-extension bx:fig-file)))
 
     ;;; BUG: insert-file-contents did not work
 
       (insert (format "
       \\caption{%s}"
-		      fig-title))
+                      fig-title))
 
       (insert (format "
       \\label{fig:%s}"
-		      (fig-base-name bx:fig-file)))
+                      (fig-base-name bx:fig-file)))
 
       (insert "
     \\end{center}
@@ -228,7 +228,7 @@
 
       (insert (format "
       \\includegraphics[width=\\textwidth]{%s}"
-		      (file-name-sans-extension bx:fig-file)))
+                      (file-name-sans-extension bx:fig-file)))
 
       (insert "      
   \\end{center}
@@ -241,11 +241,11 @@
 
       (insert (format "
       \\caption{%s}"
-		      fig-title))
+                      fig-title))
 
       (insert (format "
       \\label{fig:%s}"
-		      (fig-base-name bx:fig-file)))
+                      (fig-base-name bx:fig-file)))
 
 
       (insert "
@@ -261,20 +261,20 @@
 
 (defun org-dblock-write:bx:lcnt:body:video-presArt (params)  
   (let (
-	($videoBaseFile (or (plist-get params :videoBaseFile) ""))
-	($presResolution (or (plist-get params :presResolution) "360"))
-	($artResolution (or (plist-get params :artResolution) "720"))		
-	($videoRawBaseName)
-	($videoBaseName)
-	($videoBaseDir)	
-	($videoBaseNameExtension)
-	($videoBaseNameSansExtension)		
-	)
+        ($videoBaseFile (or (plist-get params :videoBaseFile) ""))
+        ($presResolution (or (plist-get params :presResolution) "360"))
+        ($artResolution (or (plist-get params :artResolution) "720"))           
+        ($videoRawBaseName)
+        ($videoBaseName)
+        ($videoBaseDir) 
+        ($videoBaseNameExtension)
+        ($videoBaseNameSansExtension)           
+        )
     
     (setq $videoRawBaseName (file-name-nondirectory $videoBaseFile))
     (setq $videoBaseDir (file-name-directory $videoBaseFile))    
     (if (string-prefix-p "master-" $videoRawBaseName)
-	(setq $videoBaseName (substring $videoRawBaseName (length "master-")))
+        (setq $videoBaseName (substring $videoRawBaseName (length "master-")))
       (setq $videoBaseName $videoRawBaseName)
       )
 
@@ -285,9 +285,9 @@
 \\begin{comment}
 ******  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || /Video/ =PresArt=  *%s* -- %s ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}\n"
-		      $videoRawBaseName
-		      $videoBaseNameSansExtension
-		      ))
+                      $videoRawBaseName
+                      $videoBaseNameSansExtension
+                      ))
 
       (insert (format "
 \\begin{presentationMode}
@@ -302,7 +302,7 @@
 \\end{htmlonly}
 \\end{presentationMode}
 "
-		      $videoBaseDir $videoBaseNameSansExtension $presResolution $videoBaseNameExtension
+                      $videoBaseDir $videoBaseNameSansExtension $presResolution $videoBaseNameExtension
     ))
 
       (insert (format "
@@ -318,27 +318,27 @@
 \\end{htmlonly}
 \\end{articleMode}
 "
-		      $videoBaseDir $videoBaseNameSansExtension $artResolution $videoBaseNameExtension
+                      $videoBaseDir $videoBaseNameSansExtension $artResolution $videoBaseNameExtension
     ))
       ))
 
 
 (defun org-dblock-write:bx:lcnt:body:videoJs-presArt (params)  
   (let (
-	($videoBaseFile (or (plist-get params :videoBaseFile) ""))
-	($presResolution (or (plist-get params :presResolution) "360"))
-	($artResolution (or (plist-get params :artResolution) "720"))		
-	($videoRawBaseName)
-	($videoBaseName)
-	($videoBaseDir)	
-	($videoBaseNameExtension)
-	($videoBaseNameSansExtension)		
-	)
+        ($videoBaseFile (or (plist-get params :videoBaseFile) ""))
+        ($presResolution (or (plist-get params :presResolution) "360"))
+        ($artResolution (or (plist-get params :artResolution) "720"))           
+        ($videoRawBaseName)
+        ($videoBaseName)
+        ($videoBaseDir) 
+        ($videoBaseNameExtension)
+        ($videoBaseNameSansExtension)           
+        )
     
     (setq $videoRawBaseName (file-name-nondirectory $videoBaseFile))
     (setq $videoBaseDir (file-name-directory $videoBaseFile))    
     (if (string-prefix-p "master-" $videoRawBaseName)
-	(setq $videoBaseName (substring $videoRawBaseName (length "master-")))
+        (setq $videoBaseName (substring $videoRawBaseName (length "master-")))
       (setq $videoBaseName $videoRawBaseName)
       )
 
@@ -349,9 +349,9 @@
 \\begin{comment}
 ******  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || /VideoJs/ =PresArt=  *%s* -- %s ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}\n"
-		      $videoRawBaseName
-		      $videoBaseNameSansExtension
-		      ))
+                      $videoRawBaseName
+                      $videoBaseNameSansExtension
+                      ))
 
       (insert (format "
 \\begin{presentationMode}
@@ -363,8 +363,8 @@
   <video id='%s' class=\"video-js vjs-default-skin center\" ></video>
 </div>
 "
-		      $videoBaseNameSansExtension
-		      ))
+                      $videoBaseNameSansExtension
+                      ))
 
       (insert (format "
   <script>
@@ -418,20 +418,20 @@
     })
   </script>
 "
-		      $videoBaseNameSansExtension
-		      $presResolution
-		      $videoBaseDir $videoBaseNameSansExtension $videoBaseNameExtension
-		      $videoBaseDir $videoBaseNameSansExtension $videoBaseNameExtension
-		      $videoBaseDir $videoBaseNameSansExtension $videoBaseNameExtension
-		      $videoBaseDir $videoBaseNameSansExtension $videoBaseNameExtension		      		      
-		      ))
+                      $videoBaseNameSansExtension
+                      $presResolution
+                      $videoBaseDir $videoBaseNameSansExtension $videoBaseNameExtension
+                      $videoBaseDir $videoBaseNameSansExtension $videoBaseNameExtension
+                      $videoBaseDir $videoBaseNameSansExtension $videoBaseNameExtension
+                      $videoBaseDir $videoBaseNameSansExtension $videoBaseNameExtension                               
+                      ))
 
       (insert (format "
   \\end{rawhtml}
 \\end{htmlonly}
 \\end{presentationMode}
 "
-		      ))
+                      ))
       
       (insert (format "
 \\begin{articleMode}
@@ -446,7 +446,7 @@
 \\end{htmlonly}
 \\end{articleMode}
 "
-		      $videoBaseDir $videoBaseNameSansExtension $artResolution $videoBaseNameExtension
+                      $videoBaseDir $videoBaseNameSansExtension $artResolution $videoBaseNameExtension
     ))
       ))
 
@@ -455,20 +455,20 @@
 
 (defun org-dblock-write:bx:lcnt:body:videoYoutube-presArt (params)  
   (let (
-	($videoBaseFile (or (plist-get params :videoBaseFile) ""))
-	($presResolution (or (plist-get params :presResolution) "360"))
-	($artResolution (or (plist-get params :artResolution) "720"))		
-	($videoRawBaseName)
-	($videoBaseName)
-	($videoBaseDir)	
-	($videoBaseNameExtension)
-	($videoBaseNameSansExtension)		
-	)
+        ($videoBaseFile (or (plist-get params :videoBaseFile) ""))
+        ($presResolution (or (plist-get params :presResolution) "360"))
+        ($artResolution (or (plist-get params :artResolution) "720"))           
+        ($videoRawBaseName)
+        ($videoBaseName)
+        ($videoBaseDir) 
+        ($videoBaseNameExtension)
+        ($videoBaseNameSansExtension)           
+        )
     
     (setq $videoRawBaseName (file-name-nondirectory $videoBaseFile))
     (setq $videoBaseDir (file-name-directory $videoBaseFile))    
     (if (string-prefix-p "master-" $videoRawBaseName)
-	(setq $videoBaseName (substring $videoRawBaseName (length "master-")))
+        (setq $videoBaseName (substring $videoRawBaseName (length "master-")))
       (setq $videoBaseName $videoRawBaseName)
       )
 
@@ -479,9 +479,9 @@
 \\begin{comment}
 ******  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || /VideoYoutube/ =PresArt=  *%s* -- %s ::  [[elisp:(org-cycle)][| ]]
 \\end{comment}\n"
-		      $videoRawBaseName
-		      $videoBaseNameSansExtension
-		      ))
+                      $videoRawBaseName
+                      $videoBaseNameSansExtension
+                      ))
 
       (insert (format "
 \\begin{presentationMode}
@@ -491,15 +491,15 @@
 <iframe width=\"560\" height=\"315\" src=\"%s?rel=0\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>
 
 "
-		      $videoBaseFile
-		      ))
+                      $videoBaseFile
+                      ))
 
       (insert (format "
   \\end{rawhtml}
 \\end{htmlonly}
 \\end{presentationMode}
 "
-		      ))
+                      ))
       
       (insert (format "
 \\begin{articleMode}
@@ -512,7 +512,7 @@
 \\end{htmlonly}
 \\end{articleMode}
 "
-		      $videoBaseFile
+                      $videoBaseFile
     ))
       ))
 
@@ -524,8 +524,8 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:body:toBeAddedText (params)
   (let (
-	(bx:mode (or (plist-get params :mode) "auto")) 
-	)
+        (bx:mode (or (plist-get params :mode) "auto")) 
+        )
 
         (insert (format "\
 \\begin{comment}
@@ -540,43 +540,43 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:body:fig-artpres (params)
   (let ((bx:fig-file (or (plist-get params :fig-file) ""))
-	(bx:sec (or (plist-get params :sec) "")))
+        (bx:sec (or (plist-get params :sec) "")))
     (let ((fig-title (shell-command-to-string 
-		     (format "echo -n $( cat %s )"
-			     (concat (file-name-sans-extension bx:fig-file) ".title"))))
-	  (fig-caption (shell-command-to-string 
-		     (format "echo -n $( cat %s )"
-			     (concat (file-name-sans-extension bx:fig-file) ".caption"))))
-	  )
+                     (format "echo -n $( cat %s )"
+                             (concat (file-name-sans-extension bx:fig-file) ".title"))))
+          (fig-caption (shell-command-to-string 
+                     (format "echo -n $( cat %s )"
+                             (concat (file-name-sans-extension bx:fig-file) ".caption"))))
+          )
 
       (bx:lcnt:info:base-read)
 
       (insert (format "\\begin{comment}\n"))
       (insert (format "**     ======[[elisp:(org-cycle)][Fold]]======  /Figure:/ %s -- %s\n"
-       		      (fig-base-name bx:fig-file)
-       		      fig-title))
+                      (fig-base-name bx:fig-file)
+                      fig-title))
       (insert (format "\\end{comment}\n"))
 
 
       ;; (insert (format "%%{{{ DBLOCK %s-figure %s -- %s\n"
-      ;; 		      bx:sec
-      ;; 		      (fig-base-name bx:fig-file)
-      ;; 		      fig-title))
+      ;;                      bx:sec
+      ;;                      (fig-base-name bx:fig-file)
+      ;;                      fig-title))
 
 
       (when (equal bx:sec "none")
-	(message (format "Skipped: section{%s}\n" fig-title)))
+        (message (format "Skipped: section{%s}\n" fig-title)))
 
 
       (when (equal bx:sec "sec")
-	(insert (format "\\section{%s}\n\n" fig-title)))
+        (insert (format "\\section{%s}\n\n" fig-title)))
 
 
       (when (equal bx:sec "subsec")
-	(insert (format "\\subsection{%s}\n\n" fig-title)))
+        (insert (format "\\subsection{%s}\n\n" fig-title)))
 
       (when (equal bx:sec "subsubsec")
-	(insert (format "\\subsubsection{%s}\n\n" fig-title)))
+        (insert (format "\\subsubsection{%s}\n\n" fig-title)))
 
       (insert "
 \\begin{latexonly}
@@ -592,7 +592,7 @@
       ;;;(insert (format "\\includegraphics[width=108mm,height=76mm,keepaspectratio]{figures/%s}\n" (fig-base-name bx:fig-file)))
 
       (insert (format "\\includegraphics[width=108mm,height=76mm,keepaspectratio]{%s}\n" 
-		      (file-name-sans-extension bx:fig-file)))
+                      (file-name-sans-extension bx:fig-file)))
 
       (insert "\\end{center}
 \\end{figure}
@@ -612,7 +612,7 @@
     ;;; BUG: insert-file-contents did not work
 
       (insert (format "\\caption{%s}\n"
-		      fig-title))
+                      fig-title))
 
       (insert (format "\\label{fig:%s}\n" (fig-base-name bx:fig-file)))
 
@@ -638,7 +638,7 @@
 \\begin{figure}
 ")
       (insert (format "\\caption{%s}\n"
-		      fig-title))
+                      fig-title))
 
       ;;(insert (format "\\label{fig:%s}\n" (fig-base-name bx:fig-file)))
       (insert (format "\\label{fig:%s}\n" (file-name-sans-extension bx:fig-file)))
@@ -659,7 +659,7 @@
 
 (defun org-dblock-write:bx:dblock:lcnt:body:about-this-document (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     ;;;(insert "%{{{ DBLOCK-about-this-document\n")
     (insert "\
@@ -686,9 +686,9 @@ and as html at: yyy
 
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "pres+art")
-	      (equal bx:class "art")
-	      )
+              (equal bx:class "pres+art")
+              (equal bx:class "art")
+              )
       ;; Language dependent stuff can then come here
 
      (when (equal bx:langs "en")
@@ -731,8 +731,8 @@ Some  English comes \\persian{درست وصت انگليسى} here.
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "art+pres")
-	      (equal bx:class "pres"))
+              (equal bx:class "art+pres")
+              (equal bx:class "pres"))
       (insert "
 \\mode<presentation>{
 \\section*{About This Document}
@@ -772,7 +772,7 @@ Some  English comes \\persian{درست وصت انگليسى} here.
 
 (defun org-dblock-write:bx:dblock:lcnt:body:colophon (params)
   (let ((bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) "")))
+        (bx:langs (or (plist-get params :langs) "")))
     (bx:lcnt:info:base-read)
     ;;;(insert "%{{{ DBLOCK-colophon\n")
 
@@ -793,8 +793,8 @@ It uses LaTeX, beamer, ByStar, Blee, Emacs, ...
       )
 
     (when (or (equal bx:class "art+pres")
-	      (equal bx:class "pres+pres")
-	      )
+              (equal bx:class "pres+pres")
+              )
       (insert "
 \\mode<article>{ 
 \\section*{Colophon}
@@ -807,8 +807,8 @@ It uses LaTeX, beamer, ByStar, Blee, Emacs, ...
       )
 
     (when (or (equal bx:class "pres+art")
-	      (equal bx:class "art+pres")
-	      (equal bx:class "pres"))
+              (equal bx:class "art+pres")
+              (equal bx:class "pres"))
       (insert "
 \\mode<presentation>{
 \\section*{Colophon}
@@ -831,10 +831,10 @@ It uses LaTeX, beamer, ByStar, Blee, Emacs, ...
 
 (defun org-dblock-write:bx:dblock:lcnt:latex:end-of-file (params)
   (let (
-	(bx:class (or (plist-get params :class) ""))
-	(bx:langs (or (plist-get params :langs) ""))
-	(masters (or (plist-get params :masters) ""))	
-	)
+        (bx:class (or (plist-get params :class) ""))
+        (bx:langs (or (plist-get params :langs) ""))
+        (masters (or (plist-get params :masters) ""))   
+        )
 
     ;;;(bx:lcnt:info:base-read)
     ;;;(bxi:dblock-warning)
@@ -846,7 +846,7 @@ It uses LaTeX, beamer, ByStar, Blee, Emacs, ...
 %%+CATEGORY: lcnt.latex.inputed
 %%+STARTUP: content
 "
-		    ))
+                    ))
     
     (insert (format "
 %%local variables:
@@ -855,7 +855,7 @@ It uses LaTeX, beamer, ByStar, Blee, Emacs, ...
 %%fill-column: 65
 %%TeX-master: \"%s\"
 %%End:"
-		    masters))
+                    masters))
     ))
 
 ;;;#+BEGIN: bx:dblock:lisp:provide :disabledP "false" :lib-name "dblock-lcnt-latex-body"

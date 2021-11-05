@@ -56,14 +56,14 @@ If that fails, we return major-mode.
 
 
 (defun bx:dblock:governor:process (@governor
-				   @ext-gov
-				   @style
-				   @outLevel
-				   @dblockFuncName				   
-				   @helpLine
-				   @bodyContentPlus
-				   @bodyContent
-				   )
+                                   @ext-gov
+                                   @style
+                                   @outLevel
+                                   @dblockFuncName                                 
+                                   @helpLine
+                                   @bodyContentPlus
+                                   @bodyContent
+                                   )
   "Calls open+body+close in order.
 
 ** TODO instead of major-mode we should be using (blee:comeega:primaryMajorMode)
@@ -72,7 +72,7 @@ If that fails, we return major-mode.
   ;;(setq @governor (bx:dblock:governor:effective @governor @ext-gov))  
 
   (bx:dblock:governor:helpLine @governor @style
-			       @helpLine)
+                               @helpLine)
 
   (when (>= @outLevel 0 )
     (bx:dblock:global:moded:insert-begin major-mode))
@@ -80,8 +80,8 @@ If that fails, we return major-mode.
   (bx:dblock:governor:open @outLevel @governor @style @dblockFuncName)
 
   (bx:dblock:governor:bodyContent @governor @style
-				  @bodyContentPlus
-				  @bodyContent)
+                                  @bodyContentPlus
+                                  @bodyContent)
 
   (bx:dblock:governor:close @outLevel @governor @style @dblockFuncName)
 
@@ -91,30 +91,30 @@ If that fails, we return major-mode.
 
 
 (defun bx:dblock:governor:effective (@governor
-				     @ext-gov
-				     )
+                                     @ext-gov
+                                     )
   "For now we ignore @ext-gov"
   @governor
   )
 
 (defun bx:dblock:governor:helpLine (@governor
-				    @sur-style
-				    @helpLine
-				    )
+                                    @sur-style
+                                    @helpLine
+                                    )
   "Call @helpLine perhaps and call open perhaps"
   (let (
-	($dblockParams)
-	($fullStr)
-	)
+        ($dblockParams)
+        ($fullStr)
+        )
 
     (setq $dblockParams (funcall @helpLine))
   
     (when (string= @governor "help")
       (setq $fullStr
-	    (concat
-	     $dblockParams
-	     (bx:dblock:governor:comeegaCommonOptions)
-	     ))
+            (concat
+             $dblockParams
+             (bx:dblock:governor:comeegaCommonOptions)
+             ))
       
       (blee:dblock:params:desc major-mode $fullStr)
       )
@@ -130,39 +130,39 @@ If that fails, we return major-mode.
   )
 
 (defun bx:dblock:governor:open (@outLevel
-				@governor
-				@style
-				@dblockFuncName
-				)
+                                @governor
+                                @style
+                                @dblockFuncName
+                                )
   "call open perhaps"
   (when (or
-	 (string= @governor "verbose")
-	 (string= @governor "enabled")
-	 (string= @governor "disbaled")
-	 )
+         (string= @governor "verbose")
+         (string= @governor "enabled")
+         (string= @governor "disbaled")
+         )
     (bx:dblock:governor:inDblockOpen @outLevel @governor @style @dblockFuncName)
     )
   )
 
 (defun bx:dblock:governor:bodyContent (@governor
-				       @style
-				       @bodyContentPlus
-				       @bodyContent
-				       )
+                                       @style
+                                       @bodyContentPlus
+                                       @bodyContent
+                                       )
   "Call @bodyContentPlus and @bodyContent"
 
   (when (or
-	 (string= @governor "verbose")
-	 (string= @governor "enabled")
-	 )
+         (string= @governor "verbose")
+         (string= @governor "enabled")
+         )
     (funcall @bodyContentPlus)
     )
 
   (when (or
-	 (string= @governor "verbose")
-	 (string= @governor "enabled")
-	 (string= @governor "hide")
-	 )
+         (string= @governor "verbose")
+         (string= @governor "enabled")
+         (string= @governor "hide")
+         )
     (funcall @bodyContent)
     )
   )
@@ -170,26 +170,26 @@ If that fails, we return major-mode.
 
 
 (defun bx:dblock:governor:close (@outLevel
-				 @governor
-				 @sur-style
-				 @dblockFuncName
-				 )
+                                 @governor
+                                 @sur-style
+                                 @dblockFuncName
+                                 )
   "call open perhaps"
   (when (or
-	 (string= @governor "verbose")
-	 (string= @governor "enabled")
-	 (string= @governor "disbaled")
-	 )
+         (string= @governor "verbose")
+         (string= @governor "enabled")
+         (string= @governor "disbaled")
+         )
     (bx:dblock:governor:inDblockClose @outLevel @governor @sur-style @dblockFuncName)
     )
   )
 
 
 (defun bx:dblock:governor:inDblockOpen (@outLevel
-					@governor
-					@style
-					@dblockFuncName
-					)
+                                        @governor
+                                        @style
+                                        @dblockFuncName
+                                        )
   "Perhaps compile-time-function-name needs to be added"
   ;;;(insert "Open Place Holder")
   (bx:dblock:org-mode:func-open @outLevel @dblockFuncName :style @style)
@@ -198,10 +198,10 @@ If that fails, we return major-mode.
 
   
 (defun bx:dblock:governor:inDblockClose (@outLevel
-					 @governor
-					 @style
-					 @dblockFuncName
-					 )
+                                         @governor
+                                         @style
+                                         @dblockFuncName
+                                         )
   "Perhaps compile-time-function-name needs to be added"
   ;;;(insert "Close Place Holder")
   (bx:dblock:org-mode:func-close @outLevel @dblockFuncName :style @style)
@@ -218,18 +218,18 @@ If that fails, we return major-mode.
 NOTYET, Support for fVar  needs to be added, support for more funcs, args should become named args.
 "
   (let (
-	(@paramsDescFunc (or (plist-get @args :paramsDescFunc) nil))
-	;;
-	($control nil)
-	)
+        (@paramsDescFunc (or (plist-get @args :paramsDescFunc) nil))
+        ;;
+        ($control nil)
+        )
     
     (when (and
-	   (not (equal @control "hide"))
-	   (not (equal @control "release"))
-	   )
+           (not (equal @control "hide"))
+           (not (equal @control "release"))
+           )
       (when @paramsDescFunc
-	(funcall @paramsDescFunc)
-	)
+        (funcall @paramsDescFunc)
+        )
       )
 
     (setq $control @control)    

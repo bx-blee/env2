@@ -40,9 +40,9 @@
 
 (defun org-dblock-write:bx:dblock:pres:lcnt-related (params)  
   (let (
-	(bx:types (or (plist-get params :types) ""))
-	(docsList)
-	)
+        (bx:types (or (plist-get params :types) ""))
+        (docsList)
+        )
     (bx:lcnt:info:base-read)
 
     
@@ -51,31 +51,31 @@
 *  [[elisp:(beginning-of-buffer)][Top]] #####################  [[elisp:(delete-other-windows)][(1)]]      *PresDispose Related Panels*\
 
 *      Lcnt Doc Files     ::  "
-		     ))    
+                     ))    
     
     (mapcar '(lambda (arg)
-	       (progn
-		 (insert
-		  (format "\
-[[elisp:(blee:visit-as-content-list \"%s.ttytex\")][CL ./%s.ttytex]] || "		  
-			  arg arg))))
-	       (split-string (get 'bx:lcnt:info:base  'docSrcList))
-	       )
+               (progn
+                 (insert
+                  (format "\
+[[elisp:(blee:visit-as-content-list \"%s.ttytex\")][CL ./%s.ttytex]] || "                 
+                          arg arg))))
+               (split-string (get 'bx:lcnt:info:base  'docSrcList))
+               )
 
-    (insert (format "\	
+    (insert (format "\  
 *      Related Panels     ::  [[elisp:(blee:bnsm:panel-goto \"/libre/ByStar/InitialTemplates/activeDocs/blee/lcntPublications\")][Blee LCNT Panel]] | [[elisp:(blee:bnsm:panel-goto \"/libre/ByStar/InitialTemplates/activeDocs/blee/screencasting\")][Blee ScreenCasting Panel]] |  [[elisp:(find-file \"./Panel.org\")][Visit ./Panel.org]]\
 "
-		    ))
+                    ))
 
-    (insert (format "\		    
+    (insert (format "\              
 *      General Info       ::  [[elisp:(lsip-local-run-command-here \"pwd\")][pwd]] | [[elisp:(lsip-local-run-command-here \"lsf\")][lsf]] | [[elisp:(lsip-local-run-command-here \"ls\")][ls]] | [[elisp:(lsip-local-run-command-here \"lcntProc.sh -i lcntNuOut\")][lcntProc.sh -i lcntNuOut]] | [[elisp:(lsip-local-run-command-here \"lcntProc.sh\")][lcntProc.sh]] | [[file:lcntProc.sh][Visit]] |  [[elisp:(bx:lcnt:info:base-show)][bx:lcnt:info:base-show]]\
 "
-		    ))
+                    ))
 
-    (insert (format "\		    
+    (insert (format "\              
 *      LCNT-Info          ::  [[elisp:(dired \"./LCNT-INFO\")][dired ./LCNT-INFO]] | [[elisp:(lsip-local-run-command-here \"lcnLcntInfo.sh\")][lcnLcntInfo.sh]] | NOTYET ReName Facilities\
 "
-		    ))
+                    ))
     ))
 
 
@@ -85,9 +85,9 @@
 
 (defun org-dblock-write:bx:dblock:pres:lcnt-building (params)  
   (let (
-	(bx:types (or (plist-get params :types) ""))
-	(docsList)
-	)
+        (bx:types (or (plist-get params :types) ""))
+        (docsList)
+        )
     (bx:lcnt:info:base-read)
 
     (insert (format "\
@@ -97,7 +97,7 @@
 *      Sync               ::  [[elisp:(cvs-update \".\" t)][Version Control]]
 *      =====================
 "
-		    ))
+                    ))
 
 
     (insert (format "\
@@ -105,14 +105,14 @@
 *      IIM Parameters     ::  [[elisp:(setq bx:iimBash:iimParamsArgs \"-p extent=build+view\")][-p extent=build+view]] || [[elisp:(setq bx:iimBash:iimParamsArgs \"-p extent=build\")][-p extent=build]] || [[elisp:(setq bx:iimBash:iimParamsArgs \"-p extent=view\")][-p extent=view]]\
 
 "
-		    ))
+                    ))
 
     (insert (format "\
 *      Build All          ::  \
 [[elisp:(bx:iimBash:cmndLineExec :wrapper \"\" :name \"mmUnite.sh\" :iif \"fullBuild\" :iifArgs \"\")][mmUnite.sh -i fullBuild]]\
 
 "
-		     ))
+                     ))
 
     (insert (format "\
 *      BuildPdfPreview    ::  \
@@ -128,7 +128,7 @@
 *    [[elisp:(lsip-local-run-command \"mmUnite.sh -h -v -n showRun -i screenCastingFullUpdate\")][mmUnite.sh -h -v -n showRun -i screenCastingFullUpdate]]
 *    [[elisp:(lsip-local-run-command \"mmUnite.sh -h -v -n showRun -i screenCastingFullClean\")][mmUnite.sh -h -v -n showRun -i screenCastingFullClean]]
 "
-		     ))    
+                     ))    
 
     (insert (format "\
 *      =====================
@@ -149,27 +149,27 @@
 
 (defun org-dblock-write:bx:dblock:pres:lcnt-publishing (params)  
   (let (
-	(bx:types (or (plist-get params :types) ""))
-	(docsList)
-	)
+        (bx:types (or (plist-get params :types) ""))
+        (docsList)
+        )
     (bx:lcnt:info:base-read)
 
     (insert (format "\
 *  [[elisp:(beginning-of-buffer)][Top]] #####################  [[elisp:(delete-other-windows)][(1)]]      *Publishing*
 "
-		    ))
+                    ))
     
     (mapcar '(lambda (arg)
-	       (progn
-		 (insert
-		  (format "\
+               (progn
+                 (insert
+                  (format "\
 *      Web Publish        ::  \
 [[elisp:(bx:iimBash:cmndLineExec :wrapper \"\" :name \"lcntProc.sh\" :paramArgs \"-p bystarUid=%s\" :iif \"plone3FullPublish\" :iifArgs \"\")]\
 [lcntProc.sh -p bystarUid=%s -i plone3FullPublish]]\
 "
-			  arg arg ))))
-	       (split-string (get 'bx:lcnt:info:base  'bystarUid))
-	       )
+                          arg arg ))))
+               (split-string (get 'bx:lcnt:info:base  'bystarUid))
+               )
          ))
 
 (lambda () "
@@ -178,15 +178,15 @@
 
 (defun org-dblock-write:bx:dblock:pres:lcnt-mailing (params)  
   (let (
-	(bx:types (or (plist-get params :types) ""))
-	(docsList)
-	)
+        (bx:types (or (plist-get params :types) ""))
+        (docsList)
+        )
     (bx:lcnt:info:base-read)
 
     (insert (format "\
 *  [[elisp:(beginning-of-buffer)][Top]] #####################  [[elisp:(delete-other-windows)][(1)]]      *Mailing*
 "
-		    ))
+                    ))
 
     (insert
      (format "\

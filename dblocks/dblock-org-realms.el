@@ -66,8 +66,8 @@
 (defun $realm:markup|get (<realm)
   "Get org-mode markup specifier for <realm"
   (let* (
-	($markup "")
-	)
+        ($markup "")
+        )
     (cond
      ((string-equal <realm "collective")
       (setq $markup "_")
@@ -94,9 +94,9 @@
 (defun bx:bxoId|fromHomeWithRealmGet (<realm)
   "Get org-mode markup specifier for <realm"
   (let* (
-	 ($homeDir (expand-file-name "~"))
-	 ($bxoId nil)
-	)
+         ($homeDir (expand-file-name "~"))
+         ($bxoId nil)
+        )
     (cond
      ((member <realm (bx:realms|listGet))
       (setq $bxoId t)
@@ -106,45 +106,45 @@
       ))
     (when $bxoId
       (let* (
-	     ($missing t)
-	     ($realmBaseDir (concat $homeDir "/bxo/" <realm))
-	     ($selectedRealmBaseDir (concat $realmBaseDir "/selected"))
-	     )
+             ($missing t)
+             ($realmBaseDir (concat $homeDir "/bxo/" <realm))
+             ($selectedRealmBaseDir (concat $realmBaseDir "/selected"))
+             )
       
-	(if (file-directory-p $realmBaseDir)
-	    (if (file-directory-p $selectedRealmBaseDir)
-		(progn
-		  (setq $missing nil)
-		  (setq $bxoId (file-truename $selectedRealmBaseDir))
-		  )
-	      (progn
-		(insert (format "** Missing selectedRealmBaseDir %s\n" $selectedRealmBaseDir))
-		)
-	      )
-	  (progn
-	    (insert (format "** Missing realmBaseDir %s\n" $realmBaseDir))
-	    )
-	  )
-	(when $missing
-	  (setq $bxoId nil)
-	  )
-	)
+        (if (file-directory-p $realmBaseDir)
+            (if (file-directory-p $selectedRealmBaseDir)
+                (progn
+                  (setq $missing nil)
+                  (setq $bxoId (file-truename $selectedRealmBaseDir))
+                  )
+              (progn
+                (insert (format "** Missing selectedRealmBaseDir %s\n" $selectedRealmBaseDir))
+                )
+              )
+          (progn
+            (insert (format "** Missing realmBaseDir %s\n" $realmBaseDir))
+            )
+          )
+        (when $missing
+          (setq $bxoId nil)
+          )
+        )
     $bxoId
     )))
 
 (defun bxPanel|realmPanelsBaseGet (<bxoIdBase)
   "If bxoIdBase/realmPanels does not exist return nil"
   (let* (
-	 ($baseDir (concat <bxoIdBase "/realmPanels"))
-	 ($realmPanelsBase nil)
-	 )
+         ($baseDir (concat <bxoIdBase "/realmPanels"))
+         ($realmPanelsBase nil)
+         )
     (if (file-directory-p $baseDir)
-	(progn
-	  (setq $realmPanelsBase (file-truename $baseDir))
-	  )
+        (progn
+          (setq $realmPanelsBase (file-truename $baseDir))
+          )
       (progn
-	(insert (format "Missing realmPanelsBaseGet %s\n" $baseDir))
-	)
+        (insert (format "Missing realmPanelsBaseGet %s\n" $baseDir))
+        )
       )
     $realmPanelsBase
     ))
@@ -155,8 +155,8 @@
   "Based on <realm, create a topLineDeliminator.
 <realm could be one of collective|site|platform|bue"
   (let* (
-	($markup "")
-	)
+        ($markup "")
+        )
     (setq $markup ($realm:markup|get <realm))
     
     (insert
@@ -187,8 +187,8 @@
   "Based on <realm, create a topLineDeliminator.
 <realm could be one of collective|site|platform|bue"
   (let* (
-	($markup "")
-	)
+        ($markup "")
+        )
     (setq $markup ($realm:markup|get <realm))
     (insert
      (format
@@ -206,8 +206,8 @@
   "Based on <realm, create a topLineDeliminator.
 <realm could be one of collective|site|platform|bue"
   (let* (
-	($markup "")
-	)
+        ($markup "")
+        )
     (setq $markup ($realm:markup|get <realm))
     (insert
      (format
@@ -225,8 +225,8 @@
 (defun org-dblock-write:bxPanel:realms:user|extend  (<params)
   "Creates terse links for navigation surrounding current panel in treeElem."
   (let* (
-	($realm "usageEnv")
-	)
+        ($realm "usageEnv")
+        )
     (bxPanel:realms|extend $realm <params)))
 
 
@@ -234,8 +234,8 @@
 (defun org-dblock-write:bxPanel:realms:site|extend  (<params)
   "Creates terse links for navigation surrounding current panel in treeElem."
   (let* (
-	($realm "site")
-	)
+        ($realm "site")
+        )
     (bxPanel:realms|extend $realm <params)))
 
 
@@ -243,8 +243,8 @@
 (defun org-dblock-write:bxPanel:realms:platform|extend  (<params)
   "Creates terse links for navigation surrounding current panel in treeElem."
   (let* (
-	($realm "platform")
-	)
+        ($realm "platform")
+        )
     (bxPanel:realms|extend $realm <params)))
 
 (defun bxPanel:dblocks/Kill ()
@@ -269,16 +269,16 @@ Otherwise, these would go inside of a dblock and mess things up."
 (defun bxPanel:realms|extend  (<realm <params)
   "Creates terse links for navigation surrounding current panel in treeElem."
   (let* (
-	 (<governor (letGet$governor)) (<extGov (letGet$extGov))
-	 (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
-	 (<style (letGet$style "openTerseNoNl" "closeContinue"))
-	 ;;
-	 (<bxoId (or (plist-get <params :bxoId) "auto"))
-	 (<segName (or (plist-get <params :segName) "general"))	 
-	 ($homeDir (expand-file-name "~"))
-	 )
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         ;;
+         (<bxoId (or (plist-get <params :bxoId) "auto"))
+         (<segName (or (plist-get <params :segName) "general"))  
+         ($homeDir (expand-file-name "~"))
+         )
 
-    (bxPanel:params$effective)	 
+    (bxPanel:params$effective)   
 
     (defun helpLine ()
       ":bxoId \"auto or bxoId\""
@@ -291,46 +291,46 @@ Otherwise, these would go inside of a dblock and mess things up."
     (defun bodyContent ()
       "If there is user data, insert it."
       (let* (
-	     ($bxoIdBase)
-	     ($cwd (expand-file-name "."))
-	     ($realmExtensionBase)
-	     ($realmPanelsBase)
-	     ($extensionFileName)
-	    )
-	(when (string= <bxoId "auto")
-	  (setq $bxoIdBase (bx:bxoId|fromHomeWithRealmGet <realm))
-	  )
+             ($bxoIdBase)
+             ($cwd (expand-file-name "."))
+             ($realmExtensionBase)
+             ($realmPanelsBase)
+             ($extensionFileName)
+            )
+        (when (string= <bxoId "auto")
+          (setq $bxoIdBase (bx:bxoId|fromHomeWithRealmGet <realm))
+          )
 
-	(if $bxoIdBase
-	    (progn
-	      (setq $realmPanelsBase (bxPanel|realmPanelsBaseGet $bxoIdBase))
-	      (when $realmPanelsBase
-		(setq $realmExtensionBase
-		      (replace-regexp-in-string "/bisos/panels" $realmPanelsBase $cwd))
-		(setq $extensionFileName (concat $realmExtensionBase "/" <segName ".org"))
-		(when (not (file-exists-p $extensionFileName))
-		  (make-empty-file $extensionFileName t))
-		(if (equal
-		     0
-		     (file-attribute-size (file-attributes $extensionFileName)))
-		    (progn
-		      (insert (concat "** No user extention found at: " $extensionFileName "\n"))
-		      )
-		  (progn
-		    (insert (concat "** Extended By: " $extensionFileName " :*\n"))
-		    (insert (with-temp-buffer
-			      (insert-file-contents $extensionFileName)
-			      (bxPanel:dblocks/Kill)
-			      (buffer-string)))
-		    (bxPanel:lineDeliminator|bottom <realm)		      
-		    )
-		  )
-		)
-	      )
-	  (progn
-	    (message (format "Missing bxoId=%s -- bxoIdBase=%s" <bxoId $bxoIdBase))
-	    )
-	  )))
+        (if $bxoIdBase
+            (progn
+              (setq $realmPanelsBase (bxPanel|realmPanelsBaseGet $bxoIdBase))
+              (when $realmPanelsBase
+                (setq $realmExtensionBase
+                      (replace-regexp-in-string "/bisos/panels" $realmPanelsBase $cwd))
+                (setq $extensionFileName (concat $realmExtensionBase "/" <segName ".org"))
+                (when (not (file-exists-p $extensionFileName))
+                  (make-empty-file $extensionFileName t))
+                (if (equal
+                     0
+                     (file-attribute-size (file-attributes $extensionFileName)))
+                    (progn
+                      (insert (concat "** No user extention found at: " $extensionFileName "\n"))
+                      )
+                  (progn
+                    (insert (concat "** Extended By: " $extensionFileName " :*\n"))
+                    (insert (with-temp-buffer
+                              (insert-file-contents $extensionFileName)
+                              (bxPanel:dblocks/Kill)
+                              (buffer-string)))
+                    (bxPanel:lineDeliminator|bottom <realm)                   
+                    )
+                  )
+                )
+              )
+          (progn
+            (message (format "Missing bxoId=%s -- bxoIdBase=%s" <bxoId $bxoIdBase))
+            )
+          )))
        
     (bx:invoke:withStdArgs$bx:dblock:governor:process)    
     ))
@@ -338,19 +338,19 @@ Otherwise, these would go inside of a dblock and mess things up."
 (defun org-dblock-write:bx:dblock:bnsm:user-extenstions-insert (params)
   "NOTYET, look for menuFile in subDirs, then make them visitable"
   (let ((bx:types (or (plist-get params :types) ""))
-	)
+        )
     (let 
-    	(out-string user-base-dir user-file-name)
+        (out-string user-base-dir user-file-name)
       (setq out-string (replace-regexp-in-string "\n" "" (shell-command-to-string "pwd")))
       (setq user-base-dir (expand-file-name (replace-regexp-in-string "/libre/ByStar/InitialTemplates" "~/BUE" out-string)))
       (setq user-file-name (concat user-base-dir "/" "fullUsagePanel-en.org"))
       (if (file-exists-p user-file-name)
-	  (progn
-	    (insert (concat "     *Extended By: " user-file-name " :*\n"))
-	    (insert-file user-file-name)
-	    )
-	(insert (concat "No user extention found at: " user-file-name))
-	)
+          (progn
+            (insert (concat "     *Extended By: " user-file-name " :*\n"))
+            (insert-file user-file-name)
+            )
+        (insert (concat "No user extention found at: " user-file-name))
+        )
       )
     )
   )
@@ -359,19 +359,19 @@ Otherwise, these would go inside of a dblock and mess things up."
 (defun org-dblock-write:bx:dblock:bnsm:user-extenstions-point-to (params)
   ""
   (let ((bx:types (or (plist-get params :types) ""))
-	)
+        )
     (let 
-    	(out-string user-base-dir user-file-name)
+        (out-string user-base-dir user-file-name)
       (setq out-string (replace-regexp-in-string "\n" "" (shell-command-to-string "pwd")))
       (setq user-base-dir (expand-file-name (string-replace-regexp out-string "/libre/ByStar/InitialTemplates" "~/BUE")))
       (setq user-file-name (concat user-base-dir "/" "fullUsagePanel-en.org"))
       (if (file-exists-p user-file-name)
-	  (progn
-	    (insert (concat "     *Extended By: " user-file-name " :* \n"))
-	    (insert (concat "*           /User:/    [[elisp:(find-file%20\"" user-file-name "\")][Pointer To User Specific Information File]]"))
-	    )
-	(insert (concat "No user extention found at: " user-file-name))
-	)
+          (progn
+            (insert (concat "     *Extended By: " user-file-name " :* \n"))
+            (insert (concat "*           /User:/    [[elisp:(find-file%20\"" user-file-name "\")][Pointer To User Specific Information File]]"))
+            )
+        (insert (concat "No user extention found at: " user-file-name))
+        )
       )
     )
   )
@@ -380,19 +380,19 @@ Otherwise, these would go inside of a dblock and mess things up."
 (defun org-dblock-write:bx:dblock:bnsm:site-extenstions-insert (params)
   "NOTYET, look for menuFile in subDirs, then make them visitable"
   (let ((bx:types (or (plist-get params :types) ""))
-	)
+        )
     (let 
-    	(out-string site-base-dir site-file-name)
+        (out-string site-base-dir site-file-name)
       (setq out-string (replace-regexp-in-string "\n" "" (shell-command-to-string "pwd")))
       (setq site-base-dir (expand-file-name (replace-regexp-in-string "/libre/ByStar/InitialTemplates" "/private/site" out-string)))      
       (setq site-file-name (concat site-base-dir "/" "fullUsagePanel-en.org"))
       (if (file-exists-p site-file-name)
-	  (progn
-	    (insert (concat "     *Extended By: " site-file-name " :*\n"))
-	    (insert-file site-file-name)
-	    )
-	(insert (concat "No site extention found at: " site-file-name))
-	)
+          (progn
+            (insert (concat "     *Extended By: " site-file-name " :*\n"))
+            (insert-file site-file-name)
+            )
+        (insert (concat "No site extention found at: " site-file-name))
+        )
       )
     )
   )
