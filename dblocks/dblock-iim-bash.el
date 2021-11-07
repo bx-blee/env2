@@ -276,34 +276,6 @@ fi")
     ))
 
 
-;;; OBSOLETED
-(defun org-dblock-write:bx:bsip:bash/processEachArgsOrStdin (params)
-  (let (
-        (files-list)
-        )
-    (insert "OBSOLETED: Use bx:bsip:bash/processArgsAndStdinEach instead\n")
-    (insert 
-     "\
-    if [ $# -gt 0 ] ; then
-        local each=\"\"
-        for each in ${inputsList} ; do
-            lpDo processEach ${each}
-        done
-    else
-        local eachLine=\"\"
-        while read -r -t 1 eachLine ; do
-            if [ ! -z \"${eachLine}\" ] ; then
-                local each=\"\"
-                for each in ${eachLine} ; do
-                    lpDo processEach ${each}
-                done
-            fi
-        done
-    fi
-"
-                )
-    ))
-
 (advice-add 'org-dblock-write:bx:bsip:bash/onTargetRun :around #'bx:dblock:control|wrapper)
 (defun org-dblock-write:bx:bsip:bash/onTargetRun (<params)
   "
@@ -376,8 +348,38 @@ fi")
     ))
 
 
+;;; OBSOLETED
+(defun org-dblock-write:bx:bsip:bash/processEachArgsOrStdin (params)
+  (let (
+        (files-list)
+        )
+    (insert "OBSOLETED1: Use bx:bsip:bash/processArgsAndStdin instead\n")
+    (insert 
+     "\
+    if [ $# -gt 0 ] ; then
+        local each=\"\"
+        for each in ${inputsList} ; do
+            lpDo processEach ${each}
+        done
+    else
+        local eachLine=\"\"
+        while read -r -t 1 eachLine ; do
+            if [ ! -z \"${eachLine}\" ] ; then
+                local each=\"\"
+                for each in ${eachLine} ; do
+                    lpDo processEach ${each}
+                done
+            fi
+        done
+    fi
+"
+                )
+    ))
+
+;;; OBSOLETED
 (defun org-dblock-write:bx:bsip:bash/processArgsAndStdinEach (params)
   "No params are used, but dblock demands params so you need a :param nil or an extra space."
+  (insert "OBSOLETED2: Use bx:bsip:bash/processArgsAndStdin instead\n")
   (insert 
    "\
    function processArgsAndStdin {
@@ -408,32 +410,11 @@ fi")
    )
   )
 
-(defun org-dblock-write:bx:bsip:bash/processStdinWithArgs (params)
-  (insert 
-   "\
-    function processStdinWithArgs {
-        local stdinArgs=()
-        local each
-        if [ ! -t 0 ]; then # FD 0 is not opened on a terminal, there is a pipe
-            readarray stdinArgs < /dev/stdin
-        fi
-        if [ ${#stdinArgs[@]} -eq 0 ] ; then
-            ANT_raw \"No StdinArgs -- Processing Skipped\"
-            lpReturn
-        fi
-        for each in \"${stdinArgs[@]}\"; do
-            lpDo processEach \"${each%$'\\n'}\" \"$@\"
-        done
-    }
-    lpDo processStdinWithArgs \"$@\"\
-"
-    )
-  )
-
 (defun org-dblock-write:bx:bsip:bash/processArgsAndStdin (params)
   "
-** stdin and args as one list are processed with processEach with each as an argument.
-*** No dblock params are used, but dblock demands params so you need a :param nil or an extra space.
+** args and stdin as one list are processed with processEach with each as an argument.
+*** No dblock params are used, but dblock demands params so you need a :noParams t or an extra space.
+*** readarray from stdin contains entries that have \n. We strip that with: ${each%$'\\n'}.
 "       
   (insert 
    "\
@@ -454,6 +435,33 @@ fi")
         done
     }
     lpDo processArgsAndStdin \"$@\"\
+"
+    )
+  )
+
+(defun org-dblock-write:bx:bsip:bash/processStdinWithArgs (params)
+  "
+** stdin as a list is processed with processEach with each and $@ as arguments.
+*** No dblock params are used, but dblock demands params so you need a :noParams t or an extra space.
+*** readarray from stdin contains entries that have \n. We strip that with: ${each%$'\\n'}.
+"       
+  (insert 
+   "\
+    function processStdinWithArgs {
+        local stdinArgs=()
+        local each
+        if [ ! -t 0 ]; then # FD 0 is not opened on a terminal, there is a pipe
+            readarray stdinArgs < /dev/stdin
+        fi
+        if [ ${#stdinArgs[@]} -eq 0 ] ; then
+            ANT_raw \"No StdinArgs -- Processing Skipped\"
+            lpReturn
+        fi
+        for each in \"${stdinArgs[@]}\"; do
+            lpDo processEach \"${each%$'\\n'}\" \"$@\"
+        done
+    }
+    lpDo processStdinWithArgs \"$@\"\
 "
     )
   )
