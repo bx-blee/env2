@@ -82,6 +82,12 @@
   (require 'bap-magit)
   (bap:magit:full/update)
 
+  (require 'bap-keycast)
+  (bap:keycast:full/update)
+
+  (require 'bap-gif-screencast)
+  (bap:gif-screencast:full/update)
+
   (require 'bap-doc-view)
   (bap:doc-view:full/update)
   
