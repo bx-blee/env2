@@ -72,30 +72,30 @@
   ;;(interactive)
   (define-key global-map [(f3)] nil)
 
-  (define-key global-map [(f3) (f3)] 'compose-mail)
+  (define-key global-map [(f3) (s)] 'compose-mail)
 
   ;;;
   ;;; Compose Email In Globish 
   ;;;
-  (define-key global-map [(f3) (g)] nil)
-  (define-key global-map [(f3) (g) (o) ] 'bystar:mail:compose:from-office)
-  (define-key global-map [(f3) (g) (d) ] 'bystar:mail:compose:from-desk)
-  (define-key global-map [(f3) (g) (f) ] 'bystar:mail:compose:from-friend)
+  (define-key global-map [(f3) (c)] nil)
+  (define-key global-map [(f3) (c) (o) ] 'bystar:mail:compose:from-office)
+  (define-key global-map [(f3) (c) (d) ] 'bystar:mail:compose:from-desk)
+  (define-key global-map [(f3) (c) (f) ] 'bystar:mail:compose:from-friend)
 
   ;;;
   ;;; Compose Email In Alt Language
   ;;;
-  (define-key global-map [(f3) (a)] nil)
-  (define-key global-map [(f3) (a) (o) ] 'bystar:mail:compose:alt:from-office)
-  (define-key global-map [(f3) (a) (d) ] 'bystar:mail:compose:alt:from-desk)
-  (define-key global-map [(f3) (a) (f) ] 'bystar:mail:compose:alt:from-friend)
+  (define-key global-map [(f3) (l)] nil)
+  (define-key global-map [(f3) (l) (o) ] 'bystar:mail:compose:alt:from-office)
+  (define-key global-map [(f3) (l) (d) ] 'bystar:mail:compose:alt:from-desk)
+  (define-key global-map [(f3) (l) (f) ] 'bystar:mail:compose:alt:from-friend)
 
 
   (defun blee:activities:mailCompose () (interactive) (blee:bnsm:panel-goto "/libre/ByStar/InitialTemplates/activeDocs/blee/mailCompose"))
-  (define-key global-map [(f3) (x) ] 'blee:activities:mailCompose)
+  (define-key global-map [(f3) (X) ] 'blee:activities:mailCompose)
 
   (define-key global-map [(f3) (\?)  ] 'bystar:mail:send:menu:global-kbd-help)
-  (define-key global-map [(f3) (h)  ] 'bystar:mail:send:menu:global-kbd-help)
+  (define-key global-map [(f3) (H)  ] 'bystar:mail:send:menu:global-kbd-help)
   )
 
 
@@ -176,89 +176,89 @@
 (defun bystar:mail:menu:global-kbd ()
   ""
   ;;(interactive)
-  (define-key global-map [(f2)] nil)
+  (define-key global-map [(f3)] nil)
 
-  (define-key global-map [(f2) (f2) ] 'gnus)
+  (define-key global-map [(f3) (f3) ] 'gnus)
 
-  (define-key global-map [(f2) (\1) ] 'gnus-level-and-below-1:bx)
-  (define-key global-map [(f2) (\2) ] 'gnus-level-and-below-2:bx)
-  (define-key global-map [(f2) (\3) ] 'gnus-level-and-below-3:bx)
-  (define-key global-map [(f2) (\4) ] 'gnus-level-and-below-4:bx)
-  (define-key global-map [(f2) (\5) ] 'gnus-level-and-below-5:bx)
-  (define-key global-map [(f2) (\6) ] 'gnus-level-and-below-6:bx)
-  (define-key global-map [(f2) (\7) ] 'gnus-level-and-below-7:bx)
-  (define-key global-map [(f2) (\8) ] 'gnus-level-and-below-8:bx)
-  (define-key global-map [(f2) (\9) ] 'gnus-level-and-below-9:bx)
+  (define-key global-map [(f3) (\1) ] 'gnus-level-and-below-1:bx)
+  (define-key global-map [(f3) (\2) ] 'gnus-level-and-below-2:bx)
+  (define-key global-map [(f3) (\3) ] 'gnus-level-and-below-3:bx)
+  (define-key global-map [(f3) (\4) ] 'gnus-level-and-below-4:bx)
+  (define-key global-map [(f3) (\5) ] 'gnus-level-and-below-5:bx)
+  (define-key global-map [(f3) (\6) ] 'gnus-level-and-below-6:bx)
+  (define-key global-map [(f3) (\7) ] 'gnus-level-and-below-7:bx)
+  (define-key global-map [(f3) (\8) ] 'gnus-level-and-below-8:bx)
+  (define-key global-map [(f3) (\9) ] 'gnus-level-and-below-9:bx)
 
 
   ;;;
   ;;; List All At Level and Below
   ;;;
-  (define-key global-map [(f2) (a)] nil)
-  (define-key global-map [(f2) (a) (\1) ] 'gnus-level-and-below-all-1:bx)
-  (define-key global-map [(f2) (a) (\2) ] 'gnus-level-and-below-all-2:bx)
-  (define-key global-map [(f2) (a) (\3) ] 'gnus-level-and-below-all-3:bx)
-  (define-key global-map [(f2) (a) (\4) ] 'gnus-level-and-below-all-4:bx)
-  (define-key global-map [(f2) (a) (\5) ] 'gnus-level-and-below-all-5:bx)
-  (define-key global-map [(f2) (a) (\6) ] 'gnus-level-and-below-all-6:bx)
-  (define-key global-map [(f2) (a) (\7) ] 'gnus-level-and-below-all-7:bx)
-  (define-key global-map [(f2) (a) (\8) ] 'gnus-level-and-below-all-8:bx)
-  (define-key global-map [(f2) (a) (\9) ] 'gnus-level-and-below-all-9:bx)
+  (define-key global-map [(f3) (a)] nil)
+  (define-key global-map [(f3) (a) (\1) ] 'gnus-level-and-below-all-1:bx)
+  (define-key global-map [(f3) (a) (\2) ] 'gnus-level-and-below-all-2:bx)
+  (define-key global-map [(f3) (a) (\3) ] 'gnus-level-and-below-all-3:bx)
+  (define-key global-map [(f3) (a) (\4) ] 'gnus-level-and-below-all-4:bx)
+  (define-key global-map [(f3) (a) (\5) ] 'gnus-level-and-below-all-5:bx)
+  (define-key global-map [(f3) (a) (\6) ] 'gnus-level-and-below-all-6:bx)
+  (define-key global-map [(f3) (a) (\7) ] 'gnus-level-and-below-all-7:bx)
+  (define-key global-map [(f3) (a) (\8) ] 'gnus-level-and-below-all-8:bx)
+  (define-key global-map [(f3) (a) (\9) ] 'gnus-level-and-below-all-9:bx)
 
   ;;;
   ;;; List All At Level
   ;;;
-  (define-key global-map [(f2) (l)] nil)
-  (define-key global-map [(f2) (l) (\1) ] 'gnus-level-1:bx)
-  (define-key global-map [(f2) (l) (\2) ] 'gnus-level-2:bx)
-  (define-key global-map [(f2) (l) (\3) ] 'gnus-level-3:bx)
-  (define-key global-map [(f2) (l) (\4) ] 'gnus-level-4:bx)
-  (define-key global-map [(f2) (l) (\5) ] 'gnus-level-5:bx)
-  (define-key global-map [(f2) (l) (\6) ] 'gnus-level-6:bx)
-  (define-key global-map [(f2) (l) (\7) ] 'gnus-level-7:bx)
-  (define-key global-map [(f2) (l) (\8) ] 'gnus-level-8:bx)
-  (define-key global-map [(f2) (l) (\9) ] 'gnus-level-9:bx)
+  (define-key global-map [(f3) (l)] nil)
+  (define-key global-map [(f3) (l) (\1) ] 'gnus-level-1:bx)
+  (define-key global-map [(f3) (l) (\2) ] 'gnus-level-2:bx)
+  (define-key global-map [(f3) (l) (\3) ] 'gnus-level-3:bx)
+  (define-key global-map [(f3) (l) (\4) ] 'gnus-level-4:bx)
+  (define-key global-map [(f3) (l) (\5) ] 'gnus-level-5:bx)
+  (define-key global-map [(f3) (l) (\6) ] 'gnus-level-6:bx)
+  (define-key global-map [(f3) (l) (\7) ] 'gnus-level-7:bx)
+  (define-key global-map [(f3) (l) (\8) ] 'gnus-level-8:bx)
+  (define-key global-map [(f3) (l) (\9) ] 'gnus-level-9:bx)
 
   ;;;
   ;;; List Unread At Level
   ;;;
-  (define-key global-map [(f2) (u)] nil)
-  (define-key global-map [(f2) (u) (\1) ] 'gnus-unread-level-1:bx)
-  (define-key global-map [(f2) (u) (\2) ] 'gnus-unread-level-2:bx)
-  (define-key global-map [(f2) (u) (\3) ] 'gnus-unread-level-3:bx)
-  (define-key global-map [(f2) (u) (\4) ] 'gnus-unread-level-4:bx)
-  (define-key global-map [(f2) (u) (\5) ] 'gnus-unread-level-5:bx)
-  (define-key global-map [(f2) (u) (\6) ] 'gnus-unread-level-6:bx)
-  (define-key global-map [(f2) (u) (\7) ] 'gnus-unread-level-7:bx)
-  (define-key global-map [(f2) (u) (\8) ] 'gnus-unread-level-8:bx)
-  (define-key global-map [(f2) (u) (\9) ] 'gnus-unread-level-9:bx)
+  (define-key global-map [(f3) (u)] nil)
+  (define-key global-map [(f3) (u) (\1) ] 'gnus-unread-level-1:bx)
+  (define-key global-map [(f3) (u) (\2) ] 'gnus-unread-level-2:bx)
+  (define-key global-map [(f3) (u) (\3) ] 'gnus-unread-level-3:bx)
+  (define-key global-map [(f3) (u) (\4) ] 'gnus-unread-level-4:bx)
+  (define-key global-map [(f3) (u) (\5) ] 'gnus-unread-level-5:bx)
+  (define-key global-map [(f3) (u) (\6) ] 'gnus-unread-level-6:bx)
+  (define-key global-map [(f3) (u) (\7) ] 'gnus-unread-level-7:bx)
+  (define-key global-map [(f3) (u) (\8) ] 'gnus-unread-level-8:bx)
+  (define-key global-map [(f3) (u) (\9) ] 'gnus-unread-level-9:bx)
 
   ;;;
   ;;; Get New At Level
   ;;;
-  (define-key global-map [(f2) (g)] nil)
-  (define-key global-map [(f2) (g) (g) ] 'gnus-group-get-new-news-5:bx)
-  (define-key global-map [(f2) (g) (\1) ] 'gnus-group-get-new-news-1:bx)
-  (define-key global-map [(f2) (g) (\2) ] 'gnus-group-get-new-news-2:bx)
-  (define-key global-map [(f2) (g) (\3) ] 'gnus-group-get-new-news-3:bx)
-  (define-key global-map [(f2) (g) (\4) ] 'gnus-group-get-new-news-4:bx)
-  (define-key global-map [(f2) (g) (\5) ] 'gnus-group-get-new-news-5:bx)
-  (define-key global-map [(f2) (g) (\6) ] 'gnus-group-get-new-news-6:bx)
-  (define-key global-map [(f2) (g) (\7) ] 'gnus-group-get-new-news-7:bx)
-  (define-key global-map [(f2) (g) (\8) ] 'gnus-group-get-new-news-8:bx)
-  (define-key global-map [(f2) (g) (\9) ] 'gnus-group-get-new-news-9:bx)
+  (define-key global-map [(f3) (g)] nil)
+  (define-key global-map [(f3) (g) (g) ] 'gnus-group-get-new-news-5:bx)
+  (define-key global-map [(f3) (g) (\1) ] 'gnus-group-get-new-news-1:bx)
+  (define-key global-map [(f3) (g) (\2) ] 'gnus-group-get-new-news-2:bx)
+  (define-key global-map [(f3) (g) (\3) ] 'gnus-group-get-new-news-3:bx)
+  (define-key global-map [(f3) (g) (\4) ] 'gnus-group-get-new-news-4:bx)
+  (define-key global-map [(f3) (g) (\5) ] 'gnus-group-get-new-news-5:bx)
+  (define-key global-map [(f3) (g) (\6) ] 'gnus-group-get-new-news-6:bx)
+  (define-key global-map [(f3) (g) (\7) ] 'gnus-group-get-new-news-7:bx)
+  (define-key global-map [(f3) (g) (\8) ] 'gnus-group-get-new-news-8:bx)
+  (define-key global-map [(f3) (g) (\9) ] 'gnus-group-get-new-news-9:bx)
 
-  (define-key global-map [(f2) (f)] nil)
-  (define-key global-map [(f2) (f) (w) ]  'bystar:mail:display:frame-wide)
-  (define-key global-map [(f2) (f) (b) ]  'bystar:mail:display:frame-basic)
+  (define-key global-map [(f3) (f)] nil)
+  (define-key global-map [(f3) (f) (w) ]  'bystar:mail:display:frame-wide)
+  (define-key global-map [(f3) (f) (b) ]  'bystar:mail:display:frame-basic)
 
-  (define-key global-map [(f2) (w)] 'my-gnus-summary-view-html-alternative)
+  (define-key global-map [(f3) (w)] 'my-gnus-summary-view-html-alternative)
 
   (defun blee:activities:mailRead () (interactive) (blee:bnsm:panel-goto "/libre/ByStar/InitialTemplates/activeDocs/blee/mailRead"))
-  (define-key global-map [(f2) (x) ] 'blee:activities:mailRead)
+  (define-key global-map [(f3) (x) ] 'blee:activities:mailRead)
 
-  (define-key global-map [(f2) (\?)  ] 'bystar:mail:menu:global-kbd-help)
-  (define-key global-map [(f2) (h)  ] 'bystar:mail:menu:global-kbd-help)
+  (define-key global-map [(f3) (\?)  ] 'bystar:mail:menu:global-kbd-help)
+  (define-key global-map [(f3) (h)  ] 'bystar:mail:menu:global-kbd-help)
 
   )
 
@@ -266,7 +266,7 @@
 (defun bystar:mail:menu:global-kbd-help ()
   "Display a  help"
   (interactive)
-  (describe-bindings [(f2)])
+  (describe-bindings [(f3)])
   )
 
 

@@ -96,14 +96,21 @@
   ;; (define-key global-map [(shift f1)] 'bue:visit-url-at-remote-firefox)
   ;; (define-key global-map [(control f1)] 'noop)
   ;; (define-key global-map [(meta f1)] 'noop)
-   ;; F2  -- Mail Reading
-  (require 'bystar-mail-menu)
-  (bystar:mail:menu:global-kbd)
+  ;; F2  -- Mail Reading
+  (define-key global-map [(f2)] nil)
+
+  (define-key global-map [(f2) (f2) ] 'gif-screencast-stop)
+
+  (define-key global-map [(f2) (s) ] 'gif-screencast)  ;; Start
+  (define-key global-map [(f2) (p) ] 'gif-screencast-toggle-pause) ;; Pause
+
   ;; (define-key global-map [(f2)] 'gnus)
   ;; (define-key global-map [(shift f2)] 'gnus-level-3)
   ;; (define-key global-map [(control f2)] 'gnus-level-2)
   ;; (define-key global-map [(shift control f2)] 'gnus-level-4)
    ;; F3  -- Mail Sending
+  (require 'bystar-mail-menu)
+  (bystar:mail:menu:global-kbd)
   (require 'bystar-mail-menu)
   (bystar:mail:send:menu:global-kbd)
   ;; (define-key global-map [(f3)] 'compose-mail)
