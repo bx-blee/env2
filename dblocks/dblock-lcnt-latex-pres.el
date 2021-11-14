@@ -567,6 +567,15 @@ dblock expansion of bx:lcnt:body:video-presArt :videoBaseFile ./video/master-%s.
   )
 
 
+(defun org-dblock-write:lcnt:frame-video+audio-plain-begin (params)
+  (setq params (plist-put params ':audio "UnSpecified"))
+  (setq params (plist-put params ':options "plain"))
+  (setq params (plist-put params ':fragile "true"))  
+  (full-latex-frame-begin params)
+  )
+
+
+
 (lambda () "
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || defun        :: (org-dblock-write:bx:dblock:lcnt:frame-narratedSpecified-plain-begin params) [[elisp:(org-cycle)][| ]]
   ")
