@@ -70,7 +70,9 @@
 (defun bystar:mail:send:menu:global-kbd ()
   ""
   ;;(interactive)
-  (define-key global-map [(f3)] nil)
+
+  ;; Shared with old f2
+  ;;(define-key global-map [(f3)] nil)
 
   (define-key global-map [(f3) (s)] 'compose-mail)
 
