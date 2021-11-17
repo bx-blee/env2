@@ -79,10 +79,14 @@
   ;; Programmer's Work Bench -- bystar-progtools-menu.el
   (bystar:progtools-global:menu)
 
+  ;;
+  (bf:font:global:menu)
+  (easy-menu-add-item nil '("Blee") 'bx-font-menu "Blee Help")
+
   ;; Multi-Langualization -- bystar-m17n-menu.el
   (bystar:m17n-global:menu)
   (easy-menu-add-item nil '("Blee") 'm17n-menu "Blee Help")
-
+  
   ;; Navigation Menu
   (blee:menu-sel:navigation:define)
   (easy-menu-add-item nil '("Blee") 'blee:menu-sel:navigation:menu "Blee Help")
@@ -135,6 +139,14 @@
   (bystar:emms-mode:menu)
   ;;; MUSIC End
 
+  ;;
+  (bap:keycast:global:menu)
+  (easy-menu-add-item nil '("Blee") 'bap-keycast-menu "Blee Help")
+
+  ;;
+  (bap:gif-screencast:global:menu)
+  (easy-menu-add-item nil '("Blee") 'bap-gif-screencast-menu "Blee Help")
+  
   ;;; LANGTOOL Begin
   (easy-menu-add-item nil '("Blee") 'langtool-global-menu "Blee Help")
 

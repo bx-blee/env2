@@ -8,7 +8,7 @@
 
 (orgCmntBegin "
 **  orgCmntBegin. Permits us to include * at the beginning of line as a comment.
-Which in turn alows us to switch between emacs-major mode and org-mode for COMEEGA.
+Which in turn allows us to switch between emacs-major mode and org-mode for COMEEGA.
 Example usage is: 
 (orgCmntBegin \"multi-line comment comes here.\" orgCmntEnd)
 

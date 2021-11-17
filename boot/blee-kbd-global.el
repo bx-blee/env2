@@ -101,7 +101,7 @@
 
   (define-key global-map [(f2) (f2) ] 'gif-screencast-stop)
 
-  (define-key global-map [(f2) (s) ] 'gif-screencast)  ;; Start
+  (define-key global-map [(f2) (s) ] 'gif-screencast-start-or-stop)  ;; Start
   (define-key global-map [(f2) (p) ] 'gif-screencast-toggle-pause) ;; Pause
 
   ;; (define-key global-map [(f2)] 'gnus)

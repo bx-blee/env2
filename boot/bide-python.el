@@ -61,7 +61,7 @@ typeset RcsId="$Id: setup-global-bbdb.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp $
 ;; (bide:py:full/update)
 ;;
 (defun bide:py:full/update ()
-  "This will replace everything that has to do with org-mode, including ./orgModeInit.el
+  "This will replace everything that has to do with org-mode, including ./orgModeInit.el.
 "
   (interactive)
   (blee:ann|this-func (compile-time-function-name))
@@ -102,8 +102,9 @@ typeset RcsId="$Id: setup-global-bbdb.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp $
 (defun bide:py:common|config ()
   ""
   (blee:ann|this-func (compile-time-function-name))
+  (setq lsp-pyright-typechecking-mode "off")   ;;; BISOS-Py uses a lot of this
+  (pyvenv-activate "/bisos/venv/py3/bisos3")
   )
-
 
 
 (lambda () "

@@ -94,15 +94,40 @@ typeset RcsId="$Id: setup-global-keycast.el,v 1.6 2018-06-08 23:49:29 lsipusr Ex
   (add-to-list 'global-mode-string '("" mode-line-keycast))
   )
 
-(defun turn-on-keycast ()
+(defun turn-on-keycast%% ()
   (interactive)
   (add-to-list 'global-mode-string '("" mode-line-keycast " "))
 )
 
-(defun turn-off-keycast ()
+(defun turn-off-keycast%% ()
   (interactive)
   (setq global-mode-string (delete '("" mode-line-keycast " ") global-mode-string))
+  (force-mode-line-update)
 )
+
+
+
+;;;
+;;; Global Menu/biso
+;;;
+
+;; (blee:blee:menu)
+;; (bap:keycast:global:menu)
+(defun bap:keycast:global:menu ()
+  (easy-menu-define 
+    bap-keycast-menu
+    nil 
+    "Keycast Menu"
+    '("Keycast Menu"
+      "---"
+      ["Enable Keycast Mode" (keycast-mode 1) t]  
+      ["Disable Keycast Mode" (keycast-mode -1) t]
+      "---"
+      ["Enable Keycast Log Mode" (keycast-log-mode 1) t]  
+      ["Disable Keycast Log Mode" (keycast-log-mode -1) t]
+      ["Keycast Log Erase Buffer" (keycast-log-erase-buffer) t]
+      ))
+  )
 
 
 (lambda () "
