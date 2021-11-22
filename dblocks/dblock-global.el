@@ -39,6 +39,13 @@
   (insert (format "icmInfo['moduleName'] = \"%s\"" (file-name-sans-extension (bx:buf-fname))))
   )
 
+
+(defun org-dblock-write:bx:bpf:py:name (params)
+  ""
+  (insert (format "bpfInfo['moduleName'] = \"%s\"" (file-name-sans-extension (bx:buf-fname))))
+  )
+
+
 (defun org-dblock-write:bx:global:icm:name-py (params)
   ""
   (insert (format "__icmName__ = \"%s\"" (file-name-sans-extension (bx:buf-fname))))
@@ -55,6 +62,12 @@
   ""
   (insert (format "icmInfo['version'] = \"%s\"" (format-time-string "%Y%m%d%M%S")))
   )
+
+(defun org-dblock-write:bx:bpf:py:version-timestamp (params)
+  ""
+  (insert (format "bpfInfo['version'] = \"%s\"" (format-time-string "%Y%m%d%M%S")))
+  )
+
 
 (defun org-dblock-write:bx:global:timestamp:version-py (params)
   ""

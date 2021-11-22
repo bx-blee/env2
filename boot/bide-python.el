@@ -103,7 +103,7 @@ typeset RcsId="$Id: setup-global-bbdb.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp $
   ""
   (blee:ann|this-func (compile-time-function-name))
   (setq lsp-pyright-typechecking-mode "off")   ;;; BISOS-Py uses a lot of this
-  (pyvenv-activate "/bisos/venv/py3/bisos3")
+  ;;(pyvenv-activate "/bisos/venv/py3/bisos3") ;; Gets in the way of development
   )
 
 
