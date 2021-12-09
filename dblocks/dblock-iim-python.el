@@ -646,7 +646,7 @@ Insert Org-heading
       ;;; G = %s%sGlobalContext()
       (insert
        (format "
-    ):
+    ) -> icm.OpOutcome:
 "))
       
       (when (string= @modPrefix "lib")
