@@ -182,7 +182,7 @@
   )
 
 (defun bx:mail:body:get-from-buffer-then-erase ()
-  "RETURNS Body as a string -- then erases"
+  "Return Body as a string -- then erases."
   (interactive)
   (let* (
       (this-buffer)
@@ -443,14 +443,12 @@ body-string
   )
 
 
-
 (defun bx:mail:header:add-x-mailingMethod (mailing-method)
   ""
   (setq message-default-headers
 	(concat message-default-headers
 		(format "X-MailingMethod: %s\n" mailing-method)))
   )
-
 
 (defun bxms-compose-from-base (mailing-base-dir n)
   " "
@@ -469,9 +467,7 @@ body-string
 
     (msend-compose-setup)
 
-    (message (format "Arg=%d " n))
-    
-    ;;(progn (message (format "Arg=%d " n)) (sleep-for 3))
+    (message (format "bxms-compose-from-base:: Arg=%d  base=%s" n mailing-base-dir))
 
     ;; With arg 5, just setup the envelope and from permanently
     ;;

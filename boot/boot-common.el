@@ -595,6 +595,14 @@
     string-arg
     )
 
+  ;;;
+  ;;; We want proper bidi suppport, so we restore everything
+  ;;; in case the likes of
+  ;;;
+  (setq-default bidi-display-reordering t)
+  (setq-default bidi-paragraph-direction nil)
+  (setq bidi-inhibit-bpa nil)
+
   (require 'tramp)
   (setq tramp-default-method "scp")
 

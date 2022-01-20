@@ -30,12 +30,20 @@
       (let* (
              ($extensionFileName)
              ($mailingName)
+             ($mailingBuf (find-file <mailingFile))
+	     ($mailingParams (mcdt:mailing:params|from-buf $mailingBuf))
+             ($type (or (plist-get $mailingParams :type) nil))
              )
         (setq $mailingName (mcdt:mailing:getName|with-file <mailingFile))
         (when <foldDesc
           (insert (format "  [[elisp:(org-cycle)][| /%s/ |]] " <foldDesc)))
-        (insert (format "    [[elisp:(mcdt:setup-and-compose/with-file \"%s\")][%s]]    " <mailingFile $mailingName))
-        (insert (format "    [[file:%s][Visit MailingFile]]    " <mailingFile))
+        (insert (format "    [[elisp:(mcdt:setup-and-compose/with-file \"%s\")][%s]] " <mailingFile $mailingName))
+        (when (equalp $type 'originate )
+          (insert
+           (s-lex-format
+            "|| [[elisp:(mcdt:setup-and-originate/with-file \"${<mailingFile}\")][Originate]] ")))
+        (message (format "%s" $type))
+        (insert (format "|| [[file:%s][Visit]]   " <mailingFile))
         )
       )
     

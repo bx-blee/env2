@@ -91,6 +91,9 @@
 (defun bx:realms|listGet ()
   (list "collective" "site" "usageEnv" "platform"))
 
+;;;
+;;; (bx:bxoId|fromHomeWithRealmGet "usageEnv")
+;;;
 (defun bx:bxoId|fromHomeWithRealmGet (<realm)
   "Get org-mode markup specifier for <realm"
   (let* (
@@ -304,9 +307,14 @@ Otherwise, these would go inside of a dblock and mess things up."
         (if $bxoIdBase
             (progn
               (setq $realmPanelsBase (bxPanel|realmPanelsBaseGet $bxoIdBase))
+              (message (s-lex-format "bxoIdBase=${$bxoIdBase} ${$realmPanelsBase}"))
               (when $realmPanelsBase
+                ;; (setq $realmExtensionBase
+                ;;       (replace-regexp-in-string "/bisos/panels"
+                ;;                                 $realmPanelsBase $cwd))
                 (setq $realmExtensionBase
-                      (replace-regexp-in-string "/bisos/panels" $realmPanelsBase $cwd))
+                      (replace-regexp-in-string "/bisos/git/auth/bxRepos/blee-binders"
+                                                $realmPanelsBase $cwd))
                 (setq $extensionFileName (concat $realmExtensionBase "/" <segName ".org"))
                 (when (not (file-exists-p $extensionFileName))
                   (make-empty-file $extensionFileName t))
