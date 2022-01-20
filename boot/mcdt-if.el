@@ -538,6 +538,7 @@ Used for example, in dblocks such as bxPanel:mailing/originate.
   - visit the file
   - setup  mcdt:originate/mailingName if needed
   - invoke mcdt:originate/mailingName go to the to field
+NOTYET, delete the BCC field, if there is one.
  "
   (interactive)
   (let (
@@ -545,7 +546,7 @@ Used for example, in dblocks such as bxPanel:mailing/originate.
 	($mailingBuf nil)
 	($funcSymbol nil)
 	)
-    (find-file-read-only-other-frame <mailingFilePath)
+    (find-file-read-only <mailingFilePath)
     (setq $mailingBuf (current-buffer))
     (setq $mailingName (mcdt:mailing:getName/with-buffer $mailingBuf))
     (setq $funcSymbol (intern (mcdt:mailing:originate|get-function-name $mailingName)))
@@ -559,6 +560,10 @@ Used for example, in dblocks such as bxPanel:mailing/originate.
       )
     ;;; Most recent buffer should now be the "*unsent mail<n>*"
     (switch-to-buffer (mcdt:mailing|latest-unsent-mail-buf))
+    (message-goto-bcc)
+    (beginning-of-line 1)
+    (kill-whole-line)
+    (message-goto-to)
     )
   )
 
