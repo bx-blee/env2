@@ -192,6 +192,8 @@
   (require 'blee-global)
   ;;;;(require 'blee-packages-install)
 
+  (require 'blee-org-msg)
+
   ;;;; Mail Composition Distribution And Tracking (mcdt)
   (require 'mcdt-if)
 

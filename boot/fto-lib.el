@@ -213,6 +213,9 @@ When <include_nodeBase_ the _nodeBase_ directory is included.
     (when (string= (fto:treeElem|atBaseGetType <ftoBase) "node")
       (setq $result t)
       )
+    (when (string= (fto:treeElem|atBaseGetType <ftoBase) "auxNode")
+      (setq $result t)
+      )
     $result
     )
   )
