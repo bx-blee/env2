@@ -34,6 +34,8 @@
 
 (setq org-msg-convert-citation t)
 
+(add-to-list 'auto-mode-alist '("\\.orgMsg\\'" . org-msg-edit-mode))
+
 (org-msg-mode)
 
 
