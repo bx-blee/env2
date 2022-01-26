@@ -86,11 +86,13 @@
         (insert (s-lex-format
                 "  [[elisp:(find-file \"./mailing.ttytex\")][Visit ./mailing.ttytex]]"))
         (insert (s-lex-format
+                " | [[elisp:(call-interactively 'org-msg-preview)][Browser Preview]]"))
+        (insert (s-lex-format
                 " | [[elisp:(message-mode)][message-mode]]"))
         (insert (s-lex-format
                 " | [[elisp:(mcdt:setup-and-compose/with-curBuffer)][Compose]]"))
         (insert (s-lex-format
-                " | [[elisp:(mcdt:setup-and-originate/with-curBuffer)][Originate]]"))
+                 " | [[elisp:(mcdt:setup-and-originate/with-curBuffer)][Originate]]"))
         (insert "\n#+END_COMMENT")
         )
       )
