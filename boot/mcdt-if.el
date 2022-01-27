@@ -1,6 +1,6 @@
-;;;-*- mode: Emacs-Lisp; lexical-binding: t ; -*-
+;;; mcdt-if.el --- Mail Templating, Distribution and Tracking -*- lexical-binding: t; -*-
 
-;;;
+;;; Commentary:
 ;;; MTDT (Mail Templating, Distribution and Tracking) FKA:  MCDT (Mail Composition, Distribution and Tracking)
 ;;; Libre-Halaal Constant Contact For Everyone
 ;;;
@@ -45,13 +45,28 @@
 ;;;    ======== bxms-bbdb-batch-MailingName    -- BBDB USAGE        -- Batch on One
 ;;;    ======== bxms-bbdb-toall-MailingName    -- BBDB USAGE        -- Interactive on ALL in To:
 ;;;----------------------------------------------------------------------------
+;;
+;;; Code:
 
 (require 'f)
+(require 'loop)
+(require 'message)
 (require 'mailing-from-base)
 (require 'msend-lib)
-(require 'loop)
 
-(defvar mcdt:compose:ephemera:base "/tmp"
+(defvar mcdt:reply:templates:base
+  (expand-file-name "~/bpos/usageEnvs/fullUse/mailings/reply")
+  "Basedir of where LaTeX templates are.")
+
+(defvar mcdt:reply:templates:leftToRight
+  (expand-file-name "~/bpos/usageEnvs/fullUse/mailings/reply/ltr-basicLaTeX")
+  "Basedir of where leftToRight LaTeX languages templates are.")
+
+(defvar mcdt:reply:templates:rightToLeft
+  (expand-file-name "~/bpos/usageEnvs/fullUse/mailings/reply/rtl-basicLaTeX")
+  "Basedir of where leftToRight LaTeX languages templates are.")
+
+(defvar mcdt:compose:ephemera:base "/bisos/tmp"
   "Basedir of where ephemera compositions go.")
 
 ;;
@@ -75,8 +90,8 @@ With compose can edit content and headers, with originate only headers."
 ;; (macroexpand-all (mcdt:originate$mailing-defun "~/BUE/mailings/start/family.fa/blank/basicText.fa/content.mail"))
 ;;
 (defmacro mcdt:originate$mailing-defun (<mailingFilePath)
-  "The macro defines a function to be invoked to originate a msg from template.
-<MAILINGFILEPATH is expected to be a static path.
+  "<MAILINGFILEPATH is expected to be a static path.
+The macro defines a function to be invoked to originate a msg from template.
 interactive p is needed so that there are some params.
 With compose can edit content and headers, with originate only headers."
   `(fset (intern (concat "mcdt:originate/" (mcdt:mailing:getName|with-file ,<mailingFilePath)))
@@ -635,8 +650,6 @@ When composeFwrk is msgOrg, switch to org-msg-edit-mode."
     ))
 
 
-
-
 (defun mcdt:setup-and-originate/with-file (<mailingFilePath)
   "Given a mailing file, initiate an outgoing message.
 Used for example, in dblocks such as bxPanel:mailing/originate.
@@ -735,6 +748,12 @@ NOTYET, counter has not been implemented yet."
     $ephemeraMailingFilePath
     ))
 
+(defun mcdt:compose:ephemera|mailBufRecordNew (<ephemeraMailingFilePath <bufName)
+  "Record name of <buf at <ephemeraMailingFilePath as mail.buf. It can then be obtained."
+    (with-temp-file (concat (file-name-directory <ephemeraMailingFilePath) "mail.buf")
+      (insert (s-lex-format "${<bufName}"))))
+
+
 (defun mcdt:compose:ephemera|mailBufRecord (<ephemeraMailingFilePath)
   "Record name of <buf at <ephemeraMailingFilePath as mail.buf. It can then be obtained."
     (with-temp-file (concat (file-name-directory <ephemeraMailingFilePath) "mail.buf")
@@ -801,6 +820,8 @@ dblock update it and perview."
   (message "mcdt:gnus:reply|ephemeraSetup was triggered, likely from gnus-article-prepare-hook")
   (let* (
 	 ($point)
+         ($ephemeraMailingFilePath:ltr nil)
+         ($ephemeraMailingFilePath:rtl nil)
 	 )
     (setq $point (search-forward "--citation follows this line (read-only)--" nil t))
     (when $point
@@ -809,25 +830,43 @@ dblock update it and perview."
       (insert "\n#+BEGIN: bx:mtdt:content/actions")
       (insert "\n#+END:")
       (insert "\n")
-      (insert "\n#+BEGIN: bx:file-insert:org:html :file \"./rel/mailing-html/index.html\"")
-      (insert "\n#+END:")
-      (insert "\n")
 
-      ;; Determine Language
-      ;;
-      ;; Based On Language, create an ephemera tex-base
-      ;;
-      ;; Change reply's mail buffer current directory to ephemera tex-base
-      ;;
-      ;; Add X- header info to 822-Bus
-      ;;
-      ;; Dblcok expand
+      ;; (insert "\n#+BEGIN: bx:file-insert:org:html :file \"./rel/mailing-html/index.html\"")
+      ;; (insert "\n#+END:")
+      ;; (insert "\n")
+
+      (setq $ephemeraMailingFilePath:ltr
+	    (mcdt:compose:ephemera|copyToBase
+             mcdt:reply:templates:leftToRight
+             "."))
+
+      (setq $ephemeraMailingFilePath:rtl
+	    (mcdt:compose:ephemera|copyToBase
+             mcdt:reply:templates:rightToLeft
+             "."))
+
+      (save-excursion
+        (message-carefully-insert-headers (list (cons 'X-tmp-mailingPath-ltr $ephemeraMailingFilePath:ltr)))
+        (message-carefully-insert-headers (list (cons 'X-tmp-mailingPath-rtl $ephemeraMailingFilePath:rtl)))
+        (message-sort-headers)
+        )
 
       (org-dblock-update-buffer-bx)
       )
 
     $point
     ))
+
+(defun mcdt:mailing:baseDir|set (<baseDir)
+  "Setup the specified ephemeraBaseDir for current unsent mailBuf."
+  (setq default-directory <baseDir)
+  (save-excursion
+    (message-carefully-insert-headers (list (cons 'X-tmp-mailingPath <baseDir)))
+    (message-sort-headers)
+    )
+  (mcdt:compose:ephemera|mailBufRecordNew <baseDir (current-buffer))
+  )
+
 
 ;;;(add-hook 'message-setup-hook 'mcdt:gnus:reply|ephemeraSetup)
 ;;;(remove-hook 'message-setup-hook 'mcdt:gnus:reply|ephemeraSetup)

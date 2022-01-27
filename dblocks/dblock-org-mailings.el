@@ -1,7 +1,7 @@
 (require 'bx-lcnt-lib)
 (require 'dblock-governor)
 (load "time-stamp")
-
+(require 'loop)
 
 (advice-add 'org-dblock-write:bxPanel:mailing/compose :around #'bx:dblock:control|wrapper)
 (defun org-dblock-write:bxPanel:mailing/compose  (<params)
@@ -53,7 +53,8 @@
 
 (advice-add 'org-dblock-write:bx:mtdt:content/actions :around #'bx:dblock:control|wrapper)
 (defun org-dblock-write:bx:mtdt:content/actions  (<params)
-  "In a content.{mail,msgOrg} file insert orgActionLinks for what applies to that mailing."
+  "In a content.{mail,msgOrg} file insert orgActionLinks for what applies to that mailing.
+Behaviour should be different based on what type of buffer we are in."
   (let* (
          (<governor (letGet$governor)) (<extGov (letGet$extGov))
          (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
@@ -79,10 +80,36 @@
              ($mailingFile (buffer-file-name (current-buffer)))
 	     ($mailingParams (mcdt:mailing:params|from-buf $mailingBuf))
              ($type (or (plist-get $mailingParams :type) nil))
+             ($headersList)
              )
         ;;(setq $mailingName (mcdt:mailing:getName|with-file $mailingFile))
+        ;;
+
+        (defun selectLaTeX-ltr (<basePath)
+          (insert (s-lex-format
+                   "  [[elisp:(mcdt:mailing:baseDir|set \"${<basePath}\")][Select LTR Base]]")))
+
+        (defun selectLaTeX-rtl (<basePath)
+          (insert (s-lex-format
+                   "  [[elisp:(mcdt:mailing:baseDir|set \"${<basePath}\")][Select RTL Base]]")))
+
+        (save-excursion
+          (beginning-of-buffer)
+          (setq $headersList (mail-header-extract)))
+
+        ;;(insert (format "%s\n" $headersList))
 
         (insert "#+BEGIN_COMMENT\n")
+
+        (loop-for-each each $headersList
+          ;; (insert (format "%s\n" each))
+          ;; (insert (format "%s\n" (car each)))
+          (when (equal 'x-tmp-mailingpath-rtl (car each))
+            (selectLaTeX-rtl (cdr each)))
+          (when (equal 'x-tmp-mailingpath-ltr (car each))
+            (selectLaTeX-ltr (cdr each)))
+          )
+
         (insert (s-lex-format
                 "  [[elisp:(find-file \"./mailing.ttytex\")][Visit ./mailing.ttytex]]"))
         (insert (s-lex-format

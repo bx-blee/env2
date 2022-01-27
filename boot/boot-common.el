@@ -192,7 +192,12 @@
   (require 'blee-global)
   ;;;;(require 'blee-packages-install)
 
-  (require 'blee-org-msg)
+  (require 'bap-org-msg)
+  (bap:org-msg:full/update)
+
+  (require 'bap-guess-language)
+  (bap:guess-language:full/update)
+
 
   ;;;; Mail Composition Distribution And Tracking (mcdt)
   (require 'mcdt-if)
@@ -524,7 +529,7 @@
   ;; /bisos/blee/env/main/murl-base.el /bisos/blee/env/main/murl-craigslist.el /bisos/blee/env/main/murl-slink.el /bisos/blee/env/main/murl-bbdb.el
 
   (load "murl-base.el")
-  ;;(load "murl-bbdb.el")            ;;; Captures mailto: into bbdb  -- Moved into bap-bbdb.el
+  ;;(load "murl-bbdb.el")            ;;; Captures mailto: into bbdb  -- Moved into bapbbdb.el
 
   ;; -----------------------------------------------------------------
   ;; GNU Server -- Should Run Last  after all else that is needed 
