@@ -1,5 +1,5 @@
 ;;; mcdt-if.el --- Mail Templating, Distribution and Tracking -*- lexical-binding: t; -*-
-
+q
 ;;; Commentary:
 ;;; MTDT (Mail Templating, Distribution and Tracking) FKA:  MCDT (Mail Composition, Distribution and Tracking)
 ;;; Libre-Halaal Constant Contact For Everyone
@@ -554,62 +554,14 @@ ModuleLocal.
       (setq $ephemeraMailingFilePath
 	    (mcdt:compose:ephemera|copyToBase <mailingFilePath <extSrcBase))
       (mcdt:compose|basedOnMailingTemplateFile $ephemeraMailingFilePath)
-      (mcdt:compose:ephemera|mailBufRecord $ephemeraMailingFilePath)
+      (mcdt:compose:ephemera|mailBufRecord
+       (file-name-directory $ephemeraMailingFilePath)
+       (buffer-name (mcdt:mailing|latest-unsent-mail-buf))
+       )
       (display-buffer
        (switch-to-buffer (mcdt:mailing|latest-unsent-mail-buf)))
       )
     ))
-
-(defun mcdt:compose|with-file%% (<mailingFilePath args)
-  "Out of macro work of mcdt:compose$mailing-defun.
-ModuleLocal.
-"
-  (let* (
-	 ($mailingBuf (switch-to-buffer (find-file <mailingFilePath)))
-	 ($mailingParams (mcdt:mailing:params|from-buf $mailingBuf))
-         ($ephemeraMailingFilePath nil)
-	 (<extSrcBase (or (plist-get $mailingParams :extSrcBase) nil))
-	 ($composeFwrk (mcdt:mailing:getComposeFwrk|with-buffer $mailingBuf))
-	 )
-    (message (s-lex-format "mailingParams: ${$mailingParams} extSrcBase ${<extSrcBase}"))
-
-    (cond
-     ((string-equal $composeFwrk "message")
-      (unless <extSrcBase
-        (text-mode) ;; bxms-compose-from-base checks for major-mode
-        (bxms-compose-from-base (expand-file-name (file-name-directory <mailingFilePath)) args)
-        ;; Setup default-directory of mail buffer to be mailingDirPath
-        )
-      (when <extSrcBase
-        (setq $ephemeraMailingFilePath
-	      (mcdt:compose:ephemera|copyToBase <mailingFilePath <extSrcBase))
-        (text-mode) ;; bxms-compose-from-base checks for major-mode
-        (bxms-compose-from-base (expand-file-name (file-name-directory $ephemeraMailingFilePath)) args)
-        (mcdt:compose:ephemera|mailBufRecord $ephemeraMailingFilePath)
-        (display-buffer
-         (switch-to-buffer (mcdt:mailing|latest-unsent-mail-buf)))
-        )
-      )
-     ((string-equal $composeFwrk "msgOrg")
-      (unless <extSrcBase
-        (text-mode) ;; bxms-compose-from-base checks for major-mode
-        (bxms-compose-from-base (expand-file-name (file-name-directory <mailingFilePath)) args)
-        ;; Setup default-directory of mail buffer to be mailingDirPath
-        )
-      (when <extSrcBase
-        (setq $ephemeraMailingFilePath
-	      (mcdt:compose:ephemera|copyToBase <mailingFilePath <extSrcBase))
-        (text-mode) ;; bxms-compose-from-base checks for major-mode
-        (bxms-compose-from-base (expand-file-name (file-name-directory $ephemeraMailingFilePath)) args)
-        (mcdt:compose:ephemera|mailBufRecord $ephemeraMailingFilePath)
-        (display-buffer
-         (switch-to-buffer (mcdt:mailing|latest-unsent-mail-buf)))
-        )
-      )
-     (t
-      (message (s-lex-format "Unknown $composeFwrk=${$composeFwrk}"))))
-    ))
-
 
 ;;;
 ;;; (mcdt:compose|basedOnMailingTemplateFile "/bxo/r3/iso/piu_mbFullUsage/mailings/compose/family/from/org-tex/content.orgMsg")
@@ -748,16 +700,10 @@ NOTYET, counter has not been implemented yet."
     $ephemeraMailingFilePath
     ))
 
-(defun mcdt:compose:ephemera|mailBufRecordNew (<ephemeraMailingFilePath <bufName)
+(defun mcdt:compose:ephemera|mailBufRecord (<ephemeraMailingBaseDir <bufName)
   "Record name of <buf at <ephemeraMailingFilePath as mail.buf. It can then be obtained."
-    (with-temp-file (concat (file-name-directory <ephemeraMailingFilePath) "mail.buf")
+    (with-temp-file (concat (file-name-as-directory <ephemeraMailingBaseDir) "mail.buf")
       (insert (s-lex-format "${<bufName}"))))
-
-
-(defun mcdt:compose:ephemera|mailBufRecord (<ephemeraMailingFilePath)
-  "Record name of <buf at <ephemeraMailingFilePath as mail.buf. It can then be obtained."
-    (with-temp-file (concat (file-name-directory <ephemeraMailingFilePath) "mail.buf")
-      (insert (buffer-name (mcdt:mailing|latest-unsent-mail-buf)))))
 
 (defun mcdt:compose:ephemera|mailBufObtain (<ephemeraMailingFilePath)
   "Record name of <buf at <ephemeraMailingFilePath as mail.buf. It can then be obtained."
@@ -864,8 +810,39 @@ dblock update it and perview."
     (message-carefully-insert-headers (list (cons 'X-tmp-mailingPath <baseDir)))
     (message-sort-headers)
     )
-  (mcdt:compose:ephemera|mailBufRecordNew <baseDir (current-buffer))
+  (mcdt:gnus:reply|orgHtmlDblockSetup)
+  (mcdt:compose:ephemera|mailBufRecord <baseDir (current-buffer))
   )
+
+(defun mcdt:gnus:reply|orgHtmlDblockSetup ()
+  "Called ephermaBase has been selected.
+Is idempotent."
+  (message "mcdt:gnus:reply|orgHtmlDblockSetup Entered")
+  (let* (
+	 ($orgHtmlDblockPoint nil)
+         ($citationLinePoint nil)
+	 )
+    (save-excursion
+      (goto-char (point-min))
+      (setq $orgHtmlDblockPoint
+            (search-forward "#+BEGIN: bx:file-insert:org:html :file" nil t))
+      )
+
+    (unless $orgHtmlDblockPoint
+      (save-excursion
+        (goto-char (point-min))
+        (setq $citationLinePoint
+              (search-forward "--citation follows this line (read-only)--" nil t))
+        )
+
+      (when $citationLinePoint
+        (goto-char $citationLinePoint)
+        (forward-line -1)
+        (insert "\n")
+        (insert "\n#+BEGIN: bx:file-insert:org:html :file \"./rel/mailing-html/index.html\"")
+        (insert "\n#+END:")
+        (insert "\n")
+        ))))
 
 
 ;;;(add-hook 'message-setup-hook 'mcdt:gnus:reply|ephemeraSetup)
