@@ -1,5 +1,5 @@
 ;;; mcdt-if.el --- Mail Templating, Distribution and Tracking -*- lexical-binding: t; -*-
-q
+
 ;;; Commentary:
 ;;; MTDT (Mail Templating, Distribution and Tracking) FKA:  MCDT (Mail Composition, Distribution and Tracking)
 ;;; Libre-Halaal Constant Contact For Everyone

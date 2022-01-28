@@ -589,7 +589,8 @@ surround is for panel decoration."
 
 (defun org-dblock-write:bx:file-insert:org:html (params)
   "insert :file"
-  (let (
+  (let* (
+        ($thisBuf (current-buffer))
         (bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
         (bx:file (or (plist-get params :file) ""))
         (tmp-buffer-name (generate-new-buffer-name "dblock-tmp"))       
@@ -609,7 +610,7 @@ surround is for panel decoration."
             (insert "#+END_EXPORT")                                    
             )
           (if (get-buffer tmp-buffer-name)
-              (progn
+              (save-excursion
                 (insert-buffer tmp-buffer-name)
                 (kill-buffer tmp-buffer-name)
                 )
@@ -617,13 +618,15 @@ surround is for panel decoration."
           )
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )
+    (switch-to-buffer $thisBuf)    
     ))
 
 
 
 (defun org-dblock-write:bx:dblock:global:moded:file-insert (params)
   "insert :file"
-  (let (
+  (let* (
+         ($thisBuf (current-buffer))
         (bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
         (bx:mode (or (plist-get params :mode) "auto"))       
         (bx:file (or (plist-get params :file) ""))
@@ -656,6 +659,7 @@ surround is for panel decoration."
           )
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )
+    (switch-to-buffer $thisBuf)
     ))
 
 
