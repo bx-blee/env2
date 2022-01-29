@@ -13,6 +13,11 @@
 ;;;
 ;;; The mailingFile should be in correct RFC-822 format. For example, you can not have an empty To: field.
 ;;;
+;;; MTDT consists of:
+;;;    mtdt-lib.el    --- General purpose libraries
+;;;    mtdt-newMail.el   --- Initial outgoing email
+;;;    mtdt-contextedMail.el  --- Replies and Forwards
+;;;
 ;;; Customized-compostion of mailings, takes of two forms.
 ;;;  - direct editing -- :extSrcBase nil
 ;;;  - external source editing -- :extSrcBase "."  -- The result is then
@@ -715,6 +720,29 @@ NOTYET, counter has not been implemented yet."
       nil)))
 
 ;;;
+;;; (mcdt:mailing:content|filePath)
+;;;
+(defun mcdt:mailing:content|findFile ()
+  "Return nil if file does not exist. Based on existence, determine name of mailing content file.
+NOTYET: mode could come from ($composeFwrk (mcdt:mailing:getComposeFwrk|with-buffer <mailingBuf))
+We first look for content.msgOrg.
+"
+  (let* (
+         ($filePath nil)
+         )
+    (cond
+     ((file-readable-p (setq $filePath (f-join default-directory "content.orgMsg")))
+      (find-file $filePath)
+      (org-msg-edit-mode)
+      )
+     ((file-readable-p (setq $filePath (f-join default-directory "content.mail")))
+      (find-file $filePath)
+      (message-mode)
+      )
+     (t
+      $filePath
+      ))))
+
 ;;;
 ;;;
 (defun mcdt/gotoMailBuf ()
@@ -727,10 +755,10 @@ NOTYET, counter has not been implemented yet."
       (display-buffer
        (switch-to-buffer $ephemeraMailBufName)))
     (unless $ephemeraMailBufName
-      (find-file (concat default-directory "content.mail"))
-      (message-mode)
+      (mcdt:mailing:content|findFile)
       )
     ))
+
 
 (defun mcdt:content:update/mailBufAndVisit ()
   "Goto mailBuf, update it, raise it. preview it.
