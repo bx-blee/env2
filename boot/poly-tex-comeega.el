@@ -26,7 +26,7 @@
   :hostmode 'poly-latex-hostmode
   :innermodes '(poly-org-comeega-innermode))
 
-(add-to-list 'auto-mode-alist '("\\.py\\'" . poly-latex-mode))
+(add-to-list 'auto-mode-alist '("\\.tex\\'" . poly-latex-mode))
 
 (provide 'poly-tex-comeega)
 ;;; poly-tex-comeega.el ends here
