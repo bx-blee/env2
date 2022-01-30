@@ -199,6 +199,10 @@
   (bap:guess-language:full/update)
 
 
+  (require 'bap-polymode)
+  (bap:polymode:full/update)
+
+
   ;;;; Mail Composition Distribution And Tracking (mcdt)
   (require 'mcdt-if)
 
