@@ -8,6 +8,8 @@
 
 (require 'compile-time-function-name)
 (require 'polymode)
+(require 'poly-org)
+;;(require 'jekyll-modes)
 
 (defvar bap:polymode:usage:enabled-p t "polymode package adoption control.")
 
