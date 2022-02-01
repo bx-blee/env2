@@ -83,6 +83,7 @@
   (define-key global-map [(f3) (c) (o) ] 'bystar:mail:compose:from-office)
   (define-key global-map [(f3) (c) (d) ] 'bystar:mail:compose:from-desk)
   (define-key global-map [(f3) (c) (f) ] 'bystar:mail:compose:from-friend)
+  (define-key global-map [(f3) (c) (c) ] 'bystar:mail:compose:panel)
 
   ;;;
   ;;; Compose Email In Alt Language
@@ -269,6 +270,13 @@
   "Display a  help"
   (interactive)
   (describe-bindings [(f3)])
+  )
+
+(defun bystar:mail:compose:panel ()
+  ""
+  (interactive)
+  (find-file "~/bpos/usageEnvs/fullUse/realmPanels/blee-core/mail/sending/_nodeBase_/general.org")
+  (org-shifttab)
   )
 
 

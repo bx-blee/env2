@@ -196,7 +196,6 @@ If 'xterm create an xterm for it.")
 	(switch-user-p (not (string-equal (lsip-user) user)))
 	shell-buffer-window)
 
-
     ;; test that buffer has a process
     (if (null (get-buffer-process shell-buffer))
 	(condition-case ()		; handle any enclosing save-window-excursions

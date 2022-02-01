@@ -89,7 +89,7 @@
 (defun sectionTitleOpenInsert(@sectionType)
   (insert
    (format "\
-\"\"\"\n* \
+\"\"\" #+begin_org\n* \
  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  %-10s ::"
 @sectionType
 )))
@@ -97,12 +97,12 @@
 
 (defun sectionTitleCloseInsert(@sectionType)
   (insert
-   (format "  [[elisp:(org-cycle)][| ]]\n\"\"\"\n")))
+   (format "  [[elisp:(org-cycle)][| ]]\n#+end_org \"\"\"\n")))
 
 
 (defun sectionTitleCloseInsertNoNewLine(@sectionType)
   (insert
-   (format "  [[elisp:(org-cycle)][| ]]\n\"\"\"")))
+   (format "  [[elisp:(org-cycle)][| ]]\n#+end_org \"\"\"")))
 
 
 

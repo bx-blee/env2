@@ -587,10 +587,46 @@ surround is for panel decoration."
 
 
 
+(defun org-dblock-write:bx:file-insert:org:html (params)
+  "insert :file"
+  (let* (
+        ($thisBuf (current-buffer))
+        (bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
+        (bx:file (or (plist-get params :file) ""))
+        (tmp-buffer-name (generate-new-buffer-name "dblock-tmp"))       
+        )
+    (if (not
+         (or (equal "TRUE" bx:disabledP)
+             (equal "true" bx:disabledP)))
+        (progn
+          ;;; Processing Body
+          (message (format "EXECUTING -- disabledP = %s" bx:disabledP))
+          (save-excursion
+            (switch-to-buffer (get-buffer-create tmp-buffer-name))
+            (goto-char (point-min))
+            (insert "#+BEGIN_EXPORT html\n")
+            (insert-file (format "%s" bx:file))
+            (goto-char (point-max))
+            (insert "#+END_EXPORT")                                    
+            )
+          (if (get-buffer tmp-buffer-name)
+              (save-excursion
+                (insert-buffer tmp-buffer-name)
+                (kill-buffer tmp-buffer-name)
+                )
+            )
+          )
+      (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
+      )
+    (switch-to-buffer $thisBuf)    
+    ))
+
+
 
 (defun org-dblock-write:bx:dblock:global:moded:file-insert (params)
   "insert :file"
-  (let (
+  (let* (
+         ($thisBuf (current-buffer))
         (bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
         (bx:mode (or (plist-get params :mode) "auto"))       
         (bx:file (or (plist-get params :file) ""))
@@ -623,6 +659,7 @@ surround is for panel decoration."
           )
       (message (format "DBLOCK NOT EXECUTED -- disabledP = %s" bx:disabledP))
       )
+    (switch-to-buffer $thisBuf)
     ))
 
 

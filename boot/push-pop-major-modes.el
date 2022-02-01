@@ -145,6 +145,30 @@ the pop will fail, in which case we'll do normal-mode to recover.
   blee:ppmm:mode-stack
   )
 
+;;;
+(defun outline-show-subtree+toggle ()
+  "Not yet."
+  (interactive)
+  (blee:ann|this-func (compile-time-function-name))
+  (let (
+	($isFolded?  (org-folded-p))
+	)
+    (when $isFolded?
+	(outline-show-subtree)
+	)
+    (unless $isFolded?
+      (org-cycle)
+      )
+    )
+  )
+
+
+(defun org-folded-p ()
+  "Return non-nil if point is on a folded headline or plain list item."
+  (and (or (org-at-heading-p)
+           (org-at-item-p))
+       (invisible-p (point-at-eol))))
+
 ;;(provide 'blee-ppmm)
 (provide 'push-pop-major-modes)
 

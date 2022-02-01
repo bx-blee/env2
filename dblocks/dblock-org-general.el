@@ -328,7 +328,7 @@ We then distinguish between chapter and section based on indentation and TitleSt
       (setq $result 
             (format "\
 %s \
-%s   [[elisp:(org-cycle)][| %s%s:%s |]] %s %s \
+%s   [[elisp:(outline-show-subtree+toggle)][| %s%s:%s |]] %s %s \
 "
                     (blee:panel:frontControl @outLevel :inDblock @inDblock)
                     $indentationStr

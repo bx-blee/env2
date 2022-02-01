@@ -111,7 +111,7 @@ When :format is terse, a single link.
 When :format is line, a complete line.
 "
   (let (
-	($result nil)
+	($result (s-lex-format "OOPS --- Neither Leaf, Nor Branch ftpBase=${<ftoBase}"))
 	(<format (or (plist-get <args :format) "terse"))
 	($ftoName)
 	)

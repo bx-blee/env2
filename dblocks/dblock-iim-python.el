@@ -43,6 +43,12 @@
 (defun insertTripleQuotes ()
   (insert "\"\"\""))
 
+(defun insertTripleQuotesOrgBegin ()
+  (insert "\"\"\" #+begin_org"))
+
+(defun insertTripleQuotesOrgEnd ()
+  (insert "#+end_org \"\"\""))
+
 
 (defun org-dblock-write:bx:icm:python:top-of-file (params)
   (let ((bx:vc (or (plist-get params :vc) ""))
@@ -50,7 +56,7 @@
         (bx:copyleft (or (plist-get params :copyleft) ""))
         (out-string)
         )
-    (insertTripleQuotes)
+    (insertTripleQuotesOrgBegin)
     (insert "\n")
     
     (setq out-string (concat "*  This file:" buffer-file-name))
@@ -64,7 +70,7 @@
 
     (when (equal bx:copyleft "halaal+minimal")
       (insert " *CopyLeft*  This Software is a Libre-Halaal Poly-Existential. See http://www.freeprotocols.org")
-      )
+      nn)
     
     (when (equal bx:copyleft "halaal+brief")
       (insert "** Copyright (c) 2011 Neda Communications, Inc. -- http://www.neda.com
@@ -79,7 +85,7 @@
     (insert " Best Developed With COMEEGA-Emacs And Best Used With Blee-ICM-Players.\n")
     (insert " *WARNING*: All edits wityhin Dynamic Blocks may be lost.\n")
 
-    (insertTripleQuotes)
+    (insertTripleQuotesOrgEnd)
     ))
 
 
@@ -87,7 +93,7 @@
   (let (
         (out-string)
         )
-    (insertTripleQuotes)
+    (insertTripleQuotesOrgBegin)
     (insert "\n")
 
     (insert "*  [[elisp:(org-cycle)][|/Controls/| ]] :: [[elisp:(org-show-subtree)][|=]]  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [[elisp:(progn (org-shifttab) (org-content))][Content]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] | [[elisp:(bx:org:run-me)][Run]] | [[elisp:(bx:org:run-me-eml)][RunEml]] | [[elisp:(delete-other-windows)][(1)]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]")
@@ -98,7 +104,7 @@
     
     (insert "\n")
 
-    (insertTripleQuotes)
+    (insertTripleQuotesOrgEnd)
     ))
 
 ;;;
