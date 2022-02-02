@@ -1,61 +1,67 @@
-;;; -*- Mode: Emacs-Lisp; lexical-binding: t; -*-
+;;; example-comeega.el --- Blee Native Package: poly-elisp-comeega  -*- Mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; (setq debug-on-error t)
+;; (set-auto-mode)
+;; (org-indent-mode 0)
 
 ;;;#+BEGIN: bx:dblock:global:org-controls :disabledP "false" :mode "auto"
 (lambda () "
-*  /Controls/ ::  [[elisp:(org-cycle)][| ]]  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [[elisp:(progn (org-shifttab) (org-content))][Content]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] | [[elisp:(delete-other-windows)][(1)]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]
-*  /Maintain/ ::  [[elisp:(call-interactively (quote cvs-update))][cvs-update]]  [[elisp:(vc-update)][vc-update]] | [[elisp:(bx:org:agenda:this-file-otherWin)][Agenda-List]]  [[elisp:(bx:org:todo:this-file-otherWin)][ToDo-List]] 
-*      ================
+* [[elisp:(show-all)][(>]] [[elisp:(describe-function 'org-dblock-write:bx:dblock:global:org-controls)][dbf]]
+*  /Controls/ ::  [[elisp:(org-cycle)][| ]]  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][|O]]  [[elisp:(progn (org-shifttab) (org-content))][|C]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][|N]] | [[elisp:(delete-other-windows)][|1]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]
+*  /Maintain/ ::  [[elisp:(call-interactively (quote cvs-update))][cvs-update]] | [[elisp:(bx:org:agenda:this-file-otherWin)][Agenda-This]] [[elisp:(bx:org:todo:this-file-otherWin)][ToDo-This]] | [[elisp:(bx:org:agenda:these-files-otherWin)][Agenda-These]] [[elisp:(bx:org:todo:these-files-otherWin)][ToDo-These]]
+
+* [[elisp:(org-shifttab)][<)]] [[elisp:(describe-function 'org-dblock-write:bx:dblock:global:org-controls)][dbFunc)]]  E|
+
 ")
 ;;;#+END:
 
 ;;;#+BEGIN: bx:dblock:global:org-contents-list :disabledP "false" :mode "auto"
-(lambda () "
+(lambda () " #+begin_org {
 *      ################ CONTENTS-LIST ###############
 *  [[elisp:(org-cycle)][| ]]  *Document Status, TODOs and Notes*          ::  [[elisp:(org-cycle)][| ]]
-")
+} #+end_org ")
 ;;;#+END:
 
-(lambda () "
+(lambda () " #+begin_org {
 **  [[elisp:(org-cycle)][| ]]  Idea      ::  Description   [[elisp:(org-cycle)][| ]]
-")
+} #+end_org ")
 
 
-(lambda () "
+(lambda () " #+begin_org {
 * TODO [[elisp:(org-cycle)][| ]]  Description   :: *Info and Xrefs* UNDEVELOPED just a starting point <<Xref-Here->> [[elisp:(org-cycle)][| ]]
-")
+} #+end_org ")
 
 
 ;;;#+BEGIN: bx:dblock:lisp:loading-message :disabledP "false" :message "blee-comeega"
-(lambda () "
+(lambda () " #+begin_org {
 *  [[elisp:(org-cycle)][| ]]  "Loading..."  :: Loading Announcement Message blee-comeega [[elisp:(org-cycle)][| ]]
-")
+} #+end_org ")
 
 (message "blee-comeega")
 ;;;#+END:
 
-(lambda () "
+(lambda () " #+begin_org {
 *  [[elisp:(org-cycle)][| ]]  Requires      :: Requires [[elisp:(org-cycle)][| ]]
-")
+} #+end_org ")
 
 (require 'f)
 
-(lambda () "
+(lambda () " #+begin_org {
 *  [[elisp:(org-cycle)][| ]]  Top Entry     :: blee:blee-comeega:all-defaults-set [[elisp:(org-cycle)][| ]]
 (insert (format "%s" (set-auto-mode)))
 (insert (format "%s" major-mode))
 (insert (format "%s" polymode-mode))
 
 
-")
+} #+end_org ")
 
 
-(lambda () "
+(lambda () " #+begin_org {
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || defun        :: (blee-comeega:all-defaults-set) [[elisp:(org-cycle)][| ]]
-")
+} #+end_org ")
 
-(defun blee-comeega:all-defaults-set ()
-  ""
+(defun blee-comeega:all-defaults-set () " #+begin_org {
+** Docstring Example.
+} #+end_org "
   (interactive)
 
   (require 'blee-menu-ipAddr)
@@ -64,8 +70,6 @@
 
   ;;(blee:visitFilesMenuDef)  ;; Should not be initialized before (set-buffer "*LSIP* localhost")
   )
-
-
 
 
 ;;;   (blee:menu-sel:comeega:vc/define)
@@ -210,5 +214,4 @@
 
 ;;; local variables:
 ;;; no-byte-compile: t
-;;; bx:iimp:iimName: "hereHere"
 ;;; end:

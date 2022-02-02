@@ -1,4 +1,4 @@
-;;; poly-py-comeega.el --- Blee Native Package: poly-py-comeega  -*- lexical-binding: t; -*-
+;;; comeega-poly-tex.el --- Blee Native Package: comeega-poly-tex  -*- lexical-binding: t; -*-
 ;;
 ;;; Commentary:
 ;;
@@ -7,8 +7,8 @@
 
 (require 'polymode)
 
-(define-hostmode poly-python-hostmode
-  :mode 'python-mode
+(define-hostmode poly-latex-hostmode
+  :mode 'latex-mode
   ;; temporary
   :protect-font-lock t
   :protect-syntax t
@@ -22,11 +22,11 @@
   :head-mode 'host
   :tail-mode 'host)
 
-(define-polymode poly-python-mode
-  :hostmode 'poly-python-hostmode
+(define-polymode poly-latex-mode
+  :hostmode 'poly-latex-hostmode
   :innermodes '(poly-org-comeega-innermode))
 
-(add-to-list 'auto-mode-alist '("\\.py\\'" . poly-python-mode))
+(add-to-list 'auto-mode-alist '("\\.tex\\'" . poly-latex-mode))
 
-(provide 'poly-py-comeega)
-;;; poly-py-comeega.el ends here
+(provide 'comeega-poly-tex)
+;;; comeega-poly-tex.el ends here

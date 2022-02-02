@@ -51,24 +51,24 @@
   (interactive "p\np")
   (setq arg (if arg arg 1))
   (if (and allow-extend
-	   (or (and (eq last-command this-command) (mark t))
-	       (region-active-p)))
+           (or (and (eq last-command this-command) (mark t))
+               (region-active-p)))
       (set-mark
        (save-excursion
-	 (when (< (mark) (point))
-	   (setq arg (- arg)))
-	 (goto-char (mark))
-	 (forward-word arg)
-	 (point)))
+         (when (< (mark) (point))
+           (setq arg (- arg)))
+         (goto-char (mark))
+         (forward-word arg)
+         (point)))
     (let ((wbounds (bounds-of-thing-at-point 'word)))
       (unless (consp wbounds)
-	(error "No word at point"))
+        (error "No word at point"))
       (if (>= arg 0)
-	  (goto-char (car wbounds))
-	(goto-char (cdr wbounds)))
+          (goto-char (car wbounds))
+        (goto-char (cdr wbounds)))
       (push-mark (save-excursion
-		   (forward-word arg)
-		   (point)))
+                   (forward-word arg)
+                   (point)))
       (activate-mark))))
 
 
@@ -78,10 +78,10 @@
   (bx:mark-current-word)
   (let (curWord)
     (if (region-active-p)
-	(progn
-	  (setq curWord (buffer-substring (region-beginning) (region-end)))
-	  (deactivate-mark)
-	  )
+        (progn
+          (setq curWord (buffer-substring (region-beginning) (region-end)))
+          (deactivate-mark)
+          )
     (read-from-minibuffer "EH_problem: ")
     )
     ;;;
@@ -109,23 +109,23 @@
   
   (let (subjectStr)
     (if selection
-	(setq subjectStr selection)
+        (setq subjectStr selection)
       (progn
-	(if (region-active-p)
-	    (progn
-	      (message (format "%s %s" (region-beginning) (region-end)))
-	      (setq subjectStr (buffer-substring (region-beginning) (region-end)))
-	      (message (format "1-- %s" subjectStr))
-	      ;;(festival-say-region) 	      
-	      )
-	  (setq subjectStr (read-from-minibuffer "Input: "))
-	  )
-	)
+        (if (region-active-p)
+            (progn
+              (message (format "%s %s" (region-beginning) (region-end)))
+              (setq subjectStr (buffer-substring (region-beginning) (region-end)))
+              (message (format "1-- %s" subjectStr))
+              ;;(festival-say-region)         
+              )
+          (setq subjectStr (read-from-minibuffer "Input: "))
+          )
+        )
       )
     (message (format "2--%s" subjectStr))    
     (festival-say-string (format "2--%s" subjectStr))    
     (if yas-selected-text
-	(insert yas-selected-text)
+        (insert yas-selected-text)
       )
     (festival-say-string subjectStr)
     (message (format "3--%s" subjectStr))        
@@ -153,9 +153,9 @@
   (interactive)
   (if (region-active-p)
       (progn
-	(search-in-google 1)
-	(deactivate-mark)
-	)
+        (search-in-google 1)
+        (deactivate-mark)
+        )
     )
   )
 
@@ -209,8 +209,7 @@
   ;;(interactive)
   (define-key global-map [(f12)] nil)
 
-  ;;;(define-key global-map [(f12) (f12) ] 'bx:complete-tag)
-  (define-key global-map [(f12) (f12) ] 'blee:ppmm:org-mode-toggle)
+  (define-key global-map [(f12) (f12) ] 'blee:ppmm:org-mode-toggle)   ;;; f12 o (org) --- f12 n (native)  --- f12 p (poly)
   (define-key global-map [(f12) (l)  ]  'blee:ppmm:org-mode-content-list)
   (define-key global-map [(f12) (o)  ]  'org-shifttab)
   (define-key global-map [(f12) (t)  ]  'bx:complete-tag)
@@ -254,6 +253,8 @@
   (define-key global-map [(f12) (f) (o) ]  'org-shifttab)     ;;; Overview
   (define-key global-map [(f12) (f) (c) ]  'org-content)        ;;; Content
   (define-key global-map [(f12) (f) (a) ]  'show-all)         ;;; Show All
+;;;
+  (blee:comeega:globalKbd|set)
   )
 
 
@@ -291,8 +292,8 @@ The following basic commands are globally available.
 
                  Complete AtPoint
   ---------------------------------------
-  <f12><f12>		Complete Tag
-  \\[completion-at-point]  	completion-at-point
+  <f12><f12>            Complete Tag
+  \\[completion-at-point]       completion-at-point
 complete-abbrev
 complete-dabbrev
 complete-insert
@@ -341,8 +342,8 @@ The following basic commands are globally available.
 
                 Action AtPoint
   ---------------------------------------
-  <f1><f1>		find-file-at-point
-  \\[bue:visit-url-at-remote-firefox]  	Send URL to Remote Browser
+  <f1><f1>              find-file-at-point
+  \\[bue:visit-url-at-remote-firefox]   Send URL to Remote Browser
 \\[find-tag]
 \\[tags-loop-continue]
 \\[find-tag-other-window]
@@ -397,8 +398,8 @@ For now, there are these lispish notes.
   (interactive)
   (save-excursion
   (let ((cur-buf (current-buffer))
-	(file-buf)
-	)
+        (file-buf)
+        )
     (find-file-at-point)
     (setq file-buf (current-buffer))
     (other-window 1)

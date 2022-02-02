@@ -202,10 +202,12 @@
   (require 'bap-polymode)
   (bap:polymode:full/update)
 
-  (require 'poly-elisp-comeega)
-  (require 'poly-bash-comeega)
-  (require 'poly-py-comeega)
-  (require 'poly-tex-comeega)
+  (require 'comeega)
+
+  (require 'comeega-poly-elisp)
+  (require 'comeega-poly-bash)
+  (require 'comeega-poly-py)
+  (require 'comeega-poly-tex)
 
   ;;;; Mail Composition Distribution And Tracking (mcdt)
   (require 'mcdt-if)

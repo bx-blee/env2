@@ -1,4 +1,4 @@
-;;; poly-elisp-comeega.el --- Blee Native Package: poly-elisp-comeega  -*- lexical-binding: t; -*-
+;;; comeega-poly-bash.el --- Blee Native Package: comeega-poly-bash  -*- lexical-binding: t; -*-
 ;;
 ;;; Commentary:
 ;;
@@ -7,8 +7,8 @@
 
 (require 'polymode)
 
-(define-hostmode poly-emacs-lisp-hostmode
-  :mode 'emacs-lisp-mode
+(define-hostmode poly-bash-hostmode
+  :mode 'bash-mode
   ;; temporary
   :protect-font-lock t
   :protect-syntax t
@@ -22,11 +22,11 @@
   :head-mode 'host
   :tail-mode 'host)
 
-(define-polymode poly-emacs-lisp-mode
-  :hostmode 'poly-emacs-lisp-hostmode
+(define-polymode poly-bash-mode
+  :hostmode 'poly-bash-hostmode
   :innermodes '(poly-org-comeega-innermode))
 
-(add-to-list 'auto-mode-alist '("\\.el\\'" . poly-emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("\\.sh\\'" . poly-bash-mode))
 
-(provide 'poly-elisp-comeega)
-;;; poly-elisp-comeega.el ends here
+(provide 'comeega-poly-bash)
+;;; comeega-poly-bash.el ends here
