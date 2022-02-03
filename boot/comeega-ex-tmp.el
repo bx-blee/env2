@@ -15,15 +15,15 @@
 ;;;#+END:
 
 ;;;#+BEGIN: bx:dblock:global:org-contents-list :disabledP "false" :mode "auto"
-(lambda () " #+begin_org {
+(lambda () " #+begin_org
 *      ################ CONTENTS-LIST ###############
 *  [[elisp:(org-cycle)][| ]]  *Document Status, TODOs and Notes*          ::  [[elisp:(org-cycle)][| ]]
-} #+end_org ")
+#+end_org ")
 ;;;#+END:
 
-(lambda () " #+begin_org {
+(lambda () " #+begin_org
 **  [[elisp:(org-cycle)][| ]]  Idea      ::  Description   [[elisp:(org-cycle)][| ]]
-} #+end_org ")
+#+end_org ")
 
 
 (lambda () " #+begin_org {

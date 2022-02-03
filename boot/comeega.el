@@ -40,6 +40,7 @@
   (interactive)
   (org-mode)
   (setq major-mode 'org-mode)
+  (font-lock-fontify-buffer 1)
   )
 
 
@@ -58,10 +59,12 @@
      ((eq major-mode 'org-mode)
       (set-auto-mode)
       (org-indent-mode 0)
+      (font-lock-fontify-buffer 1)
       )
      (t
       (set-auto-mode)
       (org-indent-mode 0)
+      (font-lock-fontify-buffer 1)
       )
      )))
 
@@ -83,10 +86,13 @@
       (call-interactively (comeega:polymode|getForMode major-mode))
       (current-buffer)
       (org-indent-mode 0)
+      (font-lock-fontify-buffer 1)
       )
      (t
       (call-interactively (comeega:polymode|getForMode major-mode))
       (current-buffer)
+      (org-indent-mode 0)
+      (font-lock-fontify-buffer 1)
       (org-indent-mode 0)
       )
      )))
