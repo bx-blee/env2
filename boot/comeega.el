@@ -40,7 +40,7 @@
   (interactive)
   (org-mode)
   (setq major-mode 'org-mode)
-  (font-lock-fontify-buffer 1)
+  (font-lock-ensure)
   )
 
 
@@ -64,7 +64,7 @@
      (t
       (set-auto-mode)
       (org-indent-mode 0)
-      (font-lock-fontify-buffer 1)
+      (font-lock-ensure)
       )
      )))
 

@@ -19,8 +19,8 @@
 (define-innermode comeega:poly-org-elisp-innermode nil
   "Innermode for matching comeega fragments in `org-mode'"
   :mode 'org-mode
-  :head-matcher "[ \t]*#\\+begin_org.*\n"
-  :tail-matcher "[ \t]*#\\+end_org.*\n"
+  :head-matcher "(orgCmntBegin.*\n"
+  :tail-matcher "orgCmntEnd).*\n"
   :head-mode 'host
   :tail-mode 'host)
 
