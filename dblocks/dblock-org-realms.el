@@ -1,3 +1,26 @@
+;;; dblock-org-realms.el --- realms based inclusion in bxPanels  -*- lexical-binding: t; -*-
+;;
+;; This file is part of Blee (ByStar Libre-Halaal Emacs Environment).
+;; Blee Copyright and License apply.
+;;
+;;; Commentary:
+;;
+;;  Here we provide for realms based inclusion in bxPanels.
+;;
+;;  There is a combination of two concepts at work here.
+;;  1) bxPanels    --- General facilities for abstracion of Blee Panles.
+;;  2) bx:realm   --- General facilities for abstracion of BISOS Realms
+;;  When combined the module prefix is:
+;;  bx:realm:bpoId:      --- bpoId of a realm
+;;  bx:realm:panels:
+;;
+;;  NOTYET: IMPORTANT:
+;;  - All the letGet and bx:dblock:governor:process facilities should go into their own modyles.
+;;  - All the bx:relams: should go into their own modules.
+;;
+;;; Code:
+
+
 (require 'bx-lcnt-lib)
 (require 'dblock-governor)
 (load "time-stamp")
@@ -89,36 +112,44 @@
 
 
 (defun bx:realms|listGet ()
-  (list "collective" "site" "usageEnv" "platform"))
+  (list
+   "collective"         ;; ByStar Digital Ecosystem
+   "nation"
+   "district"   ;; eg service provider
+   "site"
+   "projs"
+   "platform"
+   "usageEnv"
+   ))
 
 ;;;
-;;; (bx:bxoId|fromHomeWithRealmGet "usageEnv")
-;;;
-(defun bx:bxoId|fromHomeWithRealmGet (<realm)
-  "Get org-mode markup specifier for <realm"
+;;; (bx:realm:bpoId|fromHomeGet "usageEnv")
+;;; bx:realm:bpoId|fromHomeGet
+(defun bx:realm:bpoId|fromHomeGet (<realm)
+  "Return realm:bpoId based on <realm."
   (let* (
          ($homeDir (expand-file-name "~"))
-         ($bxoId nil)
+         ($bpoId nil)
         )
     (cond
      ((member <realm (bx:realms|listGet))
-      (setq $bxoId t)
+      (setq $bpoId t)
       )
      (t
       (error (format "unexpected %s" <realm))
       ))
-    (when $bxoId
+    (when $bpoId
       (let* (
              ($missing t)
-             ($realmBaseDir (concat $homeDir "/bxo/" <realm))
-             ($selectedRealmBaseDir (concat $realmBaseDir "/selected"))
+             ($realmBaseDir (f-join $homeDir "bpos/realms" <realm))
+             ($selectedRealmBaseDir (f-join $realmBaseDir "0"))
              )
       
         (if (file-directory-p $realmBaseDir)
             (if (file-directory-p $selectedRealmBaseDir)
                 (progn
                   (setq $missing nil)
-                  (setq $bxoId (file-truename $selectedRealmBaseDir))
+                  (setq $bpoId (file-truename $selectedRealmBaseDir))
                   )
               (progn
                 (insert (format "** Missing selectedRealmBaseDir %s\n" $selectedRealmBaseDir))
@@ -129,16 +160,17 @@
             )
           )
         (when $missing
-          (setq $bxoId nil)
+          (setq $bpoId nil)
           )
         )
-    $bxoId
+    $bpoId
     )))
 
-(defun bxPanel|realmPanelsBaseGet (<bxoIdBase)
-  "If bxoIdBase/realmPanels does not exist return nil"
+;;; bx:realm:bpoId|panelsBaseGet
+(defun  bx:realm:bpoId|panelsBaseGet (<bpoIdBase)
+  "Return panelsBasePath or nil."
   (let* (
-         ($baseDir (concat <bxoIdBase "/realmPanels"))
+         ($baseDir (concat <bpoIdBase "/realmPanels"))
          ($realmPanelsBase nil)
          )
     (if (file-directory-p $baseDir)
@@ -152,7 +184,40 @@
     $realmPanelsBase
     ))
 
-
+(defun bx:realm:bpoId:panelExtension|insert (<realmPanelsBase <segName)
+  "Return realm extensions for the panel as string or nil.
+Content of <segName + .org  is the name of file, under <realmPanelsBase, mirroring `current-buffer`
+location that will be returned as string."
+  (let* (
+         ($cwd (expand-file-name "."))
+         ($realmExtensionBase)
+         ($extensionFileName)
+         )
+    (when <realmPanelsBase
+      (setq $realmExtensionBase
+            (replace-regexp-in-string
+             "/bisos/git/auth/bxRepos/blee-binders"
+             <realmPanelsBase
+             $cwd))
+      (setq $extensionFileName
+            (f-join $realmExtensionBase
+                    (concat <segName ".org")))
+      ;; If the segment file does not exist, we create an empty one.
+      (when (not (file-exists-p $extensionFileName))
+        (make-empty-file $extensionFileName t))
+      (if (equal
+           0
+           (file-attribute-size (file-attributes $extensionFileName)))
+          (progn
+            (insert (concat "** No extention found at: " $extensionFileName "\n"))
+            )
+        (progn
+          (insert (concat "** Extended By: " $extensionFileName " :*\n"))
+          (insert (with-temp-buffer
+                    (insert-file-contents $extensionFileName)
+                    (bxPanel:dblocks/Kill)
+                    (buffer-string)))
+          )))))
 
 (defun bxPanel:lineDeliminator|top (<realm)
   "Based on <realm, create a topLineDeliminator.
@@ -276,7 +341,7 @@ Otherwise, these would go inside of a dblock and mess things up."
          (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
          (<style (letGet$style "openTerseNoNl" "closeContinue"))
          ;;
-         (<bxoId (or (plist-get <params :bxoId) "auto"))
+         (<bpoId (or (plist-get <params :bpoId) "auto"))
          (<segName (or (plist-get <params :segName) "general"))  
          ($homeDir (expand-file-name "~"))
          )
@@ -284,7 +349,7 @@ Otherwise, these would go inside of a dblock and mess things up."
     (bxPanel:params$effective)   
 
     (defun helpLine ()
-      ":bxoId \"auto or bxoId\""
+      ":bpoId \"auto or bpoId\""
       )
 
     (defun bodyContentPlus ()
@@ -294,54 +359,127 @@ Otherwise, these would go inside of a dblock and mess things up."
     (defun bodyContent ()
       "If there is user data, insert it."
       (let* (
-             ($bxoIdBase)
+             ($bpoIdBase)
              ($cwd (expand-file-name "."))
              ($realmExtensionBase)
              ($realmPanelsBase)
              ($extensionFileName)
+             )
+        (when (string= <bpoId "auto")
+          (setq $bpoIdBase (bx:realm:bpoId|fromHomeGet <realm)))
+        (when (not $bpoIdBase)
+          (message (s-lex-format "Warning: Missing bpoId=${<bpoId} -- bpoIdBase=${$bpoIdBase}")))
+        (when $bpoIdBase
+          (cond
+           ((string= <realm "usageEnv")
+            (setq $realmPanelsBase (bx:realm:bpoId|panelsBaseGet $bpoIdBase))
+            (message (s-lex-format "bpoIdBase=${$bpoIdBase} ${$realmPanelsBase}"))
+            (bx:realm:bpoId:panelExtension|insert $realmPanelsBase <segName)
+            (bxPanel:lineDeliminator|bottom <realm)
             )
-        (when (string= <bxoId "auto")
-          (setq $bxoIdBase (bx:bxoId|fromHomeWithRealmGet <realm))
+           ((string= <realm "site")
+            (insert "Unimplemented Site")
+            )
+           ((string= <realm "platform")
+            (insert "Unimplemented Platform")
+            )
+           (t
+            (error (s-lex-format "Unexpected <realm=${<realm}"))
+            )
+           ))))
+
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    ))
+
+
+(defun bxPanel:realms|extend%%  (<realm <params)
+  "Creates terse links for navigation surrounding current panel in treeElem."
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         ;;
+         (<bpoId (or (plist-get <params :bpoId) "auto"))
+         (<segName (or (plist-get <params :segName) "general"))
+         ($homeDir (expand-file-name "~"))
+         )
+
+    (bxPanel:params$effective)
+
+    (defun helpLine ()
+      ":bpoId \"auto or bpoId\""
+      )
+
+    (defun bodyContentPlus ()
+      (bxPanel:lineDeliminator|top <realm)
+      )
+
+    (defun bodyContent ()
+      "If there is user data, insert it."
+      (let* (
+             ($bpoIdBase)
+             ($cwd (expand-file-name "."))
+             ($realmExtensionBase)
+             ($realmPanelsBase)
+             ($extensionFileName)
+             )
+        (when (string= <bpoId "auto")
+          (setq $bpoIdBase (bx:realm:bpoId|fromHomeGet <realm))
           )
 
-        (if $bxoIdBase
-            (progn
-              (setq $realmPanelsBase (bxPanel|realmPanelsBaseGet $bxoIdBase))
-              (message (s-lex-format "bxoIdBase=${$bxoIdBase} ${$realmPanelsBase}"))
-              (when $realmPanelsBase
-                ;; (setq $realmExtensionBase
-                ;;       (replace-regexp-in-string "/bisos/panels"
-                ;;                                 $realmPanelsBase $cwd))
-                (setq $realmExtensionBase
-                      (replace-regexp-in-string "/bisos/git/auth/bxRepos/blee-binders"
-                                                $realmPanelsBase $cwd))
-                (setq $extensionFileName (concat $realmExtensionBase "/" <segName ".org"))
-                (when (not (file-exists-p $extensionFileName))
-                  (make-empty-file $extensionFileName t))
-                (if (equal
-                     0
-                     (file-attribute-size (file-attributes $extensionFileName)))
+        (cond
+         ((string= <realm "usageEnv")
+          (if $bpoIdBase
+              (progn
+                (setq $realmPanelsBase (bx:realm:bpoId|panelsBaseGet $bpoIdBase))
+                (message (s-lex-format "bpoIdBase=${$bpoIdBase} ${$realmPanelsBase}"))
+                (when $realmPanelsBase
+                  ;; (setq $realmExtensionBase
+                  ;;       (replace-regexp-in-string "/bisos/panels"
+                  ;;                                 $realmPanelsBase $cwd))
+                  (setq $realmExtensionBase
+                        (replace-regexp-in-string "/bisos/git/auth/bxRepos/blee-binders"
+                                                  $realmPanelsBase $cwd))
+                  (setq $extensionFileName (concat $realmExtensionBase "/" <segName ".org"))
+                  (when (not (file-exists-p $extensionFileName))
+                    (make-empty-file $extensionFileName t))
+                  (if (equal
+                       0
+                       (file-attribute-size (file-attributes $extensionFileName)))
+                      (progn
+                        (insert (concat "** No user extention found at: " $extensionFileName "\n"))
+                        )
                     (progn
-                      (insert (concat "** No user extention found at: " $extensionFileName "\n"))
+                      (insert (concat "** Extended By: " $extensionFileName " :*\n"))
+                      (insert (with-temp-buffer
+                                (insert-file-contents $extensionFileName)
+                                (bxPanel:dblocks/Kill)
+                                (buffer-string)))
+                      (bxPanel:lineDeliminator|bottom <realm)
                       )
-                  (progn
-                    (insert (concat "** Extended By: " $extensionFileName " :*\n"))
-                    (insert (with-temp-buffer
-                              (insert-file-contents $extensionFileName)
-                              (bxPanel:dblocks/Kill)
-                              (buffer-string)))
-                    (bxPanel:lineDeliminator|bottom <realm)                   
                     )
                   )
                 )
+            (progn
+              (message (format "Missing bpoId=%s -- bpoIdBase=%s" <bpoId $bpoIdBase))
               )
-          (progn
-            (message (format "Missing bxoId=%s -- bxoIdBase=%s" <bxoId $bxoIdBase))
             )
-          )))
-       
-    (bx:invoke:withStdArgs$bx:dblock:governor:process)    
+          )
+         ((string= <realm "site")
+          (insert "Unimplemented Site")
+          )
+         ((string= <realm "platform")
+          (insert "Unimplemented Platform")
+          )
+         (t
+          (error (s-lex-format "Unexpected <realm=${<realm}"))
+          )
+         )
+        ))
+
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
     ))
+
 
 (defun org-dblock-write:bx:dblock:bnsm:user-extenstions-insert (params)
   "NOTYET, look for menuFile in subDirs, then make them visitable"
