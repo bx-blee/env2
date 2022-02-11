@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Html RTL Region
+# key: html/rtlRegion
+# group: html
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+#+BEGIN_EXPORT html
+<DIV dir="rtl">
+####+END
+
+#+BEGIN_EXPORT html
+</DIV>
+####+END
