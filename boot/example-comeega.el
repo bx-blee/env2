@@ -3,7 +3,7 @@
 ;; (set-auto-mode)
 ;; (org-indent-mode 0)
 
-;;;#+BEGIN: bx:dblock:global:org-controls :disabledP "false" :mode "auto"
+;;;#+BEGIN: bx:dblockd:global:org-controls :disabledP "false" :mode "auto"
 (lambda () "
 * [[elisp:(show-all)][(>]] [[elisp:(describe-function 'org-dblock-write:bx:dblock:global:org-controls)][dbf]]
 *  /Controls/ ::  [[elisp:(org-cycle)][| ]]  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][|O]]  [[elisp:(progn (org-shifttab) (org-content))][|C]] | [[file:Panel.org][Panel]] | [[elisp:(blee:ppmm:org-mode-toggle)][|N]] | [[elisp:(delete-other-windows)][|1]] | [[elisp:(progn (save-buffer) (kill-buffer))][S&Q]]  [[elisp:(save-buffer)][Save]]  [[elisp:(kill-buffer)][Quit]] [[elisp:(org-cycle)][| ]]
@@ -15,15 +15,17 @@
 ;;;#+END:
 
 ;;;#+BEGIN: bx:dblock:global:org-contents-list :disabledP "false" :mode "auto"
-(lambda () " #+begin_org
-*      ################ CONTENTS-LIST ###############
+(lambda () "
+*      ################ CONTENTS-LIST   ###############
 *  [[elisp:(org-cycle)][| ]]  *Document Status, TODOs and Notes*          ::  [[elisp:(org-cycle)][| ]]
-#+end_org ")
+*  /OBSOLETED by  org-dblock-write:bx:global:org-contents-list/
+
+")
 ;;;#+END:
 
-(lambda () " #+begin_org
+(lambda () " #+begin_org {
 **  [[elisp:(org-cycle)][| ]]  Idea      ::  Description   [[elisp:(org-cycle)][| ]]
-#+end_org ")
+} #+end_org ")
 
 
 (lambda () " #+begin_org {
