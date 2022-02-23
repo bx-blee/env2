@@ -5,7 +5,7 @@
 (require 'easymenu)
 
 ;; (apps:magit:menu:plugin|install modes:menu:global (s-- 6))
-(defun apps:magit:menu:plugin|install (<menuLabel <menuDelimiter)
+(defun apps:magit:menu:plugin|install%% (<menuLabel <menuDelimiter)
   "Adds this as a submenu to menu labeled <menuLabel at specified delimited <menuDelimiter."
 
   (easy-menu-add-item
@@ -18,6 +18,49 @@
   (add-hook 'menu-bar-update-hook 'apps:magit:menu|update-hook)
   )
 
+;; (apps:magit:menu:plugin|install modes:menu:global (s-- 6))
+(defun apps:magit:generalMenu:plugin|install (<menuLabel <menuDelimiter)
+  "Adds this as a submenu to menu labeled <menuLabel at specified delimited <menuDelimiter."
+
+  (easy-menu-add-item
+   <menuLabel
+   nil
+   (apps:magit:generalMenu|define :active t)
+   <menuDelimiter
+   )
+
+  (add-hook 'menu-bar-update-hook 'apps:magit:menu|update-hook)
+  )
+
+;; (apps:magit:menu:plugin|install modes:menu:global (s-- 6))
+(defun apps:magit:bposMenu:plugin|install (<menuLabel <menuDelimiter)
+  "Adds this as a submenu to menu labeled <menuLabel at specified delimited <menuDelimiter."
+
+  (easy-menu-add-item
+   <menuLabel
+   nil
+   (apps:magit:bposMenu|define :active t)
+   <menuDelimiter
+   )
+
+  (add-hook 'menu-bar-update-hook 'apps:magit:menu|update-hook)
+  )
+
+;; (apps:magit:menu:plugin|install modes:menu:global (s-- 6))
+(defun apps:magit:githubMenu:plugin|install (<menuLabel <menuDelimiter)
+  "Adds this as a submenu to menu labeled <menuLabel at specified delimited <menuDelimiter."
+
+  (easy-menu-add-item
+   <menuLabel
+   nil
+   (apps:magit:githubMenu|define :active t)
+   <menuDelimiter
+   )
+
+  (add-hook 'menu-bar-update-hook 'apps:magit:menu|update-hook)
+  )
+
+
 (defun apps:magit:menu|update-hook ()
   "This is to be added to menu-bar-update-hook.
 It runs everytime any menu is invoked.
@@ -29,7 +72,7 @@ As such what happens below should be exactly what is necessary and no more."
 ;; (apps:magit:menu|define :active nil)
 ;; (popup-menu (symbol-value (apps:magit:menu|define)))
 ;;
-(defun apps:magit:menu|define (&rest <namedArgs)
+(defun apps:magit:menu|define%% (&rest <namedArgs)
   "Returns apps:magit:menu.
 :active can be specified as <namedArgs.
 "
@@ -56,41 +99,40 @@ As such what happens below should be exactly what is necessary and no more."
 	))
 
     (easy-menu-add-item
-     apps:magit:menu nil
+     apps:magit:githubMenu nil
      (apps:magit:menuItem:status|define)
      (s-- 3))
 
     (easy-menu-add-item
-     apps:magit:menu nil
+     apps:magit:githubMenu nil
      (apps:magit:menuItem:repolist-status|define)
      (s-- 3))
-    
+
     (easy-menu-add-item
-     apps:magit:menu nil
+     apps:magit:githubMenu nil
      (apps:magit:menuItem:bisos:current:bpo-repos|define)
      (s-- 4))
 
     (easy-menu-add-item
-     apps:magit:menu nil
+     apps:magit:githubMenu nil
      (apps:magit:menuItem:bisos:all:bpo-repos|define)
      (s-- 4))
-    
+
     (easy-menu-add-item
-     apps:magit:menu nil
+     apps:magit:githubMenu nil
      (apps:magit:menuItem:bisos:current:baseDir-repos|define)
      (s-- 5))
 
     (easy-menu-add-item
-     apps:magit:menu nil
+     apps:magit:githubMenu nil
      (apps:magit:menuItem:bisos:all:baseDir-repos|define)
      (s-- 5))
 
     (easy-menu-add-item
-     apps:magit:menu nil
+     apps:magit:githubMenu nil
      (apps:magit:menuItem:bisos:all:baseDir-atoms-repos|define)
      (s-- 5))
-    
-    
+
     ;; (easy-menu-add-item
     ;;  apps:magit:menu nil
     ;;  (apps:magit:menuItem:describe|define)
@@ -98,6 +140,159 @@ As such what happens below should be exactly what is necessary and no more."
 
     'apps:magit:menu
     ))
+
+;;
+;; (apps:magit:generalMenu|define :active nil)
+;; (popup-menu (symbol-value (apps:magit:generalMenu|define)))
+;;
+(defun apps:magit:generalMenu|define (&rest <namedArgs)
+  "Returns apps:magit:generalMenu.
+:active can be specified as <namedArgs.
+"
+  (let (
+	(<active (get-arg <namedArgs :active t))
+	($thisFuncName (compile-time-function-name))
+	)
+
+    (easy-menu-define
+      apps:magit:generalMenu
+      nil
+      (format "General MAGIT Menu")
+      `(
+	,(format "General MAGIT Menu")
+	:help "General MAGIT Menu"
+	:active ,<active
+	:visible t
+	,(s-- 3)
+	,(s-- 4)
+	,(s-- 5)
+	,(s-- 6)
+	,(s-- 7)
+	,(s-- 8)
+	))
+
+
+    (easy-menu-add-item
+     apps:magit:generalMenu nil
+     (apps:magit:menuItem:status|define)
+     (s-- 3))
+
+    (easy-menu-add-item
+     apps:magit:generalMenu nil
+     (apps:magit:menuItem:repolist-status|define)
+     (s-- 3))
+
+    ;; (easy-menu-add-item
+    ;;  apps:magit:generalMenu nil
+    ;;  (apps:magit:menuItem:describe|define)
+    ;;  (s-- 6))
+
+    'apps:magit:generalMenu
+    ))
+;;
+;; (apps:magit:bposMenu|define :active nil)
+;; (popup-menu (symbol-value (apps:magit:bposMenu|define)))
+;;
+(defun apps:magit:bposMenu|define (&rest <namedArgs)
+  "Returns apps:magit:bposMenu.
+:active can be specified as <namedArgs.
+"
+  (let (
+	(<active (get-arg <namedArgs :active t))
+	($thisFuncName (compile-time-function-name))
+	)
+
+    (easy-menu-define
+      apps:magit:bposMenu
+      nil
+      (format "BPOs MAGIT Menu")
+      `(
+	,(format "BPOs MAGIT Menu")
+	:help "BPOs MAGIT Menu"
+	:active ,<active
+	:visible t
+	,(s-- 3)
+	,(s-- 4)
+	,(s-- 5)
+	,(s-- 6)
+	,(s-- 7)
+	,(s-- 8)
+	))
+
+
+    (easy-menu-add-item
+     apps:magit:bposMenu nil
+     (apps:magit:menuItem:bisos:current:bpo-repos|define)
+     (s-- 4))
+
+    (easy-menu-add-item
+     apps:magit:bposMenu nil
+     (apps:magit:menuItem:bisos:all:bpo-repos|define)
+     (s-- 4))
+
+    ;; (easy-menu-add-item
+    ;;  apps:magit:bposMenu nil
+    ;;  (apps:magit:menuItem:describe|define)
+    ;;  (s-- 6))
+
+    'apps:magit:bposMenu
+    ))
+;;
+;; (apps:magit:githubMenu|define :active nil)
+;; (popup-menu (symbol-value (apps:magit:githubMenu|define)))
+;;
+(defun apps:magit:githubMenu|define (&rest <namedArgs)
+  "Returns apps:magit:githubMenu.
+:active can be specified as <namedArgs.
+"
+  (let (
+	(<active (get-arg <namedArgs :active t))
+	($thisFuncName (compile-time-function-name))
+	)
+
+    (easy-menu-define
+      apps:magit:githubMenu
+      nil
+      (format "Github MAGIT Menu")
+      `(
+	,(format "Github MAGIT Menu")
+	:help "Github MAGIT Menu"
+	:active ,<active
+	:visible t
+	,(s-- 3)
+	,(s-- 4)
+	,(s-- 5)
+	,(s-- 6)
+	,(s-- 7)
+	,(s-- 8)
+	))
+
+    (easy-menu-add-item
+     apps:magit:githubMenu nil
+     (apps:magit:menuItem:bisos:current:baseDir-repos|define)
+     (s-- 5))
+
+    (easy-menu-add-item
+     apps:magit:githubMenu nil
+     (apps:magit:menuItem:bisos:all:baseDir-repos|define)
+     (s-- 5))
+
+    (easy-menu-add-item
+     apps:magit:githubMenu nil
+     (apps:magit:menuItem:bisos:all:baseDir-atoms-repos|define)
+     (s-- 5))
+
+
+    ;; (easy-menu-add-item
+    ;;  apps:magit:githubMenu nil
+    ;;  (apps:magit:menuItem:describe|define)
+    ;;  (s-- 6))
+
+    'apps:magit:githubMenu
+    ))
+
+
+
 
 (defun apps:magit:menuItem:status|define ()
   "Returns a menuItem vector."

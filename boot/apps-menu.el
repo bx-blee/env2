@@ -83,9 +83,18 @@ As such what happens below is exactly what is necessary and no more."
     (apps:inmail:menu:plugin|install
      apps:menu:global (s-- 7))
 
-    (apps:magit:menu:plugin|install
+    ;; (apps:magit:menu:plugin|install apps:menu:global (s-- 8))
+
+    (apps:magit:generalMenu:plugin|install
      apps:menu:global (s-- 8))
-    
+
+    (apps:magit:bposMenu:plugin|install
+     apps:menu:global (s-- 8))
+
+    (apps:magit:githubMenu:plugin|install
+     apps:menu:global (s-- 8))
+
+
     ;;; Other Apps That Need Starters
     ;;;
     ;;; Gnus Email Reading
