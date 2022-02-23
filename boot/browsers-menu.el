@@ -166,7 +166,8 @@ As such what happens below should be exactly what is necessary and no more."
 	  ]
 	 ,(s-- 5)
 	 ,(s-- 6)
-	 ,(s-- 7)	 	 	 
+	 ,(s-- 7)
+	 ,(s-- 8)
 	 ))
     
 	 (easy-menu-add-item
@@ -180,6 +181,15 @@ As such what happens below should be exactly what is necessary and no more."
 	  nil          
 	  (browsers:menu:help|define)
 	  (s-- 7))
+
+         (easy-menu-add-item
+          browsers:menu:browse-url:at-point
+          nil
+          (bx:menu:panelAndHelp|define
+           "/bisos/git/auth/bxRepos/blee-binders/bisos-core/sync/_nodeBase_"
+           $thisFuncName
+           (intern (symbol-name (gensym))))
+          (s-- 8))
 
     'browsers:menu:browse-url:at-point
     ))
@@ -214,7 +224,6 @@ As such what happens below should be exactly what is necessary and no more."
 	       ))))
     'browsers:menu:browse-url:at-point:with-function
     ))
-
 
 
 ;; (popup-menu (symbol-value (browsers:menu:help|define)))

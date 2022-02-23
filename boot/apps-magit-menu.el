@@ -4,6 +4,41 @@
 
 (require 'easymenu)
 
+;;;; NOTYET BEGIN To be Caprtured in blee-lib package in blee-lib-menu.el
+
+;;
+;; [[elisp:(popup-menu (symbol-value (modes:menu:help|define)))][Help Me]]
+;; (popup-menu (symbol-value (bx:menu:panelAndHelp|define "/bisos/panels/bisos-dev/_nodeBase_"  "bx:menu:panelAndHelp|define" (intern (symbol-name (gensym))))))
+;;
+(defun bx:menu:panelAndHelp|define  (<panelName <funcName <menuName)
+  "Creates a menu item for visiting <panelName and <funcName."
+  (let (
+	($thisFuncName (compile-time-function-name))
+        )
+    (easy-menu-define
+      <menuName
+      nil
+      (s-lex-format "Help Menu Defined In ${$thisFuncName}")
+      `(
+        "Blee Panels And Help Menu:"
+	[,(format "Go To Panel: %s" <panelName)
+	 (blee:bnsm:panel-goto ,<panelName)
+	 t
+	 ]
+        "---"
+	[,(format "Visit %s" <funcName)
+	 (find-function (intern ,<funcName))
+	 t
+	 ]
+	)
+      )
+    '<menuName
+    ))
+
+;;;; NOTYET END To be Caprtured in blee-lib package in blee-lib-menu.el
+
+
+
 ;; (apps:magit:menu:plugin|install modes:menu:global (s-- 6))
 (defun apps:magit:menu:plugin|install%% (<menuLabel <menuDelimiter)
   "Adds this as a submenu to menu labeled <menuLabel at specified delimited <menuDelimiter."
@@ -182,10 +217,13 @@ As such what happens below should be exactly what is necessary and no more."
      (apps:magit:menuItem:repolist-status|define)
      (s-- 3))
 
-    ;; (easy-menu-add-item
-    ;;  apps:magit:generalMenu nil
-    ;;  (apps:magit:menuItem:describe|define)
-    ;;  (s-- 6))
+    (easy-menu-add-item
+     apps:magit:generalMenu nil
+     (bx:menu:panelAndHelp|define
+      "/bisos/git/auth/bxRepos/blee-binders/bisos-core/sync/_nodeBase_"
+      $thisFuncName
+      (intern (symbol-name (gensym))))
+     (s-- 8))
 
     'apps:magit:generalMenu
     ))
@@ -219,7 +257,6 @@ As such what happens below should be exactly what is necessary and no more."
 	,(s-- 8)
 	))
 
-
     (easy-menu-add-item
      apps:magit:bposMenu nil
      (apps:magit:menuItem:bisos:current:bpo-repos|define)
@@ -230,10 +267,13 @@ As such what happens below should be exactly what is necessary and no more."
      (apps:magit:menuItem:bisos:all:bpo-repos|define)
      (s-- 4))
 
-    ;; (easy-menu-add-item
-    ;;  apps:magit:bposMenu nil
-    ;;  (apps:magit:menuItem:describe|define)
-    ;;  (s-- 6))
+    (easy-menu-add-item
+     apps:magit:bposMenu nil
+     (bx:menu:panelAndHelp|define
+      "/bisos/git/auth/bxRepos/blee-binders/bisos-core/sync/_nodeBase_"
+      $thisFuncName
+      (intern (symbol-name (gensym))))
+     (s-- 8))
 
     'apps:magit:bposMenu
     ))
@@ -282,16 +322,16 @@ As such what happens below should be exactly what is necessary and no more."
      (apps:magit:menuItem:bisos:all:baseDir-atoms-repos|define)
      (s-- 5))
 
-
-    ;; (easy-menu-add-item
-    ;;  apps:magit:githubMenu nil
-    ;;  (apps:magit:menuItem:describe|define)
-    ;;  (s-- 6))
+    (easy-menu-add-item
+     apps:magit:githubMenu nil
+     (bx:menu:panelAndHelp|define
+      "/bisos/git/auth/bxRepos/blee-binders/bisos-core/sync/_nodeBase_"
+      $thisFuncName
+      (intern (symbol-name (gensym))))
+     (s-- 8))
 
     'apps:magit:githubMenu
     ))
-
-
 
 
 (defun apps:magit:menuItem:status|define ()
