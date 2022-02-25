@@ -178,7 +178,8 @@
   (require 'blee-lib-common)
   (require 'blee-lib-general)
 
-  (setq blee:dev:mode? t)
+  ;;;(setq blee:dev:mode? t)
+  (setq blee:dev:mode? nil)
 
   (require 'blee-dict)
   (require 'bx-lib)
