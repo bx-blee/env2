@@ -178,6 +178,8 @@
   (require 'blee-lib-common)
   (require 'blee-lib-general)
 
+  (setq blee:dev:mode? t)
+
   (require 'blee-dict)
   (require 'bx-lib)
   (require 'fv-lib)
@@ -202,14 +204,14 @@
   (require 'bap-polymode)
   (bap:polymode:full/update)
 
-  (require 'comeega)
+  (require 'bnp-comment-block)
+  (bnp:comment-block:full/update)
 
-  (require 'comeega-poly-elisp)
-  (require 'comeega-poly-bash)
-  (require 'comeega-poly-py)
-  (require 'comeega-poly-tex)
+  (require 'bnp-comeega)
+  (bnp:comeega:full/update)
 
   ;;;; Mail Composition Distribution And Tracking (mcdt)
+  ;;;; Mail Templating Distribution And Tracking (mtdt)  
   (require 'mcdt-if)
 
   ;; (require 'bystar-ue-lib)  -- Wants misc-lim
@@ -447,7 +449,6 @@
 
   (require 'eoeKbdMenuSupport)
   (require 'blee-kbd-global)    ;;; NOTYET -- Messes up magit and other stuff
-
 
   (eoe-kbd)
 
