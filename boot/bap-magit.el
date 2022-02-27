@@ -265,7 +265,7 @@ typeset RcsId="$Id: setup-global-magit.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp 
   )
 
 
-(defun bap:magit:bisos:all-baseDir-atoms-repos/list%% () "
+(defun bap:magit:bisos:all-baseDir-atoms-repos/list () "
 *** Based on current buffer, determine cur-dir and bpo. List bpos repos.
 "
   (interactive)
@@ -285,7 +285,7 @@ typeset RcsId="$Id: setup-global-magit.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp 
   )
 
 
-(defun bap:magit:bisos:all-baseDir-atoms-repos/list () "
+(defun bap:magit:bisos:all-baseDir-atoms-repos/list%% () "
 *** Based on current buffer, determine cur-dir and bpo. List bpos repos.
 "
   (interactive)
