@@ -64,7 +64,7 @@ As such what happens below should be exactly what is necessary and no more."
   "Returns a menuItem vector. Requires dynamic update."
   (car
    `(
-     [,(format "Browse At-Point URL With Selected Browser:\n  %s"
+     [,(format "Selected Browser:  %s"
 	       browse-url-browser-function)
       (find-file-at-point (ffap-url-at-point))
       :help "With Selected At-Point Browser specified with browse-url-browser-function, browse at-point URL"

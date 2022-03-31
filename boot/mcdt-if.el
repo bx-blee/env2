@@ -60,6 +60,14 @@
 (require 'msend-lib)
 (require 'org-msg)
 
+(defconst mcdt:compose:fashion::basic "Basic" "Basic Plain Text Mail Composition.")
+(defconst mcdt:compose:fashion::orgMsg "OrgMsg" "OrgMsg Mail Composition.")
+(defconst mcdt:compose:fashion::latex "LaTeX" "LaTeX Mail Composition.")
+
+(defvar mcdt:compose:fashion
+  mcdt:compose:fashion::basic
+  "Selected and Effective compose fashion.")
+
 (defvar mcdt:reply:templates:base
   (expand-file-name "~/bpos/usageEnvs/fullUse/mailings/reply")
   "Basedir of where LaTeX templates are.")
@@ -74,6 +82,23 @@
 
 (defvar mcdt:compose:ephemera:base "/bisos/tmp"
   "Basedir of where ephemera compositions go.")
+
+(defun mcdt:compose:fashion/setup (<fashion)
+  "Based on <fashion, set things up for composition."
+  (cond
+   ((eq <fashion  mcdt:compose:fashion::basic)
+    (setq mcdt:compose:fashion <fashion)
+    (message ""))
+   ((eq <fashion  mcdt:compose:fashion::orgMsg)
+    (setq mcdt:compose:fashion <fashion)
+    (message ""))
+   ((eq <fashion  mcdt:compose:fashion::latex)
+    (setq mcdt:compose:fashion <fashion)
+    (message ""))
+   (t
+    (error "Bad input"))
+   ))
+
 
 ;;
 ;; (mcdt:compose$mailing-defun "~/BUE/mailings/start/family.fa/blank/basicText.fa/content.mail")
