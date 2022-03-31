@@ -2,6 +2,7 @@
 ;;;
 
 (require 'easymenu)
+(require 'comeega)
 
 ;;(require 'web-search)
 
@@ -254,7 +255,7 @@
   (define-key global-map [(f12) (f) (c) ]  'org-content)        ;;; Content
   (define-key global-map [(f12) (f) (a) ]  'show-all)         ;;; Show All
 ;;;
-  (blee:comeega:globalKbd|set)
+  (blee:comeega-globalKbd|set)
   )
 
 

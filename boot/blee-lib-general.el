@@ -52,6 +52,23 @@
 *  [[elisp:(org-cycle)][| ]]  Top Entry                   :: fp:main-init [[elisp:(org-cycle)][| ]]
 ")
 
+(defgroup
+  blee
+  nil
+ "Blee (ByStar Libre-Halaal Emacs Environment)."
+ :group 'extensions
+ :link '(emacs-commentary-link :tag "Commentary" "blee.el")
+ :link '(emacs-library-link :tag "Lisp File" "blee.el")
+ )
+
+(defcustom
+  blee:dev:mode?
+  nil
+  "Predicate -- Blee Development Mode -- local auth git packages."
+  :type 'boolean
+  :group 'blee)
+
+
 
 (lambda () "
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || defun        :: (fp:main-init) [[elisp:(org-cycle)][| ]]

@@ -213,7 +213,7 @@ typeset RcsId="$Id: setup-global-magit.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp 
   )
 
 
-(defun bap:magit:bisos:all-baseDir-repos/list () "
+(defun bap:magit:bisos:all-baseDir-repos/list%% () "
 *** Based on current buffer, determine cur-dir and bpo. List bpos repos.
 "
   (interactive)
@@ -231,6 +231,26 @@ typeset RcsId="$Id: setup-global-magit.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp 
     (setq $reposList (s-split "\n" $reposListAsString))
     )
   )
+
+(defun bap:magit:bisos:all-baseDir-repos/list () "
+*** Based on current buffer, determine cur-dir and bpo. List bpos repos.
+"
+  (interactive)
+  ;; (blee:ann|this-func (compile-time-function-name))
+  (let (
+	($shellCommand)
+	($reposListAsString)
+	($reposList)
+	)
+    (message "Running An External Shell Command -- Be Patient ...")
+    (setq $shellCommand
+	  (format
+	   "bx-gitReposBases -v 30 --baseDir=\"/bisos/git/bxRepos\" --pbdName=\"bxReposRoot\" --vcMode=\"auth\"  -i pbdVerify all"))
+    (setq $reposListAsString (shell-command-to-string $shellCommand))
+    (setq $reposList (s-split "\n" $reposListAsString))
+    )
+  )
+
 
 
 (defun bap:magit:bisos:all-baseDir-repos/visit () "
@@ -263,6 +283,27 @@ typeset RcsId="$Id: setup-global-magit.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp 
     (setq $reposList (s-split "\n" $reposListAsString))
     )
   )
+
+
+(defun bap:magit:bisos:all-baseDir-atoms-repos/list%% () "
+*** Based on current buffer, determine cur-dir and bpo. List bpos repos.
+"
+  (interactive)
+  ;; (blee:ann|this-func (compile-time-function-name))
+  (let (
+	($shellCommand)
+	($reposListAsString)
+	($reposList)
+	)
+    (message "Running An External Shell Command -- Be Patient ...")
+    (setq $shellCommand
+	  (format
+	   "bx-gitReposBases -v 30 --baseDir=\"/bisos/git/bxRepos\" --pbdName=\"bxReposRoot\" --vcMode=\"auth\"  -i pbdVerify all"))
+    (setq $reposListAsString (shell-command-to-string $shellCommand))
+    (setq $reposList (s-split "\n" $reposListAsString))
+    )
+  )
+
 
 
 (defun bap:magit:bisos:all-baseDir-atoms-repos/visit () "
