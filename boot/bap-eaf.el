@@ -57,7 +57,7 @@ typeset RcsId="$Id: setup-global-eaf.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp $"
 *      ======[[elisp:(org-cycle)][Fold]]====== bx:setup:eaf:defaults-set -- Define 
 ")
 
-(setq bap:eaf:usage:enabled-p t)
+(setq bap:eaf:usage:enabled-p nil)
 
 
 ;;; (bap:eaf:full/update)

@@ -58,6 +58,7 @@
 (require 'message)
 (require 'mailing-from-base)
 (require 'msend-lib)
+(require 'org-msg)
 
 (defvar mcdt:reply:templates:base
   (expand-file-name "~/bpos/usageEnvs/fullUse/mailings/reply")
@@ -791,7 +792,7 @@ dblock update it and perview."
 
 (defun mcdt:gnus:reply|ephemeraSetup ()
   "Triggered when replying with Gnus, after the article has been setup"
-  (message "mcdt:gnus:reply|ephemeraSetup was triggered, likely from gnus-article-prepare-hook")
+  (message "mcdt:gnus:reply|ephemeraSetup was triggered, likely from gnus-message-setup-hook")
   (let* (
 	 ($point)
          ($ephemeraMailingFilePath:ltr nil)
@@ -804,10 +805,6 @@ dblock update it and perview."
       (insert "\n#+BEGIN: bx:mtdt:content/actions")
       (insert "\n#+END:")
       (insert "\n")
-
-      ;; (insert "\n#+BEGIN: bx:file-insert:org:html :file \"./rel/mailing-html/index.html\"")
-      ;; (insert "\n#+END:")
-      ;; (insert "\n")
 
       (setq $ephemeraMailingFilePath:ltr
 	    (mcdt:compose:ephemera|copyToBase
@@ -830,6 +827,36 @@ dblock update it and perview."
 
     $point
     ))
+
+(defun mcdt:originate:orgMsg|plusSetup ()
+  "Addition originate features.
+
+"
+  (message "mcdt:originate:orgMsg|plusSetup was triggered, likely from gnus-message-setup-hook")
+  (when org-msg-mode
+    (let* (
+	   ($point)
+	   )
+      (setq $point (search-forward "--citation follows this line (read-only)--" nil t))
+      (when $point
+        (forward-line -1)
+        (insert "\n")
+        (insert "\n#+BEGIN: bx:mtdt:content/actions")
+        (insert "\n#+END:")
+        (insert "\n"))
+
+      (when (not $point)
+        (forward-line -1)
+        (insert "\n")
+        (insert "\n#+BEGIN: bx:mtdt:content/actions")
+        (insert "\n#+END:")
+        (insert "\n"))
+
+      (org-dblock-update-buffer-bx)
+    $point
+    )))
+
+
 
 (defun mcdt:mailing:baseDir|set (<baseDir)
   "Setup the specified ephemeraBaseDir for current unsent mailBuf."
@@ -877,6 +904,59 @@ Is idempotent."
 ;;;(remove-hook 'message-setup-hook 'mcdt:gnus:reply|ephemeraSetup)
 
 (add-hook 'gnus-message-setup-hook 'mcdt:gnus:reply|ephemeraSetup 91)
+
+;;;
+;;; (mcdt:compose-mail/basic)
+;;;
+(defun mcdt:compose-mail/basic ()
+  "When org-msg mode is active, invoke compose-mail without it."
+  (let* (
+	 ($gnus-message-setup-hook gnus-message-setup-hook)
+	 )
+    ;;;
+
+    (when org-msg-mode
+      (message (s-lex-format "disabling orgMsg:: org-msg-mode was: ${org-msg-mode}"))
+      (message (s-lex-format "before:: gnus-message-setup-hook was: ${gnus-message-setup-hook}"))
+      (org-msg-mode -1)
+      )
+    (message (s-lex-format "gnus-message-setup-hook is: ${gnus-message-setup-hook}"))
+    (compose-mail)
+    ;;(setq gnus-message-setup-hook $gnus-message-setup-hook)
+    ))
+
+;;;
+;;; (mcdt:compose-mail/orgMsg)
+;;;
+(defun mcdt:compose-mail/orgMsg ()
+  "When org-msg mode is active, invoke compose-mail without it."
+  (let* (
+	 ($gnus-message-setup-hook gnus-message-setup-hook)
+	 )
+    ;;; (message (s-lex-format "mailingParams: ${$mailingParams} extSrcBase ${<extSrcBase} $composeFwrk=${$composeFwrk}"))
+
+    (when (not org-msg-mode)
+      (message (s-lex-format "enabling orgMsg:: org-msg-mode was: ${org-msg-mode}"))
+      (message (s-lex-format "before:: gnus-message-setup-hook was: ${gnus-message-setup-hook}"))
+      (org-msg-mode)
+      )
+    (message (s-lex-format "gnus-message-setup-hook is: ${gnus-message-setup-hook}"))
+    (compose-mail)
+    ;;(setq gnus-message-setup-hook $gnus-message-setup-hook)
+    ))
+
+;;;
+;;; (mcdt:compose-mail/selected)
+;;;
+(defun mcdt:compose-mail/selected ()
+  "When org-msg mode is active, invoke compose-mail without it."
+  (let* (
+	 ($gnus-message-setup-hook gnus-message-setup-hook)
+	 )
+    (message (s-lex-format "org-msg-mode=${org-msg-mode}"))
+    (compose-mail)
+    ))
+
 
 ;;;
 ;;; (process-id (get-buffer-process (lsip-buffer-for-host "localhost")))
