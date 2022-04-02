@@ -214,6 +214,7 @@
   ;;;; Mail Composition Distribution And Tracking (mcdt)
   ;;;; Mail Templating Distribution And Tracking (mtdt)  
   (require 'mcdt-if)
+  (require 'mcdt-menu)
 
   ;; (require 'bystar-ue-lib)  -- Wants misc-lim
   ;; (bystar:ue:params-auto-set)

@@ -88,13 +88,16 @@
   (cond
    ((eq <fashion  mcdt:compose:fashion::basic)
     (setq mcdt:compose:fashion <fashion)
-    (message ""))
+    (when org-msg-mode
+      (org-msg-mode -1)))
    ((eq <fashion  mcdt:compose:fashion::orgMsg)
     (setq mcdt:compose:fashion <fashion)
-    (message ""))
+    (when (not org-msg-mode)
+      (org-msg-mode)))
    ((eq <fashion  mcdt:compose:fashion::latex)
     (setq mcdt:compose:fashion <fashion)
-    (message ""))
+    (when org-msg-mode
+      (org-msg-mode -1)))
    (t
     (error "Bad input"))
    ))

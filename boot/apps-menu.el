@@ -23,7 +23,7 @@
 (require 'apps-calendar-menu)
 (require 'apps-bbdb-menu)
 (require 'apps-org-menu)
-(require 'apps-outmail-menu)
+;; (require 'apps-outmail-menu)
 (require 'apps-inmail-menu)
 (require 'apps-magit-menu)
 
@@ -77,8 +77,8 @@ As such what happens below is exactly what is necessary and no more."
     (apps:org:menu:plugin|install
      apps:menu:global (s-- 6))
 
-    (apps:outmail:menu:plugin|install
-     apps:menu:global (s-- 7))
+    ;; (apps:outmail:menu:plugin|install
+    ;;  apps:menu:global (s-- 7))
 
     (apps:inmail:menu:plugin|install
      apps:menu:global (s-- 7))

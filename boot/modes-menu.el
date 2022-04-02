@@ -15,6 +15,9 @@
 
 (require 'browsers-menu)
 
+(require 'mcdt-menu)
+
+
 (require 'nafm-menu)
 
 (require 'org-roam-menu)
@@ -83,6 +86,10 @@ For use in delimiters in easy-menu-define"
 
     (browsers:modes:menu:plugin/install
      modes:menu:global (s-- 3))
+
+    (mcdt:menu:plugin|install
+     modes:menu:global (s-- 4))
+
 
     (web:search:modes:menu:plugin/install
      modes:menu:global (s-- 4))
