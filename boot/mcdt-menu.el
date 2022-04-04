@@ -9,6 +9,12 @@
 (defun mcdt:menu:plugin|install (<menuLabel <menuDelimiter)
   "Adds this as a submenu to menu labeled <menuLabel at specified delimited <menuDelimiter."
 
+  ;; Determine starting value of mcdt:compose:fashion
+  (setq  mcdt:compose:fashion mcdt:compose:fashion::basic)
+  (when org-msg-mode
+    (setq  mcdt:compose:fashion mcdt:compose:fashion::orgMsg))
+  (mcdt:compose:fashion/setup mcdt:compose:fashion)
+
   (easy-menu-add-item
    <menuLabel
    nil
@@ -20,7 +26,7 @@
 ;;
 ;;
 (defun mcdt:menuItem:selected|define ()
-  "Returns a menuItem vector. Requires dynamic update."
+  "Return a menuItem vector. Requires dynamic update."
   (car
    `(
      [,(format "Compose with fashion :  %s"
@@ -32,10 +38,8 @@
       ]
      )))
 
-
-
 (defun mcdt:menuItem:setup-withCurBuffer|define ()
-  "Returns a menuItem vector."
+  "Return a menuItem vector."
   (car
    `(
      [,(format "MCDT Setup With Current Buffer")
@@ -47,14 +51,12 @@
      )))
 
 
-
-
 ;;
 ;; [[elisp:(popup-menu (symbol-value (browsers:menu:help|define)))][This Menu]]
 ;; (popup-menu (symbol-value (mcdt:menu:select|define)))
 ;;
 (defun mcdt:menu:select|define (&rest <namedArgs)
-  "Returns org-roam-server:menu.
+  "Return mcdt:menu:select
 :active and :visible can be specified as <namedArgs.
 "
   (let (

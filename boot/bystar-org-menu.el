@@ -890,33 +890,45 @@
 		  )
   )
 
+
+;;;
+;;; NOTYET, 2022-04-02 --- Repetition of bx:org:capture:templates-setup should not be necessary
+;;; It was not being executed properly. So, I got it to work like this.
+;;;
+
 (defun bx:org:capture:todo ()
   (interactive)
+  (bx:org:capture:templates-setup)
   (org-capture nil "t")
   )
 
 (defun bx:org:capture:Todo ()
   (interactive)
+  (bx:org:capture:templates-setup)
   (org-capture nil "T")
   )
 
 (defun bx:org:capture:event ()
   (interactive)
+  (bx:org:capture:templates-setup)
   (org-capture nil "e")
   )
 
 (defun bx:org:capture:Event ()
   (interactive)
+  (bx:org:capture:templates-setup)
   (org-capture nil "E")
   )
 
 (defun bx:org:capture:now ()
   (interactive)
+  (bx:org:capture:templates-setup)
   (org-capture nil "n")
   )
 
 (defun bx:org:capture:Now ()
   (interactive)
+  (bx:org:capture:templates-setup)
   (org-capture nil "N")
   )
 

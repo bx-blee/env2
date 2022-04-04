@@ -67,7 +67,7 @@
 
   (add-to-list 'auto-mode-alist '("\\.orgMsg\\'" . org-msg-edit-mode))
 
-  (org-msg-mode)
+  ;;(org-msg-mode)
   )
 
 
