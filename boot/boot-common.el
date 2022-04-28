@@ -247,6 +247,7 @@
 **     *Mail -- Gnus And Addons*
 "
 	       (load "bystar-mail")
+               (require 'gnus-profiles)
 	       ))
 
   (funcall  '(lambda () "
