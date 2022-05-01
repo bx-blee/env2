@@ -28,6 +28,7 @@ SCHEDULED: <2022-04-29 Fri>
 (require 'loop)
 
 ;;; (gnus-group-browse-foreign-server (quote (nntp "news.gmane.io")))
+;;; (setq smtpmail-debug-info t)
 
 
 ;;; (b:gnus:profile/filesList-add)
@@ -107,13 +108,13 @@ SCHEDULED: <2022-04-29 Fri>
 #+end_org "
   (blee:ann|this-func (compile-time-function-name))
   (let*  (
-          ($mailService:name (plist-get b:gnus:source:plist :name))
+          ($mailService-name (plist-get b:gnus:source:plist :name))
           ($imap-address (plist-get b:gnus:inMail:plist :imap-address))
           ($imap-port (plist-get b:gnus:inMail:plist :imap-port))
           )
-    ;;  Optional third arg t=append, puts $mailService:name at the end of the list.
+    ;;  Optional third arg t=append, puts $mailService-name at the end of the list.
     (add-to-list 'gnus-secondary-select-methods
-		 `(nnimap ,$mailService:name
+		 `(nnimap ,$mailService-name
 		          (nnimap-address ,$imap-address)
 		          (nnimap-server-port ,$imap-port)
 		          (nnimap-stream ssl))
@@ -127,21 +128,22 @@ SCHEDULED: <2022-04-29 Fri>
 #+end_org "
   (blee:ann|this-func (compile-time-function-name))
   (let*  (
-          ($mailService:name (plist-get b:gnus:source:plist :name))
+          ($mailService-name (plist-get b:gnus:source:plist :name))
           ($submit-from-addr (plist-get b:gnus:outMail:plist :submit-from-addr))
           ($submit-from-name (plist-get b:gnus:outMail:plist :submit-from-name))
+          ($ssmtp-address (plist-get b:gnus:outMail:plist :ssmtp-address))
           ($user-acct (plist-get b:gnus:outMail:plist :user-acct))
           )
-    ;;  Optional third arg t=append, puts $mailService:name at the end of the list.
+    ;;  Optional third arg t=append, puts $mailService-name at the end of the list.
     ;;  Not beginning of the gnus-posting-styles list.
     (add-to-list 'gnus-posting-styles
                  (first
 	          `(
-                    (,$mailService:name
+                    (,$mailService-name
 		     (address ,$submit-from-addr)
 		     (name ,$submit-from-name)
 		     ("X-Message-SMTP-Method"
-                      ,(s-lex-format "smtp smtp.gmail.com 587 ${$user-acct}"))
+                      ,(s-lex-format "smtp ${$ssmtp-address} 587 ${$user-acct}"))
                      )
                     ))
                  t)))
