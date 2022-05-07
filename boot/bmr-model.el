@@ -27,9 +27,18 @@
 " orgCmntEnd)
 
 (orgCmntBegin "
-* /Related Modules:/ Resource Provider Mohdules --- Manifest Files
+* /Plugins:/ MUAs --- Providers Modules --- Method Modules --- Manifest Files
+** Method File Names: bmr-method-inject-xxx.el --- [[bmr-method-inject-qmail.el]]
+** Map-to-MUA File Names:  mua-xxx.el --- [[mua-gnus.el]]
+** Provider File Names: bmr-prov-{mail,news}-xxx.el  --- [[bmr-prov-mail-gmail.el]]
+** Manifest File Names: bmr-manifest-xxx.el  --- [[bmr-manifest-example.el]]
 " orgCmntEnd)
 
+(orgCmntBegin "
+* Relevant Panels:
+** [[file:/bisos/panels/blee-core/mail/model/_nodeBase_/fullUsagePanel-en.org]]
+** [[file:/bisos/panels/blee-core/mail/Gnus/_nodeBase_/fullUsagePanel-en.org]]
+" orgCmntEnd)
 
 (orgCmntBegin "
 *   ~Requires~
@@ -40,12 +49,57 @@
 (require 'loop)
 
 (orgCmntBegin "
+*   ~Implementation Declarations~
+" orgCmntEnd)
+
+(defvar b:mrm:resource:manifest "SymbolPlistType"
+  " #+begin_org
+  ** =b:mrm:resource:manifest= is the top level symbol-plist used to capture the resource.
+#+end_org "
+  )
+
+(defvar b:mrm:outMail:manifest "SymbolPlistType"
+  " #+begin_org
+  ** =b:mrm:outMail:manifest= is the symbol-plist used to capture outMail parameters.
+#+end_org "
+  )
+
+(defvar b:mrm:inMail:manifest "SymbolPlistType"
+  " #+begin_org
+  ** =b:mrm:inMail:manifest= is the symbol-plist used to capture inMail paraemters.
+#+end_org "
+  )
+
+;;;  (b:remprop-all 'b:mrm:resource:manifest)
+
+;;;; DBLOCK_BEGIN
+(orgCmntBegin "
+* defun <<b:remprop-all>>  [[start-stop debugger menu]]
+" orgCmntEnd)
+(defun b:remprop-all (
+;;; DBLOCK_END
+                      <symbol
+                      )
+    " #+begin_org
+** DocStr: Walk through ~<symbol~'s property list and remove them all. Returns nil.
+#+end_org "
+      (let*  (
+              ($plist (symbol-plist <symbol))
+              )
+        (dolist ($each $plist)
+          (cl-remprop <symbol $each)
+          (pop $plist) ;;; ignoring the value
+          )))
+
+(orgCmntBegin "
 * /Concept:/ <<b:mrm Messaging Resources>>
-**  A "b:mrm Messaging Resource" consists of one of or both of:
+**  A =b:mrm Messaging Resource= consists of one of or both of:
 **  - A Retrievables Messaging Resource  (Credentialed or Open)
 **  - A Injection Messaging Resource  (Credentialed or Open)
 ** [[b:mrm:resource|define]] function is used to define a [[b:mrm:resource]]
 " orgCmntEnd)
+
+;;; (b:mrm:resource|define)
 
 ;;;; DBLOCK_BEGIN
 (orgCmntBegin "
@@ -69,19 +123,28 @@
 ~retrievablesResource-spec~ is a function that uses [[funcName]] to specify retrievablesResource.
 ~injectionResource-spec~ is a function that uses [[funcName]] to specify retrievablesResource.
 ~vault-interface~ specifies which vault interface should be used.
+** Implementation Status: *Needs Improvements*
+*** TODO Validate input sources based on enumerations.
 #+end_org "
 
-  ;;; Unset and set a fresh b:mrm:resource:manifest
-  (when resource-type
-    (plist-put b:mrm:resource:manifest 'resource-type resource-type))
-  (when name
-    (plist-put b:mrm:resource:manifest 'name name))
-  (when retrievablesResource-func
-    (funcall retrievablesResource-func))
-  (when injectionResource-func
-    (funcall injectionResource-func))
-  (when vault-interface
-    (plist-put b:mrm:resource:manifest 'vault-interface vault-interface))
+   ;; Remove all existing properties --- Start with a fresh b:mrm:resource:manifest
+   (b:remprop-all 'b:mrm:resource:manifest)
+
+   (when name
+     (put 'b:mrm:resource:manifest 'name name))
+   (when resource-type
+    (put 'b:mrm:resource:manifest 'resource-type resource-type))
+   (when map-to-mua
+     (put 'b:mrm:resource:manifest 'map-to-mua map-to-mua))
+   (when retrievablesResource-spec
+     (funcall retrievablesResource-spec))
+   (when injectionResource-spec
+     (funcall injectionResource-spec))
+   (when vault-interface
+     (put 'b:mrm:resource:manifest 'vault-interface vault-interface))
+
+   ;;; Now with b:mrm:resource:manifest fully formed, call
+   (b:mrm:resource|map-to-mua)
   )
 
 (orgCmntBegin "
@@ -134,7 +197,7 @@
 
 (orgCmntBegin "
 * /Concept:/ <<b:mrm Messaging-Resource Providers>>
-**  A "b:mrm Messaging-Resource Provider" is one of:
+**  A =b:mrm Messaging-Resource Provider= is one of:
 ** 1) A Retrievables Messaging-Resource Provider --- Examples: imap.gmail.com, news.gmane.io, A mail folder, A mbox
 ** 2) A Injection Messaging-Resource Provider --- Examples: smpt.gmail.com
 ** A Messaging-Resource Provider specifies parameters for access to Messaging Services.
@@ -195,20 +258,24 @@
                                                 &key
                                                 (user-acct nil)
                                                 (acct-passwd nil)
-                                                (injectionResource-method nil)
-                                                (injectionResource-provider nil)
+                                                (retrievablesResource-method nil)
+                                                (retrievablesResource-provider nil)
                                                 )
   " #+begin_org
 ** DocStr: Define a b:mrm:resource based on the specified keyword args.
 #+end_org "
+
+  ;; Remove all existing properties --- Start with a fresh b:mrm:resource:manifest
+  (b:remprop-all 'b:mrm:inMail:manifest)
+
   (when user-acct
-    (plist-put b:mrm:outMail:manifest 'user-acct user-acct))
+    (put 'b:mrm:inMail:manifest 'user-acct user-acct))
   (when acct-passwd
-    (plist-put b:mrm:outMail:manifest 'acct-passwd acct-passwd))
-  (when injectionResource-method
-    (plist-put b:mrm:outMail:manifest 'injectionResource-method acct-passwd))
-  (when injectionResource-provider
-    (funcall injectionResource-provider))
+    (put 'b:mrm:inMail:manifest 'acct-passwd acct-passwd))
+  (when retrievablesResource-method
+    (put 'b:mrm:inMail:manifest 'retrievablesResource-method retrievablesResource-method))
+  (when retrievablesResource-provider
+    (funcall retrievablesResource-provider))
   )
 
 
@@ -233,12 +300,16 @@
   " #+begin_org
 ** DocStr: Define a b:mrm:resource based on the specified keyword args.
 #+end_org "
+
+  ;; Remove all existing properties --- Start with a fresh b:mrm:resource:manifest
+  (b:remprop-all ':mrm:outMail:manifest)
+
   (when user-acct
-    (plist-put b:mrm:outMail:manifest 'user-acct user-acct))
+    (put 'b:mrm:outMail:manifest 'user-acct user-acct))
   (when acct-passwd
-    (plist-put b:mrm:outMail:manifest 'acct-passwd acct-passwd))
+    (put 'b:mrm:outMail:manifest 'acct-passwd acct-passwd))
   (when injectionResource-method
-    (plist-put b:mrm:outMail:manifest 'injectionResource-method acct-passwd))
+    (put 'b:mrm:outMail:manifest 'injectionResource-method injectionResource-method))
   (when injectionResource-provider
     (funcall injectionResource-provider))
   )
@@ -256,13 +327,13 @@
 #+BEGIN_SRC emacs-lisp
 
 (b:gnus:resource|define
-  :name "com.gmail@example.home"
+  :name 'com.gmail@example.home'
   :resource-type (plist-get b:mrm:resource::types 'mailService)
   :map-to-mua (plist-get b:mrm::map-to-muas 'gnus)
   :retrievablesResource-spec
    (lambda ()
      (b:gnus:retrievablesResource:mail|define
-      :user-acct "example.home"
+      :user-acct 'example.home'
       :acct-passwd (imapGetPassword)
       :retrievablesResource-method (plist-get b:mrm:retrievables::methods 'nnimap)
       :retrievablesResource-provider 'b:gnus:retrievablesResource:provider|gmail
@@ -270,7 +341,7 @@
  :injectionResource-spec
    (lambda ()
      (b:gnus:injectionResource:mail|define
-      :user-acct "example.home"
+      :user-acct 'example.home'
       :acct-passwd (smtpGetPassword)
       :injectionResource-method (plist-get b:gnus:injection::methods 'smtpmail)
       :injectionResource-provider 'b:gnus:injectionResource:provider|gmail

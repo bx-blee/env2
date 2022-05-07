@@ -248,7 +248,8 @@
 "
 	       (load "bystar-mail")
                ;;(require 'gnus-profiles)
-               (require 'gnus-manifests)
+               ;; (require 'gnus-manifests)
+               (require 'mua-abstract)
 	       ))
 
   (funcall  '(lambda () "
