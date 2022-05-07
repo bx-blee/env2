@@ -188,6 +188,7 @@
     secretService "secretService"
     authinfo "authinfo"
     authinfo.pgp "authinfo.pgp"
+    none "none"
     )
   " #+begin_org
   ** Enumeration of vault types.
@@ -274,6 +275,31 @@
     (put 'b:mrm:inMail:manifest 'acct-passwd acct-passwd))
   (when retrievablesResource-method
     (put 'b:mrm:inMail:manifest 'retrievablesResource-method retrievablesResource-method))
+  (when retrievablesResource-provider
+    (funcall retrievablesResource-provider))
+  )
+
+
+
+;;;; DBLOCK_BEGIN
+(orgCmntBegin "
+* cl-defun <<b:mrm:retrievablesResource:usenet|define>>  [[start-stop debugger menu]]
+" orgCmntEnd)
+(cl-defun b:mrm:retrievablesResource:usenet|define (
+;;; DBLOCK_END
+                                                &key
+                                                (retrievablesResource-method nil)
+                                                (retrievablesResource-provider nil)
+                                                )
+  " #+begin_org
+** DocStr: Define a b:mrm:resource based on the specified keyword args.
+#+end_org "
+
+  ;; Remove all existing properties --- Start with a fresh b:mrm:resource:manifest
+  (b:remprop-all 'b:mrm:usenet:manifest)
+
+  (when retrievablesResource-method
+    (put 'b:mrm:usenet:manifest 'retrievablesResource-method retrievablesResource-method))
   (when retrievablesResource-provider
     (funcall retrievablesResource-provider))
   )

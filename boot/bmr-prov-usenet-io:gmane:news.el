@@ -1,4 +1,4 @@
-;;; bmr-prov-mail-gmail.el --- Gmail Provider Messging Resource  --*- lexical-binding: t; -*-
+;;; bmr-prov-usenet-io:gmane:news.el --- Gmail Provider Messging Resource  --*- lexical-binding: t; -*-
 
 (orgCmntBegin "
 * Blee Messging Resource (BMR) gmail.com Mail Provider
@@ -42,46 +42,25 @@
 ** [[b:mrm:resource|define]] function is used to define a [[b:mrm:resource]]
 " orgCmntEnd)
 
-;;; (b:mrm:retrievablesResource:provider|gmail)
+;;; (b:mrm:retrievablesResource:provider|io.gmane.news)
 
 ;;;; DBLOCK_BEGIN
 (orgCmntBegin "
-* cl-defun <<b:mrm:retrievablesResource:provider|gmail>>  [[start-stop debugger menu]]
+* cl-defun <<b:mrm:retrievablesResource:provider|io.gmane.news>>  [[start-stop debugger menu]]
 " orgCmntEnd)
-(cl-defun b:mrm:retrievablesResource:provider|gmail (
+(cl-defun b:mrm:retrievablesResource:provider|io.gmane.news (
 ;;; DBLOCK_END
-                                                     )
+                                                             )
   " #+begin_org
 ** DocSrc: For each named arument, take appropriate acction and set the corresponding plist.
 #+end_org "
 
-  (put 'b:mrm:inMail:manifest  'retrievables-resource "gmail")
-  (put 'b:mrm:inMail:manifest  'retrieval-method  "imap")
-  (put 'b:mrm:inMail:manifest  'imap-address "imap.gmail.com")
-  (put 'b:mrm:inMail:manifest  'imap-port "imaps")
-  (put 'b:mrm:inMail:manifest  'imap-stream "ssl")
+  (put 'b:mrm:usenet:manifest  'protocol "nntp")
+  (put 'b:mrm:usenet:manifest  'nntp-address "news.gmane.io")
+  (put 'b:mrm:usenet:manifest  'nntp-port "nntp")
   )
 
-;;; (b:mrm:injectionResource:provider|gmail)
-
-;;;; DBLOCK_BEGIN
-(orgCmntBegin "
-* cl-defun <<b:mrm:injectionResource:provider|gmail>>  [[start-stop debugger menu]]
-" orgCmntEnd)
-(cl-defun b:mrm:injectionResource:provider|gmail (
-;;; DBLOCK_END
-                                                     )
-  " #+begin_org
-** DocSrc: For each named arument, take appropriate acction and set the corresponding plist.
-#+end_org "
-
-  (put 'b:mrm:outMail:manifest  'injection-resource "gmail")
-  (put 'b:mrm:outMail:manifest  'submission-method "smtp")
-  (put 'b:mrm:outMail:manifest  'smtp-address "smtp.gmail.com")
-  (put 'b:mrm:outMail:manifest  'smtp-port "857")
-  )
-
-(provide 'bmr-prov-mail-gmail)
+(provide 'bmr-prov-usenet-io:gmane:news)
 
 ;;; local variables:
 ;;; no-byte-compile: t

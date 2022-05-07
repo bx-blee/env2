@@ -159,11 +159,12 @@ SCHEDULED: <2022-04-29 Fri>
 #+end_org "
   (blee:ann|this-func (compile-time-function-name))
   (let*  (
-          ($source:name (plist-get b:mrm:resource:manifest :name))
-          ($nntp-address (plist-get b:mrm:usenet:manifest :nntp-address))
+          ($source:name (get 'b:mrm:resource:manifest 'name))
+          ($nntp-address (get 'b:mrm:usenet:manifest 'nntp-address))
           )
     (setq gnus-select-method `(nntp ,$nntp-address))
 
+    ;; Initially we may want the service to be offline
     ;;(gnus-server-add-server "nntp" $nntp-address)
     ;;(gnus-server-offline-server (s-lex-format "nntp:${$nntp-address}"))
     ))

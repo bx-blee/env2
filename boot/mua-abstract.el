@@ -62,20 +62,17 @@
   (load-file <fileName)
   (let*  (
           ($sourceType (plist-get b:gnus:resource:manifest :resource-type))
-          ($processed nil)
           )
-    (defun $processed () (setq $processed t))
-    (when (string= $sourceType "mailService")
+    (cond
+     ((string= $sourceType "mailService")
       (b:gnus:inMail|configure)
       (b:gnus:outMail|configure)
-      (b:gnus:vault/credentials-add)
-      ($processed))
-    (when (string= $sourceType "usenetService")
-      (b:gnus:usenet|configure)
-      ($processed))
-    (when (not $processed)
-       (message (s-lex-format "Unknown sourceType=${$sourceType}")))
-    ))
+      (b:gnus:vault/credentials-add))
+     ((string= $sourceType "usenetService")
+      (b:gnus:usenet|configure))
+     (t
+      (message (s-lex-format "Unknown sourceType=${$sourceType}")))
+     )))
 
 ;;; (call-interactively 'b:gnus:manifest/deactivate)
 ;;; (b:gnus:manifest/deactivate "/bxo/iso/piu_mbFullUsage/profiles/gnus/com.gmail@mohsen.byname/gnus-mailService.el")
@@ -91,18 +88,15 @@
   (load-file <fileName)
   (let*  (
           ($sourceType (plist-get b:gnus:resource:manifest :resource-type))
-          ($processed nil)
           )
-    (defun $processed () (setq $processed t))
-    (when (string= $sourceType "mailService")
-      ;;; NOTYET
-      ($processed))
-    (when (string= $sourceType "usenetService")
-      ;;; NOTYET
-      ($processed))
-    (when (not $processed)
-       (message "Unknown sourceType"))
-    ))
+    (cond
+     ((string= $sourceType "mailService")
+        (message "NOTYET"))
+     ((string= $sourceType "usenetService")
+      (message "NOTYET"))
+     (t
+      (message "Unknown sourceType"))
+    )))
 
 
 (orgCmntBegin "
