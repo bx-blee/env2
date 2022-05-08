@@ -42,13 +42,13 @@
 ** [[b:mrm:resource|define]] function is used to define a [[b:mrm:resource]]
 " orgCmntEnd)
 
-;;; (b:mrm:retrievablesResource:provider|com.gmail)
+;;; (b:mrm:retrievablesResource:provider|com-gmail)
 
 ;;;; DBLOCK_BEGIN
 (orgCmntBegin "
-* cl-defun <<b:mrm:retrievablesResource:provider|com.gmail>>  [[start-stop debugger menu]]
+* cl-defun <<b:mrm:retrievablesResource:provider|com-gmail>>  [[start-stop debugger menu]]
 " orgCmntEnd)
-(cl-defun b:mrm:retrievablesResource:provider|com.gmail (
+(cl-defun b:mrm:retrievablesResource:provider|com-gmail (
 ;;; DBLOCK_END
                                                      )
   " #+begin_org
@@ -62,13 +62,13 @@
   (put 'b:mrm:inMail:manifest  'imap-stream "ssl")
   )
 
-;;; (b:mrm:injectionResource:provider|gmail)
+;;; (b:mrm:injectionResource:provider|com-gmail)
 
 ;;;; DBLOCK_BEGIN
 (orgCmntBegin "
-* cl-defun <<b:mrm:injectionResource:provider|gmail>>  [[start-stop debugger menu]]
+* cl-defun <<b:mrm:injectionResource:provider|com-gmail>>  [[start-stop debugger menu]]
 " orgCmntEnd)
-(cl-defun b:mrm:injectionResource:provider|gmail (
+(cl-defun b:mrm:injectionResource:provider|com-gmail (
 ;;; DBLOCK_END
                                                      )
   " #+begin_org
@@ -81,7 +81,7 @@
   (put 'b:mrm:outMail:manifest  'smtp-port "857")
   )
 
-(provide 'bmr-prov-mail-gmail)
+(provide 'bmr-prov-mail-com:gmail)
 
 ;;; local variables:
 ;;; no-byte-compile: t

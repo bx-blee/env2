@@ -42,13 +42,13 @@
 ** [[b:mrm:resource|define]] function is used to define a [[b:mrm:resource]]
 " orgCmntEnd)
 
-;;; (b:mrm:retrievablesResource:provider|io.gmane.news)
+;;; (b:mrm:retrievablesResource:provider|io-gmane-news)
 
 ;;;; DBLOCK_BEGIN
 (orgCmntBegin "
-* cl-defun <<b:mrm:retrievablesResource:provider|io.gmane.news>>  [[start-stop debugger menu]]
+* cl-defun <<b:mrm:retrievablesResource:provider|io-gmane-news>>  [[start-stop debugger menu]]
 " orgCmntEnd)
-(cl-defun b:mrm:retrievablesResource:provider|io.gmane.news (
+(cl-defun b:mrm:retrievablesResource:provider|io-gmane-news (
 ;;; DBLOCK_END
                                                              )
   " #+begin_org

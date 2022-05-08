@@ -29,7 +29,8 @@
 (require 'loop)
 
 (require 'bmr-model)
-(require 'bmr-prov-mail-gmail)
+(require 'bmr-prov-mail-com:gmail)
+(require 'bmr-prov-usenet-io:gmane:news)
 (require 'bmr-method-inject-qmail)
 (require 'mua-gnus)
 
@@ -51,7 +52,7 @@
 ;;; (b:gnus:manifest/activate "/bxo/iso/piu_mbFullUsage/profiles/gnus/com.gmail@mohsen.byname/mailService-manifest.el")
 ;;; (b:gnus:manifest/activate "/bxo/iso/piu_mbFullUsage/profiles/gnus/io.gmane.news/gnus-usenetService.el")
 ;;;
-(defun b:gnus:manifest/activate (<fileName)
+(defun b:mrm:manifest/activate (<fileName)
   " #+begin_org
 ** Based on the specified profile setup Gnus variables.
 ** Incomplete Aspects:
@@ -60,24 +61,13 @@
   (interactive (list (read-file-name "Gnus Profile File: ")))
   (blee:ann|this-func (compile-time-function-name))
   (load-file <fileName)
-  (let*  (
-          ($sourceType (plist-get b:gnus:resource:manifest :resource-type))
-          )
-    (cond
-     ((string= $sourceType "mailService")
-      (b:gnus:inMail|configure)
-      (b:gnus:outMail|configure)
-      (b:gnus:vault/credentials-add))
-     ((string= $sourceType "usenetService")
-      (b:gnus:usenet|configure))
-     (t
-      (message (s-lex-format "Unknown sourceType=${$sourceType}")))
-     )))
+  (b:mrm:resource|map-to-mua))
+
 
 ;;; (call-interactively 'b:gnus:manifest/deactivate)
 ;;; (b:gnus:manifest/deactivate "/bxo/iso/piu_mbFullUsage/profiles/gnus/com.gmail@mohsen.byname/gnus-mailService.el")
 ;;;
-(defun b:gnus:manifest/deactivate (<fileName)
+(defun b:mrm:manifest/deactivate (<fileName)
   " #+begin_org
 ** Based on the specified profile setup Gnus variables.
 ** Incomplete Aspects:
@@ -85,18 +75,7 @@
 #+end_org "
   (interactive (list (read-file-name "Gnus Profile File: ")))
   (blee:ann|this-func (compile-time-function-name))
-  (load-file <fileName)
-  (let*  (
-          ($sourceType (plist-get b:gnus:resource:manifest :resource-type))
-          )
-    (cond
-     ((string= $sourceType "mailService")
-        (message "NOTYET"))
-     ((string= $sourceType "usenetService")
-      (message "NOTYET"))
-     (t
-      (message "Unknown sourceType"))
-    )))
+  (message "NOTYET"))
 
 
 (orgCmntBegin "
