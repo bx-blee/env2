@@ -214,7 +214,14 @@
 ;;(defun my-test-function ()  (message "This function is named '%s'" (compile-time-function-name)))
 
 
-
+(defun b:insert-file-contents|forward (<fileName)
+  "insert-file-contents and move point forward to after insertion."
+  (let* (
+         ($gotVal (insert-file-contents <fileName))
+         ($charsInserted (second $gotVal))
+         )
+    (forward-char $charsInserted)))
+                  
 ;;;#+BEGIN: bx:dblock:lisp:provide :disabledP "false" :lib-name "blee-lib-general"
 (lambda () "
 *  [[elisp:(org-cycle)][| ]]  Provide                     :: Provide [[elisp:(org-cycle)][| ]]

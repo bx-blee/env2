@@ -1,4 +1,6 @@
-;;;-*- mode: Emacs-Lisp; lexical-binding: t ; -*-
+;;;-*- mode: Emacs-Lisp; -*-
+
+;;;-*- mode: Emacs-Lisp; PROBLEMWITYHlexical-binding: t ; -*-
 ;;;
 ;;;
 
@@ -10,7 +12,7 @@
 ;; [[elisp:(popup-menu (symbol-value (modes:menu:help|define)))][Help Me]]
 ;; (popup-menu (symbol-value (bx:menu:panelAndHelp|define "/bisos/panels/bisos-dev/_nodeBase_"  "bx:menu:panelAndHelp|define" (intern (symbol-name (gensym))))))
 ;;
-(defun bx:menu:panelAndHelp|define  (<panelName <funcName <menuName)
+(defun bx:menu:panelAndHelp|define%%%  (<panelName <funcName <menuName)
   "Creates a menu item for visiting <panelName and <funcName."
   (let (
 	($thisFuncName (compile-time-function-name))
@@ -34,6 +36,11 @@
       )
     '<menuName
     ))
+
+(defun bx:menu:panelAndHelp|define  (<panelName <funcName <menuName)
+  (apps:magit:menuItem:status|define)
+  )
+
 
 ;;;; NOTYET END To be Caprtured in blee-lib package in blee-lib-menu.el
 

@@ -3,14 +3,23 @@
 ;;;#+BEGIN: blee:pkg:adoptionMessage :enable :org-level 2 pkgName
 (message "Blee Adopted Pkg: dired Requested")
 ;;;#+END:
+;;;
 
 (defun bac:pkg:shouldBeAvailable:dired ()
-  t
-  )
+  (let* (
+         (result nil)
+         )
+    (if (version< emacs-version "29")
+        (setq result t))
+    result))
 
 (defun bac:pkg:shouldBeEnabled:dired ()
-  t
-  )
+    (let* (
+         (result nil)
+         )
+    (if (version< emacs-version "29")
+        (setq result t))
+    result))
 
 ;;;#+BEGIN: blee:pkg:makeAvailable :enable :org-level 2 pkgName
 (when (bac:pkg:shouldBeAvailable:dired)
