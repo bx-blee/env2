@@ -46,6 +46,70 @@
 *  [[elisp:(org-cycle)][| ]]  defun         :: (org-dblock-write:bx:dblock:lisp:requires) [[elisp:(org-cycle)][| ]]
 ")
 
+
+(advice-add 'org-dblock-write:b:elisp:file/provide :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:file/provide (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel -1)) (<model (letGet$model))
+         (<style (letGet$style "openBlank" "closeBlank"))
+         (<modName (or (plist-get <params :modName) nil))q
+         )
+
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+
+    (defun bodyContent ()
+      "Insert the provide line"
+      (let* (
+             ($modName (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
+             )
+        (when <modName
+          (setq $modName <modName))
+        (insert (s-lex-format
+                "(provide '${$modName})"))))
+
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    ))
+
+
+(advice-add 'org-dblock-write:b:elisp:file/requires :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:file/requires (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         )
+
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert (s-lex-format
+               "  ~REQUIRES~  ")))
+
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    ))
+
+
+;;;
+;;; BELOW IS BEING OBSOLETED
+;;;
+
+
 (defun org-dblock-write:bx:dblock:lisp:requires (params)
   (let ((bx:disabledP (or (plist-get params :disabledP) "UnSpecified"))
         )

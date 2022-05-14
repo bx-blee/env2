@@ -750,7 +750,8 @@ surround is for panel decoration."
   
   (progn
     (cond ((string-equal "emacs-lisp-mode" mode)
-           (insert "(lambda () \"\n")      
+           ;(insert "(lambda () \"\n")
+           (insert "(orgCmntBegin \"\n")
            )
           ((string-equal "latex-mode" mode)
            (bx:latex:insert-begin-comment)           

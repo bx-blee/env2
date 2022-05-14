@@ -343,6 +343,33 @@ Controls:  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [
   (put this-command 'isFirstRun (not nil)))
 
 
+;;(first (b:file:read|nuOfLines "/etc/passwd" 1))
+;;
+(defun b:file:read|nuOfLines (file n)
+  "Return first N lines of FILE."
+  (with-temp-buffer
+    (insert-file-contents-literally file)
+    (cl-loop repeat n
+             unless (eobp)
+             collect (prog1 (buffer-substring-no-properties
+                             (line-beginning-position)
+                             (line-end-position))
+                       (forward-line 1)))))
+
+
+;;
+;; (b:yas-expand-snippet|file "/bisos/blee/env/snippets/bx-comeega-lisp-mode/fileElements/topLine:elisp.yas")
+;; 
+(defun b:yas-expand-snippet|file (<filePath)
+  "."
+  (let* (
+	 ($lines (b:file:read|nuOfLines <filePath 2)) 
+	 ($nameLine (second $lines))
+         ($snippetName (s-chop-prefix "# name: " $nameLine)) 
+	)
+    (yas-expand-snippet (yas-lookup-snippet $snippetName))))
+
+
 
 
 ;;;#+BEGIN: bx:dblock:lisp:provide :disabledP "false" :lib-name "blee-lib-common"
