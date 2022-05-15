@@ -370,7 +370,13 @@ Controls:  [[elisp:(show-all)][Show-All]]  [[elisp:(org-shifttab)][Overview]]  [
     (yas-expand-snippet (yas-lookup-snippet $snippetName))))
 
 
-
+;;
+;; (b:insert:newLines|nuOf 3)
+;; 
+(defun b:insert:newLines|nuOf (<nuOfLines)
+  "."
+  (dotimes (i <nuOfLines)
+    (insert "\n")))
 
 ;;;#+BEGIN: bx:dblock:lisp:provide :disabledP "false" :lib-name "blee-lib-common"
 (lambda () "

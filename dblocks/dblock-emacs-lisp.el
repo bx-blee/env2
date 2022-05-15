@@ -105,6 +105,118 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
     ))
 
 
+(advice-add 'org-dblock-write:b:elisp:file/copyLeftPlus :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:file/copyLeftPlus (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openBlank" "closeBlank"))
+         )
+
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert "\
+* Libre-Halaal Software --- Part Of Blee ---  Poly-COMEEGA Format.
+** This is Libre-Halaal Software. © Libre-Halaal Foundation. Subject to AGPL.
+** It is not part of Emacs. It is part of Blee.
+** Best read and edited  with Poly-COMEEGA (Polymode Colaborative Org-Mode Enhance Emacs Generalized Authorship)\
+"))
+
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    ))
+
+(advice-add 'org-dblock-write:b:elisp:file/authors :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:file/authors (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openBlank" "closeBlank"))
+         )
+
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert "\
+* Authors: Mohsen BANAN, http://mohsen.banan.1.byname.net/contact\
+"))
+
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    ))
+
+(advice-add 'org-dblock-write:b:elisp:file/orgTopControls :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:file/orgTopControls (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openBlank" "closeBlank"))
+         )
+
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert (s-lex-format
+               "  ~ORG-TOP-CONTROS-COME-HERE~  ")))
+
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    ))
+
+
+(advice-add 'org-dblock-write:b:elisp:file/endOf :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:file/endOf (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))         
+         )
+
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert " ~END-OF-FILE~ "))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+
+    (insert "
+;;; local variables:
+;;; no-byte-compile: t
+;;; end:\
+")
+    ))
+
+
 ;;;
 ;;; BELOW IS BEING OBSOLETED
 ;;;

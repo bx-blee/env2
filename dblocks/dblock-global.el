@@ -808,7 +808,8 @@ surround is for panel decoration."
 
   (progn
     (cond ((string-equal "emacs-lisp-mode" mode)
-           (insert "\n\")")        
+           ;;(insert "\n\")")
+           (insert "\n\" orgCmntEnd)")
            )
           ((string-equal "latex-mode" mode)
            (bx:latex:insert-end-comment)             
