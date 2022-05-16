@@ -214,6 +214,7 @@
 ;;(defun my-test-function ()  (message "This function is named '%s'" (compile-time-function-name)))
 
 
+
 (defun b:insert-file-contents|forward (<fileName)
   "insert-file-contents and move point forward to after insertion."
   (let* (
@@ -221,7 +222,40 @@
          ($charsInserted (second $gotVal))
          )
     (forward-char $charsInserted)))
-                  
+
+(defun b:insert-file-contents|noExtraLine%% (<fileName)
+  "insert-file-contents and move point forward to after insertion."
+  (let* (
+         (fileAsString)
+         )
+    (setq fileAsString (get-string-from-file (format "%s" <fileName)))
+    (s-chomp fileAsString)
+    (s-chomp fileAsString)
+    (s-chop-suffixes '("\n" "\r")  fileAsString)  
+    (insert fileAsString)
+    ))
+
+(defun b:insert-file-contents|noExtraLine2%% (<fileName)
+  "insert-file-contents and move point forward to after insertion."
+  
+  (loop-for-each $each  (reverse (cdr (reverse (b:file:read|nuOfLines <fileName 1000))))
+    (insert $each)
+    (insert "\n")
+    ))
+
+
+(defun b:insert-file-contents|noExtraLine (<fileName)
+  "insert-file-contents and move point forward to after insertion."
+  (insert 
+    (with-temp-buffer
+      (insert-file-contents <fileName)
+      (goto-char (point-max))
+      (delete-char -1)
+      (buffer-string))
+    ))
+      
+
+
 ;;;#+BEGIN: bx:dblock:lisp:provide :disabledP "false" :lib-name "blee-lib-general"
 (lambda () "
 *  [[elisp:(org-cycle)][| ]]  Provide                     :: Provide [[elisp:(org-cycle)][| ]]

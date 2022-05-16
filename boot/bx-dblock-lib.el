@@ -106,6 +106,21 @@
       )
     ))
 
+;;
+;; (b:dblock|baseDir)
+(defun b:dblock|baseDir ()
+  "/bisos/blee/env2/dblocks"
+  )
+
+;;
+;; (b:dblock:inserts|fromFile "./inserts/endOfFile.el")
+(defun b:dblock:inserts|fromFile (<fileName)
+  (b:insert-file-contents|noExtraLine (expand-file-name <fileName (b:dblock|baseDir) ))
+  ;;(insert-file-contents (expand-file-name <fileName (b:dblock|baseDir) ))
+  )
+
+
+
 (lambda () "
 *  [[elisp:(org-cycle)][| ]]  [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(beginning-of-buffer)][Top]] [[elisp:(delete-other-windows)][(1)]] || defun        :: (blee:dblock:mode:disabledP modeStr) [[elisp:(org-cycle)][| ]]
   ")

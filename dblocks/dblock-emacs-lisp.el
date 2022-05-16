@@ -57,7 +57,7 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
          (<governor (letGet$governor)) (<extGov (letGet$extGov))
          (<outLevel (letGet$outLevel -1)) (<model (letGet$model))
          (<style (letGet$style "openBlank" "closeBlank"))
-         (<modName (or (plist-get <params :modName) nil))q
+         (<modName (or (plist-get <params :modName) nil))
          )
 
     (bxPanel:params$effective)
@@ -124,12 +124,7 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
 
     (defun bodyContent ()
       "Insert the provide line"
-      (insert "\
-* Libre-Halaal Software --- Part Of Blee ---  Poly-COMEEGA Format.
-** This is Libre-Halaal Software. © Libre-Halaal Foundation. Subject to AGPL.
-** It is not part of Emacs. It is part of Blee.
-** Best read and edited  with Poly-COMEEGA (Polymode Colaborative Org-Mode Enhance Emacs Generalized Authorship)\
-"))
+      (b:dblock:inserts|fromFile "./inserts/copyLeftPlus.org"))
 
     (bx:invoke:withStdArgs$bx:dblock:governor:process)
     ))
@@ -144,6 +139,7 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
          (<governor (letGet$governor)) (<extGov (letGet$extGov))
          (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
          (<style (letGet$style "openBlank" "closeBlank"))
+         (<authors (or (plist-get <params :authors) nil))
          )
 
     (bxPanel:params$effective)
@@ -153,9 +149,8 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
 
     (defun bodyContent ()
       "Insert the provide line"
-      (insert "\
-* Authors: Mohsen BANAN, http://mohsen.banan.1.byname.net/contact\
-"))
+      (loop-for-each $each <authors
+        (b:dblock:inserts|fromFile $each)))
 
     (bx:invoke:withStdArgs$bx:dblock:governor:process)
     ))
@@ -180,7 +175,7 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
     (defun bodyContent ()
       "Insert the provide line"
       (insert (s-lex-format
-               "  ~ORG-TOP-CONTROS-COME-HERE~  ")))
+               "*  ~ORG-TOP-CONTROLS-COME-HERE~")))
 
     (bx:invoke:withStdArgs$bx:dblock:governor:process)
     ))
@@ -209,12 +204,68 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
     
     (bx:invoke:withStdArgs$bx:dblock:governor:process)
 
-    (insert "
-;;; local variables:
-;;; no-byte-compile: t
-;;; end:\
-")
+    (b:dblock:inserts|fromFile "./inserts/endOfFile.el")
     ))
+
+;;; Blee defxxx dblocks
+
+(advice-add 'org-dblock-write:b:elisp:defs/cl-defun :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:defs/cl-defun (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<defName (or (plist-get <params :defName) nil))         
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert
+       (s-lex-format
+        "  =cl-defun= <<${<defName}>>")))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    (insert
+       (s-lex-format
+        "\n(cl-defun ${<defName} ("))
+    ))
+
+(advice-add 'org-dblock-write:b:elisp:defs/defun :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:defs/defun (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<defName (or (plist-get <params :defName) nil))         
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert
+       (s-lex-format
+        "  =defun= <<${<defName}>>")))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    (insert
+       (s-lex-format
+        "\n(defun ${<defName} ("))
+    ))
+
+
 
 
 ;;;
