@@ -192,18 +192,17 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
          (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
          (<style (letGet$style "openTerseNoNl" "closeContinue"))         
          )
-
     (bxPanel:params$effective)
 
     (defun helpLine () "NOTYET" )
     (defun bodyContentPlus ())
-
     (defun bodyContent ()
       "Insert the provide line"
       (insert " ~END-OF-FILE~ "))
     
     (bx:invoke:withStdArgs$bx:dblock:governor:process)
 
+    (insert "\n")
     (b:dblock:inserts|fromFile "./inserts/endOfFile.el")
     ))
 
@@ -263,6 +262,35 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
     (insert
        (s-lex-format
         "\n(defun ${<defName} ("))
+    ))
+
+
+(advice-add 'org-dblock-write:b:elisp:defs/defmacro :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:defs/defmacro (<params)
+  "
+** When ~:modName~ is nil determine modName based on filName. Otherwise  use ~:modName~.
+Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<defName (or (plist-get <params :defName) nil))         
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert
+       (s-lex-format
+        "  =defmacro= <<${<defName}>>")))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    (insert
+       (s-lex-format
+        "\n(defmacro ${<defName} ("))
     ))
 
 
