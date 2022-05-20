@@ -293,6 +293,173 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
         "\n(defmacro ${<defName} ("))
     ))
 
+(advice-add 'org-dblock-write:b:elisp:pkg/usgEnabled?defvar :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:pkg/usgEnabled?defvar (<params)
+  "
+** Produce something like defvar bnp:mua-abstract:usage:enabled?
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<pkgAdoptionType (or (plist-get <params :pkgAdoptionType) nil))
+         (<pkgName (or (plist-get <params :pkgName) nil))
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert the defvar."
+      (insert
+       (s-lex-format
+        "  =defvar= <<${<pkgAdoptionType}:${<pkgName}:usgEnabled?>>")))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    (insert
+       (s-lex-format
+        "\n(defvar ${<pkgAdoptionType}:${<pkgName}:usgEnabled? t \"${<pkgName} package adoption control.\")"))
+    ))
+
+(advice-add 'org-dblock-write:b:elisp:pkg/fullUpdate :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:pkg/fullUpdate (<params)
+  "
+** Produce something like defvar bnp:mua-abstract:usage:enabled?
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<pkgAdoptionType (or (plist-get <params :pkgAdoptionType) nil))
+         (<pkgName (or (plist-get <params :pkgName) nil))
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert the defvar."
+      (insert
+       (s-lex-format
+        "  =defun= <<${<pkgAdoptionType}:${<pkgName}/fullUpdate>>")))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    (insert
+       (s-lex-format
+        "\n(defun ${<pkgAdoptionType}:${<pkgName}/fullUpdate ()
+ \"${<pkgName} package adoption control.\"
+ (interactive)
+  (blee:ann|this-func (compile-time-function-name))
+  (when ${<pkgAdoptionType}:${<pkgName}:usgEnabled?
+    (${<pkgAdoptionType}:${<pkgName}:install/update)
+    (${<pkgAdoptionType}:${<pkgName}:config/main)
+    )
+  )
+"))
+    ))
+
+(advice-add 'org-dblock-write:b:elisp:pkg:install/update :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:pkg:install/update (<params)
+  "
+** Produce something like defvar bnp:mua-abstract:usage:enabled?
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<pkgAdoptionType (or (plist-get <params :pkgAdoptionType) nil))
+         (<pkgName (or (plist-get <params :pkgName) nil))
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert the defvar."
+      (insert
+       (s-lex-format
+        "  =defun= <<${<pkgAdoptionType}:${<pkgName}:install/update>>")))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    (insert
+       (s-lex-format
+        "\n(defun ${<pkgAdoptionType}:${<pkgName}:install/update ()
+ \"${<pkgName} package adoption install/update template.\"
+ (interactive)
+  (blee:ann|this-func (compile-time-function-name))
+  (unless blee:dev:mode?
+    (straight-use-package
+     '(${<pkgName} :type git :host github :repo \"bx-blee/${<pkgName}\")))
+
+  (when blee:dev:mode?
+    (straight-use-package
+     '(${<pkgName} :local-repo \"/bisos/git/bxRepos/blee/${<pkgName}\")))
+  )"
+        ))
+    ))
+
+(advice-add 'org-dblock-write:b:elisp:pkg:config/main :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:pkg:config/main (<params)
+  "
+** Produce something like defvar bnp:mua-abstract:usage:enabled?
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<pkgAdoptionType (or (plist-get <params :pkgAdoptionType) nil))
+         (<pkgName (or (plist-get <params :pkgName) nil))
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert information"
+      (insert
+       (s-lex-format
+        "  =defun= <<${<pkgAdoptionType}:${<pkgName}:install/update>>")))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    (insert
+       (s-lex-format
+        "\n(defun ${<pkgAdoptionType}:${<pkgName}:config/main ()
+ \"${<pkgName} package adoption config template.\"
+ (interactive)
+  (blee:ann|this-func (compile-time-function-name))"
+        ))
+    ))
+
+
+(advice-add 'org-dblock-write:b:elisp:pkg/summaryText :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:pkg/summaryText (<params)
+  "
+** Insert the package adoption summary text.
+*** TODO Revisit openTerseNoNl closeContinue
+"
+  (let* (
+         ($inHere (b:log|entry (b:func$entry)))
+         ($myName (first $inHere))
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<pkgAdoptionType (or (plist-get <params :pkgAdoptionType) nil))
+         (<pkgName (or (plist-get <params :pkgName) nil))
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert information"
+      (insert
+       (s-lex-format
+        " Summary:  ${<pkgAdoptionType} Adoption of :${<pkgName}
+Machine Generated By ${$myName}"
+        )))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    ))
 
 
 
