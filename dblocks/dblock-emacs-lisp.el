@@ -1,4 +1,5 @@
-;;; -*- Mode: Emacs-Lisp; -*-
+;;; dblock-emacs-lisp.el --- b:pkg supports native and component adotion  -*- lexical-binding: t; -*-
+
 ;; (setq debug-on-error t)
 
 ;;;#+BEGIN: bx:dblock:global:org-controls :disabledP "false" :mode "auto"
@@ -327,6 +328,7 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
 ** Produce something like defvar bnp:mua-abstract:usage:enabled?
 "
   (let* (
+         ($inHere (b:log|entry (b:func$entry)))
          (<governor (letGet$governor)) (<extGov (letGet$extGov))
          (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
          (<style (letGet$style "openTerseNoNl" "closeContinue"))
@@ -342,8 +344,12 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
       (insert
        (s-lex-format
         "  =defun= <<${<pkgAdoptionType}:${<pkgName}/fullUpdate>>")))
-    
-    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+
+    (defun outCommentContent_bnpa ()
+      "Dispatch based on =<pkgAdoptionType."
+      (let* (
+             ($inHere (b:log|entry (b:func$entry)))
+             )
     (insert
        (s-lex-format
         "\n(defun ${<pkgAdoptionType}:${<pkgName}/fullUpdate ()
@@ -354,8 +360,19 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
     (${<pkgAdoptionType}:${<pkgName}:install/update)
     (${<pkgAdoptionType}:${<pkgName}:config/main)
     )
-  )
-"))
+  )"
+        ))
+    ))
+    
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+
+    (when (member <pkgAdoptionType b:pkg:adoption::types)
+      (funcall
+       (intern
+        (s-lex-format "outCommentContent_${<pkgAdoptionType}"))))
+    (unless (member <pkgAdoptionType b:pkg:adoption::types)
+      (b::error $inHere (s-lex-format "Unknown ${<pkgAdoptionType}")))
+
     ))
 
 (advice-add 'org-dblock-write:b:elisp:pkg:install/update :around #'bx:dblock:control|wrapper)
