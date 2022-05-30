@@ -10,6 +10,8 @@
 (require 'straight)
 (require 'blee-lib-general)
 
+(setq blee:dev:mode? t)
+
 (defvar bnp:mua-abstract:usage:enabled-p t "Mua-Abstract package adoption control.")
 
 ;;; (bnp:mua-abstract:full/update)

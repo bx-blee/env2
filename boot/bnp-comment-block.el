@@ -7,7 +7,7 @@
 
 (require 'compile-time-function-name)
 ;;(require 'core-packages)
-(require 'straight)
+;; (require 'straight)
 (require 'blee-lib-general)
 
 (defvar bnp:comment-block:usage:enabled-p t "Comment-block package adoption control.")

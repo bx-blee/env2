@@ -318,6 +318,8 @@ typeset RcsId="$Id: setup-global-bbdb.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp $
   ""
   (blee:ann|this-func (compile-time-function-name))    
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  ;;; NOTYET, 5/31/2022  Mohsen --- Below is not the right place.
+  (add-hook 'org-mode-hook (lambda () (setq bidi-paragraph-direction nil))) ;;; org-mode sets thus to left-to-right.
   )
 
 (defun bcg:org:export/portNu-fixup ()

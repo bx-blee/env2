@@ -211,6 +211,11 @@
   (require 'bnp-comeega)
   (bnp:comeega:full/update)
 
+
+  (require 'bnpa:blee-libs)
+  (bnpa:blee-libs/fullUpdate)
+    
+
   ;;;; Mail Composition Distribution And Tracking (mcdt)
   ;;;; Mail Templating Distribution And Tracking (mtdt)  
   (require 'mcdt-if)

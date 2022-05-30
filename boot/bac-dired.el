@@ -9,7 +9,7 @@
   (let* (
          (result nil)
          )
-    (if (version< emacs-version "29")
+    (if (version< emacs-version "28")
         (setq result t))
     result))
 
@@ -17,7 +17,7 @@
     (let* (
          (result nil)
          )
-    (if (version< emacs-version "29")
+    (if (version< emacs-version "28")
         (setq result t))
     result))
 
