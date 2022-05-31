@@ -38,6 +38,8 @@
 *  [[elisp:(org-cycle)][| ]]  Requires      :: Requires [[elisp:(org-cycle)][| ]]
 ")
 
+(require 'blee-libs)
+(require 'b-pkg)
 
 (lambda () "
 *  [[elisp:(org-cycle)][| ]]  Top Entry     :: none [[elisp:(org-cycle)][| ]]
@@ -332,6 +334,7 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
          (<governor (letGet$governor)) (<extGov (letGet$extGov))
          (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
          (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<pkgsStage (or (plist-get <params :pkgsStage) "ready"))
          (<pkgAdoptionType (or (plist-get <params :pkgAdoptionType) nil))
          (<pkgName (or (plist-get <params :pkgName) nil))
          )
@@ -354,8 +357,16 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
        (s-lex-format
         "\n(defun ${<pkgAdoptionType}:${<pkgName}/fullUpdate ()
  \"${<pkgName} package adoption control.\"
- (interactive)
-  (blee:ann|this-func (compile-time-function-name))
+ (interactive)"))
+
+    (when (string= <pkgsStage "ready")
+      (insert
+       (s-lex-format
+        "\
+ (b:log|entry (b:func$entry))\n")))
+
+      (insert
+       (s-lex-format "\
   (when ${<pkgAdoptionType}:${<pkgName}:usgEnabled?
     (${<pkgAdoptionType}:${<pkgName}:install/update)
     (${<pkgAdoptionType}:${<pkgName}:config/main)
@@ -384,6 +395,7 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
          (<governor (letGet$governor)) (<extGov (letGet$extGov))
          (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
          (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<pkgsStage (or (plist-get <params :pkgsStage) "ready"))
          (<pkgAdoptionType (or (plist-get <params :pkgAdoptionType) nil))
          (<pkgName (or (plist-get <params :pkgName) nil))
          )
@@ -402,17 +414,24 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
        (s-lex-format
         "\n(defun ${<pkgAdoptionType}:${<pkgName}:install/update ()
  \"${<pkgName} package adoption install/update template.\"
- (interactive)
-  (blee:ann|this-func (compile-time-function-name))
-  (unless blee:dev:mode?
-    (straight-use-package
-     '(${<pkgName} :type git :host github :repo \"bx-blee/${<pkgName}\")))
-
-  (when blee:dev:mode?
-    (straight-use-package
-     '(${<pkgName} :local-repo \"/bisos/git/bxRepos/blee/${<pkgName}\")))
-  )"
+ (interactive)\n"
         ))
+
+    (when (string= <pkgsStage "ready")
+      (insert
+       (s-lex-format
+        "\
+ (b:log|entry (b:func$entry))\n")))
+
+    (insert
+       (s-lex-format
+        "\
+ (if blee:dev:mode?
+      (straight-use-package
+       '(${<pkgName} :local-repo \"/bisos/git/bxRepos/blee/${<pkgName}\"))
+    (straight-use-package
+     '(${<pkgName} :type git :host github :repo \"bx-blee/${<pkgName}\"))))"
+       ))
     ))
 
 (advice-add 'org-dblock-write:b:elisp:pkg:config/main :around #'bx:dblock:control|wrapper)
@@ -424,6 +443,7 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
          (<governor (letGet$governor)) (<extGov (letGet$extGov))
          (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
          (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<pkgsStage (or (plist-get <params :pkgsStage) "ready"))
          (<pkgAdoptionType (or (plist-get <params :pkgAdoptionType) nil))
          (<pkgName (or (plist-get <params :pkgName) nil))
          )
@@ -442,10 +462,14 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
        (s-lex-format
         "\n(defun ${<pkgAdoptionType}:${<pkgName}:config/main ()
  \"${<pkgName} package adoption config template.\"
- (interactive)
-  (blee:ann|this-func (compile-time-function-name))"
+ (interactive)\n"))
+
+    (when (string= <pkgsStage "ready")
+      (insert
+       (s-lex-format
+        "\
+ (b:log|entry (b:func$entry))\n")))
         ))
-    ))
 
 
 (advice-add 'org-dblock-write:b:elisp:pkg/summaryText :around #'bx:dblock:control|wrapper)
