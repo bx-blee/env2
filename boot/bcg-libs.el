@@ -66,6 +66,7 @@ typeset RcsId="$Id: setup-global-bbdb.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp $
     (bcg:libs:config/main)
     )
   )
+0
 
 (defun bcg:libs:install/update ()
   ""

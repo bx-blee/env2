@@ -267,6 +267,37 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
         "\n(defun ${<defName} ("))
     ))
 
+(advice-add 'org-dblock-write:b:elisp:defs/advice-add :around #'bx:dblock:control|wrapper)
+(defun org-dblock-write:b:elisp:defs/advice-add (<params)
+  "
+** Function: advice-add symbol where function &optional props
+Add the advice function to the named function symbol.
+"
+  (let* (
+         (<governor (letGet$governor)) (<extGov (letGet$extGov))
+         (<outLevel (letGet$outLevel 1)) (<model (letGet$model))
+         (<style (letGet$style "openTerseNoNl" "closeContinue"))
+         (<symbol (or (plist-get <params :symbol) nil))
+         (<where (or (plist-get <params :where) nil))
+         (<function (or (plist-get <params :function) nil))
+         )
+    (bxPanel:params$effective)
+
+    (defun helpLine () "NOTYET" )
+    (defun bodyContentPlus ())
+    (defun bodyContent ()
+      "Insert the provide line"
+      (insert
+       (s-lex-format
+        "  =advice-add=  symbol=${<symbol} where=${<where} function=[[${<function}]]")))
+
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+    (insert
+       (s-lex-format
+        "\n(advice-add '${<symbol} :${<where} #'${<function})"))
+    ))
+
+
 
 (advice-add 'org-dblock-write:b:elisp:defs/defmacro :around #'bx:dblock:control|wrapper)
 (defun org-dblock-write:b:elisp:defs/defmacro (<params)
@@ -346,18 +377,21 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
       "Insert the defvar."
       (insert
        (s-lex-format
-        "  =defun= <<${<pkgAdoptionType}:${<pkgName}/fullUpdate>>")))
+        "  =defun= <<${<pkgAdoptionType}:${<pkgName}|fullUpdate>>")))
 
-    (defun outCommentContent_bnpa ()
+    (defun outCommentContent_bnpa () (outCommentContent_common))
+    (defun outCommentContent_bcpa () (outCommentContent_common))
+
+    (defun outCommentContent_common ()
       "Dispatch based on =<pkgAdoptionType."
       (let* (
              ($inHere (b:log|entry (b:func$entry)))
              )
     (insert
        (s-lex-format
-        "\n(defun ${<pkgAdoptionType}:${<pkgName}/fullUpdate ()
- \"${<pkgName} package adoption control.\"
- (interactive)"))
+        "\n(defun ${<pkgAdoptionType}:${<pkgName}|fullUpdate ()
+ \"${<pkgName} package adoption control.\"\n"
+        ))
 
     (when (string= <pkgsStage "ready")
       (insert
@@ -368,8 +402,8 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
       (insert
        (s-lex-format "\
   (when ${<pkgAdoptionType}:${<pkgName}:usgEnabled?
-    (${<pkgAdoptionType}:${<pkgName}:install/update)
-    (${<pkgAdoptionType}:${<pkgName}:config/main)
+    (${<pkgAdoptionType}:${<pkgName}:install|update)
+    (${<pkgAdoptionType}:${<pkgName}:config|main)
     )
   )"
         ))
@@ -407,32 +441,69 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
       "Insert the defvar."
       (insert
        (s-lex-format
-        "  =defun= <<${<pkgAdoptionType}:${<pkgName}:install/update>>")))
-    
-    (bx:invoke:withStdArgs$bx:dblock:governor:process)
-    (insert
+        "  =defun= <<${<pkgAdoptionType}:${<pkgName}:install|update>>")))
+
+    (defun outCommentPostContent ()
+      (if (member <pkgAdoptionType b:pkg:adoption::types)
+          (funcall
+           (intern
+            (s-lex-format "outCommentPostContent_${<pkgAdoptionType}")))
+        (b::error $inHere (s-lex-format "Unknown ${<pkgAdoptionType}"))))
+
+    (defun outCommentPostContent_bnpa ()  ;; Blee Native Package Adoption
+      (let* (($straightInstaller))
+        (insert
+         (s-lex-format
+          "\n(defun ${<pkgAdoptionType}:${<pkgName}:install|update ()
+ \"${<pkgName} package adoption install or update template.\"\n"
+           ))
+
+        (when (string= <pkgsStage "ready")
+          (insert
+           (s-lex-format
+            "\
+ (b:log|entry (b:func$entry))\n")))
+
+        (if (string= <pkgsStage "ready")
+            (setq $straightInstaller "b:pkg:straight|profiledInstall\n       b:pkgsProfile:native")
+          (setq $straightInstaller "straight-use-package"))
+
+        (insert
+         (s-lex-format
+          "\
+ (if b:g:dev:mode?
+      (${$straightInstaller}
+       '(${<pkgName} :local-repo \"/bisos/git/bxRepos/blee/${<pkgName}\"))
+    (${$straightInstaller}
+     '(${<pkgName} :type git :host github :repo \"bx-blee/${<pkgName}\"))))"
+          ))))
+
+    (defun outCommentPostContent_bcpa ()  ;; Blee Component Package Adoption
+      (insert
        (s-lex-format
-        "\n(defun ${<pkgAdoptionType}:${<pkgName}:install/update ()
- \"${<pkgName} package adoption install/update template.\"
+        "\n(defun ${<pkgAdoptionType}:${<pkgName}:install|update ()
+ \"${<pkgName} package adoption install or update template.\"
  (interactive)\n"
         ))
 
-    (when (string= <pkgsStage "ready")
+      (when (string= <pkgsStage "ready")
+        (insert
+         (s-lex-format
+          "\
+ (b:log|entry (b:func$entry))\n")))
+
       (insert
        (s-lex-format
         "\
- (b:log|entry (b:func$entry))\n")))
+ (b:pkg:straight|install '${<pkgName}))"
+        )))
 
-    (insert
-       (s-lex-format
-        "\
- (if blee:dev:mode?
-      (straight-use-package
-       '(${<pkgName} :local-repo \"/bisos/git/bxRepos/blee/${<pkgName}\"))
-    (straight-use-package
-     '(${<pkgName} :type git :host github :repo \"bx-blee/${<pkgName}\"))))"
-       ))
+    (bx:invoke:withStdArgs$bx:dblock:governor:process)
+
+    (outCommentPostContent)
     ))
+
+ ;;;
 
 (advice-add 'org-dblock-write:b:elisp:pkg:config/main :around #'bx:dblock:control|wrapper)
 (defun org-dblock-write:b:elisp:pkg:config/main (<params)
@@ -455,20 +526,20 @@ Combination of ~<outLevl~ = -1 and openBlank closeBlank results in pure code.
       "Insert information"
       (insert
        (s-lex-format
-        "  =defun= <<${<pkgAdoptionType}:${<pkgName}:install/update>>")))
+        "  =defun= <<${<pkgAdoptionType}:${<pkgName}:install|update>>")))
     
     (bx:invoke:withStdArgs$bx:dblock:governor:process)
     (insert
        (s-lex-format
-        "\n(defun ${<pkgAdoptionType}:${<pkgName}:config/main ()
- \"${<pkgName} package adoption config template.\"
- (interactive)\n"))
+        "\n(defun ${<pkgAdoptionType}:${<pkgName}:config|main ()
+ \"${<pkgName} package adoption config template.\"\n"
+        ))
 
     (when (string= <pkgsStage "ready")
       (insert
        (s-lex-format
         "\
- (b:log|entry (b:func$entry))\n")))
+ (b:log|entry (b:func$entry))")))
         ))
 
 
