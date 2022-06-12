@@ -109,6 +109,8 @@ typeset RcsId="$Id: setup-global-bbdb.el,v 1.6 2018-06-08 23:49:29 lsipusr Exp $
 
   (setq-default bidi-display-reordering t)         ; Blee wants to be bidi-aware
 
+  (tooltip-mode -1)
+
   (fset #'yes-or-no-p #'y-or-n-p)     ; y/n instead of yes/no
   )
 

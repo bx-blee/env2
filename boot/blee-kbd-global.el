@@ -88,7 +88,7 @@
   ;; Top Function keys
   ;; =================
   ;;
-  ;; F1  -- Visit, Jump To, Go There
+  ;; F1  -- Visit, Jump To, Go There -- REVISIT
   (require 'bx-atpoint-menu)
   (blee:atpoint:action:global-kbd)
   ;;(define-key global-map [(f1)] 'find-file-at-point)

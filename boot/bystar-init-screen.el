@@ -45,6 +45,14 @@
       )
     (switch-to-buffer my-buffer)))
 
+
+(defun b:splash|vanilaGnuEmacs ()
+  (switch-to-buffer "*GNU Emacs*")
+  (delete-other-windows)
+  (beginning-of-buffer)
+  )
+
+
 ;; (add-hook 'emacs-startup-hook 'my-startup-fcn)  ;; Does not work 
 
 ;;}}}
